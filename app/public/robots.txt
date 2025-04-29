@@ -1,0 +1,10 @@
+# Allow all user agents
+User-agent: *
+# Allow crawling of all content
+Allow: /
+
+# Disallow crawling of the admin area
+Disallow: /admin/
+
+# Optional: Specify sitemap location (uncomment and update when sitemap is generated)
+# Sitemap: https://www.orlamariecoach.com/sitemap-index.xml

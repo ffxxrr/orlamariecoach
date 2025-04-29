@@ -1,0 +1,175 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+// Removed incorrect import: import { Button, Input, Textarea, Label, Checkbox, InputNumber } from 'flowbite-astro';
+// Using standard HTML elements with Flowbite classes instead.
+
+const { id } = Astro.params; // Get service ID from URL parameter
+let service = null;
+let fetchError = null;
+let errorMessage: string | null = null;
+let successMessage: string | null = null;
+
+// Fetch existing service data for the form
+try {
+  const apiUrl = new URL(`/api/admin/services?id=${id}`, Astro.url.origin);
+  const response = await fetch(apiUrl.toString());
+  if (!response.ok) {
+    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+  }
+  service = await response.json();
+} catch (error) {
+  console.error(`Failed to fetch service with ID ${id}:`, error);
+  fetchError = error.message || `Could not load service with ID ${id}.`;
+}
+
+// Handle form submission for updates
+if (Astro.request.method === 'PUT') {
+  try {
+    const requestBody = await Astro.request.text();
+    const serviceData = JSON.parse(requestBody);
+
+    // Basic validation
+    if (!serviceData.title || !serviceData.description) {
+      throw new Error('Missing required fields: Title, Description.');
+    }
+    // Ensure order is a number
+    serviceData.order = parseInt(serviceData.order || '0', 10);
+
+    // Send PUT request to the API endpoint
+    const apiUrl = new URL(`/api/admin/services?id=${id}`, Astro.url.origin);
+    const response = await fetch(apiUrl.toString(), {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(serviceData),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || `API Error: ${response.status}`);
+    }
+
+    successMessage = `Service "${result.title}" updated successfully!`;
+    service = result; // Update local variable to reflect changes
+
+  } catch (error) {
+    console.error('Error updating service:', error);
+    errorMessage = error.message || 'An unexpected error occurred while updating.';
+  }
+}
+---
+
+<AdminLayout title={service ? `Edit: ${service.title}` : 'Edit Service'}>
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
+      {service ? `Edit Service: ${service.title}` : 'Edit Service'}
+    </h1>
+    <Button href="/admin/services" color="alternative" size="sm">
+      &larr; Back to Services
+    </Button>
+  </div>
+
+  {fetchError && (
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <span class="font-medium">Error!</span> {fetchError} Cannot edit service.
+    </div>
+  )}
+
+  {successMessage && (
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+      <span class="font-medium">Success!</span> {successMessage}
+    </div>
+  )}
+  {errorMessage && (
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <span class="font-medium">Update Error!</span> {errorMessage}
+    </div>
+  )}
+
+  {/* Only show form if service data was fetched successfully */}
+  {service && !fetchError && (
+    <form id="edit-service-form" class="space-y-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+      <input type="hidden" name="serviceId" value={id} />
+      <div>
+        <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Service Title <span class="text-red-600">*</span></label>
+        <input type="text" name="title" id="title" value={service.title} required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+      </div>
+       <div>
+        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description <span class="text-red-600">*</span></label>
+        <textarea name="description" id="description" rows={4} required class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">{service.description}</textarea>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+          <input type="text" name="price" id="price" value={service.price || ''} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+        </div>
+        <div>
+          <label for="duration" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Duration</label>
+          <input type="text" name="duration" id="duration" value={service.duration || ''} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+        </div>
+      </div>
+      <div>
+        <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image URL (Optional)</label>
+        <input type="url" name="image" id="image" value={service.image || ''} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+      </div>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+         <div>
+           <label for="order" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Display Order</label>
+           <input type="number" name="order" id="order" value={service.order ?? 0} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+           <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Lower numbers appear first.</p>
+         </div>
+         <div>
+           <label class="flex items-center mt-7 text-sm font-medium text-gray-900 dark:text-white">
+             <input type="checkbox" name="isActive" id="isActive" class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2" checked={service.isActive}/>
+             Service is Active
+           </label>
+         </div>
+       </div>
+      <div>
+        <button type="submit" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Update Service</button>
+      </div>
+    </form>
+  )}
+</AdminLayout>
+
+<script>
+  // Client-side script to handle PUT request via fetch
+  const form = document.getElementById('edit-service-form');
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    const formData = new FormData(form as HTMLFormElement);
+    const serviceId = formData.get('serviceId');
+    const serviceData = {
+      title: formData.get('title'),
+      description: formData.get('description'),
+      price: formData.get('price'),
+      duration: formData.get('duration'),
+      image: formData.get('image'),
+      order: parseInt(formData.get('order')?.toString() || '0', 10),
+      isActive: formData.get('isActive') === 'on',
+    };
+
+    try {
+      const response = await fetch(`/api/admin/services?id=${serviceId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(serviceData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || `API Error: ${response.status}`);
+      }
+
+      alert('Service updated successfully!');
+      // Optionally update form fields or redirect
+      // window.location.reload(); // Simple way to see changes
+
+    } catch (error) {
+      console.error('Error updating service via fetch:', error);
+      alert(`Failed to update service: ${error.message}`);
+    }
+  });
+</script>

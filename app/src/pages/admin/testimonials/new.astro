@@ -1,0 +1,121 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+// Removed incorrect import: import { Button, Input, Textarea, Label, Checkbox, InputNumber, Select } from 'flowbite-astro';
+// Using standard HTML elements with Flowbite classes instead.
+
+let errorMessage: string | null = null;
+let successMessage: string | null = null;
+
+if (Astro.request.method === 'POST') {
+  try {
+    const formData = await Astro.request.formData();
+    const testimonialData = {
+      clientName: formData.get('clientName')?.toString(),
+      quote: formData.get('quote')?.toString(),
+      role: formData.get('role')?.toString(),
+      image: formData.get('image')?.toString(), // Simple URL for now
+      rating: formData.get('rating') ? parseInt(formData.get('rating').toString(), 10) : undefined,
+      date: formData.get('date') ? new Date(formData.get('date').toString()) : undefined,
+      order: parseInt(formData.get('order')?.toString() || '0', 10),
+      isVisible: formData.get('isVisible') === 'on',
+    };
+
+    // Basic client-side validation check
+    if (!testimonialData.clientName || !testimonialData.quote) {
+      throw new Error('Missing required fields: Client Name, Quote.');
+    }
+    if (testimonialData.rating && (testimonialData.rating < 1 || testimonialData.rating > 5)) {
+        throw new Error('Rating must be between 1 and 5.');
+    }
+
+    // Send POST request to the API endpoint
+    const apiUrl = new URL('/api/admin/testimonials', Astro.url.origin);
+    const response = await fetch(apiUrl.toString(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(testimonialData),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || `API Error: ${response.status}`);
+    }
+
+    successMessage = `Testimonial from "${result.clientName}" created successfully!`;
+    // Optionally redirect: return Astro.redirect('/admin/testimonials');
+
+  } catch (error) {
+    console.error('Error creating testimonial:', error);
+    errorMessage = error.message || 'An unexpected error occurred.';
+  }
+}
+---
+
+<AdminLayout title="Add New Testimonial">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Add New Testimonial</h1>
+    <Button href="/admin/testimonials" color="alternative" size="sm">
+      &larr; Back to Testimonials
+    </Button>
+  </div>
+
+  {successMessage && (
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+      <span class="font-medium">Success!</span> {successMessage}
+    </div>
+  )}
+  {errorMessage && (
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <span class="font-medium">Error!</span> {errorMessage}
+    </div>
+  )}
+
+  {/* Only show form if no success message or if there was an error */}
+  {(!successMessage || errorMessage) && (
+    <form method="POST" class="space-y-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+      <div>
+        <label for="clientName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Client Name <span class="text-red-600">*</span></label>
+        <input type="text" name="clientName" id="clientName" placeholder="e.g., Jane Doe" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+      </div>
+      <div>
+        <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Client Role/Title (Optional)</label>
+        <input type="text" name="role" id="role" placeholder="e.g., Marketing Director" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+      </div>
+       <div>
+        <label for="quote" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quote <span class="text-red-600">*</span></label>
+        <textarea name="quote" id="quote" placeholder="Enter the client's testimonial quote..." rows={5} required class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
+      </div>
+       <div>
+        <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image URL (Optional)</label>
+        <input type="url" name="image" id="image" placeholder="https://... or /images/client.jpg" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+         {/* TODO: Implement proper image upload later */}
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <label for="rating" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rating (1-5, Optional)</label>
+          <input type="number" name="rating" id="rating" min="1" max="5" placeholder="e.g., 5" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+        </div>
+        <div>
+          <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date (Optional)</label>
+          <input type="date" name="date" id="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+        </div>
+         <div>
+           <label for="order" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Display Order</label>
+           <input type="number" name="order" id="order" placeholder="0" value={0} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+           <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Lower numbers appear first.</p>
+         </div>
+      </div>
+       <div>
+         <label class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+           <input type="checkbox" name="isVisible" id="isVisible" class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2" checked={true}/> {/* Default to visible */}
+           Show on Public Site
+         </label>
+       </div>
+      <div>
+        <button type="submit" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create Testimonial</button>
+      </div>
+    </form>
+  )}
+
+</AdminLayout>

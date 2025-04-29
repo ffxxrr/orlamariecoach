@@ -1,0 +1,140 @@
+---
+// Basic Admin Layout using Flowbite classes (similar to Flowbite Astro Admin Dashboard template)
+// TODO: Implement actual authentication check
+// import { checkAdminAuth } from '../utils/auth/protect'; // Example import
+import '../styles/custom.css'; // Ensure custom styles are loaded
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+
+// Authentication is handled by middleware (src/middleware.js)
+// which redirects unauthenticated users before this layout is rendered.
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} - OrlaMarie Admin</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="robots" content="noindex, nofollow"> <!-- Discourage search engines from indexing admin -->
+  <meta name="generator" content={Astro.generator} />
+  <!-- Include Flowbite CSS/JS if not handled globally -->
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+
+  {/* <!-- ===== Page Wrapper Start ===== --> */}
+  <div class="flex h-screen overflow-hidden">
+
+    {/* <!-- ===== Sidebar Start ===== --> */}
+    {/* TODO: Replace with actual Sidebar component or structure */}
+    <aside class="absolute left-0 top-0 z-9999 flex h-screen w-72 flex-col overflow-y-hidden bg-gray-800 duration-300 ease-linear dark:bg-gray-800 lg:static lg:translate-x-0 -translate-x-full">
+      {/* <!-- SIDEBAR HEADER --> */}
+      <div class="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
+        <a href="/admin" class="flex items-center">
+          <img src="/favicon.svg" alt="Logo" class="w-8 h-8 mr-2"/>
+          <span class="text-white text-xl font-semibold">OrlaMarie Admin</span>
+        </a>
+        {/* <!-- Close button for mobile --> */}
+      </div>
+
+      {/* <!-- SIDEBAR MENU --> */}
+      <nav class="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
+        {/* <!-- Menu Group --> */}
+        <div>
+          <h3 class="mb-4 ml-4 text-sm font-semibold text-gray-400">MENU</h3>
+          <ul class="mb-6 flex flex-col gap-1.5">
+            {/* <!-- Menu Item Dashboard --> */}
+            <li>
+              <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-gray-300 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-gray-700" href="/admin">
+                {/* Icon placeholder */} Dashboard
+              </a>
+            </li>
+            {/* <!-- Menu Item Blog --> */}
+            <li>
+              <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-gray-300 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-gray-700" href="/admin/blog">
+                Blog Posts
+              </a>
+            </li>
+            {/* <!-- Menu Item Services --> */}
+            <li>
+              <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-gray-300 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-gray-700" href="/admin/services">
+                Services
+              </a>
+            </li>
+            {/* <!-- Menu Item Testimonials --> */}
+            <li>
+              <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-gray-300 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-gray-700" href="/admin/testimonials">
+                Testimonials
+              </a>
+            </li>
+             {/* <!-- Menu Item Analytics --> */}
+            <li>
+              <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-gray-300 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-gray-700" href="/admin/analytics">
+                Analytics
+              </a>
+            </li>
+            {/* <!-- TODO: Add other admin links --> */}
+            {/* <!-- Menu Item Logout --> */}
+             <li>
+              <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-gray-300 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-gray-700" href="/api/admin/signout">
+                {/* Logout Icon placeholder */} Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+    {/* <!-- ===== Sidebar End ===== --> */}
+
+    {/* <!-- ===== Content Area Start ===== --> */}
+    <div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+      {/* <!-- ===== Header Start ===== --> */}
+      {/* TODO: Replace with actual Header/Navbar component or structure */}
+      <header class="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-gray-800 dark:drop-shadow-none">
+        <div class="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11">
+          <div class="flex items-center gap-2 sm:gap-4 lg:hidden">
+            {/* <!-- Hamburger Toggle BTN --> */}
+            <button class="z-99999 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden">
+              {/* Hamburger icon */}
+            </button>
+            {/* <!-- Hamburger Toggle BTN --> */}
+            <a class="block flex-shrink-0 lg:hidden" href="/admin">
+              <img src="/favicon.svg" alt="Logo" class="w-6 h-6"/>
+            </a>
+          </div>
+
+          <div class="hidden sm:block">
+            {/* Optional: Search bar or other header elements */}
+          </div>
+
+          <div class="flex items-center gap-3 2xsm:gap-7">
+            {/* <!-- User Area --> */}
+            {/* TODO: Add user dropdown, notifications, dark mode toggle */}
+            <span class="text-gray-800 dark:text-white">Admin User</span>
+            {/* <!-- User Area --> */}
+          </div>
+        </div>
+      </header>
+      {/* <!-- ===== Header End ===== --> */}
+
+      {/* <!-- ===== Main Content Start ===== --> */}
+      <main>
+        <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+          <slot /> {/* Page content goes here */}
+        </div>
+      </main>
+      {/* <!-- ===== Main Content End ===== --> */}
+    </div>
+    {/* <!-- ===== Content Area End ===== --> */}
+  </div>
+  {/* <!-- ===== Page Wrapper End ===== --> */}
+
+  {/* Ensure Flowbite JS is loaded */}
+  <script is:inline src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+</body>
+</html>

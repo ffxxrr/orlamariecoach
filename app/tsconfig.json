@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    // Type Checking
+    "strict": true, // Enable all strict type-checking options
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    // Modules
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "verbatimModuleSyntax": true, // Use the modern syntax
+    "isolatedModules": true, // Ensure files can be safely transpiled individually
+
+    // Emit
+    "noEmit": true, // Let Astro handle the build output
+
+    // Interop Constraints
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Language and Environment
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true, // Skip type checking of declaration files
+
+    // JSX
+    "jsx": "preserve",
+    "jsxImportSource": "astro", // Or "react", "preact", etc. if using framework components
+
+    // Include Astro client types for features like View Transitions
+    "types": ["astro/client"],
+
+    // Paths (adjust if needed)
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.astro"],
+  "exclude": ["node_modules", "dist"]
+}

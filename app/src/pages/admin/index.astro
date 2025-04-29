@@ -1,0 +1,55 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+// Import Flowbite components if needed, or use classes directly
+// import { Card } from 'flowbite-astro'; // Example if using components
+
+// TODO: Fetch actual dashboard data later (e.g., recent posts, stats)
+const stats = [
+  { title: 'Total Blog Posts', value: '15', change: '+2 this week' },
+  { title: 'Total Services', value: '4', change: '' },
+  { title: 'New Bookings (Month)', value: '8', change: '+10%' },
+  { title: 'Website Visitors (Month)', value: '1,245', change: '-5%' },
+];
+---
+
+<AdminLayout title="Dashboard">
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Admin Dashboard</h1>
+  </div>
+
+  {/* Stats Cards Section */}
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 mb-6">
+    {stats.map(stat => (
+      <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">{stat.title}</h3>
+            <p class="mt-1 text-3xl font-semibold text-gray-900 dark:text-white">{stat.value}</p>
+          </div>
+          {/* Optional: Add an icon here */}
+        </div>
+        {stat.change && (
+          <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+            {/* TODO: Add logic for positive/negative change color */}
+            <span>{stat.change}</span> vs last period
+          </p>
+        )}
+      </div>
+    ))}
+  </div>
+
+  {/* Placeholder for other dashboard sections */}
+  <div class="grid grid-cols-1 gap-4 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
+    <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 min-h-[300px]">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Activity</h3>
+      <p class="text-gray-500 dark:text-gray-400">Placeholder for recent blog posts, bookings, etc.</p>
+      {/* TODO: Add table or list component */}
+    </div>
+    <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 min-h-[300px]">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Analytics Overview</h3>
+      <p class="text-gray-500 dark:text-gray-400">Placeholder for charts (e.g., visitors, page views).</p>
+      {/* TODO: Add chart component */}
+    </div>
+  </div>
+
+</AdminLayout>

@@ -1,0 +1,108 @@
+graph TD
+    %% Main Components
+    Client[Client Browser] --> AstroFrontend[Astro Frontend]
+    AstroFrontend --> AstroAPI[Astro API Endpoints]
+    AstroAPI --> MongoDB[(MongoDB Database)]
+    DigitalSamba[Digital Samba] <--> AstroFrontend
+    
+    %% Frontend Breakdown
+    subgraph "Frontend Architecture"
+        AstroFrontend --> Pages[Pages & Layouts]
+        AstroFrontend --> Components[UI Components]
+        AstroFrontend --> ClientUtils[Client-Side Utilities]
+        
+        Pages --> PublicPages[Public Pages]
+        Pages --> AdminPages[Admin Pages]
+        
+        Components --> FlowbiteComponents[Flowbite Components]
+        Components --> CustomComponents[Custom Components]
+        
+        ClientUtils --> Analytics[Analytics Tracking]
+        ClientUtils --> Forms[Form Handling]
+        ClientUtils --> APIClient[API Communication]
+    end
+    
+    %% Backend Breakdown
+    subgraph "Backend Architecture"
+        AstroAPI --> PublicAPI[Public APIs]
+        AstroAPI --> ProtectedAPI[Protected APIs]
+        AstroAPI --> Middleware[Middleware]
+        AstroAPI --> Integrations[External Integrations]
+        
+        PublicAPI --> BlogAPI[Blog Content]
+        PublicAPI --> CoachAPI[Coach Information]
+        PublicAPI --> ServicesAPI[Service Offerings]
+        
+        ProtectedAPI --> AdminAPI[Admin Management]
+        ProtectedAPI --> ContentAPI[Content Management]
+        ProtectedAPI --> AnalyticsAPI[Analytics Dashboard]
+        
+        Middleware --> AuthMiddleware[Authentication]
+        Middleware --> LoggingMiddleware[Logging]
+        Middleware --> AnalyticsMiddleware[Analytics Collection]
+        
+        Integrations --> EmailService[Email Service]
+        Integrations --> FileStorage[File Storage]
+    end
+    
+    %% Database Breakdown
+    subgraph "Database Architecture"
+        MongoDB --> Collections[Collections]
+        MongoDB --> Indexes[Indexes]
+        
+        Collections --> UsersCollection[Users]
+        Collections --> CoachCollection[Coach Profile]
+        Collections --> ServicesCollection[Services]
+        Collections --> BlogCollection[Blog Posts]
+        Collections --> TestimonialsCollection[Testimonials]
+        Collections --> AnalyticsCollection[Analytics Data]
+        
+        Indexes --> UserIndexes[User Lookup]
+        Indexes --> ContentIndexes[Content Query]
+        Indexes --> AnalyticsIndexes[Analytics Query]
+    end
+    
+    %% Data Flow
+    subgraph "Key Data Flows"
+        %% Booking Flow
+        BookingFlow[Booking Flow] --> |1. View| BookingPage[Booking Page]
+        BookingPage --> |2. Load Widget| DigitalSamba
+        DigitalSamba --> |3. Process Booking| BookingComplete[Booking Complete]
+        BookingComplete --> |4. Track Event| Analytics
+        
+        %% Content Flow
+        ContentFlow[Content Flow] --> |1. Create| AdminContent[Admin Creates Content]
+        AdminContent --> |2. Store| MongoDB
+        MongoDB --> |3. Serve| PublicContent[Public Content Page]
+        PublicContent --> |4. Track| Analytics
+        
+        %% Analytics Flow
+        AnalyticsFlow[Analytics Flow] --> |1. Page View| TrackEvent[Track Event]
+        TrackEvent --> |2. Store| AnalyticsCollection
+        AnalyticsCollection --> |3. Aggregate| Reports[Analytics Reports]
+        Reports --> |4. Display| AdminDashboard[Admin Dashboard]
+    end
+
+    %% Component Interactions
+    subgraph "Astro & Flowbite Integration"
+        AstroCore[Astro Core] --> AstroPages[Astro Pages]
+        AstroCore --> AstroIslands[Astro Islands Architecture]
+        AstroCore --> ContentCollections[Content Collections]
+        
+        FlowbiteUI[Flowbite UI] --> PublicUI[Public UI Components]
+        FlowbiteUI --> AdminUI[Admin UI Components]
+        
+        TailwindCSS[Tailwind CSS] --> FlowbiteUI
+        TailwindCSS --> CustomStyles[Custom Styling]
+        
+        AstroIslands --> InteractiveComponents[Interactive Components]
+        InteractiveComponents --> FlowbiteJS[Flowbite JS Components]
+    end
+
+classDef primary fill:#f9f,stroke:#333,stroke-width:2px;
+classDef secondary fill:#bbf,stroke:#333,stroke-width:1px;
+classDef tertiary fill:#ffa,stroke:#333,stroke-width:1px;
+
+class AstroFrontend,AstroAPI,MongoDB primary;
+class Pages,Components,ClientUtils,PublicAPI,ProtectedAPI,Middleware,Integrations,Collections,Indexes secondary;
+class PublicPages,AdminPages,FlowbiteComponents,CustomComponents,Analytics,Forms,APIClient tertiary;

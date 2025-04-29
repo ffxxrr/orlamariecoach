@@ -1,0 +1,115 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+// Removed incorrect import: import { Button, Input, Textarea, Label, Checkbox, InputNumber } from 'flowbite-astro';
+// Using standard HTML elements with Flowbite classes instead.
+
+let errorMessage: string | null = null;
+let successMessage: string | null = null;
+
+if (Astro.request.method === 'POST') {
+  try {
+    const formData = await Astro.request.formData();
+    const serviceData = {
+      title: formData.get('title')?.toString(),
+      description: formData.get('description')?.toString(),
+      price: formData.get('price')?.toString(),
+      duration: formData.get('duration')?.toString(),
+      image: formData.get('image')?.toString(), // Simple URL for now
+      order: parseInt(formData.get('order')?.toString() || '0', 10),
+      isActive: formData.get('isActive') === 'on',
+    };
+
+    // Basic client-side validation check
+    if (!serviceData.title || !serviceData.description) {
+      throw new Error('Missing required fields: Title, Description.');
+    }
+
+    // Send POST request to the API endpoint
+    const apiUrl = new URL('/api/admin/services', Astro.url.origin);
+    const response = await fetch(apiUrl.toString(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(serviceData),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || `API Error: ${response.status}`);
+    }
+
+    successMessage = `Service "${result.title}" created successfully!`;
+    // Optionally redirect: return Astro.redirect('/admin/services');
+
+  } catch (error) {
+    console.error('Error creating service:', error);
+    errorMessage = error.message || 'An unexpected error occurred.';
+  }
+}
+---
+
+<AdminLayout title="Add New Service">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Add New Service</h1>
+    <Button href="/admin/services" color="alternative" size="sm">
+      &larr; Back to Services
+    </Button>
+  </div>
+
+  {successMessage && (
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+      <span class="font-medium">Success!</span> {successMessage}
+    </div>
+  )}
+  {errorMessage && (
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <span class="font-medium">Error!</span> {errorMessage}
+    </div>
+  )}
+
+  {/* Only show form if no success message or if there was an error */}
+  {(!successMessage || errorMessage) && (
+    <form method="POST" class="space-y-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+      <div>
+        <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Service Title <span class="text-red-600">*</span></label>
+        <input type="text" name="title" id="title" placeholder="e.g., Career Coaching Package" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+      </div>
+       <div>
+        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description <span class="text-red-600">*</span></label>
+        <textarea name="description" id="description" placeholder="Describe the service offering..." rows={4} required class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+          <input type="text" name="price" id="price" placeholder="e.g., $150 per session" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+        </div>
+        <div>
+          <label for="duration" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Duration</label>
+          <input type="text" name="duration" id="duration" placeholder="e.g., 60 minutes" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+        </div>
+      </div>
+      <div>
+        <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image URL (Optional)</label>
+        <input type="url" name="image" id="image" placeholder="https://... or /images/service.jpg" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+         {/* TODO: Implement proper image upload later */}
+      </div>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+         <div>
+           <label for="order" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Display Order</label>
+           <input type="number" name="order" id="order" placeholder="0" value={0} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+           <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Lower numbers appear first.</p>
+         </div>
+         <div>
+           <label class="flex items-center mt-7 text-sm font-medium text-gray-900 dark:text-white"> {/* Adjusted margin for alignment */}
+             <input type="checkbox" name="isActive" id="isActive" class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2" checked={true}/> {/* Default to active */}
+             Service is Active
+           </label>
+         </div>
+       </div>
+      <div>
+        <button type="submit" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create Service</button>
+      </div>
+    </form>
+  )}
+
+</AdminLayout>

@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  testimonial: CollectionEntry<'testimonials'>;
+}
+
+const { testimonial } = Astro.props;
+const { clientName, quote, role, image, rating } = testimonial.data;
+const { Content } = await testimonial.render(); // Render the Markdown content if any
+---
+
+<figure class="max-w-screen-md mx-auto text-center p-6 bg-white rounded-lg border border-gray-200 shadow-sm dark:bg-gray-800 dark:border-gray-700">
+  {rating && (
+    <div class="flex items-center justify-center mb-4 text-yellow-300">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg class={`w-5 h-5 ${i < rating ? 'text-yellow-300' : 'text-gray-300 dark:text-gray-500'}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+        </svg>
+      ))}
+    </div>
+  )}
+  <blockquote>
+    <p class="text-xl italic font-medium text-gray-900 dark:text-white">"{quote}"</p>
+  </blockquote>
+  <figcaption class="flex items-center justify-center mt-6 space-x-3">
+    {image && (
+      <Image
+        class="w-10 h-10 rounded-full"
+        src={image}
+        alt={clientName}
+        width={40}
+        height={40}
+        format="webp"
+      />
+    )}
+    <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
+      <cite class="pr-3 font-medium text-gray-900 dark:text-white">{clientName}</cite>
+      {role && <cite class="pl-3 text-sm text-gray-500 dark:text-gray-400">{role}</cite>}
+    </div>
+  </figcaption>
+  {/* Render additional Markdown content if provided */}
+  <div class="mt-4 text-sm text-gray-600 dark:text-gray-400 prose dark:prose-invert prose-sm">
+    <Content />
+  </div>
+</figure>

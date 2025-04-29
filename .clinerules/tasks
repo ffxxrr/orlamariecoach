@@ -1,0 +1,59 @@
+# Current Tasks
+
+## High Priority (Phase 2)
+- Set up initial MongoDB connection
+- Implement blog listing page (`src/pages/blog/index.astro`) using content collections
+- Implement services listing page (`src/pages/services/index.astro`) using content collections
+
+## Medium Priority
+- Integrate Digital Samba widget (`app/src/pages/booking.astro`) (Placeholder)
+
+## Low Priority
+- Custom analytics implementation with Flowbite charts
+- Email notification setup
+- Payment integration
+- Dark mode toggle functionality
+
+# Recently Completed (Phase 1)
+- Project planning and architecture
+- Framework selection (Astro)
+- UI component library selection (Flowbite)
+- Documentation updates
+- Initialized Astro project with Flowbite template (`app` directory)
+- Installed dependencies
+- Configured Flowbite/Tailwind (tailwind.config.cjs, flowbite JS init)
+- Created basic project structure (directories, tsconfig.json)
+- Created main layout (`src/layouts/MainLayout.astro`)
+- Implemented placeholder pages (Home, About, Contact)
+- Created responsive navigation (in MainLayout)
+- Configured initial content collections (`app/src/content/config.ts`)
+- Implemented blog listing page (`app/src/pages/blog/index.astro`)
+- Implemented services listing page (`app/src/pages/services/index.astro`)
+- Implemented service detail pages (`app/src/pages/services/[slug].astro`)
+- Implemented blog detail pages (`app/src/pages/blog/[slug].astro`)
+- Added testimonials component and page (`app/src/pages/testimonials.astro`)
+- Implemented contact form API endpoint (`app/src/pages/api/contact.js`) (Placeholder)
+- Set up basic admin layout (`app/src/layouts/AdminLayout.astro`)
+- Add initial SEO optimization (Meta tags, robots.txt)
+- Create admin authentication placeholders (`app/src/utils/auth/`, `app/src/middleware.js`, `app/src/pages/admin/login.astro`)
+- Set up admin dashboard page (`app/src/pages/admin/index.astro`) (Placeholder)
+- Implement basic admin authentication logic (.env, bcrypt, cookies, fixed login page env var loading)
+- Implement blog post management (Admin UI & API - Basic CRUD)
+- Implement services management (Admin UI & API - Basic CRUD)
+- Implement testimonial management (Admin UI & API - Basic CRUD)
+- Create basic analytics implementation (Admin UI & API - Basic)
+- Refine admin authentication (JWT implementation, logout functionality)
+
+# Blocked Tasks
+- None currently
+
+# Next Steps (Phase 3/4)
+1. Implement Digital Samba widget integration (`app/src/pages/booking.astro`) (Placeholder - Deferred).
+2. **Refine Admin Features / Start Phase 4** (e.g., improve auth, add image uploads, implement email notifications, refine UI).
+
+# Implementation Notes
+- Use the official Flowbite Astro Admin Dashboard theme as a starting point
+- Only the admin area will require authentication for now
+- Focus on getting the core public site functional before implementing admin features
+- Use Flowbite's built-in dark/light mode for the admin dashboard
+- Digital Samba integration should be wrapped in Flowbite card components for consistent styling

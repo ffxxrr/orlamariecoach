@@ -1,0 +1,181 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+// Removed incorrect import: import { Button, Input, Textarea, Label, Checkbox, Select } from 'flowbite-astro';
+// Using standard HTML elements with Flowbite classes instead.
+
+const { id } = Astro.params; // Get post ID from URL parameter
+let post = null;
+let fetchError = null;
+let errorMessage: string | null = null;
+let successMessage: string | null = null;
+
+// Fetch existing post data for the form
+try {
+  const apiUrl = new URL(`/api/admin/blog?id=${id}`, Astro.url.origin);
+  const response = await fetch(apiUrl.toString());
+  if (!response.ok) {
+    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+  }
+  post = await response.json();
+} catch (error) {
+  console.error(`Failed to fetch blog post with ID ${id}:`, error);
+  fetchError = error.message || `Could not load blog post with ID ${id}.`;
+}
+
+// Handle form submission for updates
+if (Astro.request.method === 'PUT') {
+  try {
+    // Note: Astro doesn't natively parse JSON body for PUT, we read it manually
+    const requestBody = await Astro.request.text();
+    const postData = JSON.parse(requestBody);
+
+    // Basic validation
+     if (!postData.title || !postData.description || !postData.content || !postData.category) {
+      throw new Error('Missing required fields: Title, Description, Content, Category.');
+    }
+
+    // Send PUT request to the API endpoint
+    const apiUrl = new URL(`/api/admin/blog?id=${id}`, Astro.url.origin);
+    const response = await fetch(apiUrl.toString(), {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(postData), // Send updated data
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || `API Error: ${response.status}`);
+    }
+
+    successMessage = `Blog post "${result.title}" updated successfully!`;
+    post = result; // Update the local post variable to reflect changes in the form
+
+  } catch (error) {
+    console.error('Error updating blog post:', error);
+    errorMessage = error.message || 'An unexpected error occurred while updating.';
+     // Keep existing post data in form if update fails
+  }
+}
+
+// TODO: Fetch categories dynamically if needed
+const categories = ['Career', 'Life Balance', 'Mindset', 'Productivity'];
+---
+
+<AdminLayout title={post ? `Edit: ${post.title}` : 'Edit Blog Post'}>
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
+      {post ? `Edit Blog Post: ${post.title}` : 'Edit Blog Post'}
+    </h1>
+    <Button href="/admin/blog" color="alternative" size="sm">
+      &larr; Back to Posts
+    </Button>
+  </div>
+
+  {fetchError && (
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <span class="font-medium">Error!</span> {fetchError} Cannot edit post.
+    </div>
+  )}
+
+  {successMessage && (
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+      <span class="font-medium">Success!</span> {successMessage}
+    </div>
+  )}
+  {errorMessage && (
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <span class="font-medium">Update Error!</span> {errorMessage}
+    </div>
+  )}
+
+  {/* Only show form if post data was fetched successfully */}
+  {post && !fetchError && (
+    <form id="edit-blog-form" class="space-y-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+      <input type="hidden" name="postId" value={id} />
+      <div>
+        <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title <span class="text-red-600">*</span></label>
+        <input type="text" name="title" id="title" placeholder="Enter post title" value={post.title} required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+      </div>
+       <div>
+        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Short Description <span class="text-red-600">*</span></label>
+        <textarea name="description" id="description" placeholder="Brief summary for listing pages..." rows={2} required class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">{post.description}</textarea>
+      </div>
+      <div>
+        <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content (Markdown) <span class="text-red-600">*</span></label>
+        <textarea name="content" id="content" placeholder="Write your blog post content here using Markdown..." rows={15} required class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">{post.content}</textarea>
+        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Markdown is supported.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category <span class="text-red-600">*</span></label>
+          <select name="category" id="category" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+            <option value="" disabled={!post.category}>Select a category</option>
+            {categories.map(cat => <option value={cat} selected={post.category === cat}>{cat}</option>)}
+          </select>
+        </div>
+        <div>
+          <label for="tags" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tags (comma-separated)</label>
+          <input type="text" name="tags" id="tags" placeholder="e.g., coaching, goals, success" value={post.tags?.join(', ') || ''} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+        </div>
+      </div>
+       <div>
+        <label class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+          <input type="checkbox" name="featured" id="featured" class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2" checked={post.featured}/>
+          Mark as Featured Post
+        </label>
+      </div>
+      <div>
+        <button type="submit" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Update Post</button>
+      </div>
+    </form>
+  )}
+</AdminLayout>
+
+<script>
+  // Client-side script to handle PUT request via fetch
+  const form = document.getElementById('edit-blog-form');
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    const formData = new FormData(form as HTMLFormElement);
+    const postId = formData.get('postId'); // Get ID from hidden input or URL param
+    const postData = {
+      title: formData.get('title'),
+      description: formData.get('description'),
+      content: formData.get('content'),
+      category: formData.get('category'),
+      tags: formData.get('tags')?.toString().split(',').map(tag => tag.trim()).filter(tag => tag),
+      featured: formData.get('featured') === 'on',
+    };
+
+    // Clear previous messages
+    // TODO: Implement a more robust way to display messages without full page reload if desired
+    // For now, rely on the server-rendered messages after potential page reload/navigation
+
+    try {
+      const response = await fetch(`/api/admin/blog?id=${postId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(postData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || `API Error: ${response.status}`);
+      }
+
+      // Success: Show message (or redirect)
+      // This script runs *before* Astro re-renders the page with server-side messages.
+      // For a smoother UX without full reload, you'd update the DOM here or use a framework.
+      alert('Post updated successfully!'); // Simple alert for now
+      // Optionally redirect: window.location.href = '/admin/blog';
+
+    } catch (error) {
+      console.error('Error updating post via fetch:', error);
+      alert(`Failed to update post: ${error.message}`);
+      // Display error message near the form if needed
+    }
+  });
+</script>

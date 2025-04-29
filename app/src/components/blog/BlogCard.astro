@@ -1,0 +1,73 @@
+---
+// src/components/blog/BlogCard.astro
+// Removed incorrect import: import { Card, Button } from 'flowbite-astro';
+import { Image } from 'astro:assets'; // Use Astro's Image component for optimization
+
+// Define props expected by the component, matching blog collection schema
+interface Props {
+  post: {
+    slug: string;
+    data: {
+      title: string;
+      description: string;
+      pubDate: Date;
+      image?: string; // Optional image path
+      category: string;
+    };
+  };
+}
+
+const { post } = Astro.props;
+const { slug, data } = post;
+const postUrl = `/blog/${slug}/`; // Construct URL to the detail page
+
+// Format date for display
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(data.pubDate);
+---
+
+{/* Replaced <Card> with a div and Flowbite/Tailwind classes */}
+<div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 h-full flex flex-col">
+  {data.image && (
+    <a href={postUrl}>
+      {/* Using standard img tag for now, assuming image in public/ */}
+      <img class="rounded-t-lg object-cover w-full h-48" src={data.image} alt={`Featured image for ${data.title}`} />
+      <!--
+      <Image
+        src={data.image} 
+        alt={`Featured image for ${data.title}`}
+        width={400}
+        height={200}
+        format="webp"
+        quality={80}
+        class="rounded-t-lg object-cover w-full h-48"
+      />
+      -->
+    </a>
+  )}
+  <div class="p-5 flex flex-col flex-grow">
+    <a href={postUrl}>
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        {data.title}
+      </h5>
+    </a>
+    <p class="mb-1 text-sm font-normal text-gray-500 dark:text-gray-400">
+      {formattedDate} | {data.category}
+    </p>
+    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 flex-grow">
+      {data.description}
+    </p>
+    <div class="mt-auto"> <!-- Push button to the bottom -->
+      {/* Replaced <Button> with <a> tag and Flowbite/Tailwind classes */}
+      <a href={postUrl} class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+        Read more
+        <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>

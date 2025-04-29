@@ -1,0 +1,42 @@
+---
+// src/pages/services/index.astro
+import { getCollection } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+import ServiceCard from '../../components/services/ServiceCard.astro';
+
+// Fetch all services from the 'services' collection
+const allServices = await getCollection('services');
+
+// Sort services by the 'order' field defined in frontmatter, ascending
+const sortedServices = allServices.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+
+const pageTitle = "Coaching Services";
+const pageDescription = "Explore our range of coaching services designed to help you achieve your personal and professional goals.";
+---
+
+<MainLayout title={pageTitle} description={pageDescription}>
+  <div class="container mx-auto px-4 py-8 lg:py-16">
+    <header class="mb-8 lg:mb-12 text-center">
+      <h1 class="text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
+        {pageTitle}
+      </h1>
+      <p class="text-lg font-light text-gray-500 dark:text-gray-400">
+        {pageDescription}
+      </p>
+    </header>
+
+    {sortedServices.length > 0 ? (
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {sortedServices.map((service) => (
+          <ServiceCard service={service} />
+        ))}
+      </div>
+    ) : (
+      <p class="text-center text-gray-500 dark:text-gray-400">
+        Details about our services are coming soon. Please check back later!
+      </p>
+    )}
+
+    {/* TODO: Add a section about the general coaching approach or a CTA */}
+  </div>
+</MainLayout>

@@ -1,0 +1,80 @@
+---
+// src/components/services/ServiceCard.astro
+// Removed incorrect import: import { Card, Button } from 'flowbite-astro';
+import { Image } from 'astro:assets'; // Use Astro's Image component for optimization
+
+// Define props expected by the component, matching services collection schema
+interface Props {
+  service: {
+    slug: string;
+    data: {
+      title: string;
+      description: string;
+      price?: string;
+      duration?: string;
+      image?: string; // Optional image path
+    };
+  };
+}
+
+const { service } = Astro.props;
+const { slug, data } = service;
+// Link to a potential detail page or directly to booking
+const serviceUrl = `/services/${slug}/`; // Link to detail page
+const bookingUrl = `/booking?service=${slug}`; // Example link to booking page with service pre-selected
+
+---
+
+{/* Replaced <Card> with a div and Flowbite/Tailwind classes */}
+<div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 h-full flex flex-col">
+  {data.image && (
+    <a href={serviceUrl}>
+      {/* Using standard img tag for now, assuming image in public/ */}
+      <img class="rounded-t-lg object-cover w-full h-48" src={data.image} alt={`Image for ${data.title}`} />
+      <!--
+      <Image
+        src={data.image}
+        alt={`Image for ${data.title}`}
+        width={400}
+        height={200}
+        format="webp"
+        quality={80}
+        class="rounded-t-lg object-cover w-full h-48"
+      />
+      -->
+    </a>
+  )}
+  <div class="p-5 flex flex-col flex-grow">
+    <a href={serviceUrl}>
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        {data.title}
+      </h5>
+    </a>
+    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 flex-grow">
+      {data.description}
+    </p>
+    {/* Restored price/duration block */}
+    {(data.price || data.duration) && (
+      <div class="mb-4 text-sm text-gray-600 dark:text-gray-300">
+        {data.price && <p><strong>Price:</strong> {data.price}</p>}
+        {data.duration && <p><strong>Duration:</strong> {data.duration}</p>}
+      </div>
+    )}
+    <div class="mt-auto"> <!-- Push button to the bottom -->
+      {/* Replaced <Button> with <a> tag and Flowbite/Tailwind classes */}
+      <a href={bookingUrl} class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-secondary-700 rounded-lg hover:bg-secondary-800 focus:ring-4 focus:outline-none focus:ring-secondary-300 dark:bg-secondary-600 dark:hover:bg-secondary-700 dark:focus:ring-secondary-800"> {/* Adjusted color */}
+        Book Now
+        {/* Restored SVG */}
+        <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+      </a>
+      {/* Optionally add a "Learn More" button linking to the detail page */}
+      <!--
+      <a href={serviceUrl} class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ml-2">
+        Learn More
+      </a>
+      -->
+    </div>
+  </div>
+</div>

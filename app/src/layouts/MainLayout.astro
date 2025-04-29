@@ -1,0 +1,199 @@
+---
+// Removed incorrect import: import { Navbar } from 'flowbite-astro';
+import '../styles/custom.css'; // Assuming we'll create this later as per docs
+
+interface Props {
+	title: string;
+  description?: string; // Add optional description prop
+}
+
+const { title, description = "OrlaMarie Coach - Professional coaching to help you overcome challenges and achieve your goals." } = Astro.props; // Default description
+const currentPath = Astro.url.pathname;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site); // Use Astro.site for canonical URL base
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    {/* SEO Meta Tags */}
+		<title>{title} - OrlaMarie Coach</title>
+		<meta name="title" content={`${title} - OrlaMarie Coach`} />
+		<meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL.href} />
+
+    {/* Open Graph / Facebook */}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:title" content={`${title} - OrlaMarie Coach`} />
+    <meta property="og:description" content={description} />
+    {/* <meta property="og:image" content={new URL('/og-image.jpg', Astro.site).href} /> */} {/* TODO: Add default OG image */}
+    <meta property="og:site_name" content="OrlaMarie Coach" />
+
+    {/* Twitter */}
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL.href} />
+    <meta property="twitter:title" content={`${title} - OrlaMarie Coach`} />
+    <meta property="twitter:description" content={description} />
+    {/* <meta property="twitter:image" content={new URL('/twitter-image.jpg', Astro.site).href} /> */} {/* TODO: Add default Twitter image */}
+
+		<meta name="generator" content={Astro.generator} />
+	</head>
+	<body class="bg-brand-background text-brand-text dark:bg-gray-900 dark:text-gray-100"> {/* Applied new brand colors */}
+		<header>
+      {/* Replaced Navbar component with HTML structure + Flowbite classes */}
+      {/* Updated nav background/text colors to match theme */}
+      <nav class="bg-brand-background border-b border-primary-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 dark:border-gray-700"> {/* Use brand background and subtle border */}
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+            <a href="/" class="flex items-center">
+                {/* TODO: Replace with actual logo */}
+                <img src="/favicon.svg" class="mr-3 h-6 sm:h-9" alt="OrlaMarie Coach Logo Placeholder" />
+                <span class="self-center text-xl font-semibold whitespace-nowrap text-brand-text dark:text-white">OrlaMarie Coach</span> {/* Use brand text */}
+            </a>
+            <div class="flex items-center lg:order-2">
+                {/* Optional: Add buttons like Login/Get started here if needed */}
+                <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-brand-text rounded-lg lg:hidden hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false"> {/* Use brand text and primary hover/focus */}
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                    <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+            <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+                <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                    {/* Updated link colors to use brand-text and primary for active/hover */}
+                    <li>
+                        <a href="/" class:list={["block py-2 pr-4 pl-3 rounded lg:bg-transparent lg:p-0", { "text-primary-700 dark:text-primary-500": currentPath === '/', "text-brand-text border-b border-primary-100 hover:bg-primary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-primary-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700": currentPath !== '/' }]} aria-current={currentPath === '/' ? 'page' : undefined}>Home</a>
+                    </li>
+                    <li>
+                        <a href="/services" class:list={["block py-2 pr-4 pl-3 rounded lg:bg-transparent lg:p-0", { "text-primary-700 dark:text-primary-500": currentPath.startsWith('/services'), "text-brand-text border-b border-primary-100 hover:bg-primary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-primary-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700": !currentPath.startsWith('/services') }]}>Services</a>
+                    </li>
+                    <li>
+                        <a href="/blog" class:list={["block py-2 pr-4 pl-3 rounded lg:bg-transparent lg:p-0", { "text-primary-700 dark:text-primary-500": currentPath.startsWith('/blog'), "text-brand-text border-b border-primary-100 hover:bg-primary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-primary-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700": !currentPath.startsWith('/blog') }]}>Blog</a>
+                    </li>
+                    <li>
+                        <a href="/about" class:list={["block py-2 pr-4 pl-3 rounded lg:bg-transparent lg:p-0", { "text-primary-700 dark:text-primary-500": currentPath === '/about', "text-brand-text border-b border-primary-100 hover:bg-primary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-primary-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700": currentPath !== '/about' }]}>About</a>
+                    </li>
+                    <li>
+                        <a href="/contact" class:list={["block py-2 pr-4 pl-3 rounded lg:bg-transparent lg:p-0", { "text-primary-700 dark:text-primary-500": currentPath === '/contact', "text-brand-text border-b border-primary-100 hover:bg-primary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-primary-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700": currentPath !== '/contact' }]}>Contact</a>
+                    </li>
+                     <li>
+                        <a href="/booking" class:list={["block py-2 pr-4 pl-3 rounded lg:bg-transparent lg:p-0", { "text-primary-700 dark:text-primary-500": currentPath === '/booking', "text-brand-text border-b border-primary-100 hover:bg-primary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-primary-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700": currentPath !== '/booking' }]}>Book Now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+      </nav>
+		</header>
+
+		<main>
+			<slot />
+		</main>
+
+		{/* Updated Footer colors */}
+		<footer class="p-4 bg-brand-background md:p-8 lg:p-10 dark:bg-gray-800 mt-10 border-t border-primary-200 dark:border-gray-700"> {/* Use brand background and subtle border */}
+			<div class="mx-auto max-w-screen-xl text-center">
+				<a href="#" class="flex justify-center items-center text-2xl font-semibold text-brand-text dark:text-white"> {/* Use brand text */}
+					{/* TODO: Replace with actual logo */}
+					<img src="/favicon.svg" class="mr-3 h-6 sm:h-9" alt="OrlaMarie Coach Logo Placeholder" />
+					OrlaMarie Coach
+				</a>
+				<p class="my-6 text-gray-500 dark:text-gray-400">Empowering you to achieve your goals.</p> {/* Keep gray for secondary text */}
+				<ul class="flex flex-wrap justify-center items-center mb-6 text-brand-text dark:text-white"> {/* Use brand text */}
+					<li><a href="/about" class="mr-4 hover:text-primary-700 md:mr-6 dark:hover:text-primary-500">About</a></li> {/* Use primary for hover */}
+					<li><a href="/services" class="mr-4 hover:text-primary-700 md:mr-6 dark:hover:text-primary-500">Services</a></li>
+					<li><a href="/blog" class="mr-4 hover:text-primary-700 md:mr-6 dark:hover:text-primary-500">Blog</a></li>
+					<li><a href="/contact" class="mr-4 hover:text-primary-700 md:mr-6 dark:hover:text-primary-500">Contact</a></li>
+					<li><a href="/booking" class="mr-4 hover:text-primary-700 md:mr-6 dark:hover:text-primary-500">Booking</a></li>
+				</ul>
+				<span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© {new Date().getFullYear()} <a href="#" class="hover:text-primary-700 dark:hover:text-primary-500">OrlaMarie Coach™</a>. All Rights Reserved.</span> {/* Keep gray, use primary for hover */}
+			</div>
+		</footer>
+
+    {/* Add Flowbite JS initialization */}
+    {/* Ensure Flowbite JS is loaded */}
+    <script is:inline src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+
+    {/* Basic Analytics Tracking Script (runs only in production) */}
+    {import.meta.env.PROD && (
+      <script is:inline>
+        async function trackPageView() {
+          // Avoid tracking during development or prerendering
+          if (import.meta.env.DEV || navigator.prerendering) return;
+
+          // Avoid tracking admin pages if desired (optional)
+          // if (window.location.pathname.startsWith('/admin')) return;
+
+          try {
+            const data = {
+              url: window.location.pathname + window.location.search, // Include query params
+              referrer: document.referrer,
+              screenWidth: window.innerWidth,
+              timestamp: new Date().toISOString()
+            };
+
+            // Use sendBeacon if available (more reliable for analytics)
+            // otherwise fallback to fetch
+            if (navigator.sendBeacon) {
+              const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+              navigator.sendBeacon('/api/analytics/pageview', blob);
+              // console.log('Analytics beacon sent:', data);
+            } else {
+              await fetch('/api/analytics/pageview', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+                keepalive: true // Helps ensure request finishes even if page unloads
+              });
+              // console.log('Analytics fetch sent:', data);
+            }
+          } catch (error) {
+            console.error('Analytics tracking error:', error);
+          }
+        }
+
+        // Track on initial page load
+        // Use requestAnimationFrame to ensure paint is complete before potentially blocking
+        requestAnimationFrame(() => {
+            // Use setTimeout to delay slightly, reducing impact on initial load metrics
+            setTimeout(trackPageView, 100);
+        });
+
+        // Optional: Track SPA navigations if using Astro View Transitions
+        // document.addEventListener('astro:after-swap', trackPageView);
+
+      </script>
+    )}
+	</body>
+</html>
+<style is:global>
+	/* Add global styles here if needed, or use custom.css */
+	:root {
+		--accent: 136, 58, 234;
+		--accent-light: 224, 204, 250;
+		--accent-dark: 49, 10, 101;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 60%
+		);
+	}
+	html {
+		font-family: system-ui, sans-serif;
+		background-size: 224px;
+	}
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+</style>

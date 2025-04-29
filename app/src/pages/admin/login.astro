@@ -1,0 +1,131 @@
+---
+// Admin Login Page
+import bcrypt from 'bcrypt';
+import dotenv from 'dotenv'; // Import dotenv again
+import { fileURLToPath } from 'url'; // Needed for path resolution
+import path from 'path'; // Needed for path resolution
+import { createAuthSession } from '../../utils/auth/session.js'; // Import placeholder session function
+
+let errorMessage: string | null = null;
+
+if (Astro.request.method === 'POST') {
+  try {
+    // --- Force load .env.development on POST request (WORKAROUND) ---
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    // Path from app/src/pages/admin/login.astro up to app/
+    const envPath = path.resolve(__dirname, '../../../.env.development');
+    const dotenvResult = dotenv.config({ path: envPath });
+    if (dotenvResult.error) {
+      console.error(`Login Handler: Error loading ${envPath}:`, dotenvResult.error);
+    } else {
+      console.log(`Login Handler: Loaded ${envPath}`);
+    }
+    // --- End Workaround ---
+
+    const formData = await Astro.request.formData();
+    const username = formData.get('username')?.toString();
+    const password = formData.get('password')?.toString();
+
+    console.log('Login attempt:', { username }); // Log attempt
+
+    if (!username || !password) {
+      errorMessage = 'Please enter both username and password.';
+    } else {
+      // --- Placeholder for Authentication Logic ---
+      // 1. Fetch user data based on username (e.g., from MongoDB)
+      // const user = await findUserByUsername(username);
+      // 2. Verify password
+      // const isValidPassword = user && await verifyPassword(password, user.passwordHash);
+      // 3. If valid, create session and redirect
+      // if (isValidPassword) {
+      //   createAuthSession(Astro.response, user.id); // Pass Astro.response to set cookie
+      //   return Astro.redirect('/admin'); // Redirect to admin dashboard
+      // --- Authentication Logic using .env variables (via process.env after forced load) ---
+      const storedUsername = process.env.PRIVATE_ADMIN_USERNAME;
+      const storedHash = process.env.PRIVATE_ADMIN_PASSWORD_HASH;
+
+      if (!storedUsername || !storedHash) {
+        // Use specific names in error message
+        console.error('PRIVATE_ADMIN_USERNAME or PRIVATE_ADMIN_PASSWORD_HASH not found in process.env after explicit load.');
+        errorMessage = 'Server configuration error. Please contact support.';
+      } else {
+        // Compare username
+        if (username === storedUsername) {
+          // Compare password hash
+          const passwordMatch = await bcrypt.compare(password, storedHash);
+
+          if (passwordMatch) {
+            // Password matches! Create session and redirect.
+            console.log('Admin login successful for user:', username);
+            // Pass the full Astro global, not just Astro.response
+            createAuthSession(Astro, username);
+            // NOTE: The actual session creation logic in session.js is still a placeholder.
+            return Astro.redirect('/admin');
+          } else {
+            // Password does not match
+            console.warn('Admin login failed: Incorrect password for user:', username);
+            errorMessage = 'Invalid username or password.';
+          }
+        } else {
+          // Username does not match
+          console.warn('Admin login failed: Incorrect username:', username);
+          errorMessage = 'Invalid username or password.';
+        }
+      }
+      // --- End Authentication Logic ---
+    }
+  } catch (error) {
+    console.error('Login error:', error);
+    errorMessage = 'An unexpected error occurred. Please try again.';
+  }
+}
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - OrlaMarie Coach</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="generator" content={Astro.generator} />
+  <!-- Ensure Tailwind/Flowbite CSS is loaded. If using layouts, it might be handled there. -->
+  <!-- For standalone page, might need explicit CSS link or setup -->
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+  <section class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
+    <a href="/" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+        <img class="w-8 h-8 mr-2" src="/favicon.svg" alt="logo">
+        OrlaMarie Coach Admin
+    </a>
+    <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                Sign in to your account
+            </h1>
+            {errorMessage && (
+              <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                <span class="font-medium">Login failed!</span> {errorMessage}
+              </div>
+            )}
+            <form class="space-y-4 md:space-y-6" method="POST">
+                <div>
+                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                    <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="admin" required="">
+                </div>
+                <div>
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                    <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                </div>
+                {/* Optional: Remember me checkbox */}
+                <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+            </form>
+        </div>
+    </div>
+  </section>
+  {/* Ensure Flowbite JS is loaded */}
+  <script is:inline src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+</body>
+</html>

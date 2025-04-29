@@ -1,0 +1,143 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+// Removed incorrect import: import { Button, Table, TableHead, TableBody, TableHeadCell, TableRow, TableCell, Badge } from 'flowbite-astro';
+// Using standard HTML elements with Flowbite classes instead.
+
+// Fetch testimonials from the API endpoint
+let testimonials = [];
+let fetchError = null;
+try {
+  const apiUrl = new URL('/api/admin/testimonials', Astro.url.origin);
+  const response = await fetch(apiUrl.toString());
+  if (!response.ok) {
+    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+  }
+  testimonials = await response.json();
+} catch (error) {
+  console.error('Failed to fetch testimonials:', error);
+  fetchError = error.message || 'Could not load testimonials.';
+}
+
+// Helper to format date
+function formatDate(dateString) {
+  if (!dateString) return 'N/A';
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric', month: 'short', day: 'numeric'
+  });
+}
+
+// Helper to truncate text
+function truncate(text, length = 50) {
+    if (!text) return '';
+    return text.length > length ? text.substring(0, length) + '...' : text;
+}
+---
+
+<AdminLayout title="Manage Testimonials">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Manage Testimonials</h1>
+    <a href="/admin/testimonials/new" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+      <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+      Add New Testimonial
+    </a>
+  </div>
+
+  {fetchError && (
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <span class="font-medium">Error!</span> {fetchError}
+    </div>
+  )}
+
+  {!fetchError && testimonials.length === 0 && (
+    <p class="text-center text-gray-500 dark:text-gray-400 py-8">No testimonials found.</p>
+  )}
+
+  {!fetchError && testimonials.length > 0 && (
+    <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="py-3 px-6">Client Name</th>
+            <th scope="col" class="py-3 px-6">Quote (Excerpt)</th>
+            <th scope="col" class="py-3 px-6">Rating</th>
+            <th scope="col" class="py-3 px-6">Date</th>
+            <th scope="col" class="py-3 px-6">Order</th>
+            <th scope="col" class="py-3 px-6">Status</th>
+            <th scope="col" class="py-3 px-6">
+              <span class="sr-only">Actions</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+          {testimonials.map((testimonial) => (
+            <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600" data-testimonial-id={testimonial._id}>
+              <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {testimonial.clientName}
+                {testimonial.role && <span class="block text-xs text-gray-500">{testimonial.role}</span>}
+              </td>
+              <td class="py-4 px-6">{truncate(testimonial.quote, 60)}</td>
+              <td class="py-4 px-6">{testimonial.rating ? `${testimonial.rating} / 5` : 'N/A'}</td>
+              <td class="py-4 px-6">{formatDate(testimonial.date)}</td>
+              <td class="py-4 px-6">{testimonial.order}</td>
+              <td class="py-4 px-6">
+                {testimonial.isVisible ? (
+                   <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Visible</span>
+                ) : (
+                  <span class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Hidden</span>
+                )}
+              </td>
+              <td class="py-4 px-6 text-right whitespace-nowrap">
+                <a href={`/admin/testimonials/${testimonial._id}`} class="font-medium text-primary-600 dark:text-primary-500 hover:underline mr-3">Edit</a>
+                <button type="button" class="font-medium text-red-600 dark:text-red-500 hover:underline delete-button">Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+
+</AdminLayout>
+
+<script>
+  // Client-side script for delete confirmation and action
+  document.addEventListener('DOMContentLoaded', () => {
+    const deleteButtons = document.querySelectorAll('.delete-button');
+
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', async (event) => {
+        const row = (event.target as HTMLElement).closest('tr');
+        const testimonialId = row?.dataset.testimonialId;
+        const clientName = row?.querySelector('td:first-child')?.textContent?.trim().split('\n')[0] || 'this testimonial';
+
+        if (!testimonialId) {
+          console.error('Could not find testimonial ID for deletion.');
+          alert('Error: Could not identify the testimonial to delete.');
+          return;
+        }
+
+        if (confirm(`Are you sure you want to delete the testimonial from "${clientName}"? This action cannot be undone.`)) {
+          try {
+            // Send DELETE request to the API
+            const response = await fetch(`/api/admin/testimonials?id=${testimonialId}`, {
+              method: 'DELETE',
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+              alert(`Testimonial from "${clientName}" deleted successfully.`);
+              row?.remove(); // Remove the row from the table
+            } else {
+              console.error('API Error:', result);
+              alert(`Failed to delete testimonial: ${result.message || 'Unknown error'}`);
+            }
+          } catch (error) {
+            console.error('Network or script error:', error);
+            alert(`An error occurred while trying to delete the testimonial: ${error.message}`);
+          }
+        }
+      });
+    });
+  });
+</script>
