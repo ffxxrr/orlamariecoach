@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
+import node from '@astrojs/node';
 
 const DEV_PORT = 2121;
 
@@ -33,5 +34,8 @@ export default defineConfig({
 		//
 		sitemap(),
 		tailwind(),
+		node({
+			mode: 'standalone', // Creates a self-contained server entrypoint
+		}),
 	],
 });

@@ -1,5 +1,10 @@
 {
   "dependencies": {
-    "dotenv": "^16.5.0"
+    "@types/dompurify": "^3.0.5",
+    "@types/marked": "^5.0.2",
+    "dompurify": "^3.2.5",
+    "dotenv": "^16.5.0",
+    "jsdom": "^26.1.0",
+    "marked": "^15.0.11"
   }
 }

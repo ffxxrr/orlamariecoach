@@ -55,6 +55,19 @@ export async function GET({ url }) {
     ];
     const topReferrers = await PageView.aggregate(topReferrersPipeline);
 
+    // 5. Daily Page Views for the chart
+    const dailyViewsPipeline = [
+      { $match: { timestamp: { $gte: startDate } } },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$timestamp" } }, // Group by day (YYYY-MM-DD)
+          count: { $sum: 1 } // Count views per day
+        }
+      },
+      { $sort: { _id: 1 } } // Sort by date ascending
+    ];
+    const dailyViews = await PageView.aggregate(dailyViewsPipeline);
+
 
     // Combine stats into a response object
     const stats = {
@@ -63,6 +76,7 @@ export async function GET({ url }) {
       uniqueVisitors, // Approximation
       topPages,
       topReferrers,
+      dailyViews, // Add daily views data
     };
 
     return jsonResponse(stats);

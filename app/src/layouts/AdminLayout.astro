@@ -36,7 +36,7 @@ const { title } = Astro.props;
       {/* <!-- SIDEBAR HEADER --> */}
       <div class="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
         <a href="/admin" class="flex items-center">
-          <img src="/favicon.svg" alt="Logo" class="w-8 h-8 mr-2"/>
+          <img src="/images/orlamariecoach-square.PNG" alt="Logo" class="w-8 h-8 mr-2"/>
           <span class="text-white text-xl font-semibold">OrlaMarie Admin</span>
         </a>
         {/* <!-- Close button for mobile --> */}
@@ -52,6 +52,12 @@ const { title } = Astro.props;
             <li>
               <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-gray-300 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-gray-700" href="/admin">
                 {/* Icon placeholder */} Dashboard
+              </a>
+            </li>
+            {/* <!-- Menu Item Profile --> */}
+            <li>
+              <a class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-gray-300 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-gray-700" href="/admin/profile">
+                {/* Icon placeholder */} Profile
               </a>
             </li>
             {/* <!-- Menu Item Blog --> */}
@@ -104,7 +110,7 @@ const { title } = Astro.props;
             </button>
             {/* <!-- Hamburger Toggle BTN --> */}
             <a class="block flex-shrink-0 lg:hidden" href="/admin">
-              <img src="/favicon.svg" alt="Logo" class="w-6 h-6"/>
+              <img src="/images/orlamariecoach-square.PNG" alt="Logo" class="w-6 h-6"/>
             </a>
           </div>
 

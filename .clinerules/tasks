@@ -1,16 +1,15 @@
 # Current Tasks
 
-## High Priority (Phase 2)
-- Set up initial MongoDB connection
-- Implement blog listing page (`src/pages/blog/index.astro`) using content collections
-- Implement services listing page (`src/pages/services/index.astro`) using content collections
+## High Priority (Phase 3 / Refinement)
+- [ ] **Debug & Fix Admin Profile Image Cropping** (Current Cropper.js implementation fails with `getCroppedCanvas is not a function` error and preview issues) - **Blocked / Needs Investigation**
+- [ ] Refine Admin Profile Image Editing (e.g., add rotation, scaling options, improve UI) - *Depends on fixing the basic crop*
 
 ## Medium Priority
 - Integrate Digital Samba widget (`app/src/pages/booking.astro`) (Placeholder)
 
 ## Low Priority
-- Custom analytics implementation with Flowbite charts
-- Email notification setup
+- Refine analytics dashboard (Add date range selector, more charts/stats)
+- Email notification setup (Contact Form)
 - Payment integration
 - Dark mode toggle functionality
 
@@ -43,13 +42,47 @@
 - Implement testimonial management (Admin UI & API - Basic CRUD)
 - Create basic analytics implementation (Admin UI & API - Basic)
 - Refine admin authentication (JWT implementation, logout functionality)
+- Resolved MongoDB authentication issues (Docker fix + standard Astro env var handling)
+- Resolved Mongoose connection timeout error (`app/src/utils/db/connect.js`)
+- Fixed `flowbite-astro` import errors in admin CRUD pages (Blog, Services, Testimonials)
+- Fixed Blog `slug` validation and added optional slug field to forms/API
+- Implemented inline success/error messaging for Blog edit page (`app/src/pages/admin/blog/[id].astro`)
+- Fixed Service `slug` validation and added optional slug field to forms/API
+- Implemented inline success/error messaging for Services edit page (`app/src/pages/admin/services/[id].astro`)
+- Implemented inline success/error messaging for Testimonials edit page (`app/src/pages/admin/testimonials/[id].astro`)
+- Implemented Admin Profile Management (Model: `CoachProfile.js`, API: `/api/admin/profile`, UI: `/admin/profile`, Public Page: `/about.astro`)
+- Implemented Admin Profile Image Upload (UI, API, Path Fixes)
+- Implemented Admin Profile Image Basic Cropping (UI with Cropper.js, Frontend Script, Backend handles cropped file) - **Broken: Needs Debugging**
+- Enabled analytics tracking in development (`app/src/layouts/MainLayout.astro`)
+- Implemented basic "Traffic Over Time" chart (`app/src/pages/admin/analytics/index.astro`, `app/src/components/admin/Dashboard/TrafficChart.astro`)
+- Replace placeholders on Admin Dashboard (`app/src/pages/admin/index.astro`) with dynamic data
+- Make Admin Dashboard stats cards clickable links
+- Connect public pages (Blog, Services, Testimonials, About) to fetch data from MongoDB
+- Implement dynamic testimonial carousel on homepage (`app/src/pages/index.astro`)
+- Implement Event Management (Model, API, Admin CRUD, Public Pages, Nav Links)
+
+
+# Deployment Preparation (Staging/Production)
+- Configure and verify environment variables (MongoDB URI, JWT Secret, Admin creds, Digital Samba ID, Email keys) for staging/production.
+- Set up and test production database connection (e.g., MongoDB Atlas), including firewall rules.
+- Select and configure deployment platform (Vercel, Netlify, etc.), ensuring Astro SSR/API support.
+- Verify build process on deployment platform (Node.js version, dependencies).
+- Review and adjust cookie settings (`secure`, `domain`, `httpOnly`, `sameSite`) for production HTTPS.
+- Ensure API endpoint URLs are correctly handled (relative paths or dynamic config).
+- Implement rate limiting/security for public API endpoints (Contact, Analytics).
+- Implement and configure production email service for contact form (incl. DNS records).
+- Verify Digital Samba integration in staging environment.
+- Ensure HTTPS is enforced in production.
+- Set up production logging and monitoring solution.
 
 # Blocked Tasks
 - None currently
 
 # Next Steps (Phase 3/4)
-1. Implement Digital Samba widget integration (`app/src/pages/booking.astro`) (Placeholder - Deferred).
-2. **Refine Admin Features / Start Phase 4** (e.g., improve auth, add image uploads, implement email notifications, refine UI).
+1. **Debug & Fix Admin Profile Image Cropping** - **High Priority / Blocked** (Investigate `getCroppedCanvas` TypeError and preview issues. Consider alternative libraries or integration methods if necessary).
+2. Refine Admin Profile Image Editing Tools (e.g., add rotation, scaling options, improve UI) - *Depends on fixing the basic crop*
+3. Implement Digital Samba widget integration (`app/src/pages/booking.astro`) (Placeholder - Deferred).
+4. Refine Admin Features / Start Phase 4 (e.g., improve auth, add image uploads for other areas, implement email notifications, refine UI).
 
 # Implementation Notes
 - Use the official Flowbite Astro Admin Dashboard theme as a starting point

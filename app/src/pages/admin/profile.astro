@@ -1,0 +1,263 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+// Removed flowbite-astro imports
+
+let profileData = null;
+let errorMessage = null;
+let successMessage = null;
+
+// Check for success message from redirect
+if (Astro.url.searchParams.get('success') === 'true') {
+  successMessage = 'Profile updated successfully!';
+} else if (Astro.url.searchParams.has('error')) {
+  errorMessage = decodeURIComponent(Astro.url.searchParams.get('error'));
+}
+
+
+// Fetch existing profile data on page load
+try {
+  const response = await fetch(Astro.url.origin + '/api/admin/profile', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      // Include credentials/cookies if your auth relies on them server-side
+      'Cookie': Astro.request.headers.get('cookie') || '',
+    }
+  });
+  if (response.ok) {
+    profileData = await response.json();
+  } else if (response.status !== 404) { // 404 is okay if profile not created yet
+    const errorRes = await response.json();
+    errorMessage = `Error fetching profile: ${errorRes.message || response.statusText}`;
+  }
+} catch (error) {
+  console.error("Fetch error:", error);
+  errorMessage = `Failed to fetch profile data: ${error.message}`;
+}
+
+// Handle form submission
+if (Astro.request.method === 'POST') {
+  try {
+    // Astro automatically handles FormData when enctype is multipart/form-data
+    // We just need to pass it along to the API endpoint.
+    // The API endpoint will handle extracting fields and the file.
+    const formData = await Astro.request.formData();
+
+    // Note: We are sending multipart/form-data, not application/json
+    const response = await fetch(Astro.url.origin + '/api/admin/profile', {
+      method: 'PUT', // Using PUT as we are updating the single profile resource
+      headers: {
+        // Content-Type is set automatically by fetch for FormData
+        'Cookie': Astro.request.headers.get('cookie') || '',
+      },
+      body: formData, // Send the raw FormData
+    });
+
+    // No need to parse JSON response here if we redirect immediately on success
+    if (response.ok) {
+      // Redirect on success to force a fresh GET request
+      return Astro.redirect('/admin/profile?success=true');
+    } else {
+      // Handle error response - try to parse JSON for error details
+      let errorDetails = response.statusText;
+      try {
+        const result = await response.json();
+        errorDetails = result.message || errorDetails;
+         if (result.errors) {
+           errorDetails += ` Details: ${Object.values(result.errors).map(e => e.message).join(', ')}`;
+         }
+      } catch (parseError) {
+         // If response is not JSON, use the status text
+         console.warn("Could not parse error response as JSON:", parseError);
+      }
+      // Set error message for display *without* redirecting
+      errorMessage = `Error saving profile: ${errorDetails}`;
+      successMessage = null;
+      // Re-fetch data to show the form with potentially failed state? Or just show error?
+      // Let's just show the error for now. The form will retain user input.
+    }
+
+  } catch (error) {
+    console.error("Submit error:", error);
+    // Set error message for display *without* redirecting
+    errorMessage = `Failed to save profile data: ${error.message}`;
+    successMessage = null;
+  }
+}
+
+const initialTitle = profileData?.title || '';
+const initialBio = profileData?.bio || '';
+const initialImageUrl = profileData?.imageUrl || '';
+
+import ImageCropper from '../../components/admin/ImageCropper.astro';
+---
+
+<AdminLayout title="Edit Profile - OrlaMarie Coach Admin">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-semibold mb-6">Edit Your Profile</h1>
+
+    {/* Success Alert */}
+    {successMessage && (
+      <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+        <span class="font-medium">Success!</span> {successMessage}
+      </div>
+    )}
+    {/* Error Alert */}
+    {errorMessage && (
+       <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+        <span class="font-medium">Error!</span> {errorMessage}
+      </div>
+    )}
+
+    <form method="POST" enctype="multipart/form-data" class="space-y-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+      <div>
+        <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile Section Title</label>
+        <input type="text" id="title" name="title" placeholder="e.g., About Me, My Approach" value={initialTitle} required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+      </div>
+      <div>
+        <label for="bio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bio / Main Content</label>
+        <textarea id="bio" name="bio" placeholder="Enter your detailed bio here..." rows={10} value={initialBio} required class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">You can use Markdown formatting here.</p>
+      </div>
+
+      {/* Current Image Preview */}
+      {initialImageUrl && (
+        <div class="mb-4">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Profile Image</label>
+          <img src={initialImageUrl} alt="Current profile image" class="max-w-xs h-auto rounded-lg shadow" />
+          <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Current image path: {initialImageUrl}</p>
+          <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Uploading a new image will replace this one.</p>
+        </div>
+      )}
+
+      {/* Use the ImageCropper component */}
+      <ImageCropper client:load />
+
+      {/* Hidden input MUST remain here, outside the component, but inside the form */}
+      <input type="hidden" name="croppedImageData" id="croppedImageData" />
+
+      <div>
+        <!-- Using a styled link as a button if Button component causes issues -->
+         <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Save Profile
+        </button>
+        <!-- <Button type="submit" color="blue">Save Profile</Button> -->
+      </div>
+    </form>
+  </div>
+</AdminLayout>
+
+<script>
+  // This script now ONLY handles the form submission logic,
+  // specifically checking for cropped data and converting it to a Blob.
+  // The Cropper initialization and interaction logic is moved to ImageCropper.astro.
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    const croppedImageDataInput = document.getElementById('croppedImageData') as HTMLInputElement;
+    // We need a way to know the original file name/type if we submit from here
+    // Let's assume the ImageCropper component stores it somewhere accessible,
+    // or we might need to rethink how the file name is passed.
+    // For now, let's try accessing the originalFile variable if it's somehow global (unlikely/bad practice)
+    // A better approach would be storing filename/type in data attributes or another hidden input.
+    // Let's add a placeholder for filename for now.
+    let originalFileName = 'cropped-image.jpg'; // Placeholder
+    let originalFileType = 'image/jpeg'; // Placeholder
+
+     // --- Temporary workaround: Listen for a custom event from the cropper component ---
+     // This is needed because the originalFile variable is scoped within the component's script.
+     document.addEventListener('cropperfileinfo', (event: CustomEvent) => {
+        if (event.detail) {
+            originalFileName = event.detail.name || 'cropped-image.jpg';
+            originalFileType = event.detail.type || 'image/jpeg';
+            console.log("Received file info from cropper component:", { originalFileName, originalFileType });
+        }
+     });
+     // --- End Temporary workaround ---
+
+
+    console.log("Profile page form submission script loaded.");
+    console.log("Form element:", form);
+    console.log("Hidden cropped data input:", croppedImageDataInput);
+
+
+    form?.addEventListener('submit', async (event) => {
+      console.log("Form submit event triggered.");
+      // Check if the hidden input has Base64 data set by the ImageCropper component
+      if (croppedImageDataInput && croppedImageDataInput.value) {
+        console.log("Cropped image data found in hidden input. Processing...");
+        event.preventDefault(); // Prevent default form submission
+
+        // Convert Base64 to Blob
+        const base64String = croppedImageDataInput.value;
+        try {
+          const fetchRes = await fetch(base64String);
+          const blob = await fetchRes.blob();
+          console.log("Base64 converted to Blob:", blob);
+
+          // Create a new FormData object based on the current form
+          const formData = new FormData(form);
+
+          // Remove the original file input if it exists in FormData (it shouldn't be named 'profileImage' anymore)
+          formData.delete('profileImageInput'); // Remove the input from the component
+          // Remove the hidden base64 data field as we're sending a Blob
+          formData.delete('croppedImageData');
+
+          // Append the cropped image Blob as a file named 'profileImage' (expected by backend)
+          // Use the filename/type obtained via the custom event or placeholders
+          formData.append('profileImage', blob, originalFileName);
+          console.log("Appended cropped Blob to FormData as 'profileImage'.");
+
+          // Manually submit the modified FormData
+          console.log("Submitting modified FormData...");
+          const response = await fetch(form.action, {
+            method: form.method,
+            headers: {
+              // No Content-Type needed, fetch sets it for FormData
+              'Cookie': document.cookie || '', // Send cookies
+            },
+            body: formData,
+          });
+
+          console.log("Fetch response status:", response.status);
+          if (response.ok) {
+            console.log("Submission successful. Redirecting...");
+            // Redirect on success using client-side navigation
+            window.location.href = '/admin/profile?success=true';
+          } else {
+            // Handle error response
+            let errorDetails = response.statusText;
+            try {
+              const result = await response.json();
+              errorDetails = result.message || errorDetails;
+              if (result.errors) {
+                errorDetails += ` Details: ${Object.values(result.errors).map(e => e.message).join(', ')}`;
+              }
+              console.error("Server error response:", result);
+            } catch (parseError) {
+              console.warn("Could not parse error response as JSON:", parseError);
+            }
+            // Display error message
+            const errorAlert = document.querySelector('[role="alert"].text-red-800');
+            if (errorAlert) {
+                const errorSpan = errorAlert.querySelector('span + *'); // Get the element after the "Error!" span
+                if(errorSpan) errorSpan.textContent = ` Error saving profile: ${errorDetails}`;
+                errorAlert.classList.remove('hidden');
+                const successAlert = document.querySelector('[role="alert"].text-green-800');
+                if (successAlert) successAlert.classList.add('hidden');
+            } else {
+                alert(`Error saving profile: ${errorDetails}`);
+            }
+          }
+        } catch (error) {
+          console.error("Error during cropped image submission:", error);
+          alert(`Failed to process or submit cropped image: ${error.message}`);
+        }
+      } else {
+        console.log("No cropped image data found. Allowing default form submission.");
+        // If no croppedImageData, allow the form to submit normally
+        // The backend will handle the case where no 'profileImage' is sent.
+      }
+    });
+  });
+</script>

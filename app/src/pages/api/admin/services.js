@@ -44,9 +44,22 @@ export async function POST({ request }) {
       return jsonResponse({ message: 'Missing required fields: Title, Description' }, 400);
     }
 
+     // Prepare data for the model, including the optional slug
+    const serviceToCreate = {
+        title: data.title,
+        description: data.description,
+        price: data.price || null,
+        duration: data.duration || null,
+        image: data.image || null,
+        order: data.order || 0,
+        isActive: data.isActive !== undefined ? data.isActive : true, // Default to true if not provided
+        // Include slug only if it's provided and not empty
+        ...(data.slug && data.slug.trim() !== '' && { slug: data.slug.trim().toLowerCase() }),
+    };
+
     // Create and save the new service
-    const newService = new Service(data);
-    await newService.save(); // Mongoose handles slug generation via schema hook
+    const newService = new Service(serviceToCreate);
+    await newService.save(); // Mongoose pre-save hook handles slug generation IF not provided here
 
     return jsonResponse(newService, 201); // 201 Created status
   } catch (error) {
@@ -68,10 +81,21 @@ export async function PUT({ request, url }) {
     }
 
     const data = await request.json();
-    // delete data.slug; // Optionally prevent direct slug update
 
-    // Find and update the service
-    const updatedService = await Service.findByIdAndUpdate(serviceId, data, { new: true, runValidators: true });
+    // Prepare update data, handling the slug explicitly
+    const updateData = { ...data }; // Copy incoming data
+
+    // If slug is provided and not empty, use it (and lowercase it)
+    if (data.slug && data.slug.trim() !== '') {
+        updateData.slug = data.slug.trim().toLowerCase();
+    } else {
+        // If slug is empty or not provided, remove it from updateData
+        // This allows the pre-save hook to potentially regenerate it based on title change
+        delete updateData.slug;
+    }
+
+    // Find and update the service using the prepared updateData
+    const updatedService = await Service.findByIdAndUpdate(serviceId, updateData, { new: true, runValidators: true });
 
     if (!updatedService) {
       return jsonResponse({ message: 'Service not found for update' }, 404);

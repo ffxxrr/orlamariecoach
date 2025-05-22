@@ -1,7 +1,8 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
-// Removed incorrect import: import { Button, Input, Textarea, Label, Checkbox, InputNumber, Select } from 'flowbite-astro';
+// Removed incorrect import: import { Button, Input, Textarea, Label, Checkbox, Select } from 'flowbite-astro';
 // Using standard HTML elements with Flowbite classes instead.
+// Removed Button import as well.
 
 let errorMessage: string | null = null;
 let successMessage: string | null = null;
@@ -55,9 +56,9 @@ if (Astro.request.method === 'POST') {
 <AdminLayout title="Add New Testimonial">
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Add New Testimonial</h1>
-    <Button href="/admin/testimonials" color="alternative" size="sm">
+    <a href="/admin/testimonials" class="py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
       &larr; Back to Testimonials
-    </Button>
+    </a>
   </div>
 
   {successMessage && (

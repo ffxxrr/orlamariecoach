@@ -1,7 +1,7 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
-// Removed incorrect import: import { Card, Table, TableHead, TableBody, TableHeadCell, TableRow, TableCell } from 'flowbite-astro';
-// Using standard HTML elements with Flowbite classes instead.
+import TrafficChart from '../../../components/admin/Dashboard/TrafficChart.astro'; // Import the chart component
+// Using standard HTML elements with Flowbite classes.
 
 // Fetch analytics stats from the API endpoint
 let stats = null;
@@ -22,6 +22,19 @@ try {
 // Helper to format numbers (optional)
 function formatNumber(num) {
     return num?.toLocaleString() ?? 'N/A';
+}
+
+// Prepare data for the chart if stats are available
+let trafficChartData = null;
+if (stats && stats.dailyViews) {
+  trafficChartData = {
+    labels: stats.dailyViews.map(item => item._id), // Dates (YYYY-MM-DD)
+    datasets: [{
+      label: 'Page Views',
+      data: stats.dailyViews.map(item => item.count), // Counts
+      // Styling will be applied by the component defaults or can be overridden here
+    }]
+  };
 }
 ---
 
@@ -55,15 +68,24 @@ function formatNumber(num) {
          {/* Add more cards for bounce rate, avg time, etc. if calculated */}
       </div>
 
-      {/* Placeholder for Charts */}
+       {/* Traffic Chart Section */}
        <div class="grid grid-cols-1 gap-4 md:gap-6 xl:grid-cols-1 2xl:gap-7.5 mb-6">
          <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
             <h5 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Traffic Over Time</h5>
-            <div class="min-h-[300px] flex items-center justify-center text-gray-400">
-                Placeholder for Traffic Chart (e.g., using Chart.js)
+            <div class="min-h-[350px]"> {/* Ensure sufficient height for the chart */}
+              {trafficChartData ? (
+                <> {/* Wrap true branch in fragment */}
+                  <TrafficChart chartData={trafficChartData} /> {/* REMOVED client:load directive */}
+                </>
+              ) : (
+                <> {/* Wrap false branch in fragment */}
+                  <div class="flex items-center justify-center h-full text-gray-400">
+                      {fetchError ? 'Could not load chart data.' : 'Loading chart data...'}
+                  </div>
+                </>
+              )}
             </div>
-            {/* TODO: Implement chart component */}
-         </Card>
+         </div>
        </div>
 
       {/* Top Pages and Referrers Tables */}

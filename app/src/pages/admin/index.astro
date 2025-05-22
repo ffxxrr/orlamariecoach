@@ -2,13 +2,46 @@
 import AdminLayout from '../../layouts/AdminLayout.astro';
 // Import Flowbite components if needed, or use classes directly
 // import { Card } from 'flowbite-astro'; // Example if using components
+import TrafficChart from '../../components/admin/Dashboard/TrafficChart.astro'; // Import the chart component
 
-// TODO: Fetch actual dashboard data later (e.g., recent posts, stats)
+import { connectToDatabase } from '../../utils/db/connect.js';
+import BlogPost from '../../utils/db/models/BlogPost.js';
+import Service from '../../utils/db/models/Service.js';
+import PageView from '../../utils/db/models/PageView.js';
+import Testimonial from '../../utils/db/models/Testimonial.js';
+import { format } from 'date-fns'; // For formatting dates
+
+let statsData = {
+  totalBlogPosts: 0,
+  totalServices: 0,
+  totalTestimonials: 0,
+  totalPageViews: 0,
+  // Add more stats as needed
+};
+let recentBlogPosts = [];
+
+try {
+  await connectToDatabase();
+  statsData.totalBlogPosts = await BlogPost.countDocuments();
+  statsData.totalServices = await Service.countDocuments();
+  statsData.totalTestimonials = await Testimonial.countDocuments();
+  statsData.totalPageViews = await PageView.countDocuments(); // Simple total count for now
+
+  // Fetch recent blog posts
+  recentBlogPosts = await BlogPost.find({})
+    .sort({ pubDate: -1 }) // Sort by publication date descending
+    .limit(5) // Get the latest 5
+    .select('title slug pubDate'); // Select pubDate instead of createdAt
+} catch (error) {
+  console.error("Error fetching dashboard data:", error);
+  // Handle error appropriately, maybe show default values or an error message
+}
+
 const stats = [
-  { title: 'Total Blog Posts', value: '15', change: '+2 this week' },
-  { title: 'Total Services', value: '4', change: '' },
-  { title: 'New Bookings (Month)', value: '8', change: '+10%' },
-  { title: 'Website Visitors (Month)', value: '1,245', change: '-5%' },
+  { title: 'Total Blog Posts', value: statsData.totalBlogPosts, change: '' }, // TODO: Add change calculation
+  { title: 'Total Services', value: statsData.totalServices, change: '' },
+  { title: 'Total Testimonials', value: statsData.totalTestimonials, change: '' },
+  { title: 'Total Page Views', value: statsData.totalPageViews, change: '' }, // TODO: Add change calculation
 ];
 ---
 
@@ -17,38 +50,80 @@ const stats = [
     <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Admin Dashboard</h1>
   </div>
 
-  {/* Stats Cards Section */}
+  {/* Stats Cards Section - Make cards clickable */}
   <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 mb-6">
-    {stats.map(stat => (
-      <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-        <div class="flex items-center justify-between">
-          <div>
-            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">{stat.title}</h3>
+    {stats.map(stat => {
+      let linkUrl = '#'; // Default link
+      if (stat.title === 'Total Blog Posts') linkUrl = '/admin/blog';
+      if (stat.title === 'Total Services') linkUrl = '/admin/services';
+      if (stat.title === 'Total Testimonials') linkUrl = '/admin/testimonials';
+      if (stat.title === 'Total Page Views') linkUrl = '/admin/analytics'; // Link page views to analytics page
+
+      return (
+        <a href={linkUrl} class="block rounded-lg border border-gray-200 bg-white p-6 shadow-sm hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors duration-150">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">{stat.title}</h3>
             <p class="mt-1 text-3xl font-semibold text-gray-900 dark:text-white">{stat.value}</p>
           </div>
-          {/* Optional: Add an icon here */}
-        </div>
-        {stat.change && (
-          <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
-            {/* TODO: Add logic for positive/negative change color */}
-            <span>{stat.change}</span> vs last period
-          </p>
-        )}
-      </div>
-    ))}
+            {/* Optional: Add an icon here */}
+          </div>
+          {stat.change && (
+            <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+              {/* TODO: Add logic for positive/negative change color */}
+              <span>{stat.change}</span> vs last period
+            </p>
+          )}
+        </a>
+      );
+    })}
   </div>
 
   {/* Placeholder for other dashboard sections */}
   <div class="grid grid-cols-1 gap-4 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
+    {/* Recent Activity Section */}
     <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 min-h-[300px]">
-      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Activity</h3>
-      <p class="text-gray-500 dark:text-gray-400">Placeholder for recent blog posts, bookings, etc.</p>
-      {/* TODO: Add table or list component */}
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Blog Posts</h3>
+      {recentBlogPosts.length > 0 ? (
+        <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+          {recentBlogPosts.map(post => (
+            <li class="py-3 sm:py-4">
+              <div class="flex items-center space-x-4">
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                    <a href={`/admin/blog/${post._id}`} class="hover:underline">{post.title}</a>
+                  </p>
+                  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                    Published: {post.pubDate && !isNaN(new Date(post.pubDate).getTime()) ? format(new Date(post.pubDate), 'MMM d, yyyy') : 'Date unavailable'}
+                  </p>
+                </div>
+                <a href={`/admin/blog/${post._id}`} class="inline-flex items-center text-sm font-semibold text-primary-600 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-400">
+                  Edit
+                </a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-gray-500 dark:text-gray-400">No recent blog posts found.</p>
+      )}
+      <div class="mt-4">
+         <a href="/admin/blog" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">
+            View all posts &rarr;
+         </a>
+      </div>
     </div>
+
+    {/* Analytics Overview Section */}
     <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 min-h-[300px]">
-      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Analytics Overview</h3>
-      <p class="text-gray-500 dark:text-gray-400">Placeholder for charts (e.g., visitors, page views).</p>
-      {/* TODO: Add chart component */}
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Traffic Overview</h3>
+        <a href="/admin/analytics" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">
+          View Full Report &rarr;
+        </a>
+      </div>
+      {/* Use the TrafficChart component */}
+      <TrafficChart client:load />
     </div>
   </div>
 

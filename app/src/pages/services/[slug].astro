@@ -1,27 +1,39 @@
 ---
-import { getCollection } from 'astro:content';
+// import { getCollection } from 'astro:content'; // Removed
 import MainLayout from '../../layouts/MainLayout.astro';
 import { Image } from 'astro:assets'; // Use Astro's Image component for optimization
+import { Markdown } from 'astro/components'; // Import Markdown component
+import { connectToDatabase } from '../../utils/db/connect.js';
+import Service from '../../utils/db/models/Service.js';
 
-// Generate static paths for each service
-export async function getStaticPaths() {
-  const serviceEntries = await getCollection('services');
-  return serviceEntries.map(entry => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+// This page is now server-rendered
+// export async function getStaticPaths() { ... } // Removed
+
+const { slug } = Astro.params;
+let service = null;
+
+if (!slug) {
+  console.error("Service slug is missing.");
+} else {
+  try {
+    await connectToDatabase();
+    service = await Service.findOne({ slug: slug }).lean();
+  } catch (error) {
+    console.error(`Error fetching service with slug "${slug}":`, error);
+  }
 }
 
-// Get the specific service entry for this page
-const { entry } = Astro.props;
-const { Content } = await entry.render(); // Render the Markdown content if any
-const service = entry.data;
+// Handle service not found
+if (!service) {
+  return Astro.redirect('/404');
+}
 ---
 
-<MainLayout title={service.title}>
+<MainLayout title={service.title} description={service.description}> {/* Add description to layout */}
   <div class="container mx-auto px-4 py-8 lg:py-16">
     <article class="prose dark:prose-invert max-w-none">
-      {service.image && (
+      {/* Check if service exists before accessing properties */}
+      {service && service.image && (
         <Image
           src={service.image}
           alt={service.title}
@@ -49,10 +61,12 @@ const service = entry.data;
         </div>
       )}
 
-      {/* Render the main description from Markdown */}
-      <div class="text-gray-800 dark:text-gray-200">
-        <Content />
-      </div>
+      {/* Render the main description from the database */}
+      {service && service.description && (
+        <div class="text-gray-800 dark:text-gray-200">
+          <Markdown content={service.description} />
+        </div>
+      )}
 
       {/* Optional: Add a Call to Action */}
       <div class="mt-8">

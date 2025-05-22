@@ -2,6 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 // Removed incorrect import: import { Button, Input, Textarea, Label, Checkbox, Select } from 'flowbite-astro';
 // Using standard HTML elements with Flowbite classes instead.
+// Removed Button import as well.
 
 const { id } = Astro.params; // Get post ID from URL parameter
 let post = null;
@@ -67,9 +68,9 @@ const categories = ['Career', 'Life Balance', 'Mindset', 'Productivity'];
     <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
       {post ? `Edit Blog Post: ${post.title}` : 'Edit Blog Post'}
     </h1>
-    <Button href="/admin/blog" color="alternative" size="sm">
+    <a href="/admin/blog" class="py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
       &larr; Back to Posts
-    </Button>
+    </a>
   </div>
 
   {fetchError && (
@@ -78,16 +79,13 @@ const categories = ['Career', 'Life Balance', 'Mindset', 'Productivity'];
     </div>
   )}
 
-  {successMessage && (
-    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-      <span class="font-medium">Success!</span> {successMessage}
-    </div>
-  )}
-  {errorMessage && (
-    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-      <span class="font-medium">Update Error!</span> {errorMessage}
-    </div>
-  )}
+  {/* Inline messages controlled by client-side script (initially hidden) */}
+  <div id="success-message-div" class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 hidden" role="alert">
+    <span id="success-message-span" class="font-medium"></span> {/* Content set by script */}
+  </div>
+  <div id="error-message-div" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden" role="alert">
+     <span id="error-message-span" class="font-medium"></span> {/* Content set by script */}
+  </div>
 
   {/* Only show form if post data was fetched successfully */}
   {post && !fetchError && (
@@ -96,6 +94,14 @@ const categories = ['Career', 'Life Balance', 'Mindset', 'Productivity'];
       <div>
         <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title <span class="text-red-600">*</span></label>
         <input type="text" name="title" id="title" placeholder="Enter post title" value={post.title} required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+      </div>
+      <div>
+        <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug (URL Path)</label>
+        <input type="text" name="slug" id="slug" placeholder="e.g., my-awesome-post" value={post.slug} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          The slug determines the URL (e.g., /blog/{post.slug}). Use lowercase letters, numbers, and hyphens only. Changing this affects the post's URL.
+          <a href="https://moz.com/learn/seo/url" target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:underline dark:text-primary-500">Learn more about SEO-friendly URLs</a>.
+        </p>
       </div>
        <div>
         <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Short Description <span class="text-red-600">*</span></label>
@@ -142,6 +148,7 @@ const categories = ['Career', 'Life Balance', 'Mindset', 'Productivity'];
     const postId = formData.get('postId'); // Get ID from hidden input or URL param
     const postData = {
       title: formData.get('title'),
+      slug: formData.get('slug'), // Include slug from the form
       description: formData.get('description'),
       content: formData.get('content'),
       category: formData.get('category'),
@@ -150,8 +157,16 @@ const categories = ['Career', 'Life Balance', 'Mindset', 'Productivity'];
     };
 
     // Clear previous messages
-    // TODO: Implement a more robust way to display messages without full page reload if desired
-    // For now, rely on the server-rendered messages after potential page reload/navigation
+    // Get message elements (assuming they have IDs: success-message-div, success-message-span, error-message-div, error-message-span)
+    const successDiv = document.getElementById('success-message-div');
+    const successSpan = document.getElementById('success-message-span');
+    const errorDiv = document.getElementById('error-message-div');
+    const errorSpan = document.getElementById('error-message-span');
+
+    // Clear previous messages visually
+    if (successDiv) successDiv.classList.add('hidden');
+    if (errorDiv) errorDiv.classList.add('hidden');
+
 
     try {
       const response = await fetch(`/api/admin/blog?id=${postId}`, {
@@ -166,16 +181,31 @@ const categories = ['Career', 'Life Balance', 'Mindset', 'Productivity'];
         throw new Error(result.message || `API Error: ${response.status}`);
       }
 
-      // Success: Show message (or redirect)
-      // This script runs *before* Astro re-renders the page with server-side messages.
-      // For a smoother UX without full reload, you'd update the DOM here or use a framework.
-      alert('Post updated successfully!'); // Simple alert for now
+      // Success: Show inline success message and hide the form
+      if (successDiv && successSpan) {
+        successSpan.textContent = `Success! Blog post "${result.title}" updated successfully!`;
+        successDiv.classList.remove('hidden');
+        // Hide the form
+        const editForm = document.getElementById('edit-blog-form');
+        if (editForm) {
+            editForm.classList.add('hidden');
+        }
+      } else {
+         // Fallback alert if elements not found
+         alert('Post updated successfully!');
+      }
       // Optionally redirect: window.location.href = '/admin/blog';
 
     } catch (error) {
       console.error('Error updating post via fetch:', error);
-      alert(`Failed to update post: ${error.message}`);
-      // Display error message near the form if needed
+      // Error: Show inline error message
+       if (errorDiv && errorSpan) {
+        errorSpan.textContent = `Update Error! ${error.message || 'An unexpected error occurred.'}`;
+        errorDiv.classList.remove('hidden');
+      } else {
+          // Fallback alert if elements not found
+          alert(`Failed to update post: ${error.message}`);
+      }
     }
   });
 </script>

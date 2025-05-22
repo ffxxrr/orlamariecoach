@@ -1,0 +1,249 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { verifyAdminSession } from '../../../utils/auth/session';
+
+// Authentication check
+const isAdmin = await verifyAdminSession(Astro.request);
+if (!isAdmin) {
+  return Astro.redirect('/admin/login');
+}
+
+const { id } = Astro.params; // Get event ID from the URL
+const eventTypes = ['Workshop', 'Retreat', 'Webinar', 'Talk', 'In-Person', 'Online', 'Other']; // Match the model enum
+
+let eventData = null;
+let fetchError = null;
+let formError = null;
+let formSuccess = null;
+let deleteError = null;
+let deleteSuccess = null;
+
+// Fetch existing event data
+try {
+  const apiUrl = new URL(`/api/admin/events?id=${id}`, Astro.url.origin);
+  const response = await fetch(apiUrl.toString(), {
+    headers: {
+      'Cookie': Astro.request.headers.get('cookie') || '',
+      'Content-Type': 'application/json'
+    }
+  });
+  if (!response.ok) {
+    if (response.status === 404) {
+      throw new Error(`Event with ID ${id} not found.`);
+    }
+    throw new Error(`Failed to fetch event: ${response.status} ${response.statusText}`);
+  }
+  eventData = await response.json();
+  // Format date for datetime-local input (YYYY-MM-DDTHH:mm)
+  if (eventData && eventData.date) {
+    try {
+        const dateObj = new Date(eventData.date);
+        // Adjust for timezone offset to get local time in correct format
+        const timezoneOffset = dateObj.getTimezoneOffset() * 60000; // offset in milliseconds
+        const localISOTime = new Date(dateObj.getTime() - timezoneOffset).toISOString().slice(0, 16);
+        eventData.date = localISOTime;
+    } catch (e) {
+        console.error("Error formatting date for input:", e);
+        eventData.date = ''; // Fallback if date is invalid
+    }
+  }
+
+} catch (error) {
+  console.error("Error fetching event data:", error);
+  fetchError = error.message;
+}
+
+// Handle form submission (Update)
+if (Astro.request.method === 'POST' && !Astro.url.searchParams.has('delete')) {
+  try {
+    const data = await Astro.request.formData();
+    const updatedData = {
+      name: data.get('name')?.toString().trim(),
+      date: data.get('date')?.toString(), // Keep as string for API
+      location: data.get('location')?.toString().trim(),
+      type: data.get('type')?.toString(),
+      description: data.get('description')?.toString().trim(),
+      image: data.get('image')?.toString().trim() || undefined, // Optional
+      slug: data.get('slug')?.toString().trim() || undefined // Optional
+    };
+
+    // Basic client-side validation
+    if (!updatedData.name || !updatedData.date || !updatedData.location || !updatedData.type || !updatedData.description) {
+      throw new Error("Please fill in all required fields (Name, Date, Location, Type, Description).");
+    }
+
+    const apiUrl = new URL(`/api/admin/events?id=${id}`, Astro.url.origin);
+    const response = await fetch(apiUrl.toString(), {
+      method: 'PUT', // Use PUT for updates
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': Astro.request.headers.get('cookie') || ''
+      },
+      body: JSON.stringify(updatedData)
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || `API Error: ${response.status}`);
+    }
+
+    formSuccess = `Event "${result.name}" updated successfully!`;
+    eventData = result; // Update eventData with the latest version
+    // Re-format date after successful update
+    if (eventData && eventData.date) {
+        try {
+            const dateObj = new Date(eventData.date);
+            const timezoneOffset = dateObj.getTimezoneOffset() * 60000;
+            const localISOTime = new Date(dateObj.getTime() - timezoneOffset).toISOString().slice(0, 16);
+            eventData.date = localISOTime;
+        } catch (e) {
+            eventData.date = '';
+        }
+    }
+
+  } catch (error) {
+    console.error("Error updating event:", error);
+    formError = error.message || "An unexpected error occurred.";
+    // Keep existing eventData if update fails, but maybe repopulate from form?
+    // For simplicity, we'll just show the error and keep the previously fetched data in the form.
+  }
+}
+
+// Handle Delete request
+if (Astro.request.method === 'POST' && Astro.url.searchParams.has('delete')) {
+    try {
+        const apiUrl = new URL(`/api/admin/events?id=${id}`, Astro.url.origin);
+        const response = await fetch(apiUrl.toString(), {
+            method: 'DELETE',
+            headers: {
+                'Cookie': Astro.request.headers.get('cookie') || ''
+            }
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || `API Error: ${response.status}`);
+        }
+
+        deleteSuccess = `Event deleted successfully! Redirecting...`;
+        // Use meta refresh or JS for redirection after a short delay
+        // return Astro.redirect('/admin/events'); // Immediate redirect might be too fast
+
+    } catch (error) {
+        console.error("Error deleting event:", error);
+        deleteError = error.message || "An unexpected error occurred while deleting.";
+    }
+}
+---
+
+<AdminLayout title={eventData ? `Edit Event: ${eventData.name}` : 'Edit Event'}>
+  <div class="mb-6 flex justify-between items-center">
+    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
+      {eventData ? `Edit Event: ${eventData.name}` : 'Edit Event'}
+    </h1>
+    <a href="/admin/events" class="text-blue-600 dark:text-blue-500 hover:underline text-sm">
+      &larr; Back to Events List
+    </a>
+  </div>
+
+  {fetchError && (
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <span class="font-medium">Error!</span> {fetchError}
+    </div>
+  )}
+
+  {deleteSuccess && (
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+      <span class="font-medium">Success!</span> {deleteSuccess}
+    </div>
+    <script>
+      // Redirect after a short delay
+      setTimeout(() => {
+        window.location.href = '/admin/events';
+      }, 2000); // 2 seconds delay
+    </script>
+  )}
+
+  {deleteError && (
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <span class="font-medium">Error!</span> {deleteError}
+    </div>
+  )}
+
+  {eventData && !fetchError && !deleteSuccess && (
+    <>
+      {formError && (
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+          <span class="font-medium">Update Error!</span> {formError}
+        </div>
+      )}
+
+      {formSuccess && (
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+          <span class="font-medium">Success!</span> {formSuccess}
+        </div>
+      )}
+
+      <form method="POST" class="space-y-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-6">
+        <div>
+          <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Event Name <span class="text-red-600">*</span></label>
+          <input type="text" name="name" id="name" value={eventData.name} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+        </div>
+
+        <div>
+          <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date & Time <span class="text-red-600">*</span></label>
+          <input type="datetime-local" name="date" id="date" value={eventData.date} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+        </div>
+
+        <div>
+          <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location <span class="text-red-600">*</span></label>
+          <input type="text" name="location" id="location" value={eventData.location} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+        </div>
+
+        <div>
+          <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Event Type <span class="text-red-600">*</span></label>
+          <select name="type" id="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+            {eventTypes.map(type => (
+              <option value={type} selected={eventData.type === type}>{type}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description <span class="text-red-600">*</span></label>
+          <textarea name="description" id="description" rows="6" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>{eventData.description}</textarea>
+        </div>
+
+         <div>
+          <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">URL Slug (Optional)</label>
+          <input type="text" name="slug" id="slug" value={eventData.slug || ''} placeholder="e.g., my-awesome-event-2025" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+          <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">If left blank, a slug will be generated from the event name.</p>
+        </div>
+
+        <div>
+          <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image URL (Optional)</label>
+          <input type="url" name="image" id="image" value={eventData.image || ''} placeholder="https://example.com/image.jpg" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+        </div>
+
+        <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          Update Event
+        </button>
+      </form>
+
+      <!-- Delete Button/Form -->
+      <div class="mt-8 border-t border-gray-200 dark:border-gray-700 pt-6">
+          <h2 class="text-lg font-semibold text-red-600 dark:text-red-500 mb-3">Delete Event</h2>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              This action cannot be undone. Are you sure you want to permanently delete this event?
+          </p>
+          <form method="POST" action={`/admin/events/${id}?delete=true`} onsubmit="return confirm('Are you absolutely sure you want to delete this event? This cannot be undone.');">
+              <button type="submit" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                  Delete Event Permanently
+              </button>
+          </form>
+      </div>
+    </>
+  )}
+</AdminLayout>

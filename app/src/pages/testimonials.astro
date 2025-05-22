@@ -1,11 +1,36 @@
 ---
-import { getCollection } from 'astro:content';
+// import { getCollection } from 'astro:content'; // Removed
 import MainLayout from '../layouts/MainLayout.astro';
 import TestimonialCard from '../components/testimonials/TestimonialCard.astro';
+import { connectToDatabase } from '../utils/db/connect.js';
+import Testimonial from '../utils/db/models/Testimonial.js';
 
-// Fetch all testimonials and sort them by the 'order' field
-const testimonials = (await getCollection('testimonials'))
-  .sort((a, b) => a.data.order - b.data.order);
+let dbTestimonials = [];
+try {
+  await connectToDatabase();
+  // Fetch all testimonials from MongoDB
+  const allTestimonialsFromDb = await Testimonial.find({})
+    .sort({ order: 1 }) // Sort by the order field, ascending
+    .lean();
+
+  // Adapt the structure to match what TestimonialCard expects (data property)
+  dbTestimonials = allTestimonialsFromDb.map(testimonial => ({
+    id: testimonial._id.toString(),
+    // No slug for testimonials usually
+    data: {
+      clientName: testimonial.clientName,
+      quote: testimonial.quote,
+      rating: testimonial.rating,
+      image: testimonial.image,
+      order: testimonial.order,
+      // Add other fields expected by TestimonialCard if necessary
+    }
+  }));
+
+} catch (error) {
+  console.error("Error fetching testimonials from DB:", error);
+  // Handle error appropriately
+}
 ---
 
 <MainLayout title="Client Testimonials" description="Hear from clients who have benefited from OrlaMarie's coaching services.">
@@ -18,10 +43,10 @@ const testimonials = (await getCollection('testimonials'))
         </p>
       </div>
 
-      {testimonials.length > 0 ? (
+      {dbTestimonials.length > 0 ? (
         <div class="grid gap-8 lg:grid-cols-1">
-          {testimonials.map((testimonial) => (
-            <TestimonialCard testimonial={testimonial} />
+          {dbTestimonials.map((testimonial) => (
+            <TestimonialCard testimonial={testimonial} /> // Pass adapted object
           ))}
         </div>
       ) : (

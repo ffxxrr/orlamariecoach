@@ -1,0 +1,151 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { verifyAdminSession } from '../../../utils/auth/session';
+
+// Authentication check
+const isAdmin = await verifyAdminSession(Astro.request);
+if (!isAdmin) {
+  return Astro.redirect('/admin/login');
+}
+
+const eventTypes = ['Workshop', 'Retreat', 'Webinar', 'Talk', 'In-Person', 'Online', 'Other']; // Match the model enum
+
+let formError = null;
+let formSuccess = null;
+let formData = {
+    name: '',
+    date: '',
+    location: '',
+    type: 'Workshop', // Default type
+    description: '',
+    image: '',
+    slug: '' // Optional slug input
+};
+
+if (Astro.request.method === 'POST') {
+  try {
+    const data = await Astro.request.formData();
+    const eventData = {
+      name: data.get('name')?.toString().trim(),
+      date: data.get('date')?.toString(), // Keep as string for API
+      location: data.get('location')?.toString().trim(),
+      type: data.get('type')?.toString(),
+      description: data.get('description')?.toString().trim(),
+      image: data.get('image')?.toString().trim() || undefined, // Optional
+      slug: data.get('slug')?.toString().trim() || undefined // Optional
+    };
+
+    // Basic client-side validation (API does more)
+    if (!eventData.name || !eventData.date || !eventData.location || !eventData.type || !eventData.description) {
+      throw new Error("Please fill in all required fields (Name, Date, Location, Type, Description).");
+    }
+
+    // Construct the absolute URL for the API endpoint
+    const apiUrl = new URL('/api/admin/events', Astro.url.origin);
+    const response = await fetch(apiUrl.toString(), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': Astro.request.headers.get('cookie') || '' // Pass cookies
+      },
+      body: JSON.stringify(eventData)
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || `API Error: ${response.status}`);
+    }
+
+    formSuccess = `Event "${result.name}" created successfully!`;
+    // Don't clear form data on success, let user see what they submitted or redirect
+    // Optionally redirect: return Astro.redirect('/admin/events');
+
+  } catch (error) {
+    console.error("Error creating event:", error);
+    formError = error.message || "An unexpected error occurred.";
+    // Repopulate formData in case of error
+    const data = await Astro.request.formData(); // Re-read form data
+    formData = {
+        name: data.get('name')?.toString() || '',
+        date: data.get('date')?.toString() || '',
+        location: data.get('location')?.toString() || '',
+        type: data.get('type')?.toString() || 'Workshop',
+        description: data.get('description')?.toString() || '',
+        image: data.get('image')?.toString() || '',
+        slug: data.get('slug')?.toString() || ''
+    };
+  }
+}
+---
+
+<AdminLayout title="Add New Event">
+  <div class="mb-6 flex justify-between items-center">
+    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Add New Event</h1>
+    <a href="/admin/events" class="text-blue-600 dark:text-blue-500 hover:underline text-sm">
+      &larr; Back to Events List
+    </a>
+  </div>
+
+  {formError && (
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <span class="font-medium">Error!</span> {formError}
+    </div>
+  )}
+
+  {formSuccess && (
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+      <span class="font-medium">Success!</span> {formSuccess}
+      <a href="/admin/events" class="ml-2 font-semibold hover:underline">View Events List</a>
+      <a href="/admin/events/new" class="ml-2 font-semibold hover:underline">Add Another Event</a>
+    </div>
+  )}
+
+  {!formSuccess && (
+    <form method="POST" class="space-y-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+      <div>
+        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Event Name <span class="text-red-600">*</span></label>
+        <input type="text" name="name" id="name" value={formData.name} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+      </div>
+
+      <div>
+        <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date & Time <span class="text-red-600">*</span></label>
+        <input type="datetime-local" name="date" id="date" value={formData.date} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+      </div>
+
+      <div>
+        <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location <span class="text-red-600">*</span></label>
+        <input type="text" name="location" id="location" value={formData.location} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+      </div>
+
+      <div>
+        <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Event Type <span class="text-red-600">*</span></label>
+        <select name="type" id="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>
+          {eventTypes.map(type => (
+            <option value={type} selected={formData.type === type}>{type}</option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description <span class="text-red-600">*</span></label>
+        <textarea name="description" id="description" rows="6" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required>{formData.description}</textarea>
+      </div>
+
+       <div>
+        <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">URL Slug (Optional)</label>
+        <input type="text" name="slug" id="slug" value={formData.slug} placeholder="e.g., my-awesome-event-2025" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">If left blank, a slug will be generated from the event name.</p>
+      </div>
+
+      <div>
+        <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image URL (Optional)</label>
+        <input type="url" name="image" id="image" value={formData.image} placeholder="https://example.com/image.jpg" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+      </div>
+
+      <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Create Event
+      </button>
+    </form>
+  )}
+</AdminLayout>

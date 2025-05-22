@@ -1,14 +1,40 @@
 ---
 // src/pages/blog/index.astro
-import { getCollection } from 'astro:content';
+// import { getCollection } from 'astro:content'; // No longer using content collections here
 import MainLayout from '../../layouts/MainLayout.astro';
 import BlogCard from '../../components/blog/BlogCard.astro';
+import { connectToDatabase } from '../../utils/db/connect.js';
+import BlogPost from '../../utils/db/models/BlogPost.js';
 
-// Fetch all blog posts from the 'blog' collection
-const allPosts = await getCollection('blog');
+let dbPosts = [];
+try {
+  await connectToDatabase();
+  // Fetch all published blog posts from MongoDB
+  // TODO: Add a 'status' field to BlogPost model later to filter only 'published' posts
+  const allPostsFromDb = await BlogPost.find({}) // Add filter like { status: 'published' } later
+    .sort({ pubDate: -1 }) // Sort by publication date, newest first
+    .lean(); // Use .lean() for better performance if not modifying docs
 
-// Sort posts by publication date, newest first
-const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  // Adapt the structure to match what BlogCard expects (data property)
+  // Also ensure necessary fields are present
+  dbPosts = allPostsFromDb.map(post => ({
+    id: post._id.toString(), // Pass ID if needed by card/link
+    slug: post.slug, // Pass slug for linking
+    data: {
+      title: post.title,
+      description: post.description,
+      pubDate: post.pubDate,
+      image: post.image,
+      category: post.category,
+      // Add other fields expected by BlogCard if necessary
+    }
+  }));
+
+} catch (error) {
+  console.error("Error fetching blog posts from DB:", error);
+  // Handle error appropriately, maybe show an error message
+}
+
 
 const pageTitle = "OrlaMarie Coach Blog";
 const pageDescription = "Insights, tips, and resources on personal growth, career development, and achieving your goals.";
@@ -25,10 +51,10 @@ const pageDescription = "Insights, tips, and resources on personal growth, caree
       </p>
     </header>
 
-    {sortedPosts.length > 0 ? (
+    {dbPosts.length > 0 ? (
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {sortedPosts.map((post) => (
-          <BlogCard post={post} />
+        {dbPosts.map((post) => (
+          <BlogCard post={post} /> // Pass the adapted post object
         ))}
       </div>
     ) : (

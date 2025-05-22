@@ -1,14 +1,28 @@
 ---
 import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
+// Removed CollectionEntry import as we're now using direct DB data
+
+// Define a simple type for the testimonial data coming from MongoDB
+// Ideally, this would match the Mongoose schema more closely
+interface TestimonialData {
+  _id: string; // Or ObjectId if needed
+  clientName: string;
+  quote: string;
+  role?: string;
+  image?: string;
+  rating?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 
 interface Props {
-  testimonial: CollectionEntry<'testimonials'>;
+  testimonial: TestimonialData;
 }
 
 const { testimonial } = Astro.props;
-const { clientName, quote, role, image, rating } = testimonial.data;
-const { Content } = await testimonial.render(); // Render the Markdown content if any
+// Destructure directly from the testimonial object, not testimonial.data
+const { clientName, quote, role, image, rating } = testimonial;
+// Removed Content rendering as quote is likely plain text from DB
 ---
 
 <figure class="max-w-screen-md mx-auto text-center p-6 bg-white rounded-lg border border-gray-200 shadow-sm dark:bg-gray-800 dark:border-gray-700">
@@ -42,6 +56,6 @@ const { Content } = await testimonial.render(); // Render the Markdown content i
   </figcaption>
   {/* Render additional Markdown content if provided */}
   <div class="mt-4 text-sm text-gray-600 dark:text-gray-400 prose dark:prose-invert prose-sm">
-    <Content />
+    {/* Removed <Content /> rendering */}
   </div>
 </figure>

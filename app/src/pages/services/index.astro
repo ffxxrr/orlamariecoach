@@ -1,14 +1,38 @@
 ---
 // src/pages/services/index.astro
-import { getCollection } from 'astro:content';
+// import { getCollection } from 'astro:content'; // Removed
 import MainLayout from '../../layouts/MainLayout.astro';
 import ServiceCard from '../../components/services/ServiceCard.astro';
+import { connectToDatabase } from '../../utils/db/connect.js';
+import Service from '../../utils/db/models/Service.js';
 
-// Fetch all services from the 'services' collection
-const allServices = await getCollection('services');
+let dbServices = [];
+try {
+  await connectToDatabase();
+  // Fetch all services from MongoDB
+  const allServicesFromDb = await Service.find({})
+    .sort({ order: 1 }) // Sort by the order field, ascending
+    .lean();
 
-// Sort services by the 'order' field defined in frontmatter, ascending
-const sortedServices = allServices.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+  // Adapt the structure to match what ServiceCard expects (data property)
+  dbServices = allServicesFromDb.map(service => ({
+    id: service._id.toString(),
+    slug: service.slug, // Pass slug for linking
+    data: {
+      title: service.title,
+      description: service.description,
+      price: service.price,
+      duration: service.duration,
+      image: service.image,
+      order: service.order,
+      // Add other fields expected by ServiceCard if necessary
+    }
+  }));
+
+} catch (error) {
+  console.error("Error fetching services from DB:", error);
+  // Handle error appropriately
+}
 
 const pageTitle = "Coaching Services";
 const pageDescription = "Explore our range of coaching services designed to help you achieve your personal and professional goals.";
@@ -25,10 +49,10 @@ const pageDescription = "Explore our range of coaching services designed to help
       </p>
     </header>
 
-    {sortedServices.length > 0 ? (
+    {dbServices.length > 0 ? (
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {sortedServices.map((service) => (
-          <ServiceCard service={service} />
+        {dbServices.map((service) => (
+          <ServiceCard service={service} /> // Pass the adapted service object
         ))}
       </div>
     ) : (

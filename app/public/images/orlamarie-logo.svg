@@ -1,0 +1,311 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 120">
+  <!-- Logo Container -->
+  <defs>
+    <!-- Enhanced watercolor gradient background -->
+    <linearGradient id="enhancedBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8f4eb" /> <!-- Very light mint -->
+      <stop offset="50%" stop-color="#d8ebde" /> <!-- Light sage -->
+      <stop offset="100%" stop-color="#c5e0cc" /> <!-- Soft mint green -->
+    </linearGradient>
+    
+    <!-- Enhanced text color with more depth -->
+    <linearGradient id="enhancedText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3c4c3c" /> <!-- Darker olive gray for better contrast -->
+      <stop offset="100%" stop-color="#4a5d4a" /> <!-- Deeper sage -->
+    </linearGradient>
+    
+    <!-- Enhanced spiral colors -->
+    <linearGradient id="enhancedSpiral" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#67946d" /> <!-- Deeper mint -->
+      <stop offset="100%" stop-color="#4d7153" /> <!-- Richer sage green -->
+    </linearGradient>
+    
+    <!-- Filter for subtle shadow -->
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1" />
+      <feOffset dx="0.5" dy="0.5" result="offsetblur" />
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.2" />
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" /> 
+      </feMerge>
+    </filter>
+    
+    <!-- Triple spiral glow -->
+    <radialGradient id="spiralGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="10%" stop-color="#d8ebde" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#d8ebde" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Enhanced background with subtle texture -->
+  <path d="M10,20 
+           Q70,0 140,20 
+           Q210,40 280,20 
+           Q320,10 340,20 
+           L340,100 
+           Q280,120 210,100 
+           Q140,80 70,100 
+           Q20,120 10,100 Z" 
+        fill="url(#enhancedBg)" 
+        opacity="0.7" />
+  
+  <!-- Add subtle texture pattern -->
+  <g opacity="0.07">
+    <path d="M0,0 h350 v120 h-350 z" fill="#3c4c3c" fill-opacity="0.02" />
+    <!-- Random small dots for texture -->
+    <g fill="#3c4c3c" fill-opacity="0.08">
+      <circle cx="40" cy="30" r="1.2" />
+      <circle cx="90" cy="25" r="0.9" />
+      <circle cx="150" cy="40" r="1.5" />
+      <circle cx="210" cy="35" r="1.0" />
+      <circle cx="270" cy="45" r="1.3" />
+      <circle cx="60" cy="80" r="1.1" />
+      <circle cx="120" cy="90" r="1.4" />
+      <circle cx="180" cy="75" r="0.9" />
+      <circle cx="240" cy="85" r="1.2" />
+      <circle cx="300" cy="70" r="1.0" />
+    </g>
+  </g>
+  
+  <!-- Subtle glow behind triple spiral -->
+  <circle cx="55" cy="60" r="33" fill="url(#spiralGlow)" />
+  
+  <!-- Thin circular outline to define the triple spiral area -->
+  <circle cx="55" cy="60" r="32" 
+          fill="none" 
+          stroke="#67946d" 
+          stroke-width="0.8" 
+          stroke-opacity="0.5" />
+          
+  <!-- Triple spiral with enhanced definition -->
+  <g transform="translate(55,60) scale(1.35)" filter="url(#softShadow)">
+    <!-- Main spiral paths - slightly visible to connect dots -->
+    <path d="M-6,-12 
+             C-6,-13 -5.5,-14.5 -4.5,-15.8 
+             C-3.5,-17 -2,-18 0,-18.5 
+             C2,-19 4,-18.5 6,-17 
+             C8,-15.5 9,-13.5 9,-11 
+             C9,-8.5 8,-6 6,-4.5 
+             C4,-3 1.5,-2.5 -0.5,-3 
+             C-2.5,-3.5 -4,-4.5 -5,-6 
+             C-6,-7.5 -6.2,-9.5 -6,-12Z" 
+          fill="none" 
+          stroke="#67946d" 
+          stroke-width="0.5" 
+          stroke-opacity="0.3" />
+          
+    <!-- Spiral arms with better defined dots -->
+    <g fill="url(#enhancedSpiral)">
+      <!-- First spiral arm dots -->
+      <circle cx="-6" cy="-12" r="0.7" />
+      <circle cx="-5.7" cy="-13" r="0.7" />
+      <circle cx="-5.3" cy="-14" r="0.7" />
+      <circle cx="-4.8" cy="-15" r="0.7" />
+      <circle cx="-4" cy="-15.8" r="0.7" />
+      <circle cx="-3" cy="-16.5" r="0.7" />
+      <circle cx="-2" cy="-17" r="0.7" />
+      <circle cx="-1" cy="-17.4" r="0.7" />
+      <circle cx="0" cy="-17.7" r="0.7" />
+      <circle cx="1" cy="-17.8" r="0.7" />
+      <circle cx="2" cy="-17.7" r="0.7" />
+      <circle cx="3" cy="-17.4" r="0.7" />
+      <circle cx="4" cy="-17" r="0.7" />
+      <circle cx="5" cy="-16.3" r="0.7" />
+      <circle cx="6" cy="-15.5" r="0.7" />
+      <circle cx="6.8" cy="-14.5" r="0.7" />
+      <circle cx="7.4" cy="-13.5" r="0.7" />
+      <circle cx="7.8" cy="-12.5" r="0.7" />
+      <circle cx="8.2" cy="-11.5" r="0.7" />
+      <circle cx="8.4" cy="-10.5" r="0.7" />
+      <circle cx="8.4" cy="-9.5" r="0.7" />
+      <circle cx="8.2" cy="-8.5" r="0.7" />
+      <circle cx="7.8" cy="-7.5" r="0.7" />
+      <circle cx="7.2" cy="-6.5" r="0.7" />
+      <circle cx="6.5" cy="-5.7" r="0.7" />
+      <circle cx="5.6" cy="-5" r="0.7" />
+      <circle cx="4.6" cy="-4.4" r="0.7" />
+      <circle cx="3.6" cy="-4" r="0.7" />
+      <circle cx="2.6" cy="-3.7" r="0.7" />
+      <circle cx="1.6" cy="-3.5" r="0.7" />
+      <circle cx="0.6" cy="-3.4" r="0.7" />
+      <circle cx="-0.4" cy="-3.4" r="0.7" />
+      <circle cx="-1.4" cy="-3.6" r="0.7" />
+      <circle cx="-2.4" cy="-4" r="0.7" />
+      <circle cx="-3.3" cy="-4.5" r="0.7" />
+      <circle cx="-4.1" cy="-5.2" r="0.7" />
+      <circle cx="-4.8" cy="-6" r="0.7" />
+      <circle cx="-5.3" cy="-7" r="0.7" />
+      <circle cx="-5.7" cy="-8" r="0.7" />
+      <circle cx="-5.9" cy="-9" r="0.7" />
+      <circle cx="-6" cy="-10" r="0.7" />
+      <circle cx="-6" cy="-11" r="0.7" />
+      
+      <!-- Second spiral arm - path connection -->
+      <path d="M5,-12 
+               C6,-13 7,-14 8.5,-14.7 
+               C10,-15.4 12,-15.8 14,-15 
+               C16,-14.2 17,-12.5 17.2,-10 
+               C17.4,-7.5 16.5,-5 14.5,-3 
+               C12.5,-1 10,0 7.5,-0.5 
+               C5,-1 3.5,-2.5 3,-5 
+               C2.5,-7.5 3,-10 5,-12Z" 
+            fill="none" 
+            stroke="#67946d" 
+            stroke-width="0.5" 
+            stroke-opacity="0.3" />
+            
+      <!-- Second spiral arm dots -->
+      <circle cx="5" cy="-12" r="0.7" />
+      <circle cx="5.5" cy="-12.8" r="0.7" />
+      <circle cx="6.1" cy="-13.5" r="0.7" />
+      <circle cx="6.8" cy="-14" r="0.7" />
+      <circle cx="7.6" cy="-14.5" r="0.7" />
+      <circle cx="8.5" cy="-14.9" r="0.7" />
+      <circle cx="9.5" cy="-15.2" r="0.7" />
+      <circle cx="10.5" cy="-15.4" r="0.7" />
+      <circle cx="11.5" cy="-15.5" r="0.7" />
+      <circle cx="12.5" cy="-15.4" r="0.7" />
+      <circle cx="13.5" cy="-15.1" r="0.7" />
+      <circle cx="14.3" cy="-14.7" r="0.7" />
+      <circle cx="15" cy="-14.1" r="0.7" />
+      <circle cx="15.7" cy="-13.4" r="0.7" />
+      <circle cx="16.2" cy="-12.5" r="0.7" />
+      <circle cx="16.5" cy="-11.5" r="0.7" />
+      <circle cx="16.7" cy="-10.5" r="0.7" />
+      <circle cx="16.8" cy="-9.5" r="0.7" />
+      <circle cx="16.7" cy="-8.5" r="0.7" />
+      <circle cx="16.4" cy="-7.5" r="0.7" />
+      <circle cx="16" cy="-6.5" r="0.7" />
+      <circle cx="15.4" cy="-5.6" r="0.7" />
+      <circle cx="14.7" cy="-4.8" r="0.7" />
+      <circle cx="13.9" cy="-4.1" r="0.7" />
+      <circle cx="13" cy="-3.5" r="0.7" />
+      <circle cx="12" cy="-3" r="0.7" />
+      <circle cx="11" cy="-2.6" r="0.7" />
+      <circle cx="10" cy="-2.3" r="0.7" />
+      <circle cx="9" cy="-2.1" r="0.7" />
+      <circle cx="8" cy="-2" r="0.7" />
+      <circle cx="7" cy="-1.9" r="0.7" />
+      <circle cx="6" cy="-2" r="0.7" />
+      <circle cx="5" cy="-2.2" r="0.7" />
+      <circle cx="4.2" cy="-2.6" r="0.7" />
+      <circle cx="3.5" cy="-3.2" r="0.7" />
+      <circle cx="3" cy="-4" r="0.7" />
+      <circle cx="2.7" cy="-5" r="0.7" />
+      <circle cx="2.5" cy="-6" r="0.7" />
+      <circle cx="2.5" cy="-7" r="0.7" />
+      <circle cx="2.7" cy="-8" r="0.7" />
+      <circle cx="3" cy="-9" r="0.7" />
+      <circle cx="3.5" cy="-10" r="0.7" />
+      <circle cx="4.1" cy="-11" r="0.7" />
+      
+      <!-- Third spiral arm - path connection -->
+      <path d="M0,9 
+               C-1,10 -2,11 -3.5,11.7 
+               C-5,12.4 -7,12.8 -9,12.5 
+               C-11,12.2 -12.5,11 -13.5,9 
+               C-14.5,7 -14.5,4.5 -13.5,2 
+               C-12.5,-0.5 -10.5,-2.5 -8,-3 
+               C-5.5,-3.5 -3,-3 -1,-1 
+               C1,1 1.5,3.5 1,6 
+               C0.5,8.5 -0.5,10 -1.5,11 
+               C-2.5,12 -3.5,12.5 -4.5,12.5Z" 
+            fill="none" 
+            stroke="#67946d" 
+            stroke-width="0.5" 
+            stroke-opacity="0.3" />
+            
+      <!-- Third spiral arm dots -->
+      <circle cx="0" cy="9" r="0.7" />
+      <circle cx="-0.5" cy="9.8" r="0.7" />
+      <circle cx="-1.2" cy="10.5" r="0.7" />
+      <circle cx="-2" cy="11.1" r="0.7" />
+      <circle cx="-3" cy="11.6" r="0.7" />
+      <circle cx="-4" cy="12" r="0.7" />
+      <circle cx="-5" cy="12.2" r="0.7" />
+      <circle cx="-6" cy="12.4" r="0.7" />
+      <circle cx="-7" cy="12.5" r="0.7" />
+      <circle cx="-8" cy="12.4" r="0.7" />
+      <circle cx="-9" cy="12.2" r="0.7" />
+      <circle cx="-10" cy="11.8" r="0.7" />
+      <circle cx="-10.8" cy="11.3" r="0.7" />
+      <circle cx="-11.5" cy="10.7" r="0.7" />
+      <circle cx="-12.1" cy="10" r="0.7" />
+      <circle cx="-12.6" cy="9.1" r="0.7" />
+      <circle cx="-13" cy="8.1" r="0.7" />
+      <circle cx="-13.3" cy="7.1" r="0.7" />
+      <circle cx="-13.5" cy="6.1" r="0.7" />
+      <circle cx="-13.6" cy="5.1" r="0.7" />
+      <circle cx="-13.5" cy="4.1" r="0.7" />
+      <circle cx="-13.3" cy="3.1" r="0.7" />
+      <circle cx="-13" cy="2.1" r="0.7" />
+      <circle cx="-12.5" cy="1.2" r="0.7" />
+      <circle cx="-11.9" cy="0.4" r="0.7" />
+      <circle cx="-11.1" cy="-0.3" r="0.7" />
+      <circle cx="-10.3" cy="-0.9" r="0.7" />
+      <circle cx="-9.4" cy="-1.4" r="0.7" />
+      <circle cx="-8.4" cy="-1.8" r="0.7" />
+      <circle cx="-7.4" cy="-2.1" r="0.7" />
+      <circle cx="-6.4" cy="-2.3" r="0.7" />
+      <circle cx="-5.4" cy="-2.4" r="0.7" />
+      <circle cx="-4.4" cy="-2.3" r="0.7" />
+      <circle cx="-3.4" cy="-2.1" r="0.7" />
+      <circle cx="-2.5" cy="-1.7" r="0.7" />
+      <circle cx="-1.7" cy="-1.2" r="0.7" />
+      <circle cx="-1" cy="-0.5" r="0.7" />
+      <circle cx="-0.4" cy="0.3" r="0.7" />
+      <circle cx="0" cy="1.2" r="0.7" />
+      <circle cx="0.3" cy="2.1" r="0.7" />
+      <circle cx="0.5" cy="3.1" r="0.7" />
+      <circle cx="0.6" cy="4.1" r="0.7" />
+      <circle cx="0.5" cy="5.1" r="0.7" />
+      <circle cx="0.3" cy="6.1" r="0.7" />
+      <circle cx="0" cy="7.1" r="0.7" />
+      <circle cx="-0.4" cy="8" r="0.7" />
+      
+      <!-- Central connecting area -->
+      <circle cx="0" cy="0" r="0.8" />
+      <circle cx="1" cy="0" r="0.8" />
+      <circle cx="-1" cy="0" r="0.8" />
+      <circle cx="0" cy="1" r="0.8" />
+      <circle cx="0" cy="-1" r="0.8" />
+      <circle cx="0.7" cy="0.7" r="0.8" />
+      <circle cx="-0.7" cy="0.7" r="0.8" />
+      <circle cx="0.7" cy="-0.7" r="0.8" />
+      <circle cx="-0.7" cy="-0.7" r="0.8" />
+    </g>
+  </g>
+  
+  <!-- Text with enhanced definition but lowercase styling -->
+  <g filter="url(#softShadow)">
+    <!-- Elegant lowercase text for "orla marie" -->
+    <text x="120" y="55" 
+          font-family="'Palatino Linotype', 'Book Antiqua', 'Garamond', serif" 
+          font-size="22" 
+          font-weight="400"
+          letter-spacing="1"
+          fill="url(#enhancedText)">orla</text>
+    
+    <!-- Center dot separator with subtle glow -->
+    <circle cx="177" cy="51" r="3.5" fill="url(#enhancedText)" opacity="0.8" />
+    
+    <!-- Second name part -->
+    <text x="190" y="55" 
+          font-family="'Palatino Linotype', 'Book Antiqua', 'Garamond', serif" 
+          font-size="22" 
+          font-weight="400"
+          letter-spacing="1"
+          fill="url(#enhancedText)">marie</text>
+    
+    <!-- "coach" text -->
+    <text x="140" y="85" 
+          font-family="'Palatino Linotype', 'Book Antiqua', 'Garamond', serif" 
+          font-size="20" 
+          font-weight="400"
+          letter-spacing="2"
+          fill="url(#enhancedText)">coach</text>
+  </g>
+</svg>

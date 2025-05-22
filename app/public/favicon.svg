@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Darker watercolor-like background -->
+  <defs>
+    <radialGradient id="bgGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#c8e6cb" />
+      <stop offset="100%" stop-color="#79b98a" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background circle with soft edges -->
+  <circle cx="50" cy="50" r="48" fill="url(#bgGradient)" />
+  
+  <!-- Simplified Celtic Triple Spiral (Triskelion) -->
+  <g fill="none" stroke="#324238" stroke-width="3" stroke-linecap="round">
+    <!-- First spiral -->
+    <path d="M33,30 C28,35 30,45 37,47 C44,49 50,42 48,36 C46,30 39,28 35,32 C31,36 33,43 38,44 C43,45 47,40 46,36" />
+    
+    <!-- Second spiral -->
+    <path d="M70,38 C65,33 55,35 53,42 C51,49 58,55 64,53 C70,51 72,44 68,40 C64,36 57,38 56,43 C55,48 60,52 64,51" />
+    
+    <!-- Third spiral -->
+    <path d="M50,77 C55,72 53,62 46,60 C39,58 33,65 35,71 C37,77 44,79 48,75 C52,71 50,64 45,63 C40,62 36,67 37,71" />
+    
+    <!-- Connecting triangle in center -->
+    <path d="M42,39 L58,39 L50,65 Z" stroke-width="2" />
+  </g>
+</svg>

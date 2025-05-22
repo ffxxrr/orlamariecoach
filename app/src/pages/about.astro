@@ -1,38 +1,75 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-// Removed Image import and local import as we'll use public path
-// Removed incorrect import: import { Card } from 'flowbite-astro';
+import { connectToDatabase } from '../utils/db/connect';
+import CoachProfile from '../utils/db/models/CoachProfile';
+// Removed Markdown component import
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
+import { JSDOM } from 'jsdom';
+
+let profile = null;
+let fetchError = null;
+let sanitizedBioHtml = '';
+
+try {
+  await connectToDatabase();
+  profile = await CoachProfile.findOne({}).lean(); // Use lean() for plain JS object
+} catch (error) {
+  console.error("Error fetching profile for about page:", error);
+  fetchError = "Could not load profile information at this time.";
+}
+
+// Provide default values if profile is null or fetch failed
+const pageTitle = profile?.title || "About OrlaMarie";
+const bioContent = profile?.bio || "Information about OrlaMarie coming soon.";
+const imageUrl = profile?.imageUrl || "/images/orlamarie-profile.jpg"; // Default image
+
+// Parse and sanitize the bio content if available
+if (profile?.bio) {
+  try {
+    const rawHtml = await marked.parse(profile.bio);
+    // Need jsdom for DOMPurify in Node.js environment
+    const window = new JSDOM('').window;
+    const purify = DOMPurify(window);
+    sanitizedBioHtml = purify.sanitize(rawHtml);
+  } catch (parseError) {
+    console.error("Error parsing or sanitizing bio markdown:", parseError);
+    fetchError = (fetchError ? fetchError + '; ' : '') + "Could not render profile content.";
+    sanitizedBioHtml = '<p>Error rendering content.</p>'; // Fallback HTML
+  }
+} else {
+   sanitizedBioHtml = `<p>${bioContent}</p>`; // Use default text if no bio
+}
 ---
 
-<MainLayout title="About OrlaMarie">
+<MainLayout title={pageTitle}>
   <div class="max-w-screen-xl mx-auto px-4 py-8 lg:py-16">
-    <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">About OrlaMarie Coach</h1>
+    <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{pageTitle}</h1>
+    <!-- Optional: Add a subtitle or keep the existing one -->
     <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Learn more about OrlaMarie's coaching philosophy and experience.</p>
 
-    {/* Replaced <Card> with a div and Flowbite/Tailwind classes */}
+    {fetchError && <p class="text-red-500 mb-4">{fetchError}</p>}
+
+    {/* Main content area */}
     <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-      <h2 class="text-2xl font-bold mb-4">Our Mission</h2>
-      <p class="text-gray-700 dark:text-gray-400 mb-4">
-        To empower individuals to unlock their full potential, overcome obstacles, and create fulfilling lives through personalized coaching.
-      </p>
-      <h2 class="text-2xl font-bold mb-4">Meet OrlaMarie</h2>
+       {/* Removed static Mission section, assuming bio covers it */}
+       {/* <h2 class="text-2xl font-bold mb-4">Our Mission</h2> ... */}
+
       <div class="flex flex-col md:flex-row items-start gap-8">
-        <div class="flex-1">
-          <p class="text-gray-700 dark:text-gray-400 mb-4">
-            [Placeholder for coach biography and credentials. This section will be updated with actual content.]
-          </p>
-          <p class="text-gray-700 dark:text-gray-400">
-            OrlaMarie brings a wealth of experience and a passion for helping others achieve their best selves. Her approach combines empathy with practical strategies to guide clients towards meaningful change.
-          </p>
+        {/* Use set:html with sanitized content */}
+        <div class="flex-1 prose prose-lg dark:prose-invert max-w-none" set:html={sanitizedBioHtml}>
+           {/* Content is now injected via set:html */}
         </div>
-        <div class="w-full md:w-1/3 flex-shrink-0">
-          {/* Using direct public path for the image */}
-          <img
-            src="/images/orlamarie-profile.jpg"
-            alt="OrlaMarie Coach profile picture"
-            class="rounded-lg shadow-md w-full h-auto object-cover"
-            loading="lazy"
-          />
+        {profile && ( /* Only show image section if profile exists */
+          <div class="w-full md:w-1/3 flex-shrink-0">
+            <img
+              src={imageUrl}
+              alt={pageTitle}
+              class="rounded-lg shadow-md w-full h-auto object-cover"
+              loading="lazy"
+            />
+          </div>
+        )}
         </div>
       </div>
       {/* TODO: Add more sections like values, approach, etc. */}

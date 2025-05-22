@@ -1,0 +1,89 @@
+---
+// src/components/admin/Dashboard/TrafficChart.astro
+import type { ChartData, ChartOptions } from 'chart.js/auto';
+
+interface Props {
+  chartData: { labels: string[]; datasets: { label: string; data: number[]; tension?: number; borderColor?: string; backgroundColor?: string }[] };
+  chartOptions?: ChartOptions<'line'>; // Allow optional custom options
+  chartId?: string; // Allow custom ID if needed
+}
+
+const {
+  chartData,
+  chartOptions = { // Default options
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          precision: 0 // Ensure whole numbers for view counts
+        }
+      },
+      x: {
+        ticks: {
+          maxRotation: 0, // Prevent label rotation if possible
+          autoSkip: true, // Automatically skip labels if too crowded
+          maxTicksLimit: 10 // Limit number of visible ticks
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        display: false // Hide legend by default for a single dataset
+      },
+      tooltip: {
+        mode: 'index',
+        intersect: false,
+      },
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    }
+  },
+  chartId = 'traffic-chart' // Default ID
+} = Astro.props;
+
+// Prepare data and options for the client-side script
+const dataString = JSON.stringify(chartData);
+const optionsString = JSON.stringify(chartOptions);
+---
+
+<canvas id={chartId}></canvas>
+
+<script define:vars={{ chartId, dataString, optionsString }}>
+  import { Chart, registerables } from 'chart.js/auto'; // Use auto to include necessary controllers/scales
+
+  // Register necessary components (line controller, scales, etc.)
+  Chart.register(...registerables);
+
+  const canvas = document.getElementById(chartId);
+  if (canvas instanceof HTMLCanvasElement) {
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      const data = JSON.parse(dataString);
+      const options = JSON.parse(optionsString);
+
+      // Ensure dataset has default styling if not provided
+      data.datasets = data.datasets.map(dataset => ({
+        tension: 0.4, // Smooth lines
+        borderColor: 'rgb(59, 130, 246)', // Example blue color
+        backgroundColor: 'rgba(59, 130, 246, 0.1)', // Light blue fill
+        fill: true,
+        ...dataset // Merge with provided dataset props
+      }));
+
+
+      new Chart(ctx, {
+        type: 'line', // Specify chart type
+        data: data,
+        options: options,
+      });
+    } else {
+      console.error(`Could not get 2D context for chart canvas with ID: ${chartId}`);
+    }
+  } else {
+    console.error(`Could not find chart canvas element with ID: ${chartId}`);
+  }
+</script>

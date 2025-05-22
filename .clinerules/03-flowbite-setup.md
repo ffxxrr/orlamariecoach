@@ -27,9 +27,10 @@ npm create astro@latest
 # Add Tailwind CSS integration
 npx astro add tailwind
 
-# Install Flowbite and Flowbite-Astro
-npm install flowbite flowbite-astro
+# Install Flowbite
+npm install flowbite
 ```
+**Note:** This project uses Flowbite directly via its Tailwind plugin and JavaScript, **not** the `flowbite-astro` component library.
 
 Update your `astro.config.mjs`:
 
@@ -94,137 +95,188 @@ src/
     └── custom.css          # Custom styles beyond Flowbite
 ```
 
-## Using Flowbite Components
+## Using Flowbite (HTML + Tailwind Classes)
 
-### Basic Component Usage
+Flowbite is integrated via its Tailwind CSS plugin and its necessary JavaScript file (usually included in your main layout). **This project does NOT use the `flowbite-astro` component library.** Instead, you should use standard HTML elements and apply the appropriate Flowbite utility classes for styling.
 
-Import and use Flowbite components in your Astro files:
+### Basic Usage with Tailwind Classes
+
+Apply Flowbite's utility classes directly to your standard HTML elements within your `.astro` files. Refer to the official [Flowbite Documentation](https://flowbite.com/docs/getting-started/introduction/) for available components and their corresponding HTML structure and classes.
+
+**Example: Creating a Button**
+
+Instead of importing a component, use a standard `<a>` or `<button>` tag and apply Flowbite classes:
 
 ```astro
 ---
-import { Card, Button } from 'flowbite-astro'
+// No Flowbite component import needed
 ---
+<a href="/contact" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+  Contact Us
+</a>
 
-<Card>
-  <h2 class="text-2xl font-bold">Service Offering</h2>
-  <p>Description of the service goes here.</p>
-  <Button color="primary">Book Now</Button>
-</Card>
+<button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+  Learn More
+</button>
 ```
 
-### Key Components for Public Site
+### Interactive Components (JavaScript)
 
-These Flowbite components are particularly useful for the coaching website:
+For components requiring JavaScript (like dropdowns, modals, carousels), ensure the Flowbite JavaScript is included in your layout (e.g., `src/layouts/MainLayout.astro` or `src/layouts/AdminLayout.astro`). Then, add the necessary `data-modal-toggle`, `data-dropdown-toggle`, etc., attributes to your HTML elements as specified in the Flowbite documentation.
 
-1. **Navbar** - For site navigation
-   ```astro
-   import { Navbar } from 'flowbite-astro'
-   
-   <Navbar fluid={true} rounded={true}>
-     <Navbar.Brand href="/">
-       <img src="/logo.svg" class="mr-3 h-6 sm:h-9" alt="OrlaMarie Coach Logo" />
-       <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-         OrlaMarie Coach
-       </span>
-     </Navbar.Brand>
-     <Navbar.Toggle />
-     <Navbar.Collapse>
-       <Navbar.Link href="/" active={true}>Home</Navbar.Link>
-       <Navbar.Link href="/services">Services</Navbar.Link>
-       <Navbar.Link href="/blog">Blog</Navbar.Link>
-       <Navbar.Link href="/about">About</Navbar.Link>
-       <Navbar.Link href="/contact">Contact</Navbar.Link>
-     </Navbar.Collapse>
-   </Navbar>
-   ```
+```astro
+---
+// src/layouts/MainLayout.astro (Example of including the script)
+---
+<html>
+  <head>...</head>
+  <body>
+    <slot />
+    {/* Ensure Flowbite JS is loaded */}
+    <script is:inline src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+  </body>
+</html>
+```
 
-2. **Hero Section** - For homepage
-   ```astro
-   <section class="bg-white dark:bg-gray-900">
-     <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-       <div class="mr-auto place-self-center lg:col-span-7">
-         <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Transform Your Life with Expert Coaching</h1>
-         <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Professional coaching to help you overcome challenges and achieve your goals.</p>
-         <a href="/booking" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-           Book a Session
-           <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-         </a>
-       </div>
-       <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-         <img src="/hero-image.jpg" alt="Coaching session">
-       </div>
-     </div>
-   </section>
-   ```
+```astro
+<!-- Example: Dropdown Trigger -->
+<button id="dropdownButton" data-dropdown-toggle="dropdown" class="..." type="button">
+  Dropdown button
+  <svg>...</svg>
+</button>
 
-3. **Testimonial Section** - For client testimonials
-   ```astro
-   import { Carousel } from 'flowbite-astro'
-   
-   <section class="bg-white dark:bg-gray-900">
-     <div class="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
-       <div class="max-w-screen-md mx-auto">
-         <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Client Success Stories</h2>
-         <p class="mb-8 font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Hear from clients who have transformed their lives through coaching</p>
-         
-         <Carousel indicators={true}>
-           <!-- Testimonial 1 -->
-           <div class="flex flex-col items-center p-8">
-             <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/testimonial1.jpg" alt="Client photo"/>
-             <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Sarah Johnson</h5>
-             <span class="text-sm text-gray-500 dark:text-gray-400">Marketing Executive</span>
-             <p class="mt-3 text-gray-500 dark:text-gray-400">"The coaching sessions with OrlaMarie have been transformative for my career. I've gained clarity, confidence, and achieved goals I thought were years away."</p>
-           </div>
-           
-           <!-- Add more testimonials as needed -->
-         </Carousel>
-       </div>
-     </div>
-   </section>
-   ```
+<!-- Dropdown menu -->
+<div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownButton">
+      <li><a href="#" class="...">Dashboard</a></li>
+      {/* ... other items */}
+    </ul>
+</div>
+```
 
-4. **Service Cards** - For service offerings
-   ```astro
-   import { Card } from 'flowbite-astro'
-   
-   <div class="grid gap-8 lg:grid-cols-3">
-     <Card imgSrc="/career-coaching.jpg" imgAlt="Career coaching">
-       <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-         Career Coaching
-       </h5>
-       <p class="font-normal text-gray-700 dark:text-gray-400 mb-4">
-         Navigate career transitions, improve leadership skills, and achieve your professional goals.
-       </p>
-       <p class="font-medium text-lg mb-4">
-         $150 per session
-       </p>
-       <p class="text-sm text-gray-500 mb-4">
-         60-minute sessions
-       </p>
-       <a href="/booking" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-         Book Now
-         <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-         </svg>
-       </a>
-     </Card>
-     
-     <!-- Add more service cards -->
-   </div>
-   ```
+### Key Component Examples (HTML + Tailwind)
+
+Refer to the official [Flowbite Components Documentation](https://flowbite.com/docs/components/) for the correct HTML structure and Tailwind classes for common UI patterns like Navbars, Hero Sections, Cards, Testimonials, etc.
+
+**Example: Basic Card Structure** (From Flowbite Docs)
+
+```html
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href="#">
+        <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
+    </a>
+    <div class="p-5">
+        <a href="#">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
+        </a>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+        <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Read more
+             <svg>...</svg>
+        </a>
+    </div>
+</div>
+```
+*(The previous examples using `flowbite-astro` imports were incorrect and have been removed.)*
 
 ### Admin Dashboard Components
 
-For the admin area, leverage these Flowbite dashboard components:
+For the admin area, continue using standard HTML elements styled with Flowbite and Tailwind classes. The Flowbite documentation provides examples for common dashboard elements like sidebars, tables, forms, and stats cards.
 
-1. **Admin Layout** - Shared layout for admin pages
+1. **Admin Layout Structure (Conceptual)**
+   (The existing `AdminLayout.astro` already follows this principle, using HTML tags and classes).
    ```astro
    ---
    // src/layouts/AdminLayout.astro
-   import { Sidebar, Navbar } from 'flowbite-astro'
-   import { checkAdminAuth } from '../lib/auth';
-   
-   // Check authentication (pseudo-code)
+   // No flowbite-astro imports needed here for layout structure
+   import '../styles/custom.css';
+   // Authentication logic...
+   ---
+   <!doctype html>
+   <html>
+   <head>...</head>
+   <body class="bg-gray-50 dark:bg-gray-900">
+     <div class="flex h-screen overflow-hidden">
+       {/* Sidebar: Use <aside> with Flowbite classes */}
+       <aside class="...">
+          {/* Sidebar Header */}
+          <div class="...">...</div>
+          {/* Sidebar Menu: Use <nav> and <ul> with Flowbite classes */}
+          <nav class="...">...</nav>
+       </aside>
+
+       {/* Content Area */}
+       <div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+         {/* Header: Use <header> with Flowbite classes */}
+         <header class="...">...</header>
+
+         {/* Main Content: Use <main> */}
+         <main>
+           <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+             <slot /> {/* Page content goes here */}
+           </div>
+         </main>
+       </div>
+     </div>
+     <script is:inline src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+   </body>
+   </html>
+   ```
+   *(The previous example using `flowbite-astro` imports was incorrect.)*
+
+2. **Analytics Dashboard Example (Conceptual)**
+   Use standard HTML `div`s for cards and `<table>` elements styled with Flowbite/Tailwind classes.
+   ```astro
+   ---
+   // src/pages/admin/index.astro
+   import AdminLayout from '../../layouts/AdminLayout.astro';
+   // No flowbite-astro imports needed
+   ---
+   <AdminLayout title="Admin Dashboard">
+     <h1 class="text-2xl font-semibold mb-4">Dashboard</h1>
+
+     <div class="grid gap-4 mb-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+       {/* Stats Card Example (HTML + Tailwind) */}
+       <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+         <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
+           Website Visitors
+         </h5>
+         <p class="text-2xl font-bold text-gray-900 dark:text-white">1,245</p>
+         <p class="text-sm font-normal text-gray-500 dark:text-gray-400">Last 30 days</p>
+       </div>
+       {/* Add more stats cards */}
+     </div>
+
+     {/* Charts would go here (using chart.js or other library integrated into Astro) */}
+
+     <div class="mb-4">
+       <h2 class="text-xl font-semibold mb-2">Recent Bookings</h2>
+       {/* Table Example (HTML + Tailwind) */}
+       <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+               <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                   <tr>
+                       <th scope="col" class="px-6 py-3">Client Name</th>
+                       <th scope="col" class="px-6 py-3">Date</th>
+                       <th scope="col" class="px-6 py-3">Service</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">Jane Doe</th>
+                       <td class="px-6 py-4">2024-04-28</td>
+                       <td class="px-6 py-4">Career Coaching</td>
+                   </tr>
+                   {/* More rows */}
+               </tbody>
+           </table>
+       </div>
+     </div>
+   </AdminLayout>
+   ```
+   *(The previous example using `flowbite-astro` Card and Table imports was incorrect.)*
+
+## Digital Samba Integration
    const isAuthenticated = await checkAdminAuth(Astro.request);
    if (!isAuthenticated) {
      return Astro.redirect('/admin/login');
@@ -297,22 +349,23 @@ For the admin area, leverage these Flowbite dashboard components:
 
 ## Digital Samba Integration
 
-Wrap your Digital Samba booking widget in Flowbite components for a consistent look:
+Wrap your Digital Samba booking widget in standard HTML `div` elements styled with Flowbite/Tailwind classes for a consistent look, rather than using a `flowbite-astro` Card component.
 
 ```astro
 ---
 // src/pages/booking.astro
 import MainLayout from '../layouts/MainLayout.astro';
-import { Card } from 'flowbite-astro';
+// Removed incorrect Card import
 ---
 
-<MainLayout>
+<MainLayout title="Book a Session">
   <div class="max-w-screen-xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-extrabold mb-6">Book Your Coaching Session</h1>
-    
-    <Card>
+    <h1 class="text-3xl font-extrabold mb-6 dark:text-white">Book Your Coaching Session</h1>
+
+    {/* Use standard div with Flowbite/Tailwind classes */}
+    <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg border dark:border-gray-700">
       <div id="digital-samba-container" class="min-h-[600px] w-full">
-        <!-- Digital Samba widget will load here -->
+        {/* Digital Samba widget will load here */}
         <div class="flex items-center justify-center h-full">
           <p class="text-gray-500">Loading booking widget...</p>
         </div>
@@ -379,9 +432,10 @@ function checkAuthSession(request) {
 ```astro
 ---
 // src/pages/admin/login.astro
-import { Alert } from 'flowbite-astro';
+// Removed incorrect Alert import
 
 // Handle form submission
+let error = null; // Example error handling variable
 if (Astro.request.method === 'POST') {
   try {
     const data = await Astro.request.formData();
@@ -411,6 +465,12 @@ if (Astro.request.method === 'POST') {
         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
           Admin Login
         </h1>
+        {/* Display error messages using styled divs if needed */}
+        {error && (
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <span class="font-medium">Login Error!</span> {error}
+          </div>
+        )}
         <form class="space-y-4 md:space-y-6" method="POST">
           <div>
             <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>

@@ -1,7 +1,8 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
-// Removed incorrect import: import { Button, Input, Textarea, Label, Checkbox, InputNumber } from 'flowbite-astro';
+// Removed incorrect import: import { Button, Input, Textarea, Label, Checkbox, Select } from 'flowbite-astro';
 // Using standard HTML elements with Flowbite classes instead.
+// Removed Button import as well.
 
 const { id } = Astro.params; // Get service ID from URL parameter
 let service = null;
@@ -64,9 +65,9 @@ if (Astro.request.method === 'PUT') {
     <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
       {service ? `Edit Service: ${service.title}` : 'Edit Service'}
     </h1>
-    <Button href="/admin/services" color="alternative" size="sm">
+    <a href="/admin/services" class="py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
       &larr; Back to Services
-    </Button>
+    </a>
   </div>
 
   {fetchError && (
@@ -75,16 +76,13 @@ if (Astro.request.method === 'PUT') {
     </div>
   )}
 
-  {successMessage && (
-    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-      <span class="font-medium">Success!</span> {successMessage}
-    </div>
-  )}
-  {errorMessage && (
-    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-      <span class="font-medium">Update Error!</span> {errorMessage}
-    </div>
-  )}
+  {/* Inline messages controlled by client-side script (initially hidden) */}
+  <div id="success-message-div" class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 hidden" role="alert">
+    <span id="success-message-span" class="font-medium"></span> {/* Content set by script */}
+  </div>
+  <div id="error-message-div" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden" role="alert">
+     <span id="error-message-span" class="font-medium"></span> {/* Content set by script */}
+  </div>
 
   {/* Only show form if service data was fetched successfully */}
   {service && !fetchError && (
@@ -93,6 +91,14 @@ if (Astro.request.method === 'PUT') {
       <div>
         <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Service Title <span class="text-red-600">*</span></label>
         <input type="text" name="title" id="title" value={service.title} required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+      </div>
+      <div>
+        <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug (URL Path)</label>
+        <input type="text" name="slug" id="slug" placeholder="e.g., career-coaching" value={service.slug} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          The slug determines the URL (e.g., /services/{service.slug}). Use lowercase letters, numbers, and hyphens only. Changing this affects the service's URL.
+          <a href="https://moz.com/learn/seo/url" target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:underline dark:text-primary-500">Learn more about SEO-friendly URLs</a>.
+        </p>
       </div>
        <div>
         <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description <span class="text-red-600">*</span></label>
@@ -142,6 +148,7 @@ if (Astro.request.method === 'PUT') {
     const serviceId = formData.get('serviceId');
     const serviceData = {
       title: formData.get('title'),
+      slug: formData.get('slug'), // Include slug from the form
       description: formData.get('description'),
       price: formData.get('price'),
       duration: formData.get('duration'),
@@ -163,13 +170,42 @@ if (Astro.request.method === 'PUT') {
         throw new Error(result.message || `API Error: ${response.status}`);
       }
 
-      alert('Service updated successfully!');
-      // Optionally update form fields or redirect
-      // window.location.reload(); // Simple way to see changes
+      // Success: Show inline success message and hide the form
+      const successDiv = document.getElementById('success-message-div');
+      const successSpan = document.getElementById('success-message-span');
+      const errorDiv = document.getElementById('error-message-div'); // Get error div to hide it
+
+      if (successDiv && successSpan) {
+        successSpan.textContent = `Success! Service "${result.title}" updated successfully!`;
+        successDiv.classList.remove('hidden');
+        // Hide the form
+        const editForm = document.getElementById('edit-service-form');
+        if (editForm) {
+            editForm.classList.add('hidden');
+        }
+      } else {
+         // Fallback alert if elements not found
+         alert('Service updated successfully!');
+      }
+      // Optionally redirect: window.location.href = '/admin/services';
 
     } catch (error) {
       console.error('Error updating service via fetch:', error);
-      alert(`Failed to update service: ${error.message}`);
+      // Error: Show inline error message
+      const errorDiv = document.getElementById('error-message-div');
+      const errorSpan = document.getElementById('error-message-span');
+      const successDiv = document.getElementById('success-message-div'); // Get success div to hide it
+
+       if (errorDiv && errorSpan) {
+        errorSpan.textContent = `Update Error! ${error.message || 'An unexpected error occurred.'}`;
+        errorDiv.classList.remove('hidden');
+      } else {
+          // Fallback alert if elements not found
+          alert(`Failed to update service: ${error.message}`);
+      }
+       if (successDiv) {
+          successDiv.classList.add('hidden'); // Hide any previous success message
+      }
     }
   });
 </script>

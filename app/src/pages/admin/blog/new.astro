@@ -2,6 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 // Removed incorrect import: import { Button, Input, Textarea, Label, Checkbox, Select } from 'flowbite-astro';
 // Using standard HTML elements with Flowbite classes instead.
+// Removed Button import as well.
 
 let errorMessage: string | null = null;
 let successMessage: string | null = null;
@@ -55,9 +56,9 @@ const categories = ['Career', 'Life Balance', 'Mindset', 'Productivity'];
 <AdminLayout title="Add New Blog Post">
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Add New Blog Post</h1>
-    <Button href="/admin/blog" color="alternative" size="sm">
+    <a href="/admin/blog" class="py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
       &larr; Back to Posts
-    </Button>
+    </a>
   </div>
 
   {successMessage && (
@@ -77,6 +78,14 @@ const categories = ['Career', 'Life Balance', 'Mindset', 'Productivity'];
       <div>
         <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title <span class="text-red-600">*</span></label>
         <input type="text" name="title" id="title" placeholder="Enter post title" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+      </div>
+      <div>
+        <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug (URL Path)</label>
+        <input type="text" name="slug" id="slug" placeholder="e.g., my-awesome-post (optional, auto-generated from title)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          The slug determines the URL (e.g., /blog/your-slug). Leave blank to auto-generate from title. Use lowercase letters, numbers, and hyphens only.
+          <a href="https://moz.com/learn/seo/url" target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:underline dark:text-primary-500">Learn more about SEO-friendly URLs</a>.
+        </p>
       </div>
        <div>
         <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Short Description <span class="text-red-600">*</span></label>

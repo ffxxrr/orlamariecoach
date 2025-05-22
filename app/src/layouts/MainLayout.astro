@@ -46,12 +46,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site); // Use Astro.site 
 		<header>
       {/* Replaced Navbar component with HTML structure + Flowbite classes */}
       {/* Updated nav background/text colors to match theme */}
-      <nav class="bg-brand-background border-b border-primary-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 dark:border-gray-700"> {/* Use brand background and subtle border */}
-        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+      <nav class="bg-primary-100 border-b border-primary-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 dark:border-gray-700"> {/* Use light green background and subtle border */}
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-lg"> {/* Made navbar narrower */}
             <a href="/" class="flex items-center">
-                {/* TODO: Replace with actual logo */}
-                <img src="/favicon.svg" class="mr-3 h-6 sm:h-9" alt="OrlaMarie Coach Logo Placeholder" />
-                <span class="self-center text-xl font-semibold whitespace-nowrap text-brand-text dark:text-white">OrlaMarie Coach</span> {/* Use brand text */}
+                <img src="/images/orlamariecoach-square.PNG" class="mr-3 h-10 sm:h-16" alt="OrlaMarie Coach Logo" /> {/* Further increased logo size */}
+                {/* Removed text: <span class="self-center text-xl font-semibold whitespace-nowrap text-brand-text dark:text-white">OrlaMarie Coach</span> */}
             </a>
             <div class="flex items-center lg:order-2">
                 {/* Optional: Add buttons like Login/Get started here if needed */}
@@ -72,6 +71,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site); // Use Astro.site 
                     </li>
                     <li>
                         <a href="/blog" class:list={["block py-2 pr-4 pl-3 rounded lg:bg-transparent lg:p-0", { "text-primary-700 dark:text-primary-500": currentPath.startsWith('/blog'), "text-brand-text border-b border-primary-100 hover:bg-primary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-primary-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700": !currentPath.startsWith('/blog') }]}>Blog</a>
+                    </li>
+                     <li>
+                        <a href="/events" class:list={["block py-2 pr-4 pl-3 rounded lg:bg-transparent lg:p-0", { "text-primary-700 dark:text-primary-500": currentPath.startsWith('/events'), "text-brand-text border-b border-primary-100 hover:bg-primary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-primary-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700": !currentPath.startsWith('/events') }]}>Events</a>
                     </li>
                     <li>
                         <a href="/about" class:list={["block py-2 pr-4 pl-3 rounded lg:bg-transparent lg:p-0", { "text-primary-700 dark:text-primary-500": currentPath === '/about', "text-brand-text border-b border-primary-100 hover:bg-primary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-primary-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700": currentPath !== '/about' }]}>About</a>
@@ -95,9 +97,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site); // Use Astro.site 
 		{/* Updated Footer colors */}
 		<footer class="p-4 bg-brand-background md:p-8 lg:p-10 dark:bg-gray-800 mt-10 border-t border-primary-200 dark:border-gray-700"> {/* Use brand background and subtle border */}
 			<div class="mx-auto max-w-screen-xl text-center">
-				<a href="#" class="flex justify-center items-center text-2xl font-semibold text-brand-text dark:text-white"> {/* Use brand text */}
-					{/* TODO: Replace with actual logo */}
-					<img src="/favicon.svg" class="mr-3 h-6 sm:h-9" alt="OrlaMarie Coach Logo Placeholder" />
+				<a href="/" class="flex justify-center items-center text-2xl font-semibold text-brand-text dark:text-white"> {/* Use brand text */}
+					<img src="/images/orlamariecoach-square.PNG" class="mr-3 h-6 sm:h-9" alt="OrlaMarie Coach Logo" />
 					OrlaMarie Coach
 				</a>
 				<p class="my-6 text-gray-500 dark:text-gray-400">Empowering you to achieve your goals.</p> {/* Keep gray for secondary text */}
@@ -105,10 +106,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site); // Use Astro.site 
 					<li><a href="/about" class="mr-4 hover:text-primary-700 md:mr-6 dark:hover:text-primary-500">About</a></li> {/* Use primary for hover */}
 					<li><a href="/services" class="mr-4 hover:text-primary-700 md:mr-6 dark:hover:text-primary-500">Services</a></li>
 					<li><a href="/blog" class="mr-4 hover:text-primary-700 md:mr-6 dark:hover:text-primary-500">Blog</a></li>
+          <li><a href="/events" class="mr-4 hover:text-primary-700 md:mr-6 dark:hover:text-primary-500">Events</a></li>
 					<li><a href="/contact" class="mr-4 hover:text-primary-700 md:mr-6 dark:hover:text-primary-500">Contact</a></li>
 					<li><a href="/booking" class="mr-4 hover:text-primary-700 md:mr-6 dark:hover:text-primary-500">Booking</a></li>
 				</ul>
-				<span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© {new Date().getFullYear()} <a href="#" class="hover:text-primary-700 dark:hover:text-primary-500">OrlaMarie Coach™</a>. All Rights Reserved.</span> {/* Keep gray, use primary for hover */}
+				<span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© {new Date().getFullYear()} <a href="/" class="hover:text-primary-700 dark:hover:text-primary-500">OrlaMarie Coach™</a>. All Rights Reserved.</span> {/* Keep gray, use primary for hover */}
 			</div>
 		</footer>
 
@@ -116,12 +118,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site); // Use Astro.site 
     {/* Ensure Flowbite JS is loaded */}
     <script is:inline src="/node_modules/flowbite/dist/flowbite.min.js"></script>
 
-    {/* Basic Analytics Tracking Script (runs only in production) */}
-    {import.meta.env.PROD && (
+    {/* Basic Analytics Tracking Script (modified to run in dev too) */}
+    {/* {import.meta.env.PROD && ( */} {/* Condition removed for dev testing */}
       <script is:inline>
         async function trackPageView() {
-          // Avoid tracking during development or prerendering
-          if (import.meta.env.DEV || navigator.prerendering) return;
+          // Avoid tracking during development or prerendering - REMOVED check for dev testing
+          if (navigator.prerendering) return; // Keep prerendering check
+          // Removed redundant check: if (import.meta.env.DEV || navigator.prerendering) return;
 
           // Avoid tracking admin pages if desired (optional)
           // if (window.location.pathname.startsWith('/admin')) return;
@@ -165,7 +168,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site); // Use Astro.site 
         // document.addEventListener('astro:after-swap', trackPageView);
 
       </script>
-    )}
+    {/* )} */} {/* Condition removed for dev testing */}
 	</body>
 </html>
 <style is:global>
