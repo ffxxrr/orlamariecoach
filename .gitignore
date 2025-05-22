@@ -66,6 +66,10 @@ Thumbs.db
 analytics-data/
 test-analytics/
 
+# Raw image assets (source files - too large for git)
+public/images/orla/raw/
+public/images/**/raw/
+
 # Backup files
 *.backup
 *.bak
