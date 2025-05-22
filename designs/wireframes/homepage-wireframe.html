@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrlaMarieCoach - Homepage Wireframe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+
+        .wireframe {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .wireframe-header {
+            background: #e9ecef;
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .wireframe-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .wireframe-subtitle {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+
+        .section {
+            border-bottom: 1px solid #dee2e6;
+            position: relative;
+        }
+
+        .section-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #007bff;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .navigation {
+            background: #f8f9fa;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .logo-placeholder {
+            background: #2d5a27;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .nav-items {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            padding: 0.5rem;
+            background: #e9ecef;
+            border-radius: 4px;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .cta-button {
+            background: #2d5a27;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        .hero {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5f0 100%);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero-headline {
+            background: #dee2e6;
+            height: 3rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .hero-headline::after {
+            content: "Headline: 'Find Inner Peace Through Authentic Meditation'";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.9rem;
+            color: #495057;
+        }
+
+        .hero-subtext {
+            background: #e9ecef;
+            height: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .hero-subtext::after {
+            content: "Subtext: Value proposition and credentials";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .content-section {
+            padding: 3rem 2rem;
+        }
+
+        .section-title {
+            background: #e9ecef;
+            height: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .column-item {
+            text-align: center;
+            padding: 1.5rem;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+        }
+
+        .icon-placeholder {
+            width: 60px;
+            height: 60px;
+            background: #4a7c59;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            position: relative;
+        }
+
+        .icon-placeholder::after {
+            content: "🧘";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+        }
+
+        .text-block {
+            background: #f8f9fa;
+            height: 4rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .testimonials {
+            background: #f8f9fa;
+            padding: 3rem 2rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .quote-text {
+            background: #e9ecef;
+            height: 3rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .client-photo {
+            width: 50px;
+            height: 50px;
+            background: #6c757d;
+            border-radius: 50%;
+        }
+
+        .client-details {
+            background: #f8f9fa;
+            height: 2rem;
+            flex-grow: 1;
+            border-radius: 4px;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .annotation {
+            position: absolute;
+            background: #ffc107;
+            color: #000;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            z-index: 5;
+        }
+
+        .mobile-note {
+            background: #17a2b8;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-items {
+                display: none;
+            }
+            
+            .hero {
+                padding: 2rem 1rem;
+            }
+            
+            .content-section {
+                padding: 2rem 1rem;
+            }
+            
+            .hero-ctas {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .layout-notes {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .layout-notes h4 {
+            color: #856404;
+            margin-bottom: 0.5rem;
+        }
+
+        .layout-notes ul {
+            color: #856404;
+            margin-left: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe">
+        <div class="wireframe-header">
+            <div class="wireframe-title">OrlaMarieCoach - Homepage Wireframe</div>
+            <div class="wireframe-subtitle">Desktop Layout | Journey-Based Navigation | Nature-Inspired Design</div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="section">
+            <div class="section-label">NAVIGATION</div>
+            <div class="navigation">
+                <div class="logo-placeholder">OrlaMarieCoach</div>
+                <div class="nav-items">
+                    <div class="nav-item">Home</div>
+                    <div class="nav-item">About</div>
+                    <div class="nav-item">Services</div>
+                    <div class="nav-item">Courses</div>
+                    <div class="nav-item">Resources</div>
+                    <div class="nav-item">Contact</div>
+                </div>
+                <div class="cta-button">Book Session</div>
+            </div>
+            <div class="annotation" style="top: 60px; right: 10px;">Sticky navigation with journey-based flow</div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="section">
+            <div class="section-label">HERO</div>
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="hero-headline"></div>
+                    <div class="hero-subtext"></div>
+                    <div class="hero-ctas">
+                        <div class="cta-button">Start Your Journey</div>
+                        <div class="cta-button" style="background: transparent; color: #2d5a27; border: 2px solid #2d5a27;">Learn More</div>
+                    </div>
+                </div>
+                <div class="annotation" style="bottom: 10px; right: 10px;">Nature background image with subtle overlay</div>
+            </div>
+        </div>
+
+        <!-- Services Overview -->
+        <div class="section">
+            <div class="section-label">SERVICES</div>
+            <div class="content-section">
+                <div class="section-title" style="position: relative;">
+                    <div class="annotation" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">"How I Can Help You Find Peace"</div>
+                </div>
+                <div class="three-column">
+                    <div class="column-item">
+                        <div class="icon-placeholder" style="--icon: '🧘‍♀️';"></div>
+                        <div class="text-block"></div>
+                        <div class="text-block" style="height: 2rem;"></div>
+                        <div class="cta-button" style="margin-top: 1rem; font-size: 0.9rem;">Learn More</div>
+                    </div>
+                    <div class="column-item">
+                        <div class="icon-placeholder" style="background: #7fb069;"></div>
+                        <div class="text-block"></div>
+                        <div class="text-block" style="height: 2rem;"></div>
+                        <div class="cta-button" style="margin-top: 1rem; font-size: 0.9rem;">Explore Courses</div>
+                    </div>
+                    <div class="column-item">
+                        <div class="icon-placeholder" style="background: #5a9bb5;"></div>
+                        <div class="text-block"></div>
+                        <div class="text-block" style="height: 2rem;"></div>
+                        <div class="cta-button" style="margin-top: 1rem; font-size: 0.9rem;">Book Today</div>
+                    </div>
+                </div>
+            </div>
+            <div class="annotation" style="bottom: 10px; left: 50%; transform: translateX(-50%);">1-on-1 Sessions | Online Courses | Group Workshops</div>
+        </div>
+
+        <!-- About Orla Section -->
+        <div class="section">
+            <div class="section-label">ABOUT</div>
+            <div class="content-section" style="background: #f8f9fa;">
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: center;">
+                    <div style="background: #dee2e6; height: 300px; border-radius: 8px; position: relative;">
+                        <div class="annotation" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">Professional Photo of Orla</div>
+                    </div>
+                    <div>
+                        <div class="section-title" style="margin-bottom: 1rem;"></div>
+                        <div class="text-block" style="height: 2rem; margin-bottom: 1rem;"></div>
+                        <div class="text-block" style="height: 3rem; margin-bottom: 1rem;"></div>
+                        <div class="text-block" style="height: 2rem; margin-bottom: 2rem;"></div>
+                        <div class="cta-button">Read My Story</div>
+                    </div>
+                </div>
+            </div>
+            <div class="annotation" style="bottom: 10px; right: 10px;">Trust-building with credentials and personal story</div>
+        </div>
+
+        <!-- Social Proof / Testimonials -->
+        <div class="section">
+            <div class="section-label">TESTIMONIALS</div>
+            <div class="testimonials">
+                <div class="section-title" style="text-align: center; margin-bottom: 2rem;">
+                    <div class="annotation" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">"What My Clients Say"</div>
+                </div>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="quote-text"></div>
+                        <div class="client-info">
+                            <div class="client-photo"></div>
+                            <div class="client-details"></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="quote-text"></div>
+                        <div class="client-info">
+                            <div class="client-photo"></div>
+                            <div class="client-details"></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="quote-text"></div>
+                        <div class="client-info">
+                            <div class="client-photo"></div>
+                            <div class="client-details"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="annotation" style="bottom: 10px; left: 10px;">Rotating testimonials with photos and transformation stories</div>
+        </div>
+
+        <!-- Featured Course -->
+        <div class="section">
+            <div class="section-label">FEATURED COURSE</div>
+            <div class="content-section">
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: center;">
+                    <div>
+                        <div class="section-title" style="margin-bottom: 1rem;">
+                            <div class="annotation" style="top: 50%; left: 20px;">"Mindfulness Foundations" - Featured Course</div>
+                        </div>
+                        <div class="text-block" style="height: 2rem; margin-bottom: 1rem;"></div>
+                        <div class="text-block" style="height: 3rem; margin-bottom: 1rem;"></div>
+                        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                            <div class="text-block" style="height: 1.5rem; width: 100px;"></div>
+                            <div class="text-block" style="height: 1.5rem; width: 120px;"></div>
+                            <div class="text-block" style="height: 1.5rem; width: 80px;"></div>
+                        </div>
+                        <div class="cta-button">Enroll Now - €197</div>
+                    </div>
+                    <div style="background: #dee2e6; height: 250px; border-radius: 8px; position: relative;">
+                        <div class="annotation" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">Course Preview Video</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <div class="section">
+            <div class="section-label">EMAIL SIGNUP</div>
+            <div class="content-section" style="background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 100%); color: white; text-align: center;">
+                <div class="section-title" style="background: rgba(255,255,255,0.2); color: white; margin-bottom: 1rem;">
+                    <div class="annotation" style="color: #000;">"Weekly Mindfulness Tips"</div>
+                </div>
+                <div class="text-block" style="background: rgba(255,255,255,0.1); margin: 0 auto 2rem; max-width: 500px;"></div>
+                <div style="display: flex; gap: 1rem; justify-content: center; max-width: 400px; margin: 0 auto;">
+                    <div style="background: white; height: 2.5rem; flex-grow: 1; border-radius: 25px;"></div>
+                    <div class="cta-button" style="background: #7fb069;">Subscribe</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="section">
+            <div class="section-label">FOOTER</div>
+            <div class="footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <div class="text-block" style="height: 1.5rem; margin-bottom: 1rem;"></div>
+                        <div class="text-block" style="height: 3rem;"></div>
+                    </div>
+                    <div class="footer-section">
+                        <div class="text-block" style="height: 1.5rem; margin-bottom: 1rem;"></div>
+                        <div class="text-block" style="height: 3rem;"></div>
+                    </div>
+                    <div class="footer-section">
+                        <div class="text-block" style="height: 1.5rem; margin-bottom: 1rem;"></div>
+                        <div class="text-block" style="height: 3rem;"></div>
+                    </div>
+                </div>
+                <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <div class="text-block" style="height: 1rem; max-width: 300px; margin: 0 auto;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mobile-note">
+            📱 Mobile-First Design: Stack all columns vertically, simplify navigation to hamburger menu, ensure touch-friendly buttons
+        </div>
+
+        <div class="layout-notes">
+            <h4>🎯 Key Design Principles Applied:</h4>
+            <ul>
+                <li><strong>Journey-Based Navigation:</strong> Logical flow from awareness → interest → consideration → action</li>
+                <li><strong>Progressive Disclosure:</strong> Information revealed in digestible chunks, no overwhelming content</li>
+                <li><strong>Trust Building:</strong> Professional photo, credentials, testimonials prominently featured</li>
+                <li><strong>Nature Integration:</strong> Calm backgrounds, organic shapes, breathing room between sections</li>
+                <li><strong>Conversion Optimization:</strong> Clear CTAs, benefit-focused messaging, multiple paths to booking</li>
+                <li><strong>Irish Authenticity:</strong> Warm, personal approach without stereotypical imagery</li>
+            </ul>
+        </div>
+
+        <div class="layout-notes" style="background: #d1ecf1; border-color: #bee5eb;">
+            <h4>📱 Responsive Considerations:</h4>
+            <ul>
+                <li><strong>Mobile Navigation:</strong> Hamburger menu with slide-out drawer</li>
+                <li><strong>Hero Section:</strong> Stack content vertically, larger touch targets for CTAs</li>
+                <li><strong>Services Grid:</strong> Single column on mobile, maintain visual hierarchy</li>
+                <li><strong>About Section:</strong> Stack photo above text, maintain readability</li>
+                <li><strong>Testimonials:</strong> Single column carousel with swipe navigation</li>
+                <li><strong>Forms:</strong> Full-width inputs with proper spacing for thumb navigation</li>
+            </ul>
+        </div>
+
+        <div class="layout-notes" style="background: #d4edda; border-color: #c3e6cb;">
+            <h4>🔗 Integration Points:</h4>
+            <ul>
+                <li><strong>Digital Samba:</strong> "Book Session" buttons connect to scheduling system</li>
+                <li><strong>Course Platform:</strong> Featured course links to detailed course pages</li>
+                <li><strong>Analytics:</strong> Track button clicks, section views, conversion paths</li>
+                <li><strong>Newsletter:</strong> Email collection with automated welcome sequence</li>
+                <li><strong>Social Proof:</strong> Dynamic testimonial rotation with admin management</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

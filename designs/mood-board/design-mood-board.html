@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrlaMarieCoach - Design Mood Board</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f8fffe 0%, #f0f7f4 100%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: #2d5a27;
+            margin-bottom: 1rem;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #5a7c5a;
+            font-weight: 300;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.2rem;
+            color: #2d5a27;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .color-card {
+            text-align: center;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-swatch {
+            height: 120px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .color-info {
+            padding: 1rem;
+            background: white;
+        }
+
+        .color-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .color-hex {
+            font-family: 'Inter', monospace;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .typography-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .font-showcase {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5f0 100%);
+        }
+
+        .font-primary {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-secondary {
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .font-sample {
+            margin-bottom: 1rem;
+        }
+
+        .mood-elements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .mood-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .nature-visual {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .forest {
+            background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 100%);
+        }
+
+        .ocean {
+            background: linear-gradient(135deg, #3498db 0%, #85c1e9 100%);
+        }
+
+        .earth {
+            background: linear-gradient(135deg, #8b4513 0%, #deb887 100%);
+        }
+
+        .sky {
+            background: linear-gradient(135deg, #87ceeb 0%, #e0f6ff 100%);
+        }
+
+        .ui-elements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .button-demo {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 0.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(45, 90, 39, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #2d5a27;
+            border: 2px solid #2d5a27;
+        }
+
+        .btn-secondary:hover {
+            background: #2d5a27;
+            color: white;
+        }
+
+        .design-principles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .principle {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5f0 100%);
+        }
+
+        .principle-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .principle-title {
+            font-weight: 600;
+            color: #2d5a27;
+            margin-bottom: 0.5rem;
+        }
+
+        .principle-desc {
+            font-size: 0.9rem;
+            color: #5a7c5a;
+        }
+
+        @media (max-width: 768px) {
+            .typography-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>OrlaMarieCoach</h1>
+            <p class="subtitle">Design Mood Board & Visual Foundation</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #7f8c8d;">Nature-Inspired Minimalism • Mindful Design • Professional Authenticity</p>
+        </div>
+
+        <!-- Color Palette Section -->
+        <div class="section">
+            <h2 class="section-title">Color Palette</h2>
+            <div class="color-palette">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #2d5a27;">Forest Deep</div>
+                    <div class="color-info">
+                        <div class="color-name">Forest Deep</div>
+                        <div class="color-hex">#2d5a27</div>
+                        <small>Primary Brand • Trust • Grounding</small>
+                    </div>
+                </div>
+                
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #4a7c59; color: white;">Sage Calm</div>
+                    <div class="color-info">
+                        <div class="color-name">Sage Calm</div>
+                        <div class="color-hex">#4a7c59</div>
+                        <small>Secondary • Balance • Growth</small>
+                    </div>
+                </div>
+                
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #7fb069; color: white;">Living Green</div>
+                    <div class="color-info">
+                        <div class="color-name">Living Green</div>
+                        <div class="color-hex">#7fb069</div>
+                        <small>Accent • Vitality • Renewal</small>
+                    </div>
+                </div>
+                
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #5a9bb5; color: white;">Ocean Breath</div>
+                    <div class="color-info">
+                        <div class="color-name">Ocean Breath</div>
+                        <div class="color-hex">#5a9bb5</div>
+                        <small>Calm • Depth • Clarity</small>
+                    </div>
+                </div>
+                
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #d4a574; color: white;">Earth Warmth</div>
+                    <div class="color-info">
+                        <div class="color-name">Earth Warmth</div>
+                        <div class="color-hex">#d4a574</div>
+                        <small>Comfort • Authenticity • Irish Heritage</small>
+                    </div>
+                </div>
+                
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #f8fffe; color: #2c3e50; border: 1px solid #e8f5f0;">Pure Light</div>
+                    <div class="color-info">
+                        <div class="color-name">Pure Light</div>
+                        <div class="color-hex">#f8fffe</div>
+                        <small>Background • Space • Clarity</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Typography Section -->
+        <div class="section">
+            <h2 class="section-title">Typography System</h2>
+            <div class="typography-section">
+                <div class="font-showcase font-primary">
+                    <h3>Primary: Inter</h3>
+                    <div class="font-sample" style="font-size: 2rem; font-weight: 700;">Meditation</div>
+                    <div class="font-sample" style="font-size: 1.5rem; font-weight: 500;">Find Your Inner Peace</div>
+                    <div class="font-sample" style="font-size: 1rem; font-weight: 400;">Modern, clean, and highly legible sans-serif for body text, navigation, and UI elements. Conveys professionalism and accessibility.</div>
+                    <div class="font-sample" style="font-size: 0.9rem; font-weight: 300;">Available weights: 300, 400, 500, 600, 700</div>
+                </div>
+                
+                <div class="font-showcase font-secondary">
+                    <h3 class="font-primary">Secondary: Crimson Pro</h3>
+                    <div class="font-sample" style="font-size: 2.5rem; font-weight: 400;">Mindful Living</div>
+                    <div class="font-sample" style="font-size: 1.8rem; font-weight: 300;">Ancient Wisdom, Modern Practice</div>
+                    <div class="font-sample" style="font-size: 1rem; font-weight: 400;">Elegant serif for headings and special content. Adds warmth and sophistication while maintaining readability.</div>
+                    <div class="font-sample font-primary" style="font-size: 0.9rem; font-weight: 300;">Used selectively for emotional impact</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mood & Atmosphere -->
+        <div class="section">
+            <h2 class="section-title">Mood & Atmosphere</h2>
+            <div class="mood-elements">
+                <div class="mood-card">
+                    <div class="nature-visual forest">🌲</div>
+                    <h4>Grounded</h4>
+                    <p>Deep forest greens that evoke stability, growth, and the Irish countryside. Creates trust and connection to nature.</p>
+                </div>
+                
+                <div class="mood-card">
+                    <div class="nature-visual ocean">🌊</div>
+                    <h4>Flowing</h4>
+                    <p>Ocean blues representing breath, calm, and the endless flow of meditation practice. Brings serenity and depth.</p>
+                </div>
+                
+                <div class="mood-card">
+                    <div class="nature-visual earth">🍃</div>
+                    <h4>Authentic</h4>
+                    <p>Earth tones connecting to Irish heritage and genuine, down-to-earth teaching. Warmth and accessibility.</p>
+                </div>
+                
+                <div class="mood-card">
+                    <div class="nature-visual sky">☁️</div>
+                    <h4>Spacious</h4>
+                    <p>Light, airy backgrounds creating mental space and clarity. Allows content to breathe and minds to rest.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- UI Elements -->
+        <div class="section">
+            <h2 class="section-title">UI Elements & Interactions</h2>
+            <div class="ui-elements">
+                <div class="button-demo">
+                    <h4>Primary Actions</h4>
+                    <a href="#" class="btn btn-primary">Book a Session</a>
+                    <a href="#" class="btn btn-primary">Start Course</a>
+                </div>
+                
+                <div class="button-demo">
+                    <h4>Secondary Actions</h4>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                    <a href="#" class="btn btn-secondary">Contact Orla</a>
+                </div>
+                
+                <div class="button-demo">
+                    <h4>Interactive States</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Gentle hover effects with subtle elevation and color transitions. No jarring animations that break meditative state.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Design Principles -->
+        <div class="section">
+            <h2 class="section-title">Design Principles</h2>
+            <div class="design-principles">
+                <div class="principle">
+                    <div class="principle-icon">🧘‍♀️</div>
+                    <div class="principle-title">Mindful Minimalism</div>
+                    <div class="principle-desc">Clean, uncluttered design that promotes focus and reduces visual stress</div>
+                </div>
+                
+                <div class="principle">
+                    <div class="principle-icon">🌿</div>
+                    <div class="principle-title">Nature Connection</div>
+                    <div class="principle-desc">Organic shapes, natural colors, and gentle textures that evoke outdoor serenity</div>
+                </div>
+                
+                <div class="principle">
+                    <div class="principle-icon">🎯</div>
+                    <div class="principle-title">Purpose-Driven</div>
+                    <div class="principle-desc">Every element serves the user's journey toward inner peace and personal growth</div>
+                </div>
+                
+                <div class="principle">
+                    <div class="principle-icon">📱</div>
+                    <div class="principle-title">Mobile-First</div>
+                    <div class="principle-desc">Responsive design optimized for meditation on-the-go and various devices</div>
+                </div>
+                
+                <div class="principle">
+                    <div class="principle-icon">🤝</div>
+                    <div class="principle-title">Accessible</div>
+                    <div class="principle-desc">High contrast, clear typography, and inclusive design for all users</div>
+                </div>
+                
+                <div class="principle">
+                    <div class="principle-icon">🍀</div>
+                    <div class="principle-title">Irish Authenticity</div>
+                    <div class="principle-desc">Subtle cultural elements without stereotypes, honoring heritage authentically</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Implementation Notes -->
+        <div class="section">
+            <h2 class="section-title">Implementation Strategy</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h4 style="color: #2d5a27; margin-bottom: 1rem;">Visual Hierarchy</h4>
+                    <ul style="line-height: 1.8; color: #5a7c5a;">
+                        <li>Crimson Pro for major headings and emotional content</li>
+                        <li>Inter for body text, navigation, and functional elements</li>
+                        <li>Generous white space for breathing room</li>
+                        <li>Progressive disclosure to prevent overwhelm</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: #2d5a27; margin-bottom: 1rem;">Layout Philosophy</h4>
+                    <ul style="line-height: 1.8; color: #5a7c5a;">
+                        <li>Journey-based navigation reflecting personal growth</li>
+                        <li>Soft, rounded corners for approachability</li>
+                        <li>Subtle gradients and shadows for depth</li>
+                        <li>Nature-inspired organic spacing</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: #2d5a27; margin-bottom: 1rem;">Content Strategy</h4>
+                    <ul style="line-height: 1.8; color: #5a7c5a;">
+                        <li>Trust elements prominently displayed</li>
+                        <li>Social proof integrated naturally</li>
+                        <li>Clear value propositions</li>
+                        <li>Gentle calls-to-action</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
