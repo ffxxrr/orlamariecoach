@@ -1,16 +1,920 @@
-<!-- Contact & Booking Mockup - High-Fidelity Design
-     Professional contact page with Digital Samba integration placeholder
-     Features comprehensive booking system, contact form, and FAQ section
-     Includes €100/hour pricing and global timezone support
-     See artifact for complete implementation -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Contact & Booking Mockup - Orla Marie Coach</title>
-    <!-- Complete implementation available in project artifact -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Booking - Orla Marie Coach</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2D5016;
+            --secondary-green: #4A7C59;
+            --accent-green: #7BA05B;
+            --sage: #9CAF88;
+            --warm-white: #FEFEFE;
+            --soft-gray: #F8F9FA;
+            --text-primary: #1A1A1A;
+            --text-secondary: #4A4A4A;
+            --text-light: #6B7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--warm-white);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(254, 254, 254, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(122, 160, 91, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-green);
+            border-radius: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        /* Hero Section */
+        .contact-hero {
+            background: linear-gradient(135deg, var(--soft-gray) 0%, var(--warm-white) 100%);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><path d="M20 20c15-5 25 10 40 5s30-15 40-5v80H0V30c10-15 20-15 20-10z" fill="%239CAF88" opacity="0.1"/></svg>') no-repeat;
+            background-size: cover;
+        }
+
+        .hero-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-hero h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .response-time {
+            display: inline-block;
+            background: rgba(122, 160, 91, 0.1);
+            color: var(--primary-green);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            border: 1px solid rgba(122, 160, 91, 0.2);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            padding: 3rem 0;
+            background: var(--warm-white);
+        }
+
+        .actions-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .action-card {
+            background: var(--soft-gray);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid rgba(122, 160, 91, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(45, 80, 22, 0.15);
+        }
+
+        .action-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-green), var(--sage));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .action-card h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .action-card p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-green);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        /* Booking Section */
+        .booking-section {
+            padding: 5rem 0;
+            background: var(--soft-gray);
+        }
+
+        .booking-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .booking-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .booking-info {
+            background: var(--warm-white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(45, 80, 22, 0.08);
+            border: 1px solid rgba(122, 160, 91, 0.1);
+        }
+
+        .booking-info h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .session-types {
+            margin: 2rem 0;
+        }
+
+        .session-type {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--soft-gray);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(122, 160, 91, 0.1);
+        }
+
+        .session-details h4 {
+            color: var(--primary-green);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .session-details p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .session-price {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+
+        .booking-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .booking-features li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .digital-samba-widget {
+            background: var(--warm-white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(45, 80, 22, 0.08);
+            border: 1px solid rgba(122, 160, 91, 0.1);
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: linear-gradient(45deg, var(--soft-gray) 25%, transparent 25%), 
+                              linear-gradient(-45deg, var(--soft-gray) 25%, transparent 25%), 
+                              linear-gradient(45deg, transparent 75%, var(--soft-gray) 75%), 
+                              linear-gradient(-45deg, transparent 75%, var(--soft-gray) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .widget-placeholder {
+            max-width: 300px;
+        }
+
+        .widget-placeholder h4 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+        }
+
+        .widget-placeholder p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Contact Form Section */
+        .contact-form-section {
+            padding: 5rem 0;
+            background: var(--warm-white);
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .contact-form {
+            background: var(--soft-gray);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(122, 160, 91, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--primary-green);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(122, 160, 91, 0.2);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--warm-white);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(122, 160, 91, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 0.25rem;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            padding: 4rem 0;
+            background: var(--soft-gray);
+        }
+
+        .info-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: var(--warm-white);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(45, 80, 22, 0.08);
+            border: 1px solid rgba(122, 160, 91, 0.1);
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-green), var(--sage));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .info-card h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .info-card a {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .info-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 0;
+            background: var(--warm-white);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .faq-item {
+            background: var(--soft-gray);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(122, 160, 91, 0.1);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(122, 160, 91, 0.05);
+        }
+
+        .faq-answer {
+            padding: 0 2rem 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .faq-toggle {
+            color: var(--accent-green);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .contact-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+
+            .booking-info {
+                padding: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <p>Contact & booking mockup completed - see artifact for full design implementation</p>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">Orla Marie Coach</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/courses">Courses</a></li>
+                <li><a href="/contact" class="active">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="contact-hero">
+            <div class="hero-container">
+                <h1>Start Your Transformation Today</h1>
+                <p class="hero-subtitle">Ready to begin your meditation journey? Book a session, ask questions, or explore how the Orla Marie Method can bring peace and clarity to your life.</p>
+                <div class="response-time">⚡ Typically respond within 24 hours</div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+            <div class="actions-container">
+                <div class="actions-grid">
+                    <div class="action-card">
+                        <div class="action-icon">📅</div>
+                        <h3>Book a Session</h3>
+                        <p>Schedule your personalized meditation session with flexible global timezone support. Perfect for getting started or deepening your practice.</p>
+                        <a href="#booking" class="btn btn-primary">Schedule Now</a>
+                    </div>
+
+                    <div class="action-card">
+                        <div class="action-icon">🎓</div>
+                        <h3>Explore Courses</h3>
+                        <p>Discover our comprehensive online courses designed to fit your lifestyle and learning preferences. Learn at your own pace with lifetime access.</p>
+                        <a href="/courses" class="btn btn-secondary">View Courses</a>
+                    </div>
+
+                    <div class="action-card">
+                        <div class="action-icon">💬</div>
+                        <h3>Ask Questions</h3>
+                        <p>Not sure where to start? Send a message and receive personalized guidance on which approach would work best for your unique situation.</p>
+                        <a href="#contact-form" class="btn btn-secondary">Get in Touch</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section class="booking-section" id="booking">
+            <div class="booking-container">
+                <div class="section-header">
+                    <h2>Book Your Session</h2>
+                    <p>Choose your preferred session type and find a time that works with your schedule. All sessions include personalized guidance and follow-up support.</p>
+                </div>
+
+                <div class="booking-content">
+                    <div class="booking-info">
+                        <h3>Session Options</h3>
+                        
+                        <div class="session-types">
+                            <div class="session-type">
+                                <div class="session-details">
+                                    <h4>Individual Session</h4>
+                                    <p>One-on-one personalized meditation guidance</p>
+                                </div>
+                                <div class="session-price">€100</div>
+                            </div>
+
+                            <div class="session-type">
+                                <div class="session-details">
+                                    <h4>Package Deal</h4>
+                                    <p>6 sessions with 33% savings and ongoing support</p>
+                                </div>
+                                <div class="session-price">€400</div>
+                            </div>
+                        </div>
+
+                        <ul class="booking-features">
+                            <li><div class="feature-icon">✓</div>Global timezone support</li>
+                            <li><div class="feature-icon">✓</div>Personalized technique matching</li>
+                            <li><div class="feature-icon">✓</div>Energy healing integration</li>
+                            <li><div class="feature-icon">✓</div>Post-session email summary</li>
+                            <li><div class="feature-icon">✓</div>Ongoing support between sessions</li>
+                            <li><div class="feature-icon">✓</div>Revolut & PayPal payment options</li>
+                        </ul>
+
+                        <p><strong>Note:</strong> All sessions are conducted via secure video call with flexible scheduling to accommodate your time zone and lifestyle.</p>
+                    </div>
+
+                    <div class="digital-samba-widget">
+                        <div class="widget-placeholder">
+                            <h4>Digital Samba Booking Widget</h4>
+                            <p>Interactive calendar allowing clients to:</p>
+                            <ul style="text-align: left; color: var(--text-light); margin: 1rem 0;">
+                                <li>Select available time slots</li>
+                                <li>Choose session type</li>
+                                <li>Enter personal details</li>
+                                <li>Complete secure payment</li>
+                                <li>Receive confirmation email</li>
+                            </ul>
+                            <div class="btn btn-primary">Integration Placeholder</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section class="contact-form-section" id="contact-form">
+            <div class="form-container">
+                <div class="section-header">
+                    <h2>Send a Message</h2>
+                    <p>Have questions about meditation, courses, or which approach might work best for you? Send a message and receive personalized guidance within 24 hours.</p>
+                </div>
+
+                <form class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inquiryType">What can I help you with?</label>
+                        <select id="inquiryType" name="inquiryType">
+                            <option value="">Please select...</option>
+                            <option value="general">General meditation questions</option>
+                            <option value="courses">Course information</option>
+                            <option value="sessions">Individual session inquiry</option>
+                            <option value="techniques">Technique recommendations</option>
+                            <option value="pricing">Pricing and packages</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience">Current meditation experience</label>
+                        <select id="experience" name="experience">
+                            <option value="">Please select...</option>
+                            <option value="beginner">Complete beginner</option>
+                            <option value="some">Some experience (less than 1 year)</option>
+                            <option value="intermediate">Intermediate (1-3 years)</option>
+                            <option value="advanced">Advanced (3+ years)</option>
+                            <option value="teacher">I teach meditation</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea id="message" name="message" required placeholder="Tell me about your interests, questions, or what you're hoping to achieve through meditation..."></textarea>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <label for="newsletter">I'd like to receive occasional updates about new courses and meditation insights (optional)</label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="privacy" name="privacy" required>
+                        <label for="privacy">I agree to the privacy policy and understand my information will be used solely to respond to my inquiry *</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Contact Information -->
+        <section class="contact-info">
+            <div class="info-container">
+                <div class="section-header">
+                    <h2>Get in Touch</h2>
+                    <p>Multiple ways to connect, with flexible options to suit your preferences and schedule.</p>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">📧</div>
+                        <h3>Email</h3>
+                        <p>
+                            <a href="mailto:admin@orlamariecoach.com">admin@orlamariecoach.com</a><br>
+                            Typically respond within 24 hours
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">🌍</div>
+                        <h3>Global Availability</h3>
+                        <p>
+                            Online sessions across all time zones<br>
+                            Flexible scheduling to fit your lifestyle
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">🍀</div>
+                        <h3>Based in Donegal</h3>
+                        <p>
+                            Bringing Irish heritage and Celtic wisdom<br>
+                            to modern meditation practice
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">💳</div>
+                        <h3>Payment Options</h3>
+                        <p>
+                            Revolut and PayPal accepted<br>
+                            Secure, global payment processing
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq-section">
+            <div class="faq-container">
+                <div class="section-header">
+                    <h2>Common Questions</h2>
+                    <p>Quick answers to help you get started with confidence.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How quickly will I hear back after contacting you?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        I typically respond to all inquiries within 24 hours, often sooner. You'll receive a personalized response addressing your specific questions and next steps.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What if I'm completely new to meditation?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Perfect! I specialize in working with complete beginners. My approach is gentle, practical, and designed to meet you exactly where you are in your journey.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do online sessions work?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Sessions are conducted via secure video call using Digital Samba. You'll receive a link 24 hours before your session, along with preparation guidance to ensure you get the most from our time together.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What payment methods do you accept?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        I accept payments through Revolut and PayPal, both of which support major credit cards and bank transfers from anywhere in the world. Payment is secure and processed immediately upon booking.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
