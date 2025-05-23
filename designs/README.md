@@ -1,34 +1,47 @@
-# Design Assets
+# Design Assets Directory
 
-This directory will contain all design-related files including:
+This directory contains visual design assets and current design specifications for the OrlaMarieCoach website.
 
-## Structure
+## Directory Structure
 
-- `mockups/` - Design mockups and wireframes
-- `mood-boards/` - Visual inspiration and mood boards
-- `brand-assets/` - Logos, color palettes, typography guides
-- `ui-components/` - Reusable design components
-- `responsive-layouts/` - Mobile and tablet design variations
+### Current Design Assets
+- **`mockups/current/`** - Final approved mockups ready for development
+- **`mockups/archive/`** - Historical mockup versions for reference
+- **`color-palette/`** - Brand color specifications and guidelines
+- **`typography/`** - Font specifications and typography guidelines
+- **`mood-board/`** - Design inspiration and visual direction
+- **`wireframes/`** - Layout structure and user flow wireframes
+- **`backups/`** - Backup copies of design iterations
 
-## Design Guidelines
+### Design Process Documentation
+Design process documentation has been moved to `docs/design-process/` for better organization:
+- **`docs/design-process/client-feedback/`** - Client feedback and design decisions
+- **`docs/design-process/mockup-iterations/`** - Development iterations and technical fixes
+- **`docs/design-process/integration-report.md`** - Overall integration status
+- **`docs/design-process/mockup-completion-summary.md`** - Final completion summary
+- **`docs/design-process/mockup-cleanup-plan.md`** - Cleanup and organization plan
 
-### Color Palette
-- **Primary**: Green-focused palette (specific shades TBD)
-- **Secondary**: Earth tones and natural colors
-- **Avoid**: Yellow and red (per client preference)
+## Current Status
 
-### Typography
-- Clean, readable fonts that convey professionalism
-- Serene and calming feel
-- Good readability across all devices
+**Design Review Completed**: May 23, 2025
+- ✅ All 6 page mockups finalized
+- ✅ Client feedback incorporated
+- ✅ Contact and booking pages separated per client request
+- ✅ Course platform cleaned up and approved
+- ✅ Ready for development phase
 
-### Visual Style
-- Nature-inspired elements (trees, leaves, natural textures)
-- Minimalist approach with plenty of white space
-- Calming imagery that supports meditation theme
-- Professional photography of Orla when available
+## Ready for Development
+The current mockups in `mockups/current/` are the approved designs ready for implementation:
+- homepage-ultimate.html
+- about-page-current.html
+- services-current.html
+- contact-current.html
+- booking-current.html
+- course-platform-current.html
 
-### Responsive Design
-- Mobile-first approach
-- Tablet and desktop optimizations
-- Touch-friendly interface elements
+## Next Steps
+1. Begin Next.js implementation based on approved mockups
+2. Set up component library from design system
+3. Implement responsive layouts for all devices
+4. Integrate Digital Samba booking system
+5. Build custom analytics platform
