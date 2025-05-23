@@ -33,10 +33,10 @@ All mockups now feature professional logo integration and are development-ready:
    - Professional credentials including kids certification
    - Logo integration with Celtic identity reinforcement
 
-6. **course-platform-current.html** ⚠️ **NAMING ISSUE IDENTIFIED**
+6. **course-platform-current.html** ✅ **METHODOLOGY CONFIRMED**
    - €250 course pricing with student testimonials
-   - **CRITICAL**: "OM Method" terminology flagged for replacement per client feedback
-   - **ACTION REQUIRED**: Alternative methodology naming needed before development
+   - **"The OM Method" branding APPROVED by client**
+   - Professional positioning and global accessibility ready for development
 
 7. **course-platform-custom-icons.html** ✅
    - Personalized course icons (lotus, tree, workplace)
