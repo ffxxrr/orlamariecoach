@@ -412,85 +412,7 @@
             color: white;
         }
 
-        /* Comparison Table */
-        .comparison-section {
-            padding: var(--space-2xl) var(--space-lg);
-            background: linear-gradient(135deg, var(--color-pure-light) 0%, rgba(232, 245, 240, 0.3) 100%);
-        }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: var(--space-xl);
-        }
-
-        .section-title {
-            font-family: var(--font-secondary);
-            font-size: 2.5rem;
-            color: var(--color-forest-deep);
-            margin-bottom: var(--space-md);
-            font-weight: 400;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--color-medium-text);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .comparison-table {
-            background: white;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            margin-top: var(--space-lg);
-        }
-
-        .table-header {
-            background: var(--color-forest-deep);
-            color: white;
-            padding: var(--space-md);
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .table-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            border-bottom: 1px solid var(--color-light-border);
-        }
-
-        .table-cell {
-            padding: var(--space-md);
-            text-align: center;
-            border-right: 1px solid var(--color-light-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .table-cell:last-child {
-            border-right: none;
-        }
-
-        .table-cell.feature {
-            background: var(--color-pure-light);
-            font-weight: 600;
-            text-align: left;
-            color: var(--color-forest-deep);
-            justify-content: flex-start;
-        }
-
-        .rating {
-            display: flex;
-            gap: 2px;
-        }
-
-        .star {
-            color: var(--color-earth-warmth);
-            font-size: 1.1rem;
-        }
 
         /* FAQ Section */
         .faq-section {
@@ -680,17 +602,7 @@
                 flex-direction: column;
                 align-items: center;
             }
-            
-            .table-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .table-cell {
-                border-right: none;
-                border-bottom: 1px solid var(--color-light-border);
-                justify-content: flex-start;
-                text-align: left;
-            }
+
             
             .cta-buttons {
                 flex-direction: column;
@@ -911,90 +823,7 @@
         </div>
     </section>
 
-    <!-- Service Comparison -->
-    <section class="comparison-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Choose What's Right for You</h2>
-                <p class="section-subtitle">Compare our services to find your perfect meditation journey. Each approach offers unique benefits tailored to different learning styles and life circumstances.</p>
-            </div>
-            
-            <div class="comparison-table">
-                <div class="table-header">Service Comparison</div>
-                
-                <div class="table-row">
-                    <div class="table-cell feature">Feature</div>
-                    <div class="table-cell">1-on-1 Sessions</div>
-                    <div class="table-cell">Online Courses</div>
-                    <div class="table-cell">Group Workshops</div>
-                </div>
-                
-                <div class="table-row">
-                    <div class="table-cell feature">Personalization</div>
-                    <div class="table-cell">
-                        <div class="rating">
-                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-                        </div>
-                    </div>
-                    <div class="table-cell">
-                        <div class="rating">
-                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span style="color: #ddd;">★</span><span style="color: #ddd;">★</span>
-                        </div>
-                    </div>
-                    <div class="table-cell">
-                        <div class="rating">
-                            <span class="star">★</span><span class="star">★</span><span style="color: #ddd;">★</span><span style="color: #ddd;">★</span><span style="color: #ddd;">★</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="table-row">
-                    <div class="table-cell feature">Flexibility</div>
-                    <div class="table-cell">
-                        <div class="rating">
-                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span style="color: #ddd;">★</span>
-                        </div>
-                    </div>
-                    <div class="table-cell">
-                        <div class="rating">
-                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-                        </div>
-                    </div>
-                    <div class="table-cell">
-                        <div class="rating">
-                            <span class="star">★</span><span class="star">★</span><span style="color: #ddd;">★</span><span style="color: #ddd;">★</span><span style="color: #ddd;">★</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="table-row">
-                    <div class="table-cell feature">Community</div>
-                    <div class="table-cell">
-                        <div class="rating">
-                            <span class="star">★</span><span style="color: #ddd;">★</span><span style="color: #ddd;">★</span><span style="color: #ddd;">★</span><span style="color: #ddd;">★</span>
-                        </div>
-                    </div>
-                    <div class="table-cell">
-                        <div class="rating">
-                            <span class="star">★</span><span class="star">★</span><span style="color: #ddd;">★</span><span style="color: #ddd;">★</span><span style="color: #ddd;">★</span>
-                        </div>
-                    </div>
-                    <div class="table-cell">
-                        <div class="rating">
-                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="table-row">
-                    <div class="table-cell feature">Best For</div>
-                    <div class="table-cell">Beginners, Specific Issues</div>
-                    <div class="table-cell">Self-Motivated Learners</div>
-                    <div class="table-cell">Social Learners</div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- FAQ Section -->
     <section class="faq-section">
@@ -1146,7 +975,7 @@
             }, observerOptions);
 
             // Observe service cards and sections
-            document.querySelectorAll('.service-card, .faq-item, .comparison-table').forEach(el => {
+            document.querySelectorAll('.service-card, .faq-item').forEach(el => {
                 observer.observe(el);
             });
 
