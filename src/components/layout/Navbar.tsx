@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -27,14 +27,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-4 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-3 group">
-          <div className="relative w-10 h-10 rounded-lg overflow-hidden">
-            <Image
-              src="/images/brand/logo-square.png"
-              alt="OrlaMarieCoach Logo"
-              fill
-              className="object-cover"
-              priority
-            />
+          <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-forest-deep/10 flex items-center justify-center">
+            <span className="font-crimson text-forest-deep text-lg">OM</span>
           </div>
           <span className="font-crimson text-xl font-medium text-forest-deep group-hover:text-sage-calm transition-colors">
             OrlaMarieCoach

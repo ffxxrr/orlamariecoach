@@ -3,12 +3,12 @@ import Link from 'next/link'
 export default function Hero() {
   return (
     <section className="relative bg-gradient-to-br from-pure-light to-light-border min-h-screen flex items-center justify-center px-4 overflow-hidden">
-      {/* Background Pattern */}
+      {/* Background Pattern - Using simpler pattern without SVG data URL */}
       <div className="absolute inset-0 opacity-80">
         <div 
           className="w-full h-full bg-no-repeat bg-cover bg-center"
           style={{
-            backgroundImage: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800' fill='none'><defs><pattern id='botanicalPattern' x='0' y='0' width='200' height='200' patternUnits='userSpaceOnUse'><circle cx='50' cy='50' r='2' fill='%234a7c59' opacity='0.1'/><path d='M100 20 Q120 40 130 60 Q120 80 100 100' stroke='%237fb069' stroke-width='1' fill='none' opacity='0.15'/><circle cx='150' cy='120' r='1.5' fill='%235a9bb5' opacity='0.1'/><path d='M20 150 Q40 130 60 150 Q40 170 20 150' fill='%23d4a574' opacity='0.08'/></pattern></defs><rect width='100%' height='100%' fill='url(%23botanicalPattern)'/><path d='M0,400 Q300,300 600,400 T1200,400 L1200,800 L0,800 Z' fill='%23f8fffe' opacity='0.6'/></svg>")`
+            background: 'linear-gradient(135deg, rgba(74, 124, 89, 0.05) 0%, rgba(127, 176, 105, 0.05) 100%)'
           }}
         />
       </div>
@@ -19,7 +19,7 @@ export default function Hero() {
           Find Your Inner Peace Through{' '}
           <span className="relative">
             Authentic Meditation
-            <span className="absolute -top-2 -right-8 text-4xl animate-float-flower">🌸</span>
+            <span className="absolute -top-2 -right-8 text-4xl">🌸</span>
           </span>
         </h1>
         

@@ -2,6 +2,7 @@ import Hero from '@/components/home/Hero'
 import Services from '@/components/home/Services'
 import OMMethod from '@/components/home/OMMethod'
 import About from '@/components/home/About'
+import FreeMeditationSection from '@/components/home/FreeMeditationSection'
 import Testimonials from '@/components/home/Testimonials'
 import FeaturedCourse from '@/components/home/FeaturedCourse'
 import Newsletter from '@/components/home/Newsletter'
@@ -18,6 +19,7 @@ export default function HomePage() {
         <Hero />
         <Services />
         <OMMethod />
+        <FreeMeditationSection />
         <About />
         <Testimonials />
         <FeaturedCourse />

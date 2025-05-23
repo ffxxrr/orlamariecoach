@@ -1,3 +1,5 @@
+import React from 'react'
+
 const testimonials = [
   {
     quote: "Orla's gentle guidance helped me find calm in the chaos of everyday life. Her approach is so authentic and grounded – exactly what I needed.",

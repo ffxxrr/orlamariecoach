@@ -28,7 +28,8 @@ export default function Footer() {
                 <Image
                   src="/images/brand/logo-square.png"
                   alt="OrlaMarieCoach Logo"
-                  fill
+                  width={32}
+                  height={32}
                   className="object-cover"
                 />
               </div>
