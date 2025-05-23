@@ -152,20 +152,24 @@
         }
 
         .logo {
-            font-family: var(--font-secondary);
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--color-forest-deep);
             text-decoration: none;
-            letter-spacing: -0.02em;
             display: flex;
             align-items: center;
-            gap: 8px;
         }
 
-        .logo::before {
-            content: '🌿';
+        .logo-image {
+            height: 40px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            font-family: var(--font-secondary);
             font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--color-forest-deep);
+            margin-left: 12px;
+            letter-spacing: -0.02em;
         }
 
         .nav-menu {
@@ -887,7 +891,10 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="#" class="logo">OrlaMarieCoach</a>
+            <a href="#" class="logo">
+                <img src="../../public/images/brand/logo-square.png" alt="OrlaMarieCoach Logo" class="logo-image">
+                <span class="logo-text">OrlaMarieCoach</span>
+            </a>
             <ul class="nav-menu">
                 <li><a href="#" class="nav-link active">Home</a></li>
                 <li><a href="#" class="nav-link">About</a></li>
@@ -1038,7 +1045,10 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>OrlaMarieCoach</h3>
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <img src="../../public/images/brand/logo-square.png" alt="OrlaMarieCoach Logo" style="height: 32px; width: 32px; border-radius: 6px;">
+                        <h3 style="margin: 0 0 0 12px;">OrlaMarieCoach</h3>
+                    </div>
                     <p>Guiding you toward inner peace through authentic meditation and mindfulness practices rooted in wisdom and compassion.</p>
                 </div>
                 <div class="footer-section">

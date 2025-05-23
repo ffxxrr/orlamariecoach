@@ -35,19 +35,23 @@
         }
 
         .logo {
-            font-family: 'Crimson Pro', serif;
-            font-size: 1.75rem;
-            font-weight: 500;
-            color: var(--primary-green);
-            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 8px;
+            text-decoration: none;
         }
 
-        .logo::before {
-            content: '🌿';
-            font-size: 1.2rem;
+        .logo-image {
+            height: 40px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            margin-left: 12px;
         }
 
         .nav-links {
@@ -681,7 +685,10 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="/" class="logo">Orla Marie Coach</a>
+            <a href="/" class="logo">
+                <img src="../../public/images/brand/logo-square.png" alt="OrlaMarieCoach Logo" class="logo-image">
+                <span class="logo-text">Orla Marie Coach</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About</a></li>
