@@ -58,18 +58,11 @@
             text-decoration: none;
         }
 
-        .logo-symbol {
-            width: 40px;
+        .logo-image {
             height: 40px;
-            background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-family: 'Crimson Pro', serif;
-            font-size: 1.2rem;
-            font-weight: 600;
+            width: 40px;
+            border-radius: 8px;
+            object-fit: cover;
             margin-right: 12px;
         }
 
@@ -576,7 +569,7 @@
     <nav>
         <div class="nav-container">
             <a href="/" class="logo">
-                <div class="logo-symbol">OM</div>
+                <img src="../../../public/images/brand/logo-square.png" alt="OrlaMarieCoach Logo" class="logo-image">
                 <span class="logo-text">Orla Marie Coach</span>
             </a>
             <ul class="nav-links">
