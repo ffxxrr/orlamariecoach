@@ -1,4 +1,5 @@
 import React from 'react'
+import { CelticTriskelion } from '@/components/brand'
 
 const pillarsLeft = [
   {
@@ -115,7 +116,10 @@ export default function OMMethod() {
             <div className="relative">
               <div className="absolute -inset-3 border-2 border-living-green rounded-full opacity-30 animate-ripple" />
               <div className="w-60 h-60 lg:w-72 lg:h-72 bg-gradient-to-br from-forest-deep to-sage-calm rounded-full flex flex-col items-center justify-center text-white text-center shadow-2xl animate-gentle-pulse p-6">
-                <div className="text-6xl lg:text-7xl font-light mb-4">ॐ</div>
+                <div className="text-6xl lg:text-7xl font-light mb-1">ॐ</div>
+                <div className="mb-2">
+                  <CelticTriskelion size={48} className="mx-auto" />
+                </div>
                 <div className="space-y-2">
                   <h3 className="font-crimson text-lg lg:text-xl font-medium leading-tight">
                     Balanced Integration

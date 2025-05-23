@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-// import Image from 'next/image'
+import Logo from '@/components/brand/Logo'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -18,7 +18,7 @@ export default function Navbar() {
 
   return (
     <nav 
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 z-[1000] transition-all duration-300 ${
         isScrolled 
           ? 'bg-pure-light/98 backdrop-blur-[10px] shadow-sm' 
           : 'bg-pure-light/95 backdrop-blur-[10px]'
@@ -26,13 +26,8 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-4 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-3 group">
-          <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-forest-deep/10 flex items-center justify-center">
-            <span className="font-crimson text-forest-deep text-lg">OM</span>
-          </div>
-          <span className="font-crimson text-xl font-medium text-forest-deep group-hover:text-sage-calm transition-colors">
-            OrlaMarieCoach
-          </span>
+        <Link href="/">
+          <Logo size="md" variant="default" withText={true} />
         </Link>
 
         {/* Desktop Navigation */}

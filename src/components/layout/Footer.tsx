@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Image from 'next/image'
+import Logo from '@/components/brand/Logo'
 
 const footerLinks = {
   quickLinks: [
@@ -23,19 +23,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-2">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="relative w-8 h-8 rounded-md overflow-hidden">
-                <Image
-                  src="/images/brand/logo-square.png"
-                  alt="OrlaMarieCoach Logo"
-                  width={32}
-                  height={32}
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="font-crimson text-xl font-medium text-living-green">
-                OrlaMarieCoach
-              </h3>
+            <div className="mb-6">
+              <Logo size="sm" variant="dark" withText={true} />
             </div>
             <p className="text-white/80 leading-relaxed mb-6 max-w-md">
               Guiding you toward inner peace through authentic meditation and mindfulness practices rooted in wisdom and compassion.

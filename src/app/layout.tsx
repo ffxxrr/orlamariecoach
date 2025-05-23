@@ -24,6 +24,13 @@ export const metadata: Metadata = {
     locale: 'en_IE',
     siteName: 'OrlaMarieCoach',
   },
+  icons: {
+    icon: [
+      { url: '/images/brand/favicon/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/images/brand/logo-square.png',
+  },
+  themeColor: '#79b98a',
 }
 
 export default function RootLayout({

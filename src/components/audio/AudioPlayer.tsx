@@ -1,20 +1,26 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Play, Pause, Download, Volume2 } from 'lucide-react'
+import { Play, Pause, Download, Volume2, DownloadCloud } from 'lucide-react'
 
 interface AudioPlayerProps {
-  audioSrc: string
+  audioSrc: string | {
+    mp3?: string
+    ogg?: string
+    mp4?: string
+  }
   title: string
   downloadable?: boolean
   className?: string
+  onDownloadClick?: () => void
 }
 
 export default function AudioPlayer({ 
   audioSrc, 
   title, 
   downloadable = true,
-  className = '' 
+  className = '',
+  onDownloadClick
 }: AudioPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
@@ -81,9 +87,30 @@ export default function AudioPlayer({
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
   }
 
+  // Determine the download URL based on the audioSrc prop
+  const getDownloadUrl = () => {
+    if (typeof audioSrc === 'string') {
+      return audioSrc;
+    }
+    
+    // Prefer MP3 for download if available, then fall back to other formats
+    return audioSrc.mp3 || audioSrc.ogg || audioSrc.mp4 || '';
+  };
+
   return (
     <div className={`rounded-lg shadow-sm bg-white/60 backdrop-blur-sm p-4 ${className}`}>
-      <audio ref={audioRef} src={audioSrc} preload="metadata" />
+      <audio ref={audioRef} preload="metadata">
+        {typeof audioSrc === 'string' ? (
+          <source src={audioSrc} />
+        ) : (
+          <>
+            {audioSrc.mp3 && <source src={audioSrc.mp3} type="audio/mpeg" />}
+            {audioSrc.ogg && <source src={audioSrc.ogg} type="audio/ogg" />}
+            {audioSrc.mp4 && <source src={audioSrc.mp4} type="audio/mp4" />}
+          </>
+        )}
+        Your browser does not support the audio element.
+      </audio>
       
       <div className="flex items-center gap-3 mb-3">
         <button 
@@ -117,10 +144,16 @@ export default function AudioPlayer({
         
         {downloadable && (
           <a 
-            href={audioSrc} 
+            href={getDownloadUrl()} 
             download
             className="text-forest-deep hover:text-sage-calm transition-colors"
             aria-label="Download meditation"
+            onClick={(e) => {
+              if (onDownloadClick) {
+                e.preventDefault();
+                onDownloadClick();
+              }
+            }}
           >
             <Download size={20} />
           </a>
