@@ -5,28 +5,31 @@ import { useState } from 'react'
 const testimonials = [
   {
     id: 1,
-    name: "Sarah M.",
+    name: "Laura Kennedy",
     location: "Dublin, Ireland",
-    text: "Working with Orla transformed my relationship with stress. The OM Method gave me practical tools I use daily, and her Kids Mindfulness techniques have been invaluable for my children during exam periods.",
-    emoji: "👩"
+    course: "OM Method Foundations",
+    text: "The OM Method Foundations course was transformative. Orla's teaching style makes mindfulness approachable and practical. I've gone from skeptical to practicing daily, and the benefits in my stress levels and sleep quality have been remarkable.",
+    image: "/images/testimonials/laura.webp"
   },
   {
     id: 2,
-    name: "Michael O'Connor",
+    name: "John Fitzgerald",
     location: "Cork, Ireland",
-    text: "As someone who was skeptical about meditation, I was surprised by how accessible Orla makes it. Her approach is grounded, practical, and free from jargon. Six months later, I'm sleeping better and handling work pressure with much more ease.",
-    emoji: "👨"
+    course: "OM Method in Daily Life",
+    text: "As a busy executive, I was looking for practical ways to manage stress. This course delivered exactly that. The techniques for integrating mindfulness into meetings and difficult conversations have been game-changing for my leadership approach.",
+    image: "/images/testimonials/john.webp"
   },
   {
     id: 3,
-    name: "Emma Walsh",
+    name: "Siobhan McBride",
     location: "Galway, Ireland",
-    text: "Orla's patience and authentic teaching style creates a space where anyone can learn mindfulness. The personal touches in The OM Method helped me create a sustainable practice that fits my busy life as a mother of three.",
-    emoji: "👩"
+    course: "OM Method Deepening",
+    text: "Having practiced meditation for years, I was looking to deepen my practice. Orla's advanced course provided subtle techniques and insights that have taken my meditation to a new level. The community of practitioners was also incredibly supportive.",
+    image: "/images/testimonials/siobhan.webp"
   }
 ]
 
-export default function AboutTestimonials() {
+export default function CoursesTestimonials() {
   const [activeIndex, setActiveIndex] = useState(0)
   
   const nextTestimonial = () => {
@@ -61,10 +64,13 @@ export default function AboutTestimonials() {
           
           <div className="flex flex-col items-center">
             <div className="w-16 h-16 bg-forest-deep/10 rounded-full flex items-center justify-center mb-4">
-              <span className="text-2xl">{testimonials[activeIndex].emoji}</span>
+              <span className="text-2xl">👤</span>
             </div>
             <p className="text-forest-deep font-medium">{testimonials[activeIndex].name}</p>
             <p className="text-medium-text text-sm">{testimonials[activeIndex].location}</p>
+            <p className="text-forest-deep text-sm mt-2">
+              Course: {testimonials[activeIndex].course}
+            </p>
           </div>
           
           <div className="flex justify-center mt-8">

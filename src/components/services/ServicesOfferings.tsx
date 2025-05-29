@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import ImagePlaceholder from '@/components/ui/ImagePlaceholder'
 
 const services = [
   {
@@ -65,10 +66,16 @@ export default function ServicesOfferings() {
               }`}
             >
               <div className={`${index % 2 === 1 ? 'md:order-2' : 'md:order-1'}`}>
-                <div className="relative rounded-2xl overflow-hidden shadow-md aspect-[4/3]">
-                  <div className="absolute inset-0 bg-forest-deep/50 flex items-center justify-center">
-                    <span className="text-white text-lg font-medium">Image: {service.title}</span>
-                  </div>
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-md">
+                  <Image
+                    src={service.id === 1 ? '/images/orla/optimized/service/7R500325.webp' :
+                         service.id === 2 ? '/images/orla/optimized/service/7R500126.webp' :
+                         '/images/orla/optimized/service/7R500362.webp'}
+                    alt={service.title}
+                    width={600}
+                    height={450}
+                    className="object-cover w-full h-full"
+                  />
                 </div>
               </div>
               

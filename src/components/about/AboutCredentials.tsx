@@ -18,7 +18,7 @@ export default function AboutCredentials() {
           <div className="relative">
             <div className="relative aspect-square rounded-2xl overflow-hidden shadow-md">
               <Image
-                src="/images/orla/optimized/about/teaching.webp"
+                src="/images/orla/optimized/about/7R500406.webp"
                 alt="Orla Marie teaching a meditation class"
                 width={600}
                 height={600}

@@ -58,7 +58,7 @@ export default function AboutHero() {
           <div className="order-1 md:order-2 relative">
             <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[3/4] max-w-md mx-auto">
               <Image
-                src="/images/orla/optimized/about/portrait.webp"
+                src="/images/orla/optimized/about/7R500130.webp"
                 alt="Orla Marie meditation coach"
                 width={600}
                 height={800}
