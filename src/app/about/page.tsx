@@ -7,6 +7,8 @@ import AboutCTA from '@/components/about/AboutCTA'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import BotanicalAccents from '@/components/ui/BotanicalAccents'
+import Container from '@/components/ui/Container'
+import Section from '@/components/ui/Section'
 
 export const metadata = {
   title: 'About Orla Marie | Mindfulness & Meditation Coach',
@@ -19,12 +21,36 @@ export default function AboutPage() {
       <BotanicalAccents />
       <Navbar />
       <main>
-        <AboutHero />
-        <AboutStory />
-        <AboutCredentials />
-        <AboutOMMethod />
-        <AboutTestimonials />
-        <AboutCTA />
+        <Section padded>
+          <Container>
+            <AboutHero />
+          </Container>
+        </Section>
+        <Section padded className="bg-white/60">
+          <Container>
+            <AboutStory />
+          </Container>
+        </Section>
+        <Section padded>
+          <Container>
+            <AboutCredentials />
+          </Container>
+        </Section>
+        <Section padded className="bg-white/60">
+          <Container>
+            <AboutOMMethod />
+          </Container>
+        </Section>
+        <Section padded>
+          <Container>
+            <AboutTestimonials />
+          </Container>
+        </Section>
+        <Section padded className="bg-white/60">
+          <Container>
+            <AboutCTA />
+          </Container>
+        </Section>
       </main>
       <Footer />
     </>

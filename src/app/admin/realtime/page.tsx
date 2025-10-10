@@ -1,16 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { 
-  Users, 
-  Eye, 
-  Activity,
-  Globe,
-  Smartphone,
-  Monitor,
-  RefreshCw,
-  Wifi
-} from 'lucide-react';
+import { Globe, Smartphone, Monitor, RefreshCw, Wifi } from 'lucide-react';
 
 interface RealtimeData {
   activeVisitors: number;

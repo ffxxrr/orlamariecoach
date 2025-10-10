@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Button from '@/components/ui/Button'
 
 export default function ContactCTA() {
   return (
@@ -14,29 +15,23 @@ export default function ContactCTA() {
       </div>
       
       <div className="max-w-4xl mx-auto text-center relative z-10">
-        <h2 className="font-crimson text-3xl md:text-4xl font-light mb-6">
+        <h2 className="font-crimson text-3xl md:text-4xl font-light mb-6 fade-in-up">
           Ready for Personalised Guidance?
         </h2>
         
-        <p className="text-white/90 mb-10 max-w-2xl mx-auto">
+        <p className="text-white/90 mb-10 max-w-2xl mx-auto fade-in-up">
           Whether you start with questions or jump straight into a session, I'm here to support 
           your meditation journey with authentic, personalised guidance.
         </p>
         
-        <div className="flex flex-wrap gap-4 justify-center">
-          <Link
-            href="#contact-form"
-            className="bg-white text-forest-deep font-medium px-8 py-4 rounded-full hover:bg-pure-light hover:-translate-y-1 transition-all duration-300"
-          >
-            Send Your Questions
+        <div className="flex flex-wrap gap-4 justify-center fade-in-up">
+          <Link href="#contact-form">
+            <Button variant="secondary">Send Your Questions</Button>
           </Link>
-          
-          <Link
-            href="/book-session"
-            className="bg-transparent border-2 border-white text-white font-medium px-8 py-4 rounded-full 
-                       hover:bg-white hover:text-forest-deep hover:-translate-y-1 transition-all duration-300"
-          >
-            Book a Session
+          <Link href="/book-session">
+            <Button variant="ghost" className="border-2 border-white text-white hover:bg-white hover:text-forest-deep">
+              Book a Session
+            </Button>
           </Link>
         </div>
       </div>

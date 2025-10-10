@@ -1,0 +1,29 @@
+{
+  "root": true,
+  "extends": ["next/core-web-vitals"],
+  "parserOptions": {
+    "project": ["./tsconfig.json"],
+    "tsconfigRootDir": "."
+  },
+  "rules": {
+    "react/no-unescaped-entities": "off"
+  },
+  "overrides": [
+    {
+      "files": ["src/lib/analytics/**/*"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "prefer-const": "off",
+        "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+      }
+    },
+    {
+      "files": ["src/app/api/analytics/**/*"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+      }
+    }
+  ]
+}
+

@@ -56,7 +56,9 @@ export default function FeaturedCourse() {
           {/* Course Preview */}
           <div className="relative">
             <div className="bg-white/10 backdrop-blur-md h-80 rounded-2xl flex items-center justify-center relative overflow-hidden">
-              <div className="text-6xl opacity-80">▶️</div>
+              <div className="opacity-80">
+                <svg viewBox="0 0 24 24" className="w-12 h-12 text-white"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+              </div>
               
               {/* Preview overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Button from '@/components/ui/Button'
 import Image from 'next/image'
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder'
 
@@ -80,15 +81,15 @@ export default function ServicesOfferings() {
               </div>
               
               <div className={`${index % 2 === 1 ? 'md:order-1' : 'md:order-2'}`}>
-                <h2 className="font-crimson text-2xl md:text-3xl text-forest-deep mb-3">
+                <h2 className="font-crimson text-2xl md:text-3xl text-forest-deep mb-3 fade-in-up">
                   {service.title}
                 </h2>
                 
-                <p className="text-medium-text mb-4">
+                <p className="text-medium-text mb-4 fade-in-up">
                   {service.description}
                 </p>
                 
-                <div className="bg-pure-light rounded-lg p-4 mb-6">
+                <div className="bg-pure-light rounded-lg p-4 mb-6 fade-in-up">
                   <div className="text-forest-deep font-medium mb-2">
                     {service.price}
                   </div>
@@ -103,11 +104,8 @@ export default function ServicesOfferings() {
                   </ul>
                 </div>
                 
-                <Link 
-                  href={service.link}
-                  className="btn btn-primary inline-block"
-                >
-                  {service.cta}
+                <Link href={service.link}>
+                  <Button>{service.cta}</Button>
                 </Link>
               </div>
             </div>

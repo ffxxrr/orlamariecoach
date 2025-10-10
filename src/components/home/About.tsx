@@ -27,7 +27,12 @@ export default function About() {
                   }}
                 />
               </div>
-              <div className="text-8xl relative z-10">🧘‍♀️</div>
+              <div className="relative z-10">
+                <svg viewBox="0 0 64 64" className="w-24 h-24 text-white opacity-90">
+                  <circle cx="32" cy="32" r="30" className="fill-white/20" />
+                  <path d="M32 18c-6 0-10 4-10 10 0 3 1 6 3 8l-7 10h6l5-7 3 4 3-4 5 7h6l-7-10c2-2 3-5 3-8 0-6-4-10-10-10z" className="fill-white" />
+                </svg>
+              </div>
             </div>
           </div>
 
@@ -56,25 +61,25 @@ export default function About() {
             </div>
 
             {/* Credentials */}
-            <div className="bg-white p-6 rounded-xl border border-light-border shadow-sm">
+            <div className="bg-white p-6 rounded-xl border border-light-border shadow-sm fade-in-up">
               <h3 className="font-crimson text-lg font-medium text-forest-deep mb-4">
                 Qualifications & Training
               </h3>
               <ul className="space-y-2 text-medium-text">
                 <li className="flex items-center space-x-2">
-                  <span className="text-living-green">✓</span>
+                  <span className="text-living-green">•</span>
                   <span>Certified Meditation Teacher</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <span className="text-living-green">✓</span>
+                  <span className="text-living-green">•</span>
                   <span>Mindfulness-Based Stress Reduction (MBSR)</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <span className="text-living-green">✓</span>
+                  <span className="text-living-green">•</span>
                   <span>Mindfulness for Kids Certified</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <span className="text-living-green">✓</span>
+                  <span className="text-living-green">•</span>
                   <span>500+ hours of teaching experience</span>
                 </li>
               </ul>

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Button from '@/components/ui/Button'
 
 export default function BookingCTA() {
   return (
@@ -14,31 +15,24 @@ export default function BookingCTA() {
       </div>
       
       <div className="max-w-4xl mx-auto text-center relative z-10">
-        <h2 className="font-crimson text-3xl md:text-4xl font-light mb-6">
+        <h2 className="font-crimson text-3xl md:text-4xl font-light mb-6 fade-in-up">
           Your Transformation Starts Today
         </h2>
         
-        <p className="text-white/90 mb-10 max-w-2xl mx-auto">
+        <p className="text-white/90 mb-10 max-w-2xl mx-auto fade-in-up">
           Take the first step toward lasting peace and clarity. Book your personalised 
           meditation session and discover how The OM Method can transform your relationship 
           with stress and bring authentic calm to your life.
         </p>
         
-        <div className="flex flex-wrap gap-4 justify-center">
-          <Link
-            href="#booking-widget"
-            className="bg-white text-forest-deep font-medium px-8 py-4 rounded-full 
-                     hover:bg-pure-light hover:-translate-y-1 transition-all duration-300"
-          >
-            Schedule Your Session
+        <div className="flex flex-wrap gap-4 justify-center fade-in-up">
+          <Link href="#booking-widget">
+            <Button variant="secondary">Schedule Your Session</Button>
           </Link>
-          
-          <Link
-            href="/contact"
-            className="bg-transparent border-2 border-white text-white font-medium px-8 py-4 rounded-full 
-                     hover:bg-white hover:text-forest-deep hover:-translate-y-1 transition-all duration-300"
-          >
-            Ask Questions First
+          <Link href="/contact">
+            <Button variant="ghost" className="border-2 border-white text-white hover:bg-white hover:text-forest-deep">
+              Ask Questions First
+            </Button>
           </Link>
         </div>
       </div>

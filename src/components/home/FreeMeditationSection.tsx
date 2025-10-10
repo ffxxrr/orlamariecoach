@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Button from '@/components/ui/Button'
 import Image from 'next/image'
 import AudioPlayer from '@/components/audio/AudioPlayer'
 
@@ -43,11 +44,11 @@ export default function FreeMeditationSection() {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
-            <h2 className="font-crimson text-3xl md:text-4xl text-forest-deep mb-4 leading-tight">
+            <h2 className="font-crimson text-3xl md:text-4xl text-forest-deep mb-4 leading-tight fade-in-up">
               Experience a Free Guided Meditation
             </h2>
             
-            <p className="text-medium-text mb-6">
+            <p className="text-medium-text mb-6 fade-in-up">
               Take a moment for yourself with this complimentary guided session. 
               Perfect for beginners and experienced practitioners alike.
             </p>
@@ -81,7 +82,7 @@ export default function FreeMeditationSection() {
                       <a
                         href="/media/audio/meditations/irish-countryside-meditation.mp3"
                         download
-                        className="btn btn-secondary inline-block"
+                        className="inline-block"
                         onClick={() => {
                           // Trigger download programmatically if it didn't start automatically
                           setTimeout(() => {
@@ -94,7 +95,7 @@ export default function FreeMeditationSection() {
                           }, 1000);
                         }}
                       >
-                        Download Again
+                        <Button variant="secondary">Download Again</Button>
                       </a>
                     </div>
                   ) : (
@@ -116,9 +117,9 @@ export default function FreeMeditationSection() {
                         <button
                           type="submit"
                           disabled={isSubscribing}
-                          className="btn btn-primary whitespace-nowrap"
+                          className=""
                         >
-                          {isSubscribing ? 'Processing...' : 'Download Now'}
+                          <Button>{isSubscribing ? 'Processing...' : 'Download Now'}</Button>
                         </button>
                       </div>
                       
@@ -140,9 +141,9 @@ export default function FreeMeditationSection() {
                   </p>
                   <button 
                     onClick={() => setShowEmailForm(true)}
-                    className="btn btn-secondary w-full sm:w-auto"
+                    className="w-full sm:w-auto"
                   >
-                    Join Our Community
+                    <Button variant="secondary" className="w-full sm:w-auto">Join Our Community</Button>
                   </button>
                 </>
               )}

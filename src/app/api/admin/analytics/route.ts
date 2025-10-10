@@ -330,7 +330,7 @@ function getRelativeTime(date: Date): string {
 /**
  * Format location string
  */
-function formatLocation(country?: string, city?: string): string {
+function formatLocation(country?: string | null, city?: string | null): string {
   if (city && country) {
     return `${city}, ${country}`;
   }

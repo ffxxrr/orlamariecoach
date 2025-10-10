@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Button from '@/components/ui/Button'
 
 export default function CoursesCTA() {
   return (
@@ -18,18 +19,11 @@ export default function CoursesCTA() {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link 
-            href="/contact"
-            className="btn btn-secondary px-8 py-4"
-          >
-            Ask a Question
+          <Link href="/contact">
+            <Button variant="secondary">Ask a Question</Button>
           </Link>
-          
-          <Link 
-            href="/booking"
-            className="btn btn-primary px-8 py-4"
-          >
-            Enroll Now
+          <Link href="/booking">
+            <Button variant="primary">Enroll Now</Button>
           </Link>
         </div>
       </div>

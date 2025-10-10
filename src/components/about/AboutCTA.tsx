@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Button from '@/components/ui/Button'
 
 export default function AboutCTA() {
   return (
@@ -14,18 +15,11 @@ export default function AboutCTA() {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link 
-            href="/services"
-            className="btn btn-secondary px-8 py-4"
-          >
-            Explore Services
+          <Link href="/services">
+            <Button size="md" variant="secondary">Explore Services</Button>
           </Link>
-          
-          <Link 
-            href="/book-session"
-            className="btn btn-primary px-8 py-4"
-          >
-            Book a Session
+          <Link href="/book-session">
+            <Button size="md" variant="primary">Book a Session</Button>
           </Link>
         </div>
       </div>

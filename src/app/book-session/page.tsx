@@ -8,6 +8,8 @@ import BookingWidget from '@/components/booking/BookingWidget'
 import BookingTestimonials from '@/components/booking/BookingTestimonials'
 import BookingFAQ from '@/components/booking/BookingFAQ'
 import BookingCTA from '@/components/booking/BookingCTA'
+import Container from '@/components/ui/Container'
+import Section from '@/components/ui/Section'
 import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 import { useEffect } from 'react'
 
@@ -31,12 +33,36 @@ export default function BookSessionPage() {
       <BotanicalAccents />
       <Navbar />
       <main>
-        <BookingHero />
-        <BookingOptions />
-        <BookingWidget />
-        <BookingTestimonials />
-        <BookingFAQ />
-        <BookingCTA />
+        <Section padded>
+          <Container>
+            <BookingHero />
+          </Container>
+        </Section>
+        <Section padded className="bg-white/60">
+          <Container>
+            <BookingOptions />
+          </Container>
+        </Section>
+        <Section padded>
+          <Container>
+            <BookingWidget />
+          </Container>
+        </Section>
+        <Section padded className="bg-white/60">
+          <Container>
+            <BookingTestimonials />
+          </Container>
+        </Section>
+        <Section padded>
+          <Container>
+            <BookingFAQ />
+          </Container>
+        </Section>
+        <Section padded className="bg-white/60">
+          <Container>
+            <BookingCTA />
+          </Container>
+        </Section>
       </main>
       <Footer />
     </>

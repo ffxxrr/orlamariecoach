@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Logo from '@/components/brand/Logo'
+import { Facebook, Instagram, Youtube } from 'lucide-react'
 
 const footerLinks = {
   quickLinks: [
@@ -81,18 +82,33 @@ export default function Footer() {
               </li>
             </ul>
 
-            {/* Social Links Placeholder */}
+            {/* Social Links */}
             <div className="flex space-x-4">
-              <a href="#" className="text-white/60 hover:text-living-green transition-colors">
-                <span className="sr-only">Facebook</span>
-                <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">
-                  📘
+              <a 
+                href="https://www.facebook.com/orlamariecoach"
+                className="text-white/70 hover:text-living-green transition-colors"
+                aria-label="Facebook"
+              >
+                <div className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center">
+                  <Facebook className="w-5 h-5" />
                 </div>
               </a>
-              <a href="#" className="text-white/60 hover:text-living-green transition-colors">
-                <span className="sr-only">Instagram</span>
-                <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">
-                  📷
+              <a 
+                href="https://www.instagram.com/orlamariecoach"
+                className="text-white/70 hover:text-living-green transition-colors"
+                aria-label="Instagram"
+              >
+                <div className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center">
+                  <Instagram className="w-5 h-5" />
+                </div>
+              </a>
+              <a 
+                href="https://www.youtube.com/orlamariecoach"
+                className="text-white/70 hover:text-living-green transition-colors"
+                aria-label="YouTube"
+              >
+                <div className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center">
+                  <Youtube className="w-5 h-5" />
                 </div>
               </a>
             </div>

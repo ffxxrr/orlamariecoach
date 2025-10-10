@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import Button from '@/components/ui/Button'
 import Image from 'next/image'
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder'
 import { useEventTracker } from '@/components/ui/AnalyticsProvider'
@@ -113,7 +114,7 @@ export default function CoursesList() {
                 </div>
                 
                 <div className="p-8">
-                  <div className="flex justify-between items-start mb-4">
+                  <div className="flex justify-between items-start mb-4 fade-in-up">
                     <div>
                       <h2 className="font-crimson text-2xl md:text-3xl text-forest-deep">
                         {course.title}
@@ -125,11 +126,11 @@ export default function CoursesList() {
                     </div>
                   </div>
                   
-                  <p className="text-medium-text mb-6">
+                  <p className="text-medium-text mb-6 fade-in-up">
                     {course.description}
                   </p>
                   
-                  <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="grid grid-cols-2 gap-4 mb-6 fade-in-up">
                     <div className="flex items-center gap-2">
                       <span className="text-forest-deep">⚡</span>
                       <span className="text-medium-text text-sm">Level: {course.level}</span>
@@ -164,20 +165,11 @@ export default function CoursesList() {
                   </div>
                   
                   <div className="flex gap-4">
-                    <Link 
-                      href={`/courses/${course.id}`}
-                      className="btn btn-primary"
-                      onClick={() => handleCourseEnquiry(course, 'details_clicked')}
-                    >
-                      Course Details
+                    <Link href={`/courses/${course.id}`} onClick={() => handleCourseEnquiry(course, 'details_clicked')}>
+                      <Button variant="primary">Course Details</Button>
                     </Link>
-                    
-                    <Link 
-                      href="/book-session"
-                      className="btn btn-secondary"
-                      onClick={() => handleCourseEnquiry(course, 'enroll_clicked')}
-                    >
-                      Enroll Now
+                    <Link href="/book-session" onClick={() => handleCourseEnquiry(course, 'enroll_clicked')}>
+                      <Button variant="secondary">Enroll Now</Button>
                     </Link>
                   </div>
                 </div>

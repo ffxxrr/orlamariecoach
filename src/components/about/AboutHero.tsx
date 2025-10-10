@@ -34,21 +34,21 @@ export default function AboutHero() {
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-forest-deep/10 flex items-center justify-center text-forest-deep">
-                  <span className="text-xl">🧘‍♀️</span>
+                  <svg viewBox="0 0 24 24" className="w-5 h-5"><path fill="currentColor" d="M12 6c-2.21 0-4 1.79-4 4 0 1.3.63 2.46 1.6 3.2L8 16h8l-1.6-2.8A4 4 0 0016 10c0-2.21-1.79-4-4-4z"/></svg>
                 </div>
                 <span className="text-medium-text">MBSR Certified Practitioner</span>
               </div>
               
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-forest-deep/10 flex items-center justify-center text-forest-deep">
-                  <span className="text-xl">👶</span>
+                  <svg viewBox="0 0 24 24" className="w-5 h-5"><path fill="currentColor" d="M12 4a4 4 0 00-4 4v2H7a3 3 0 000 6h10a3 3 0 000-6h-1V8a4 4 0 00-4-4z"/></svg>
                 </div>
                 <span className="text-medium-text">Mindfulness for Kids Certified</span>
               </div>
               
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-forest-deep/10 flex items-center justify-center text-forest-deep">
-                  <span className="text-xl">⏱️</span>
+                  <svg viewBox="0 0 24 24" className="w-5 h-5"><path fill="currentColor" d="M12 8V6h4v2h-4zm0 2a6 6 0 100 12 6 6 0 000-12zm1 7h-2v-5h2v5z"/></svg>
                 </div>
                 <span className="text-medium-text">500+ Hours Teaching Experience</span>
               </div>

@@ -72,23 +72,23 @@ export default function Navbar() {
       <nav 
         className={`sticky top-0 z-[1000] transition-all duration-300 ${
           isScrolled 
-            ? 'bg-pure-light/98 backdrop-blur-[10px] shadow-sm' 
-            : 'bg-pure-light/95 backdrop-blur-[10px]'
+            ? 'bg-pure-light/98 backdrop-blur-[12px] shadow-sm' 
+            : 'bg-pure-light/95 backdrop-blur-[12px]'
         } border-b border-light-border`}
       >
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-4 lg:px-8">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 z-10">
             <Logo size="md" variant="default" withText={true} />
           </Link>
 
           {/* Desktop Navigation */}
-          <ul className="hidden lg:flex items-center space-x-8">
+          <ul className="hidden lg:flex items-center space-x-6">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link 
                   href={link.href} 
-                  className={`nav-link font-medium px-3 py-2 rounded-lg transition-all duration-300 ${
+                  className={`font-medium px-3 py-2 rounded-full transition-all duration-300 ${
                     pathname === link.href
                       ? 'text-forest-deep bg-forest-deep/10'
                       : 'text-deep-text hover:text-forest-deep hover:bg-forest-deep/10'
@@ -101,16 +101,19 @@ export default function Navbar() {
           </ul>
 
           {/* CTA Button */}
-          <Link 
-            href="/book-session" 
-            className="hidden lg:inline-block bg-gradient-to-r from-forest-deep to-sage-calm text-white px-6 py-3 rounded-full font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
-          >
-            Book Session
+          <Link href="/book-session" className="hidden lg:inline-block">
+            <span className="sr-only">Book Session</span>
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-forest-deep to-sage-calm text-white px-6 py-3 rounded-full font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6l4 2" />
+              </svg>
+              Book Session
+            </div>
           </Link>
 
           {/* Mobile Menu Button */}
           <button 
-            className="lg:hidden p-2 rounded-lg hover:bg-forest-deep/10 transition-colors z-10"
+            className="lg:hidden p-2 rounded-full hover:bg-forest-deep/10 transition-colors z-10"
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
             aria-expanded={isMobileMenuOpen}

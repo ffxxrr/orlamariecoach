@@ -5,6 +5,9 @@ import ServicesCTA from '@/components/services/ServicesCTA'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import BotanicalAccents from '@/components/ui/BotanicalAccents'
+import Container from '@/components/ui/Container'
+import Section from '@/components/ui/Section'
+import Divider from '@/components/ui/Divider'
 
 export const metadata = {
   title: 'Services & Pricing | Orla Marie Mindfulness Coach',
@@ -17,10 +20,36 @@ export default function ServicesPage() {
       <BotanicalAccents />
       <Navbar />
       <main>
-        <ServicesHero />
-        <ServicesOfferings />
-        <ServicesFAQ />
-        <ServicesCTA />
+        <Section padded>
+          <Container>
+            <ServicesHero />
+          </Container>
+        </Section>
+        <Section padded className="bg-white/60">
+          <Container>
+            <ServicesOfferings />
+          </Container>
+        </Section>
+        <Section padded={false}>
+          <Container>
+            <Divider className="my-2" />
+          </Container>
+        </Section>
+        <Section padded>
+          <Container>
+            <ServicesFAQ />
+          </Container>
+        </Section>
+        <Section padded={false}>
+          <Container>
+            <Divider className="my-2" />
+          </Container>
+        </Section>
+        <Section padded className="bg-white/60">
+          <Container>
+            <ServicesCTA />
+          </Container>
+        </Section>
       </main>
       <Footer />
     </>

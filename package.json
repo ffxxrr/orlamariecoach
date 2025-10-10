@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:setup": "prisma generate && prisma db push",
-    "db:studio": "prisma studio",
-    "db:reset": "prisma db push --force-reset",
+    "db:setup": "node scripts/check-env.js && prisma generate && prisma db push",
+    "db:studio": "node scripts/check-env.js && prisma studio",
+    "db:reset": "node scripts/check-env.js && prisma db push --force-reset",
     "type-check": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch"

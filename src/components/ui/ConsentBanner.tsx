@@ -65,7 +65,7 @@ export default function ConsentBanner({ onConsentChange }: ConsentBannerProps) {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-sage-light border-t-2 border-forest-deep p-4 shadow-lg z-50">
+    <div className="fixed bottom-0 left-0 right-0 bg-sage-light border-t-2 border-forest-deep p-4 shadow-lg z-50" suppressHydrationWarning>
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex-1">

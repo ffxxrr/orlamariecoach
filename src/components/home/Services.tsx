@@ -40,10 +40,10 @@ export default function Services() {
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="font-crimson text-3xl lg:text-4xl text-forest-deep mb-6">
+          <h2 className="font-crimson text-3xl lg:text-4xl text-forest-deep mb-6 fade-in-up">
             How I Can Help You Find Peace
           </h2>
-          <p className="text-lg text-medium-text max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-medium-text max-w-3xl mx-auto leading-relaxed fade-in-up">
             Whether you&apos;re completely new to meditation or looking to deepen your practice, I offer personalised approaches that honour your unique journey.
           </p>
         </div>
@@ -78,11 +78,11 @@ export default function Services() {
                 <p className="text-medium-text mb-6 leading-relaxed">
                   {service.description}
                 </p>
-                <Link 
-                  href={service.link}
-                  className="inline-block bg-gradient-to-r from-forest-deep to-sage-calm text-white px-6 py-3 rounded-full font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
-                >
-                  Learn More
+                <Link href={service.link} className="inline-block fade-in-up">
+                  <span className="sr-only">Learn more about {service.title}</span>
+                  <div className="bg-gradient-to-r from-forest-deep to-sage-calm text-white px-6 py-3 rounded-full font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                    Learn More
+                  </div>
                 </Link>
               </div>
             </div>

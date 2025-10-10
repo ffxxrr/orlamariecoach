@@ -31,9 +31,20 @@ export default function AdminLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const [currentDateStr, setCurrentDateStr] = useState<string>('');
 
   useEffect(() => {
     checkAuthStatus();
+    // Avoid hydration mismatch: compute date on client only
+    try {
+      const str = new Date().toLocaleDateString('en-IE', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      setCurrentDateStr(str);
+    } catch {}
   }, []);
 
   const checkAuthStatus = async () => {
@@ -220,13 +231,8 @@ export default function AdminLayout({
                 </h2>
               </div>
               <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-500">
-                  {new Date().toLocaleDateString('en-IE', {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
+                <span className="text-sm text-gray-500" suppressHydrationWarning>
+                  {currentDateStr || ''}
                 </span>
               </div>
             </div>

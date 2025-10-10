@@ -15,17 +15,20 @@ export default function ContactHero() {
 
       {/* Content */}
       <div className="max-w-4xl mx-auto relative z-10">
-        <h1 className="font-crimson text-4xl md:text-5xl font-light text-forest-deep mb-6 leading-tight">
+        <h1 className="font-crimson text-4xl md:text-5xl font-light text-forest-deep mb-6 leading-tight fade-in-up">
           Have Questions? Get Personalised Guidance
         </h1>
         
-        <p className="text-lg text-medium-text mb-8 max-w-2xl mx-auto">
+        <p className="text-lg text-medium-text mb-8 max-w-2xl mx-auto fade-in-up">
           Whether you're curious about meditation, need course recommendations, or want to understand 
           which approach might work best for you, I'm here to help with personalised guidance.
         </p>
         
-        <div className="inline-block bg-forest-deep/10 text-forest-deep font-medium px-6 py-3 rounded-full mb-6 border border-forest-deep/20">
-          ⚡ Personal response within 24 hours
+        <div className="inline-block bg-forest-deep/10 text-forest-deep font-medium px-6 py-3 rounded-full mb-6 border border-forest-deep/20 fade-in-up">
+          <span className="inline-flex items-center gap-2">
+            <svg viewBox="0 0 24 24" className="w-5 h-5 text-forest-deep"><path fill="currentColor" d="M11 21h-1l1-7H7l9-12h1l-1 7h4l-9 12z"/></svg>
+            Personal response within 24 hours
+          </span>
         </div>
         
         <div className="mt-6">
