@@ -4,9 +4,9 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { getPrisma } from '@/lib/db';
+export const dynamic = 'force-dynamic';
+const prisma = getPrisma();
 
 export interface ConsentPayload {
   visitorId: string;
