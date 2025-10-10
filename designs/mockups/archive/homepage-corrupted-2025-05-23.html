@@ -1,0 +1,194 @@
+ I discovered how powerful mindfulness can be in transforming not just our minds, but our entire experience of living.</p>
+                    <p>Now, I'm passionate about sharing these ancient practices in a way that feels <span class="highlight">authentic, accessible, and deeply personal</span> to each person I work with.</p>
+                    <a href="#" class="btn btn-secondary">Read My Story</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What My Clients Say</h2>
+                <p class="section-subtitle">Real transformations from people who've found their path to inner peace</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Orla's gentle guidance helped me find calm in the chaos of everyday life. Her approach is so authentic and grounded – exactly what I needed."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h4>Sarah Murphy</h4>
+                            <p>Working Mother, Dublin</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"I was sceptical about meditation, but Orla's practical approach made it accessible. The techniques I learned have genuinely changed how I handle stress."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DC</div>
+                        <div class="author-info">
+                            <h4>David Chen</h4>
+                            <p>Business Owner, Cork</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"The online course was beautifully structured. Orla's voice is so calming, and I love that I can practise at my own pace whilst still feeling supported."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">EO</div>
+                        <div class="author-info">
+                            <h4>Emma O'Brien</h4>
+                            <p>Teacher, Galway</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Course -->
+    <section class="featured-course">
+        <div class="container">
+            <div class="course-content">
+                <div class="course-info">
+                    <h2>Mindfulness Foundations</h2>
+                    <p>A comprehensive 8-week programme designed to introduce you to the core practices of mindfulness meditation. Perfect for beginners or anyone looking to establish a consistent practice.</p>
+                    <div class="course-features">
+                        <span class="course-feature">8 Weeks</span>
+                        <span class="course-feature">Video Lessons</span>
+                        <span class="course-feature">Guided Audio</span>
+                        <span class="course-feature">Community Access</span>
+                    </div>
+                    <a href="#" class="btn" style="background: white; color: var(--color-forest-deep); font-weight: 500;">Enrol Now - €197</a>
+                </div>
+                <div class="course-preview"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Weekly Mindfulness Inspiration</h2>
+            <p>Receive gentle reminders, practical tips, and exclusive insights delivered to your inbox every Wednesday. Join our community of mindful practitioners.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="height: 32px; width: 32px; border-radius: 6px; background: var(--color-living-green); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9rem;">OM</div>
+                        <h3 style="margin: 0 0 0 12px;">OrlaMarieCoach</h3>
+                    </div>
+                    <p>Guiding you toward inner peace through authentic meditation and mindfulness practices rooted in wisdom and compassion.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#">About Orla</a></p>
+                    <p><a href="#">Services</a></p>
+                    <p><a href="#">Online Courses</a></p>
+                    <p><a href="#">Resources</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>admin@orlamariecoach.com</p>
+                    <p>Book a free consultation</p>
+                    <p>Sligo, Ireland</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 OrlaMarieCoach. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function togglePlay(button) {
+            const isPlaying = button.textContent === '⏸️';
+            
+            // Reset all other buttons
+            document.querySelectorAll('.play-button').forEach(btn => {
+                btn.textContent = '▶️';
+                btn.parentElement.parentElement.querySelector('.progress-fill').style.width = '0%';
+                if (btn.dataset.interval) {
+                    clearInterval(btn.dataset.interval);
+                }
+            });
+            
+            if (!isPlaying) {
+                button.textContent = '⏸️';
+                // Simulate playing animation
+                const progressBar = button.parentElement.parentElement.querySelector('.progress-fill');
+                let width = 0;
+                const interval = setInterval(() => {
+                    width += 0.5;
+                    progressBar.style.width = width + '%';
+                    if (width >= 100) {
+                        clearInterval(interval);
+                        button.textContent = '▶️';
+                        progressBar.style.width = '0%';
+                    }
+                }, 100);
+                
+                // Store interval to clear if paused
+                button.dataset.interval = interval;
+            }
+        }
+
+        // Smooth scrolling and fade-in animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in class to elements when they come into view
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe service cards, testimonials, and sample cards
+            document.querySelectorAll('.service-card, .testimonial-card, .sample-card').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.style.background = 'rgba(248, 255, 254, 0.98)';
+                    navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+                } else {
+                    navbar.style.background = 'rgba(248, 255, 254, 0.95)';
+                    navbar.style.boxShadow = 'none';
+                }
+            });
+
+            // Sample card entrance animations
+            const sampleCards = document.querySelectorAll('.sample-card');
+            sampleCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200 + 1000); // Delay after page load
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrlaMarieCoach - Services | Discover The OM Method for Your Perfect Meditation Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Design System Variables */
+        :root {
+            /* Colors */
+            --color-forest-deep: #2d5a27;
+            --color-sage-calm: #4a7c59;
+            --color-living-green: #7fb069;
+            --color-ocean-breath: #5a9bb5;
+            --color-earth-warmth: #d4a574;
+            --color-pure-light: #f8fffe;
+            --color-deep-text: #2c3e50;
+            --color-medium-text: #5a7c5a;
+            --color-light-border: #e8f5f0;
+            
+            /* Typography */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-secondary: 'Crimson Pro', Georgia, serif;
+            
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 15px;
+            --radius-lg: 20px;
+            --radius-full: 50px;
+            
+            /* Shadows */
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 8px 25px rgba(45, 90, 39, 0.3);
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            color: var(--color-deep-text);
+            background: var(--color-pure-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(248, 255, 254, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-light-border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm) var(--space-lg);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            height: 40px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            font-family: var(--font-secondary);
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--color-forest-deep);
+            margin-left: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: var(--space-lg);
+            list-style: none;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--color-deep-text);
+            text-decoration: none;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--color-forest-deep);
+            background: rgba(45, 90, 39, 0.1);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--color-forest-deep) 0%, var(--color-sage-calm) 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: var(--color-pure-light);
+            padding: var(--space-sm) var(--space-lg);
+            border-bottom: 1px solid var(--color-light-border);
+        }
+
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 0.9rem;
+            color: var(--color-medium-text);
+        }
+
+        .breadcrumb a {
+            color: var(--color-medium-text);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--color-forest-deep);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--color-pure-light) 0%, var(--color-light-border) 100%);
+            padding: var(--space-2xl) var(--space-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" fill="none"><path d="M0,200 Q300,150 600,200 T1200,200 L1200,400 L0,400 Z" fill="%23f8fffe" opacity="0.5"/><circle cx="150" cy="100" r="2" fill="%234a7c59" opacity="0.3"/><circle cx="900" cy="80" r="3" fill="%237fb069" opacity="0.4"/><circle cx="1050" cy="150" r="2" fill="%235a9bb5" opacity="0.2"/></svg>') no-repeat center center;
+            background-size: cover;
+            opacity: 0.6;
+            z-index: 0;
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-family: var(--font-secondary);
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--color-forest-deep);
+            margin-bottom: var(--space-md);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .page-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-medium-text);
+            margin-bottom: var(--space-xl);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Service Cards */
+        .services {
+            padding: var(--space-2xl) var(--space-lg);
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            border: 2px solid var(--color-light-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: var(--space-lg);
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--color-light-border);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .service-card:nth-child(1) .service-icon {
+            background: linear-gradient(135deg, var(--color-forest-deep) 0%, var(--color-sage-calm) 100%);
+        }
+
+        .service-card:nth-child(2) .service-icon {
+            background: linear-gradient(135deg, var(--color-living-green) 0%, var(--color-sage-calm) 100%);
+        }
+
+        .service-card:nth-child(3) .service-icon {
+            background: linear-gradient(135deg, var(--color-ocean-breath) 0%, var(--color-living-green) 100%);
+        }
+
+        .service-info h3 {
+            font-family: var(--font-secondary);
+            font-size: 1.8rem;
+            color: var(--color-forest-deep);
+            margin-bottom: var(--space-xs);
+            font-weight: 500;
+        }
+
+        .service-brief {
+            color: var(--color-medium-text);
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .service-pricing {
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .price-display {
+            background: var(--color-forest-deep);
+            color: white;
+            padding: var(--space-md) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: var(--space-xs);
+        }
+
+        .service-card:nth-child(2) .price-display {
+            background: var(--color-living-green);
+        }
+
+        .service-card:nth-child(3) .price-display {
+            background: var(--color-ocean-breath);
+        }
+
+        .price-subtitle {
+            font-size: 0.85rem;
+            color: var(--color-medium-text);
+        }
+
+        .service-details {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        .service-description {
+            background: linear-gradient(135deg, var(--color-pure-light) 0%, rgba(232, 245, 240, 0.3) 100%);
+            padding: var(--space-md);
+            border-radius: var(--radius-sm);
+            border-left: 4px solid var(--color-living-green);
+        }
+
+        .service-description p {
+            color: var(--color-medium-text);
+            margin-bottom: var(--space-sm);
+            line-height: 1.7;
+        }
+
+        .service-description p:last-child {
+            margin-bottom: 0;
+        }
+
+        .service-benefits {
+            background: white;
+            border: 1px solid var(--color-light-border);
+            padding: var(--space-md);
+            border-radius: var(--radius-sm);
+        }
+
+        .benefits-title {
+            font-weight: 600;
+            color: var(--color-forest-deep);
+            margin-bottom: var(--space-sm);
+            font-size: 1rem;
+        }
+
+        .benefit-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 0.9rem;
+            color: var(--color-medium-text);
+        }
+
+        .checkmark {
+            width: 16px;
+            height: 16px;
+            background: var(--color-living-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        .service-actions {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            font-weight: 500;
+            font-family: var(--font-primary);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-forest-deep) 0%, var(--color-sage-calm) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-forest-deep);
+            border: 2px solid var(--color-forest-deep);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-forest-deep);
+            color: white;
+        }
+
+
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-title {
+            font-family: var(--font-secondary);
+            font-size: 2.5rem;
+            color: var(--color-forest-deep);
+            margin-bottom: var(--space-md);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--color-medium-text);
+            font-weight: 300;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: var(--space-2xl) var(--space-lg);
+            background: white;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: var(--space-md);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-light-border);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-question {
+            background: var(--color-pure-light);
+            padding: var(--space-md);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: var(--color-forest-deep);
+        }
+
+        .faq-question:hover {
+            background: rgba(232, 245, 240, 0.5);
+        }
+
+        .faq-toggle {
+            background: var(--color-living-green);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: var(--space-md);
+            background: white;
+            color: var(--color-medium-text);
+            line-height: 1.6;
+            border-top: 1px solid var(--color-light-border);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-sage-calm) 0%, var(--color-forest-deep) 100%);
+            color: white;
+            padding: var(--space-2xl) var(--space-lg);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-family: var(--font-secondary);
+            font-size: 2.5rem;
+            margin-bottom: var(--space-md);
+            font-weight: 400;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: var(--space-xl);
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--color-forest-deep);
+            font-weight: 600;
+        }
+
+        .btn-white:hover {
+            background: var(--color-pure-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--color-forest-deep);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-deep-text);
+            color: white;
+            padding: var(--space-2xl) var(--space-lg) var(--space-lg);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-section h3 {
+            font-family: var(--font-secondary);
+            font-size: 1.3rem;
+            margin-bottom: var(--space-md);
+            color: var(--color-living-green);
+            font-weight: 500;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.6;
+            margin-bottom: var(--space-xs);
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--color-living-green);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--space-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar-container {
+                padding: var(--space-sm);
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 2.2rem;
+            }
+            
+            .service-header {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: var(--space-md);
+            }
+            
+            .service-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo">
+                <img src="../../../public/images/brand/logo-square.png" alt="OrlaMarieCoach Logo" class="logo-image">
+                <span class="logo-text">OrlaMarieCoach</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link">Home</a></li>
+                <li><a href="#" class="nav-link">About</a></li>
+                <li><a href="#" class="nav-link active">Services</a></li>
+                <li><a href="#" class="nav-link">Courses</a></li>
+                <li><a href="#" class="nav-link">Resources</a></li>
+                <li><a href="#" class="nav-link">Contact</a></li>
+            </ul>
+            <a href="#" class="nav-cta">Book Session</a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="#">Home</a> > <span>Services</span>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1 class="page-title">The OM Method Services</h1>
+            <p class="page-subtitle">Discover personalised meditation and mindfulness guidance through The OM Method approach. Whether you're beginning your journey or looking to deepen your practice, I offer transformative experiences tailored to your unique path of inner growth.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <!-- Individual Sessions -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">🧘‍♀️</div>
+                    <div class="service-info">
+                        <h3>Personalised 1-on-1 OM Method Sessions</h3>
+                        <p class="service-brief">Customised meditation practice through The OM Method, designed for your unique needs, challenges, and personal growth goals.</p>
+                    </div>
+                    <div class="service-pricing">
+                        <div class="price-display">€100</div>
+                        <div class="price-subtitle">per session (60 min)</div>
+                    </div>
+                </div>
+                
+                <div class="service-details">
+                    <div class="service-description">
+                        <p>Experience the transformative power of The OM Method through truly personalised meditation guidance. Each session is carefully crafted to meet you exactly where you are in your journey, whether you're dealing with stress, seeking clarity, or working through life transitions.</p>
+                        <p>Together, we'll explore The OM Method techniques that resonate with your unique energy and circumstances. You'll develop a sustainable practice that fits seamlessly into your daily life, with ongoing support to ensure your meditation journey continues to serve your evolving needs.</p>
+                    </div>
+                    <div class="service-benefits">
+                        <h5 class="benefits-title">What's Included:</h5>
+                        <div class="benefit-list">
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>Initial assessment & goal setting</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>Customised OM Method approach</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>Guided practice sessions</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>Take-home practice plan</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>Follow-up support materials</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-actions">
+                    <a href="#" class="btn btn-primary">Book Free Consultation</a>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Online Courses -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">📚</div>
+                    <div class="service-info">
+                        <h3>Self-Paced OM Method Courses</h3>
+                        <p class="service-brief">Comprehensive meditation training programmes through The OM Method, completed at your own pace with lifetime access to all materials.</p>
+                    </div>
+                    <div class="service-pricing">
+                        <div class="price-display">€250</div>
+                        <div class="price-subtitle">lifetime access</div>
+                    </div>
+                </div>
+                
+                <div class="service-details">
+                    <div class="service-description">
+                        <p>Learn foundational OM Method practices through carefully structured, progressive courses designed for modern life. Each programme combines ancient wisdom with contemporary understanding, making meditation accessible and practical for your daily experience.</p>
+                        <p>From basic OM Method foundations to advanced contemplative practices, you'll have everything needed to build a sustainable meditation practice that grows with you over time, all while developing your personal connection to the universal OM vibration.</p>
+                    </div>
+                    <div class="service-benefits">
+                        <h5 class="benefits-title">Course Features:</h5>
+                        <div class="benefit-list">
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>8-12 week structured programmes</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>HD video & audio sessions</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>Downloadable resources</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>Community forum access</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>Progress tracking tools</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-actions">
+                    <a href="#" class="btn btn-primary">View All Courses</a>
+                    <a href="#" class="btn btn-secondary">Free Preview</a>
+                </div>
+            </div>
+
+            <!-- Group Workshops -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">👥</div>
+                    <div class="service-info">
+                        <h3>OM Method Group Workshops & Retreats</h3>
+                        <p class="service-brief">Connect with like-minded practitioners through OM Method group experiences designed to deepen your practice through shared wisdom and community support.</p>
+                    </div>
+                    <div class="service-pricing">
+                        <div class="price-display">€45-195</div>
+                        <div class="price-subtitle">per workshop</div>
+                    </div>
+                </div>
+                
+                <div class="service-details">
+                    <div class="service-description">
+                        <p>Experience the power of community in your OM Method journey. Group workshops offer a unique opportunity to learn alongside others, share insights, and build lasting connections with fellow practitioners exploring the universal vibration of OM.</p>
+                        <p>From introductory OM Method workshops to intensive retreat experiences, these gatherings create a supportive environment for deeper exploration and mutual growth in mindfulness practice through shared wisdom traditions.</p>
+                    </div>
+                    <div class="service-benefits">
+                        <h5 class="benefits-title">Workshop Types:</h5>
+                        <div class="benefit-list">
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>Monthly Introduction Workshops</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>Seasonal Day Retreats</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>Advanced Practice Sessions</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>Special Topic Workshops</span>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="checkmark">✓</div>
+                                <span>Community Practice Groups</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-actions">
+                    <a href="#" class="btn btn-primary">View Schedule</a>
+                    <a href="#" class="btn btn-secondary">Join Waitlist</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="section-subtitle">Find answers to common questions about our meditation services</div>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What if I've never meditated before?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        Perfect! Most of my clients are complete beginners to The OM Method and meditation in general. I specialise in making meditation accessible and approachable, regardless of your experience level. We'll start with simple, practical OM Method techniques that you can immediately apply in your daily life. There's no pressure to sit in uncomfortable positions or empty your mind completely – that's not what The OM Method is about.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I know which service is right for me?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        I offer a free 15-minute consultation where we'll discuss your goals, current stress levels, and learning preferences. Based on this conversation, I'll recommend the best OM Method approach for your situation. You can also start with a single 1-on-1 session to experience The OM Method firsthand before committing to a course or workshop series.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I switch between services?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! Many clients find that their needs evolve as their OM Method practice develops. You might start with individual sessions to build confidence, then join online courses for structured learning, and later participate in group workshops for community support. I'm here to guide you to the most appropriate OM Method service for your current stage of growth.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What's your refund policy?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        I offer a satisfaction guarantee for all services. If you're not completely satisfied with your first individual session, I'll provide a full refund. For courses and workshops, you have 7 days from the start date to request a full refund if the content isn't meeting your needs. My goal is your growth and peace of mind, both in practice and in our business relationship.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Begin Your OM Method Journey?</h2>
+            <p>Book a free 15-minute consultation to discover which OM Method approach is best for you. No commitment required – just an opportunity to explore how The OM Method can transform your daily experience.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-white">Book Free Consultation</a>
+                <a href="#" class="btn btn-outline">Contact Orla</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                    <img src="../../../public/images/brand/logo-square.png" alt="OrlaMarieCoach Logo" style="height: 32px; width: 32px; border-radius: 6px;">
+                    <h3 style="margin: 0 0 0 12px;">OrlaMarieCoach</h3>
+                </div>
+                <p>Guiding you toward inner peace through authentic meditation and mindfulness practices rooted in wisdom and compassion.</p>
+                <p>Transform your daily experience through the power of mindful living.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#">About Orla</a>
+                <a href="#">All Services</a>
+                <a href="#">Online Courses</a>
+                <a href="#">Workshop Schedule</a>
+                <a href="#">Resources</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>admin@orlamariecoach.com</p>
+                <a href="#">Book a free consultation</a>
+                <p>Sligo, Ireland</p>
+                <a href="#">+353 (0) XXX XXX XXX</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <a href="#">Join our Newsletter</a>
+                <a href="#">Follow on Instagram</a>
+                <a href="#">Facebook Community</a>
+                <a href="#">Client Reviews</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 OrlaMarieCoach. All rights reserved. | <a href="#" style="color: inherit;">Privacy Policy</a> | <a href="#" style="color: inherit;">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                const toggle = item.querySelector('.faq-toggle');
+                
+                // Initially hide all answers
+                answer.style.display = 'none';
+                
+                question.addEventListener('click', () => {
+                    const isOpen = answer.style.display === 'block';
+                    
+                    // Close all other FAQ items
+                    faqItems.forEach(otherItem => {
+                        otherItem.querySelector('.faq-answer').style.display = 'none';
+                        otherItem.querySelector('.faq-toggle').textContent = '+';
+                        otherItem.querySelector('.faq-toggle').style.transform = 'rotate(0deg)';
+                    });
+                    
+                    // Toggle current item
+                    if (!isOpen) {
+                        answer.style.display = 'block';
+                        toggle.textContent = '−';
+                        toggle.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+
+            // Smooth scrolling and fade-in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe service cards and sections
+            document.querySelectorAll('.service-card, .faq-item').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.style.background = 'rgba(248, 255, 254, 0.98)';
+                    navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+                } else {
+                    navbar.style.background = 'rgba(248, 255, 254, 0.95)';
+                    navbar.style.boxShadow = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

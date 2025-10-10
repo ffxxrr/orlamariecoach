@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Questions - Orla Marie Coach</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2D5016;
+            --secondary-green: #4A7C59;
+            --accent-green: #7BA05B;
+            --sage: #9CAF88;
+            --warm-white: #FEFEFE;
+            --soft-gray: #F8F9FA;
+            --text-primary: #1A1A1A;
+            --text-secondary: #4A4A4A;
+            --text-light: #6B7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--warm-white);
+        }
+
+        /* Botanical Enhancement Styles */
+        .botanical-accent {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .botanical-accent.leaf-1 {
+            top: 10%;
+            right: 5%;
+            width: 60px;
+            height: 60px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10 Q70 30 80 50 Q70 70 50 90 Q30 70 20 50 Q30 30 50 10" fill="%234a7c59" opacity="0.3"/><path d="M50 10 L50 90" stroke="%232d5a27" stroke-width="2" opacity="0.5"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: floatLeaf 6s ease-in-out infinite;
+        }
+
+        .botanical-accent.flower-1 {
+            top: 20%;
+            left: 10%;
+            width: 50px;
+            height: 50px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="30" r="8" fill="%23d4a574" opacity="0.6"/><circle cx="30" cy="50" r="8" fill="%23d4a574" opacity="0.6"/><circle cx="70" cy="50" r="8" fill="%23d4a574" opacity="0.6"/><circle cx="50" cy="70" r="8" fill="%23d4a574" opacity="0.6"/><circle cx="50" cy="50" r="5" fill="%235a9bb5" opacity="0.4"/><circle cx="50" cy="70" r="6" fill="%23d4a574" opacity="0.4"/><circle cx="50" cy="50" r="4" fill="%232d5a27" opacity="0.6"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: floatFlower 10s ease-in-out infinite;
+        }
+
+        @keyframes floatLeaf {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(3deg); }
+        }
+
+        @keyframes floatFlower {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-6px) scale(1.05); }
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(254, 254, 254, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(122, 160, 91, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            height: 40px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            margin-left: 12px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-green);
+            border-radius: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(45, 90, 39, 0.3);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        /* Hero Section */
+        .contact-hero {
+            background: linear-gradient(135deg, var(--soft-gray) 0%, var(--warm-white) 100%);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><defs><pattern id="contactPattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1" fill="%234a7c59" opacity="0.1"/><circle cx="35" cy="35" r="1.5" fill="%237fb069" opacity="0.1"/><path d="M10 25 Q25 20 40 25" stroke="%23d4a574" stroke-width="0.5" fill="none" opacity="0.15"/></pattern></defs><rect width="100%" height="100%" fill="url(%23contactPattern)"/></svg>') no-repeat;
+            background-size: cover;
+            opacity: 0.6;
+        }
+
+        .hero-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-hero h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .response-time {
+            display: inline-block;
+            background: rgba(122, 160, 91, 0.1);
+            color: var(--primary-green);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            border: 1px solid rgba(122, 160, 91, 0.2);
+        }
+
+        .cta-secondary {
+            margin-top: 1.5rem;
+            display: block;
+        }
+
+        .cta-secondary a {
+            color: var(--accent-green);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .cta-secondary a:hover {
+            border-bottom-color: var(--accent-green);
+        }
+
+        /* Quick Questions Section */
+        .quick-questions {
+            padding: 4rem 0;
+            background: var(--warm-white);
+            position: relative;
+        }
+
+        .questions-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .question-card {
+            background: var(--soft-gray);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid rgba(122, 160, 91, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 25px;
+            height: 25px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="30" r="5" fill="%237fb069" opacity="0.3"/><circle cx="30" cy="50" r="4" fill="%235a9bb5" opacity="0.3"/><circle cx="70" cy="50" r="4" fill="%23d4a574" opacity="0.3"/></svg>') no-repeat center;
+            background-size: contain;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .question-card:hover::before {
+            opacity: 1;
+        }
+
+        .question-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(45, 80, 22, 0.15);
+        }
+
+        .question-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent-green), var(--sage));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .question-card h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .question-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .question-examples {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .question-examples h4 {
+            color: var(--primary-green);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-examples ul {
+            list-style: none;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .question-examples li {
+            margin-bottom: 0.25rem;
+        }
+
+        .question-examples li::before {
+            content: '•';
+            color: var(--accent-green);
+            margin-right: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        /* Contact Form Section */
+        .contact-form-section {
+            padding: 5rem 0;
+            background: var(--soft-gray);
+            position: relative;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .contact-form {
+            background: var(--warm-white);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(122, 160, 91, 0.1);
+            box-shadow: 0 4px 20px rgba(45, 80, 22, 0.08);
+            position: relative;
+        }
+
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30 20 Q50 10 70 20 Q80 40 70 60 Q50 70 30 60 Q20 40 30 20" fill="%237fb069" opacity="0.15"/><circle cx="45" cy="35" r="2" fill="%235a9bb5" opacity="0.3"/><circle cx="55" cy="45" r="1.5" fill="%23d4a574" opacity="0.3"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--primary-green);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(122, 160, 91, 0.2);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--warm-white);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(122, 160, 91, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 0.25rem;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-green);
+            transform: translateY(-2px);
+        }
+
+        /* Contact Information */
+        .contact-info {
+            padding: 4rem 0;
+            background: var(--warm-white);
+        }
+
+        .info-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: var(--soft-gray);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(45, 80, 22, 0.08);
+            border: 1px solid rgba(122, 160, 91, 0.1);
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-green), var(--sage));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .info-card h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .info-card a {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .info-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 0;
+            background: var(--soft-gray);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .faq-item {
+            background: var(--warm-white);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(122, 160, 91, 0.1);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(122, 160, 91, 0.05);
+        }
+
+        .faq-answer {
+            padding: 0 2rem 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .faq-toggle {
+            color: var(--accent-green);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white" opacity="0.1"><circle cx="20" cy="30" r="2"/><circle cx="80" cy="20" r="1.5"/><circle cx="60" cy="70" r="1"/><circle cx="30" cy="80" r="1.5"/><path d="M10 50 Q30 40 50 50 Q70 60 90 50" stroke="white" stroke-width="1" fill="none" opacity="0.2"/></svg>');
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-green);
+        }
+
+        .btn-white:hover {
+            background: var(--soft-gray);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .contact-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .questions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .botanical-accent {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Botanical Accent Elements -->
+    <div class="botanical-accent leaf-1"></div>
+    <div class="botanical-accent flower-1"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="../../../public/images/brand/logo-square.png" alt="OrlaMarieCoach Logo" class="logo-image">
+                <span class="logo-text">Orla Marie Coach</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/courses">Courses</a></li>
+                <li><a href="/contact" class="active">Contact</a></li>
+            </ul>
+            <a href="/book-session" class="nav-cta">Book Session</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="contact-hero">
+            <div class="hero-container">
+                <h1>Have Questions? Get Personalized Guidance</h1>
+                <p class="hero-subtitle">Whether you're curious about meditation, need course recommendations, or want to understand which approach might work best for you, I'm here to help with personalized guidance.</p>
+                <div class="response-time">⚡ Personal response within 24 hours</div>
+                <div class="cta-secondary">
+                    <p>Ready to book a session? <a href="/book-session">Schedule your personalized meditation session →</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Questions -->
+        <section class="quick-questions">
+            <div class="questions-container">
+                <div class="section-header">
+                    <h2>What Can I Help You With?</h2>
+                    <p>I love answering questions about meditation and helping people find their perfect path to inner peace. Here are some common areas where I provide guidance.</p>
+                </div>
+
+                <div class="questions-grid">
+                    <div class="question-card">
+                        <div class="question-icon">🧘‍♀️</div>
+                        <h3>Getting Started with Meditation</h3>
+                        <p>Perfect for complete beginners who want to understand the basics and find the right approach for their lifestyle.</p>
+                        <div class="question-examples">
+                            <h4>Common Questions:</h4>
+                            <ul>
+                                <li>"I've never meditated before - where do I start?"</li>
+                                <li>"How much time do I need to practice daily?"</li>
+                                <li>"What if I can't stop my mind from racing?"</li>
+                                <li>"Which technique would work best for me?"</li>
+                            </ul>
+                        </div>
+                        <a href="#contact-form" class="btn btn-secondary">Ask About Starting</a>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-icon">🎓</div>
+                        <h3>Course Recommendations</h3>
+                        <p>Get personalized advice on which online course would be the perfect fit for your experience level and goals.</p>
+                        <div class="question-examples">
+                            <h4>Common Questions:</h4>
+                            <ul>
+                                <li>"Which course is right for my experience level?"</li>
+                                <li>"What's included in the courses?"</li>
+                                <li>"Can I switch between courses?"</li>
+                                <li>"Do you offer payment plans?"</li>
+                            </ul>
+                        </div>
+                        <a href="#contact-form" class="btn btn-secondary">Course Guidance</a>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-icon">🌱</div>
+                        <h3>Deepening Your Practice</h3>
+                        <p>For those with some meditation experience who want to take their practice to the next level with personalized guidance.</p>
+                        <div class="question-examples">
+                            <h4>Common Questions:</h4>
+                            <ul>
+                                <li>"How can I deepen my existing practice?"</li>
+                                <li>"I'm stuck in my meditation - what next?"</li>
+                                <li>"Can you help me with specific challenges?"</li>
+                                <li>"How do I integrate Celtic spirituality?"</li>
+                            </ul>
+                        </div>
+                        <a href="#contact-form" class="btn btn-secondary">Deepen Practice</a>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-icon">🏢</div>
+                        <h3>Workplace & Stress Management</h3>
+                        <p>Practical meditation solutions for busy professionals dealing with stress, focus issues, and work-life balance.</p>
+                        <div class="question-examples">
+                            <h4>Common Questions:</h4>
+                            <ul>
+                                <li>"How can meditation help with work stress?"</li>
+                                <li>"I'm too busy - can meditation still work?"</li>
+                                <li>"Quick techniques for stressful moments?"</li>
+                                <li>"Building a sustainable practice with a busy schedule?"</li>
+                            </ul>
+                        </div>
+                        <a href="#contact-form" class="btn btn-secondary">Workplace Solutions</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section class="contact-form-section" id="contact-form">
+            <div class="form-container">
+                <div class="section-header">
+                    <h2>Send Me Your Questions</h2>
+                    <p>I read and personally respond to every message. The more you tell me about your situation and goals, the better guidance I can provide.</p>
+                </div>
+
+                <form class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inquiryType">What area can I help you with?</label>
+                        <select id="inquiryType" name="inquiryType">
+                            <option value="">Please select...</option>
+                            <option value="getting-started">Getting started with meditation</option>
+                            <option value="course-recommendations">Course recommendations</option>
+                            <option value="deepening-practice">Deepening my existing practice</option>
+                            <option value="workplace-stress">Workplace stress management</option>
+                            <option value="technique-specific">Specific meditation techniques</option>
+                            <option value="celtic-spirituality">Celtic spirituality integration</option>
+                            <option value="session-inquiry">Individual session information</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience">Your current meditation experience</label>
+                        <select id="experience" name="experience">
+                            <option value="">Please select...</option>
+                            <option value="complete-beginner">Complete beginner - never tried meditation</option>
+                            <option value="tried-some">Tried a few times but struggled to stick with it</option>
+                            <option value="occasional">Practice occasionally (few times a month)</option>
+                            <option value="regular">Regular practice (few times a week)</option>
+                            <option value="daily">Daily practitioner</option>
+                            <option value="experienced">Experienced (multiple years of practice)</option>
+                            <option value="teacher">I teach meditation or mindfulness</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="challenges">What challenges or goals would you like help with?</label>
+                        <textarea id="challenges" name="challenges" placeholder="For example: 'I struggle with a racing mind during meditation' or 'I want to build a consistent daily practice' or 'I'm interested in the Celtic spiritual aspects'..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Your Questions or Message *</label>
+                        <textarea id="message" name="message" required placeholder="Tell me about your situation, what you're hoping to achieve, or any specific questions you have about meditation or my approach..."></textarea>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <label for="newsletter">I'd like to receive occasional meditation insights and course updates (optional)</label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="privacy" name="privacy" required>
+                        <label for="privacy">I understand my information will be used solely to respond to my inquiry and agree to the privacy policy *</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Send My Questions</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Contact Information -->
+        <section class="contact-info">
+            <div class="info-container">
+                <div class="section-header">
+                    <h2>Other Ways to Connect</h2>
+                    <p>Multiple options to suit your communication preferences and needs.</p>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">📧</div>
+                        <h3>Direct Email</h3>
+                        <p>
+                            <a href="mailto:admin@orlamariecoach.com">admin@orlamariecoach.com</a><br>
+                            Personal response within 24 hours
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">⏰</div>
+                        <h3>Response Time</h3>
+                        <p>
+                            Typically respond within 12-24 hours<br>
+                            All messages answered personally by Orla
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">🍀</div>
+                        <h3>Based in Ireland</h3>
+                        <p>
+                            Donegal, Ireland (GMT timezone)<br>
+                            Serving clients globally online
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">🎯</div>
+                        <h3>Ready to Start?</h3>
+                        <p>
+                            <a href="/book-session">Book a personalized session</a><br>
+                            Direct path to one-on-one guidance
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq-section">
+            <div class="faq-container">
+                <div class="section-header">
+                    <h2>Quick Answers</h2>
+                    <p>Common questions about getting in touch and what to expect.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How quickly will I hear back from you?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        I personally read and respond to every message within 24 hours, often much sooner. You'll receive a thoughtful, personalized response addressing your specific questions and situation.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What if I'm not sure which course or approach is right for me?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        That's exactly what I'm here to help with! Tell me about your situation, experience level, and goals, and I'll provide personalized recommendations for the best path forward.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you offer free consultations before booking a session?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        While I don't offer formal consultations, I'm always happy to answer questions via email to help you determine if my approach would be a good fit before you book a session.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can you help me even if I'm a complete beginner?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! I love working with complete beginners. My approach is gentle, practical, and designed to meet you exactly where you are in your journey, with no experience required.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What makes your approach different from meditation apps?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Unlike apps, you get personalized guidance based on your unique situation, Celtic spiritual integration, and the ability to ask questions and receive individual support. It's real mentorship, not just content.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-container">
+                <h2>Ready for Personalized Guidance?</h2>
+                <p>Whether you start with questions or jump straight into a session, I'm here to support your meditation journey with authentic, personalized guidance.</p>
+                <div class="cta-buttons">
+                    <a href="#contact-form" class="btn btn-white">Send Your Questions</a>
+                    <a href="/book-session" class="btn btn-outline">Book a Session</a>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

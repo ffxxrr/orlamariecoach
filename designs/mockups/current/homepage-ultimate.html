@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrlaMarieCoach - Find Your Inner Peace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Design System Variables */
+        :root {
+            /* Colors */
+            --color-forest-deep: #2d5a27;
+            --color-sage-calm: #4a7c59;
+            --color-living-green: #7fb069;
+            --color-ocean-breath: #5a9bb5;
+            --color-earth-warmth: #d4a574;
+            --color-pure-light: #f8fffe;
+            --color-deep-text: #2c3e50;
+            --color-medium-text: #5a7c5a;
+            --color-light-border: #e8f5f0;
+            
+            /* Typography */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-secondary: 'Crimson Pro', Georgia, serif;
+            
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 15px;
+            --radius-lg: 20px;
+            --radius-full: 50px;
+            
+            /* Shadows */
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 8px 25px rgba(45, 90, 39, 0.3);
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            color: var(--color-deep-text);
+            background: var(--color-pure-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Botanical Enhancement Styles */
+        .botanical-accent {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .botanical-accent.leaf-1 {
+            top: 10%;
+            right: 5%;
+            width: 60px;
+            height: 60px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10 Q70 30 80 50 Q70 70 50 90 Q30 70 20 50 Q30 30 50 10" fill="%234a7c59" opacity="0.3"/><path d="M50 10 L50 90" stroke="%232d5a27" stroke-width="2" opacity="0.5"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: floatLeaf 6s ease-in-out infinite;
+        }
+
+        .botanical-accent.leaf-2 {
+            bottom: 15%;
+            left: 8%;
+            width: 45px;
+            height: 45px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20 50 Q30 20 50 10 Q70 20 80 50 Q70 80 50 90 Q30 80 20 50" fill="%237fb069" opacity="0.4"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: floatLeaf 8s ease-in-out infinite reverse;
+        }
+
+        .botanical-accent.flower-1 {
+            top: 20%;
+            left: 10%;
+            width: 50px;
+            height: 50px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="30" r="8" fill="%23d4a574" opacity="0.6"/><circle cx="30" cy="50" r="8" fill="%23d4a574" opacity="0.6"/><circle cx="70" cy="50" r="8" fill="%23d4a574" opacity="0.6"/><circle cx="50" cy="70" r="8" fill="%23d4a574" opacity="0.6"/><circle cx="50" cy="50" r="6" fill="%235a9bb5" opacity="0.8"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: floatFlower 10s ease-in-out infinite;
+        }
+
+        .botanical-accent.flower-2 {
+            bottom: 25%;
+            right: 12%;
+            width: 40px;
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="25" r="6" fill="%237fb069" opacity="0.5"/><circle cx="75" cy="45" r="6" fill="%237fb069" opacity="0.5"/><circle cx="65" cy="75" r="6" fill="%237fb069" opacity="0.5"/><circle cx="35" cy="75" r="6" fill="%237fb069" opacity="0.5"/><circle cx="25" cy="45" r="6" fill="%237fb069" opacity="0.5"/><circle cx="50" cy="50" r="5" fill="%232d5a27" opacity="0.7"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: floatFlower 12s ease-in-out infinite reverse;
+        }
+
+        .botanical-accent.branch-1 {
+            top: 35%;
+            right: 2%;
+            width: 80px;
+            height: 120px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 120"><path d="M40 10 Q45 40 50 70 Q55 100 60 120" stroke="%234a7c59" stroke-width="3" fill="none" opacity="0.3"/><circle cx="45" cy="30" r="4" fill="%237fb069" opacity="0.4"/><circle cx="52" cy="55" r="3" fill="%237fb069" opacity="0.4"/><circle cx="48" cy="80" r="3" fill="%237fb069" opacity="0.4"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: sway 15s ease-in-out infinite;
+        }
+
+        @keyframes floatLeaf {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        @keyframes floatFlower {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.05); }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(3px) rotate(1deg); }
+            75% { transform: translateX(-3px) rotate(-1deg); }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(248, 255, 254, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-light-border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm) var(--space-lg);
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-image {
+            height: 40px;
+            width: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-family: var(--font-secondary);
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--color-forest-deep);
+            margin-left: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: var(--space-lg);
+            list-style: none;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--color-deep-text);
+            text-decoration: none;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--color-forest-deep);
+            background: rgba(45, 90, 39, 0.1);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--color-forest-deep) 0%, var(--color-sage-calm) 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--color-pure-light) 0%, var(--color-light-border) 100%);
+            padding: var(--space-2xl) var(--space-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none"><defs><pattern id="botanicalPattern" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="2" fill="%234a7c59" opacity="0.1"/><path d="M100 20 Q120 40 130 60 Q120 80 100 100" stroke="%237fb069" stroke-width="1" fill="none" opacity="0.15"/><circle cx="150" cy="120" r="1.5" fill="%235a9bb5" opacity="0.1"/><path d="M20 150 Q40 130 60 150 Q40 170 20 150" fill="%23d4a574" opacity="0.08"/></pattern></defs><rect width="100%" height="100%" fill="url(%23botanicalPattern)"/><path d="M0,400 Q300,300 600,400 T1200,400 L1200,800 L0,800 Z" fill="%23f8fffe" opacity="0.6"/></svg>') no-repeat center center;
+            background-size: cover;
+            opacity: 0.8;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: var(--font-secondary);
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: var(--color-forest-deep);
+            margin-bottom: var(--space-md);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            position: relative;
+        }
+
+        .hero h1::after {
+            content: '🌸';
+            position: absolute;
+            top: -10px;
+            right: -40px;
+            font-size: 2rem;
+            animation: floatFlower 8s ease-in-out infinite;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--color-medium-text);
+            margin-bottom: var(--space-xl);
+            font-weight: 300;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--space-xl);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            font-weight: 500;
+            font-family: var(--font-primary);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-forest-deep) 0%, var(--color-sage-calm) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-forest-deep);
+            border: 2px solid var(--color-forest-deep);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-forest-deep);
+            color: white;
+        }
+
+        /* Enhanced Services Section */
+        .services {
+            padding: var(--space-2xl) var(--space-lg);
+            background: white;
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 5%;
+            width: 40px;
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20 80 Q30 20 50 30 Q70 20 80 80 Q70 60 50 70 Q30 60 20 80" fill="%237fb069" opacity="0.2"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+            position: relative;
+        }
+
+        .section-title {
+            font-family: var(--font-secondary);
+            font-size: 2.5rem;
+            color: var(--color-forest-deep);
+            margin-bottom: var(--space-md);
+            font-weight: 400;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--color-medium-text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-2xl);
+        }
+
+        .service-card {
+            background: white;
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--color-light-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 30px;
+            height: 30px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="30" r="8" fill="%23d4a574" opacity="0.3"/><circle cx="30" cy="50" r="6" fill="%237fb069" opacity="0.3"/><circle cx="70" cy="50" r="6" fill="%235a9bb5" opacity="0.3"/><circle cx="50" cy="70" r="8" fill="%23d4a574" opacity="0.3"/></svg>') no-repeat center;
+            background-size: contain;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto var(--space-md);
+            color: white;
+            position: relative;
+        }
+
+        .service-card:nth-child(1) .service-icon {
+            background: linear-gradient(135deg, var(--color-forest-deep) 0%, var(--color-sage-calm) 100%);
+        }
+
+        .service-card:nth-child(2) .service-icon {
+            background: linear-gradient(135deg, var(--color-living-green) 0%, var(--color-sage-calm) 100%);
+        }
+
+        .service-card:nth-child(3) .service-icon {
+            background: linear-gradient(135deg, var(--color-ocean-breath) 0%, var(--color-living-green) 100%);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-secondary);
+            font-size: 1.5rem;
+            color: var(--color-forest-deep);
+            margin-bottom: var(--space-sm);
+            font-weight: 500;
+        }
+
+        .service-card p {
+            color: var(--color-medium-text);
+            margin-bottom: var(--space-md);
+            line-height: 1.6;
+        }
+
+        .service-card .btn {
+            font-size: 0.9rem;
+            padding: 12px 24px;
+        }
+
+        /* OM Method Section */
+        .om-method {
+            padding: var(--space-2xl) var(--space-lg);
+            background: linear-gradient(135deg, rgba(232, 245, 240, 0.3) 0%, var(--color-pure-light) 50%, rgba(232, 245, 240, 0.3) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .om-method::before {
+            content: '';
+            position: absolute;
+            top: 5%;
+            left: 3%;
+            width: 50px;
+            height: 70px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 70"><path d="M25 10 Q35 25 40 45 Q35 65 25 68 Q15 65 10 45 Q15 25 25 10" fill="%234a7c59" opacity="0.15"/><circle cx="28" cy="30" r="2" fill="%237fb069" opacity="0.2"/><circle cx="22" cy="50" r="1.5" fill="%235a9bb5" opacity="0.2"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: sway 18s ease-in-out infinite;
+        }
+
+        .om-method::after {
+            content: '';
+            position: absolute;
+            bottom: 8%;
+            right: 5%;
+            width: 60px;
+            height: 60px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="30" r="8" fill="%23d4a574" opacity="0.1"/><circle cx="25" cy="55" r="6" fill="%237fb069" opacity="0.1"/><circle cx="75" cy="55" r="6" fill="%235a9bb5" opacity="0.1"/><circle cx="50" cy="75" r="5" fill="%23d4a574" opacity="0.1"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: floatFlower 14s ease-in-out infinite;
+        }
+
+        .method-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            gap: var(--space-xl);
+            align-items: center;
+            margin: var(--space-2xl) 0;
+        }
+
+        .method-pillars {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .method-pillars-right {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .pillar-card {
+            background: white;
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid var(--color-light-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="25" fill="%237fb069" opacity="0.1"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .pillar-card:hover::before {
+            animation: floatFlower 2s ease-in-out infinite;
+        }
+
+        .pillar-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        .pillar-card h3 {
+            font-family: var(--font-secondary);
+            font-size: 1.4rem;
+            color: var(--color-forest-deep);
+            margin-bottom: var(--space-sm);
+            font-weight: 500;
+        }
+
+        .pillar-card p {
+            color: var(--color-medium-text);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .method-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: var(--space-md);
+        }
+
+        .om-symbol {
+            background: linear-gradient(135deg, var(--color-forest-deep) 0%, var(--color-sage-calm) 100%);
+            border-radius: 50%;
+            width: 280px;
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            box-shadow: 0 12px 40px rgba(45, 90, 39, 0.3);
+            position: relative;
+            animation: gentlePulse 6s ease-in-out infinite;
+            padding: var(--space-lg);
+        }
+
+        .om-symbol::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            right: -12px;
+            bottom: -12px;
+            border: 2px solid var(--color-living-green);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: ripple 4s ease-in-out infinite;
+        }
+
+        .om-text {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: var(--space-md);
+            line-height: 1;
+        }
+
+        .om-description h3 {
+            font-family: var(--font-secondary);
+            font-size: 1.2rem;
+            margin-bottom: var(--space-sm);
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .om-description p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.5;
+            max-width: 220px;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.1; }
+            100% { transform: scale(1); opacity: 0.3; }
+        }
+
+        .method-benefits {
+            margin-top: var(--space-2xl);
+            text-align: center;
+        }
+
+        .method-benefits h3 {
+            font-family: var(--font-secondary);
+            font-size: 1.8rem;
+            color: var(--color-forest-deep);
+            margin-bottom: var(--space-xl);
+            font-weight: 500;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: var(--space-md);
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            margin-bottom: var(--space-sm);
+            display: block;
+        }
+
+        .benefit-item h4 {
+            font-family: var(--font-secondary);
+            font-size: 1.2rem;
+            color: var(--color-forest-deep);
+            margin-bottom: var(--space-xs);
+            font-weight: 500;
+        }
+
+        .benefit-item p {
+            color: var(--color-medium-text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Enhanced About Section */
+        .about {
+            padding: var(--space-2xl) var(--space-lg);
+            background: linear-gradient(135deg, var(--color-pure-light) 0%, rgba(232, 245, 240, 0.5) 100%);
+            position: relative;
+        }
+
+        .about::after {
+            content: '';
+            position: absolute;
+            bottom: 10%;
+            right: 5%;
+            width: 60px;
+            height: 80px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 80"><path d="M30 5 Q45 25 50 45 Q45 65 30 75 Q15 65 10 45 Q15 25 30 5" fill="%234a7c59" opacity="0.15"/><path d="M30 5 L30 75" stroke="%232d5a27" stroke-width="2" opacity="0.2"/><circle cx="35" cy="20" r="2" fill="%237fb069" opacity="0.3"/><circle cx="25" cy="35" r="1.5" fill="%235a9bb5" opacity="0.3"/><circle cx="35" cy="50" r="2" fill="%23d4a574" opacity="0.3"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: sway 12s ease-in-out infinite;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--space-2xl);
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--color-sage-calm) 0%, var(--color-living-green) 100%);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 25px;
+            height: 25px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="25" r="8" fill="white" opacity="0.3"/><circle cx="25" cy="50" r="6" fill="white" opacity="0.3"/><circle cx="75" cy="50" r="6" fill="white" opacity="0.3"/><circle cx="50" cy="75" r="8" fill="white" opacity="0.3"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        .about-image::after {
+            content: '🧘‍♀️';
+            font-size: 4rem;
+            z-index: 1;
+        }
+
+        .about-text h2 {
+            font-family: var(--font-secondary);
+            font-size: 2.2rem;
+            color: var(--color-forest-deep);
+            margin-bottom: var(--space-md);
+            font-weight: 400;
+        }
+
+        .about-text p {
+            color: var(--color-medium-text);
+            margin-bottom: var(--space-md);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .about-text .highlight {
+            color: var(--color-forest-deep);
+            font-weight: 500;
+        }
+
+        /* Enhanced Testimonials */
+        .testimonials {
+            padding: var(--space-2xl) var(--space-lg);
+            background: white;
+            position: relative;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            right: 8%;
+            width: 50px;
+            height: 50px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30 20 Q50 10 70 20 Q80 40 70 60 Q50 70 30 60 Q20 40 30 20" fill="%237fb069" opacity="0.1"/><circle cx="45" cy="35" r="3" fill="%235a9bb5" opacity="0.2"/><circle cx="55" cy="45" r="2" fill="%23d4a574" opacity="0.2"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: floatLeaf 10s ease-in-out infinite;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, var(--color-pure-light) 0%, rgba(232, 245, 240, 0.3) 100%);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--color-living-green);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="30" r="5" fill="%237fb069" opacity="0.4"/><circle cx="30" cy="50" r="4" fill="%235a9bb5" opacity="0.4"/><circle cx="70" cy="50" r="4" fill="%23d4a574" opacity="0.4"/><circle cx="50" cy="70" r="5" fill="%237fb069" opacity="0.4"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .testimonial-quote {
+            font-family: var(--font-secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--color-sage-calm);
+            margin-bottom: var(--space-md);
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--color-sage-calm);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .author-info h4 {
+            color: var(--color-deep-text);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .author-info p {
+            color: var(--color-medium-text);
+            font-size: 0.9rem;
+        }
+
+        /* Enhanced Featured Course */
+        .featured-course {
+            padding: var(--space-2xl) var(--space-lg);
+            background: linear-gradient(135deg, var(--color-sage-calm) 0%, var(--color-forest-deep) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-course::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 40px;
+            height: 60px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 60"><path d="M20 10 Q30 20 35 35 Q30 50 20 55 Q10 50 5 35 Q10 20 20 10" fill="white" opacity="0.1"/><circle cx="22" cy="25" r="2" fill="white" opacity="0.15"/><circle cx="18" cy="40" r="1.5" fill="white" opacity="0.15"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: sway 20s ease-in-out infinite;
+        }
+
+        .featured-course::after {
+            content: '';
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="30" r="6" fill="white" opacity="0.1"/><circle cx="30" cy="50" r="5" fill="white" opacity="0.1"/><circle cx="70" cy="50" r="5" fill="white" opacity="0.1"/><circle cx="50" cy="70" r="6" fill="white" opacity="0.1"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: floatFlower 15s ease-in-out infinite;
+        }
+
+        .course-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-2xl);
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-info h2 {
+            font-family: var(--font-secondary);
+            font-size: 2.5rem;
+            margin-bottom: var(--space-md);
+            font-weight: 400;
+        }
+
+        .course-info p {
+            font-size: 1.1rem;
+            margin-bottom: var(--space-md);
+            opacity: 0.9;
+        }
+
+        .course-features {
+            display: flex;
+            gap: var(--space-lg);
+            margin: var(--space-lg) 0;
+            flex-wrap: wrap;
+        }
+
+        .course-feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+        }
+
+        .course-preview {
+            background: rgba(255, 255, 255, 0.1);
+            height: 300px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .course-preview::after {
+            content: '▶️';
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: var(--space-2xl) var(--space-lg);
+            background: linear-gradient(135deg, var(--color-living-green) 0%, var(--color-ocean-breath) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 30px;
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 40"><path d="M15 5 Q22 15 25 25 Q22 35 15 38 Q8 35 5 25 Q8 15 15 5" fill="white" opacity="0.1"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: floatLeaf 8s ease-in-out infinite;
+        }
+
+        .newsletter::after {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            right: 15%;
+            width: 35px;
+            height: 35px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="30" r="6" fill="white" opacity="0.1"/><circle cx="30" cy="50" r="5" fill="white" opacity="0.1"/><circle cx="70" cy="50" r="5" fill="white" opacity="0.1"/><circle cx="50" cy="70" r="6" fill="white" opacity="0.1"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: floatFlower 12s ease-in-out infinite reverse;
+        }
+
+        .newsletter h2 {
+            font-family: var(--font-secondary);
+            font-size: 2.2rem;
+            margin-bottom: var(--space-md);
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter p {
+            font-size: 1.1rem;
+            margin-bottom: var(--space-xl);
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: var(--space-md);
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-input {
+            flex-grow: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: var(--radius-full);
+            font-size: 1rem;
+            background: white;
+            color: var(--color-deep-text);
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--color-medium-text);
+        }
+
+        .newsletter-btn {
+            background: var(--color-forest-deep);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: var(--radius-full);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: var(--color-sage-calm);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-deep-text);
+            color: white;
+            padding: var(--space-2xl) var(--space-lg) var(--space-lg);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .footer-section h3 {
+            font-family: var(--font-secondary);
+            font-size: 1.3rem;
+            margin-bottom: var(--space-md);
+            color: var(--color-living-green);
+            font-weight: 500;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: var(--color-living-green);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--space-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-ctas {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .course-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .method-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .method-pillars,
+            .method-pillars-right {
+                order: 2;
+                flex-direction: row;
+                gap: var(--space-md);
+            }
+
+            .method-pillars .pillar-card,
+            .method-pillars-right .pillar-card {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .method-center {
+                order: 1;
+                margin-bottom: var(--space-lg);
+                padding-left: 0;
+            }
+
+            .om-symbol {
+                width: 200px;
+                height: 200px;
+                padding: var(--space-md);
+            }
+
+            .om-text {
+                font-size: 3rem;
+            }
+
+            .om-description h3 {
+                font-size: 1rem;
+            }
+
+            .om-description p {
+                font-size: 0.85rem;
+                max-width: 160px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+
+            .botanical-accent {
+                display: none;
+            }
+        }
+
+        /* Scroll animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Botanical Accent Elements -->
+    <div class="botanical-accent leaf-1"></div>
+    <div class="botanical-accent leaf-2"></div>
+    <div class="botanical-accent flower-1"></div>
+    <div class="botanical-accent flower-2"></div>
+    <div class="botanical-accent branch-1"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo">
+                <img src="../../../public/images/brand/logo-square.png" alt="OrlaMarieCoach Logo" class="logo-image">
+                <span class="logo-text">OrlaMarieCoach</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active">Home</a></li>
+                <li><a href="#" class="nav-link">About</a></li>
+                <li><a href="#" class="nav-link">Services</a></li>
+                <li><a href="#" class="nav-link">Courses</a></li>
+                <li><a href="#" class="nav-link">Resources</a></li>
+                <li><a href="#" class="nav-link">Contact</a></li>
+            </ul>
+            <a href="#" class="nav-cta">Book Session</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Find Your Inner Peace Through Authentic Meditation</h1>
+            <p class="subtitle">Discover the transformative power of mindfulness with personalised guidance rooted in traditional wisdom and modern understanding.</p>
+            <div class="hero-ctas">
+                <a href="#" class="btn btn-primary">Start Your Journey</a>
+                <a href="#" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rest of the content remains the same as the original file -->
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How I Can Help You Find Peace</h2>
+                <p class="section-subtitle">Whether you're completely new to meditation or looking to deepen your practice, I offer personalised approaches that honour your unique journey.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🧘‍♀️</div>
+                    <h3>1-on-1 Sessions</h3>
+                    <p>Personalised meditation guidance tailored to your specific needs, challenges, and goals. Experience the power of individual attention in a supportive, non-judgmental environment.</p>
+                    <a href="#" class="btn btn-primary">Book Session</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📚</div>
+                    <h3>Online Courses</h3>
+                    <p>Self-paced learning programmes that guide you step-by-step through foundational meditation practices. Learn at your own rhythm with lifetime access to comprehensive materials.</p>
+                    <a href="#" class="btn btn-primary">Explore Courses</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👥</div>
+                    <h3>Group Workshops</h3>
+                    <p>Connect with like-minded individuals in supportive group settings. Experience the power of community whilst learning practical techniques for daily life.</p>
+                    <a href="#" class="btn btn-primary">Join Workshop</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OM Method Section -->
+    <section class="om-method">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">The OM Method</h2>
+                <p class="section-subtitle">A unique approach that blends ancient wisdom with modern understanding, creating a pathway to lasting inner peace.</p>
+            </div>
+            <div class="method-content">
+                <div class="method-pillars">
+                    <div class="pillar-card">
+                        <div class="pillar-icon">🌱</div>
+                        <h3>Organic</h3>
+                        <p>Natural progression that honors your individual pace and authentic needs, allowing meditation to unfold organically in your life.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-icon">🧠</div>
+                        <h3>Mindful</h3>
+                        <p>Conscious awareness brought to every moment, cultivating a deeper understanding of your thoughts, emotions, and responses.</p>
+                    </div>
+                </div>
+                <div class="method-center">
+                    <div class="om-symbol">
+                        <span class="om-text">ॐ</span>
+                        <div class="om-description">
+                            <h3>Balanced Integration</h3>
+                            <p>The OM Method creates harmony between your inner world and daily life, making meditation not just a practice, but a way of being.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="method-pillars-right">
+                    <div class="pillar-card">
+                        <div class="pillar-icon">🌸</div>
+                        <h3>Compassionate</h3>
+                        <p>Gentle, non-judgmental approach that meets you exactly where you are, fostering growth through kindness and understanding.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-icon">🌊</div>
+                        <h3>Flowing</h3>
+                        <p>Adaptive practices that move with life's changes, creating sustainable habits that strengthen rather than strain your daily rhythm.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="method-benefits">
+                <h3>Why the OM Method Works</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">⏰</span>
+                        <h4>Sustainable Practice</h4>
+                        <p>Build a meditation routine that fits naturally into your life without overwhelming your schedule.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🎯</span>
+                        <h4>Personal Relevance</h4>
+                        <p>Techniques adapted to your specific challenges, goals, and learning style for maximum effectiveness.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🌊</span>
+                        <h4>Gentle Progress</h4>
+                        <p>Compassionate approach that meets you where you are, fostering growth without pressure or judgment.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🔄</span>
+                        <h4>Lasting Change</h4>
+                        <p>Integration strategies that help meditation principles flow into all areas of your daily experience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image"></div>
+                <div class="about-text">
+                    <h2>Meet Orla Marie</h2>
+                    <p>Hello, I'm Orla, and I believe that <span class="highlight">everyone has the capacity for inner peace</span> – sometimes we just need the right guidance to discover it.</p>
+                    <p>My journey to meditation began during a particularly challenging period in my life. Through consistent practice and dedicated study, I discovered how powerful mindfulness can be in transforming not just our minds, but our entire experience of living.</p>
+                    <p>Now, I'm passionate about sharing these ancient practices in a way that feels <span class="highlight">authentic, accessible, and deeply personal</span> to each person I work with.</p>
+                    <a href="#" class="btn btn-secondary">Read My Story</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What My Clients Say</h2>
+                <p class="section-subtitle">Real transformations from people who've found their path to inner peace</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Orla's gentle guidance helped me find calm in the chaos of everyday life. Her approach is so authentic and grounded – exactly what I needed."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h4>Sarah Murphy</h4>
+                            <p>Working Mother, Dublin</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"I was sceptical about meditation, but Orla's practical approach made it accessible. The techniques I learned have genuinely changed how I handle stress."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DC</div>
+                        <div class="author-info">
+                            <h4>David Chen</h4>
+                            <p>Business Owner, Cork</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"The online course was beautifully structured. Orla's voice is so calming, and I love that I can practise at my own pace whilst still feeling supported."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">EO</div>
+                        <div class="author-info">
+                            <h4>Emma O'Brien</h4>
+                            <p>Teacher, Galway</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Course -->
+    <section class="featured-course">
+        <div class="container">
+            <div class="course-content">
+                <div class="course-info">
+                    <h2>Mindfulness Foundations</h2>
+                    <p>A comprehensive 8-week programme designed to introduce you to the core practices of mindfulness meditation. Perfect for beginners or anyone looking to establish a consistent practice.</p>
+                    <div class="course-features">
+                        <span class="course-feature">8 Weeks</span>
+                        <span class="course-feature">Video Lessons</span>
+                        <span class="course-feature">Guided Audio</span>
+                        <span class="course-feature">Community Access</span>
+                    </div>
+                    <a href="#" class="btn" style="background: white; color: var(--color-forest-deep); font-weight: 500;">Enrol Now - €250</a>
+                </div>
+                <div class="course-preview"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Weekly Mindfulness Inspiration</h2>
+            <p>Receive gentle reminders, practical tips, and exclusive insights delivered to your inbox every Wednesday. Join our community of mindful practitioners.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <img src="../../../public/images/brand/logo-square.png" alt="OrlaMarieCoach Logo" style="height: 32px; width: 32px; border-radius: 6px; object-fit: cover;">
+                        <h3 style="margin: 0 0 0 12px;">OrlaMarieCoach</h3>
+                    </div>
+                    <p>Guiding you toward inner peace through authentic meditation and mindfulness practices rooted in wisdom and compassion.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#">About Orla</a></p>
+                    <p><a href="#">Services</a></p>
+                    <p><a href="#">Online Courses</a></p>
+                    <p><a href="#">Resources</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>admin@orlamariecoach.com</p>
+                    <p>Book a free consultation</p>
+                    <p>Sligo, Ireland</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 OrlaMarieCoach. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling and fade-in animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in class to elements when they come into view
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe service cards and testimonials
+            document.querySelectorAll('.service-card, .testimonial-card').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.style.background = 'rgba(248, 255, 254, 0.98)';
+                    navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+                } else {
+                    navbar.style.background = 'rgba(248, 255, 254, 0.95)';
+                    navbar.style.boxShadow = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

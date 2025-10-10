@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Session - Orla Marie Coach</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2D5016;
+            --secondary-green: #4A7C59;
+            --accent-green: #7BA05B;
+            --sage: #9CAF88;
+            --warm-white: #FEFEFE;
+            --soft-gray: #F8F9FA;
+            --text-primary: #1A1A1A;
+            --text-secondary: #4A4A4A;
+            --text-light: #6B7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--warm-white);
+        }
+
+        /* Botanical Enhancement Styles */
+        .botanical-accent {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .botanical-accent.leaf-1 {
+            top: 15%;
+            right: 8%;
+            width: 50px;
+            height: 50px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10 Q70 30 80 50 Q70 70 50 90 Q30 70 20 50 Q30 30 50 10" fill="%234a7c59" opacity="0.3"/><path d="M50 10 L50 90" stroke="%232d5a27" stroke-width="2" opacity="0.5"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: floatLeaf 8s ease-in-out infinite;
+        }
+
+        .botanical-accent.branch-1 {
+            top: 35%;
+            left: 5%;
+            width: 80px;
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50"><path d="M10 25 Q30 15 50 25 Q70 35 90 25" stroke="%237fb069" stroke-width="3" fill="none" opacity="0.2"/><circle cx="25" cy="20" r="3" fill="%235a9bb5" opacity="0.3"/><circle cx="65" cy="30" r="2" fill="%23d4a574" opacity="0.3"/></svg>') no-repeat center;
+            background-size: contain;
+            animation: floatBranch 12s ease-in-out infinite;
+        }
+
+        @keyframes floatLeaf {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        @keyframes floatBranch {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            50% { transform: translateX(5px) rotate(2deg); }
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(254, 254, 254, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(122, 160, 91, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            height: 40px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            margin-left: 12px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-green);
+            border-radius: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .nav-cta {
+            background: transparent;
+            color: var(--primary-green);
+            padding: 12px 24px;
+            border: 2px solid var(--primary-green);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        /* Hero Section */
+        .booking-hero {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white" opacity="0.1"><circle cx="20" cy="30" r="2"/><circle cx="80" cy="20" r="1.5"/><circle cx="60" cy="80" r="1"/><circle cx="30" cy="70" r="1.5"/><path d="M10 50 Q30 40 50 50 Q70 60 90 50" stroke="white" stroke-width="1" fill="none" opacity="0.2"/></svg>');
+        }
+
+        .hero-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .booking-hero h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
+
+        .hero-benefits {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-benefit {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .benefit-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .cta-secondary {
+            margin-top: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-secondary a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .cta-secondary a:hover {
+            border-bottom-color: white;
+        }
+
+        /* Session Options */
+        .session-options {
+            padding: 5rem 0;
+            background: var(--warm-white);
+            position: relative;
+        }
+
+        .options-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .session-card {
+            background: var(--soft-gray);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(122, 160, 91, 0.1);
+            box-shadow: 0 4px 20px rgba(45, 80, 22, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .session-card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 60px;
+            height: 60px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="30" r="6" fill="%237fb069" opacity="0.2"/><circle cx="30" cy="50" r="4" fill="%235a9bb5" opacity="0.2"/><circle cx="70" cy="50" r="4" fill="%23d4a574" opacity="0.2"/><circle cx="50" cy="70" r="5" fill="%234a7c59" opacity="0.2"/></svg>') no-repeat center;
+            background-size: contain;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .session-card:hover::before {
+            opacity: 1;
+        }
+
+        .session-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(45, 80, 22, 0.15);
+        }
+
+        .session-card.featured {
+            background: linear-gradient(135deg, var(--accent-green), var(--sage));
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .session-card.featured::before {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="30" r="6" fill="white" opacity="0.3"/><circle cx="30" cy="50" r="4" fill="white" opacity="0.3"/><circle cx="70" cy="50" r="4" fill="white" opacity="0.3"/><circle cx="50" cy="70" r="5" fill="white" opacity="0.3"/></svg>') no-repeat center;
+        }
+
+        .session-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .session-details h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .session-card.featured .session-details h3 {
+            color: white;
+        }
+
+        .session-details p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .session-card.featured .session-details p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .session-price {
+            text-align: right;
+        }
+
+        .price-amount {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            line-height: 1;
+        }
+
+        .session-card.featured .price-amount {
+            color: white;
+        }
+
+        .price-note {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+        }
+
+        .session-card.featured .price-note {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .session-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .session-features li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .session-card.featured .session-features li {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .session-card.featured .feature-icon {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .session-description {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .session-card.featured .session-description {
+            background: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-green);
+            transform: translateY(-2px);
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-green);
+            border-color: white;
+        }
+
+        .btn-white:hover {
+            background: var(--soft-gray);
+            transform: translateY(-2px);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #1A1A1A;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Booking Widget Section */
+        .booking-widget-section {
+            padding: 5rem 0;
+            background: var(--soft-gray);
+        }
+
+        .widget-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .widget-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .widget-info {
+            background: var(--warm-white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(45, 80, 22, 0.08);
+            border: 1px solid rgba(122, 160, 91, 0.1);
+        }
+
+        .widget-info h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-steps {
+            margin: 2rem 0;
+        }
+
+        .booking-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: var(--primary-green);
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .step-content p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .support-info {
+            background: var(--soft-gray);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .support-info h4 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .support-features {
+            list-style: none;
+        }
+
+        .support-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .support-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .digital-samba-widget {
+            background: var(--warm-white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(45, 80, 22, 0.08);
+            border: 1px solid rgba(122, 160, 91, 0.1);
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: linear-gradient(45deg, var(--soft-gray) 25%, transparent 25%), 
+                              linear-gradient(-45deg, var(--soft-gray) 25%, transparent 25%), 
+                              linear-gradient(45deg, transparent 75%, var(--soft-gray) 75%), 
+                              linear-gradient(-45deg, transparent 75%, var(--soft-gray) 75%);
+            background-size: 30px 30px;
+            background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
+        }
+
+        .widget-placeholder {
+            max-width: 400px;
+        }
+
+        .widget-placeholder h4 {
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.8rem;
+        }
+
+        .widget-placeholder p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .widget-features {
+            text-align: left;
+            margin: 1.5rem 0;
+        }
+
+        .widget-features ul {
+            list-style: none;
+            color: var(--text-secondary);
+        }
+
+        .widget-features li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .widget-features li::before {
+            content: '✓';
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 4rem 0;
+            background: var(--warm-white);
+        }
+
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--soft-gray);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(122, 160, 91, 0.1);
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-green), var(--sage));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            color: var(--primary-green);
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 0;
+            background: var(--soft-gray);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .faq-item {
+            background: var(--warm-white);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(122, 160, 91, 0.1);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(122, 160, 91, 0.05);
+        }
+
+        .faq-answer {
+            padding: 0 2rem 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .faq-toggle {
+            color: var(--accent-green);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white" opacity="0.1"><circle cx="20" cy="30" r="2"/><circle cx="80" cy="20" r="1.5"/><circle cx="60" cy="80" r="1"/><circle cx="30" cy="70" r="1.5"/><path d="M10 50 Q30 40 50 50 Q70 60 90 50" stroke="white" stroke-width="1" fill="none" opacity="0.2"/></svg>');
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .final-cta h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .final-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .booking-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-benefits {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .session-card.featured {
+                transform: none;
+            }
+
+            .widget-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .widget-info {
+                padding: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .final-cta h2 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .botanical-accent {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Botanical Accent Elements -->
+    <div class="botanical-accent leaf-1"></div>
+    <div class="botanical-accent branch-1"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="../../../public/images/brand/logo-square.png" alt="OrlaMarieCoach Logo" class="logo-image">
+                <span class="logo-text">Orla Marie Coach</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/courses">Courses</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+            <a href="/contact" class="nav-cta">Have Questions?</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="booking-hero">
+            <div class="hero-container">
+                <h1>Book Your Personalized Meditation Session</h1>
+                <p class="hero-subtitle">Experience The OM Method with individual guidance tailored to your unique needs, goals, and lifestyle. Transform stress into peace with authentic Celtic wisdom and modern techniques.</p>
+                
+                <div class="hero-benefits">
+                    <div class="hero-benefit">
+                        <div class="benefit-icon">🌍</div>
+                        <span>Global Timezone Support</span>
+                    </div>
+                    <div class="hero-benefit">
+                        <div class="benefit-icon">🎯</div>
+                        <span>Personalized Approach</span>
+                    </div>
+                    <div class="hero-benefit">
+                        <div class="benefit-icon">✨</div>
+                        <span>Energy Healing Integration</span>
+                    </div>
+                </div>
+
+                <div class="cta-secondary">
+                    <p>Have questions first? <a href="/contact">Get personalized guidance before booking →</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Session Options -->
+        <section class="session-options">
+            <div class="options-container">
+                <div class="section-header">
+                    <h2>Choose Your Session Experience</h2>
+                    <p>Whether you're looking for a single transformative session or ongoing support, each option includes personalized guidance using The OM Method approach.</p>
+                </div>
+
+                <div class="options-grid">
+                    <!-- Individual Session -->
+                    <div class="session-card">
+                        <div class="session-header">
+                            <div class="session-details">
+                                <h3>Individual Session</h3>
+                                <p>Perfect for getting started or addressing specific needs</p>
+                            </div>
+                            <div class="session-price">
+                                <div class="price-amount">€100</div>
+                                <div class="price-note">per session</div>
+                            </div>
+                        </div>
+
+                        <div class="session-description">
+                            Ideal for those new to meditation or looking to address specific challenges. You'll receive personalized technique matching, gentle guidance, and practical tools you can use immediately.
+                        </div>
+
+                        <ul class="session-features">
+                            <li><div class="feature-icon">✓</div>90 minutes of focused guidance</li>
+                            <li><div class="feature-icon">✓</div>Personalized technique matching</li>
+                            <li><div class="feature-icon">✓</div>Energy healing integration</li>
+                            <li><div class="feature-icon">✓</div>Post-session email summary</li>
+                            <li><div class="feature-icon">✓</div>3 days of follow-up support</li>
+                            <li><div class="feature-icon">✓</div>Celtic wisdom integration</li>
+                        </ul>
+
+                        <a href="#booking-widget" class="btn btn-primary">Book Single Session</a>
+                    </div>
+
+                    <!-- Package Deal -->
+                    <div class="session-card featured">
+                        <div class="popular-badge">Most Popular</div>
+                        <div class="session-header">
+                            <div class="session-details">
+                                <h3>6-Session Package</h3>
+                                <p>Complete transformation journey with ongoing support</p>
+                            </div>
+                            <div class="session-price">
+                                <div class="price-amount">€400</div>
+                                <div class="price-note">save €200</div>
+                            </div>
+                        </div>
+
+                        <div class="session-description">
+                            Transform your relationship with stress and discover lasting peace. This comprehensive package provides structured progression through The OM Method with continuous support and refinement.
+                        </div>
+
+                        <ul class="session-features">
+                            <li><div class="feature-icon">✓</div>6 × 90-minute sessions</li>
+                            <li><div class="feature-icon">✓</div>Progressive skill development</li>
+                            <li><div class="feature-icon">✓</div>Ongoing support between sessions</li>
+                            <li><div class="feature-icon">✓</div>Personalized practice plan</li>
+                            <li><div class="feature-icon">✓</div>Celtic spiritual guidance</li>
+                            <li><div class="feature-icon">✓</div>Lifetime email support</li>
+                            <li><div class="feature-icon">✓</div>Flexible scheduling over 6 months</li>
+                        </ul>
+
+                        <a href="#booking-widget" class="btn btn-white">Book Package Deal</a>
+                    </div>
+                </div>
+
+                <div class="section-header" style="margin-top: 3rem; margin-bottom: 2rem;">
+                    <p style="font-size: 1rem; color: var(--text-secondary);">
+                        <strong>All sessions include:</strong> Secure video calls via Digital Samba, global timezone accommodation, and payment via Revolut or PayPal. Sessions are recorded for your reference (with permission).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Widget -->
+        <section class="booking-widget-section" id="booking-widget">
+            <div class="widget-container">
+                <div class="section-header">
+                    <h2>Schedule Your Session</h2>
+                    <p>Choose your preferred time and complete secure payment. You'll receive confirmation with all session details within minutes.</p>
+                </div>
+
+                <div class="widget-content">
+                    <div class="widget-info">
+                        <h3>Booking Process</h3>
+                        
+                        <div class="booking-steps">
+                            <div class="booking-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Select Your Session</h4>
+                                    <p>Choose between individual session or 6-session package based on your needs and goals.</p>
+                                </div>
+                            </div>
+
+                            <div class="booking-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Pick Your Time</h4>
+                                    <p>Select from available slots that work with your timezone and schedule preferences.</p>
+                                </div>
+                            </div>
+
+                            <div class="booking-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Complete Details</h4>
+                                    <p>Provide basic information and any specific goals or challenges you'd like to focus on.</p>
+                                </div>
+                            </div>
+
+                            <div class="booking-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h4>Secure Payment</h4>
+                                    <p>Complete payment via Revolut or PayPal with full security and instant confirmation.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="support-info">
+                            <h4>📞 Booking Support</h4>
+                            <ul class="support-features">
+                                <li><div class="support-icon">✓</div>Instant email confirmation</li>
+                                <li><div class="support-icon">✓</div>Calendar invitation with video link</li>
+                                <li><div class="support-icon">✓</div>Pre-session preparation guide</li>
+                                <li><div class="support-icon">✓</div>24/7 technical support</li>
+                                <li><div class="support-icon">✓</div>Flexible rescheduling options</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="digital-samba-widget">
+                        <div class="widget-placeholder">
+                            <h4>Digital Samba Booking Interface</h4>
+                            <p>Interactive booking calendar with real-time availability, session selection, and integrated payment processing.</p>
+                            
+                            <div class="widget-features">
+                                <h4 style="margin-bottom: 1rem; color: var(--primary-green);">Widget Features:</h4>
+                                <ul>
+                                    <li>Real-time calendar availability</li>
+                                    <li>Session type selection (Individual/Package)</li>
+                                    <li>Timezone automatic detection</li>
+                                    <li>Personal information collection</li>
+                                    <li>Goals and preferences questionnaire</li>
+                                    <li>Secure payment processing</li>
+                                    <li>Instant confirmation system</li>
+                                    <li>Automatic email notifications</li>
+                                </ul>
+                            </div>
+
+                            <div class="btn btn-primary" style="margin-top: 2rem;">Integration Placeholder</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials-section">
+            <div class="testimonials-container">
+                <div class="section-header">
+                    <h2>What Clients Say About Their Sessions</h2>
+                    <p>Real transformations from people who've experienced The OM Method approach to meditation and mindfulness.</p>
+                </div>
+
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "Orla's approach is so different from anything I'd tried before. The combination of practical techniques with Celtic wisdom created something truly special. I finally found peace with my anxiety."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">S</div>
+                            <div class="author-info">
+                                <h4>Sarah M.</h4>
+                                <p>6-Session Package Client</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "As a complete beginner, I was nervous about meditation. Orla made it so accessible and personal. The energy healing aspect was unexpected but incredibly powerful."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">M</div>
+                            <div class="author-info">
+                                <h4>Michael R.</h4>
+                                <p>Individual Session Client</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "The personalized approach made all the difference. Instead of generic advice, I got techniques specifically chosen for my lifestyle and challenges. Life-changing experience."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">L</div>
+                            <div class="author-info">
+                                <h4>Linda K.</h4>
+                                <p>Returning Client</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq-section">
+            <div class="faq-container">
+                <div class="section-header">
+                    <h2>Booking Questions</h2>
+                    <p>Everything you need to know about scheduling and preparing for your session.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do online sessions work?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Sessions are conducted via secure video call using Digital Samba. You'll receive a session link 24 hours before your appointment along with preparation guidelines. All you need is a quiet space and stable internet connection.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What if I need to reschedule my session?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        You can reschedule up to 24 hours before your session at no charge. For package clients, sessions are valid for 6 months, providing maximum flexibility for your schedule.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What payment methods do you accept?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        I accept payments through Revolut and PayPal, both supporting major credit cards and bank transfers globally. Payment is processed securely during booking with instant confirmation.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do I need any special equipment or preparation?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        No special equipment needed! Just a quiet, comfortable space where you won't be interrupted. I'll send preparation guidelines 24 hours before your session to help you get the most from our time together.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What if I'm a complete beginner to meditation?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Perfect! Most of my clients are beginners, and my approach is specifically designed to be accessible. I'll guide you through everything step-by-step with techniques chosen specifically for your learning style.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How is the 6-session package structured?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        The package provides progressive development over 6 sessions, typically spaced 1-2 weeks apart. Each session builds on the previous one, with ongoing support between sessions. You have 6 months to complete all sessions.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta">
+            <div class="cta-container">
+                <h2>Your Transformation Starts Today</h2>
+                <p>Take the first step toward lasting peace and clarity. Book your personalized meditation session and discover how The OM Method can transform your relationship with stress and bring authentic calm to your life.</p>
+                <div class="cta-buttons">
+                    <a href="#booking-widget" class="btn btn-white">Schedule Your Session</a>
+                    <a href="/contact" class="btn btn-outline">Ask Questions First</a>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
