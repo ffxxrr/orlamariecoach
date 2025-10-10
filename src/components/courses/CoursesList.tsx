@@ -1,6 +1,8 @@
+'use client'
 import Link from 'next/link'
 import Image from 'next/image'
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder'
+import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 
 const courses = [
   {
@@ -69,6 +71,28 @@ const courses = [
 ]
 
 export default function CoursesList() {
+  const { trackCourseInteraction } = useEventTracker()
+
+  const handleCourseView = (course: any) => {
+    trackCourseInteraction('view', {
+      courseId: course.id.toString(),
+      courseName: course.title,
+      coursePrice: parseInt(course.price.replace('€', '')),
+      courseLevel: course.level,
+      source: 'courses_page_list'
+    })
+  }
+
+  const handleCourseEnquiry = (course: any, action: string) => {
+    trackCourseInteraction('enquiry', {
+      courseId: course.id.toString(),
+      courseName: course.title,
+      coursePrice: parseInt(course.price.replace('€', '')),
+      action,
+      source: 'courses_page_list'
+    })
+  }
+
   return (
     <section className="py-16 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -76,13 +100,14 @@ export default function CoursesList() {
           {courses.map((course) => (
             <div 
               key={course.id}
+              onMouseEnter={() => handleCourseView(course)}
               className="bg-pure-light rounded-2xl overflow-hidden shadow-md"
             >
               <div className="grid grid-cols-1 md:grid-cols-2">
                 <div className="h-full">
                   <ImagePlaceholder 
                     text={course.title}
-                    icon={course.icon}
+                    icon={course.icon || undefined}
                     aspectRatio="h-full"
                   />
                 </div>
@@ -142,13 +167,15 @@ export default function CoursesList() {
                     <Link 
                       href={`/courses/${course.id}`}
                       className="btn btn-primary"
+                      onClick={() => handleCourseEnquiry(course, 'details_clicked')}
                     >
                       Course Details
                     </Link>
                     
                     <Link 
-                      href="/booking"
+                      href="/book-session"
                       className="btn btn-secondary"
+                      onClick={() => handleCourseEnquiry(course, 'enroll_clicked')}
                     >
                       Enroll Now
                     </Link>

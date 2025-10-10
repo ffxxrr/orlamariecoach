@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { Play, Pause, Download, Volume2, DownloadCloud } from 'lucide-react'
+import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 
 interface AudioPlayerProps {
   audioSrc: string | {
@@ -28,6 +29,7 @@ export default function AudioPlayer({
   const [isLoaded, setIsLoaded] = useState(false)
   
   const audioRef = useRef<HTMLAudioElement>(null)
+  const { trackAudioInteraction, trackConversion } = useEventTracker()
   const progressBarRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -45,7 +47,17 @@ export default function AudioPlayer({
     // Events
     audio.addEventListener('loadeddata', setAudioData)
     audio.addEventListener('timeupdate', setAudioTime)
-    audio.addEventListener('ended', () => setIsPlaying(false))
+    audio.addEventListener('ended', () => {
+      setIsPlaying(false)
+      trackAudioInteraction('complete', title, {
+        totalDuration: Math.round(duration),
+        completionRate: 1.0
+      })
+      trackConversion('audio_download', {
+        audioTitle: title,
+        completedListening: true
+      })
+    })
     
     return () => {
       audio.removeEventListener('loadeddata', setAudioData)
@@ -60,8 +72,18 @@ export default function AudioPlayer({
     
     if (isPlaying) {
       audio.pause()
+      trackAudioInteraction('pause', title, {
+        duration: Math.round(currentTime),
+        totalDuration: Math.round(duration),
+        position: currentTime / duration
+      })
     } else {
       audio.play()
+      trackAudioInteraction('play', title, {
+        duration: Math.round(currentTime),
+        totalDuration: Math.round(duration),
+        isFirstPlay: currentTime === 0
+      })
     }
     setIsPlaying(!isPlaying)
   }
@@ -149,6 +171,17 @@ export default function AudioPlayer({
             className="text-forest-deep hover:text-sage-calm transition-colors"
             aria-label="Download meditation"
             onClick={(e) => {
+              trackAudioInteraction('download_request', title, {
+                currentTime: Math.round(currentTime),
+                totalDuration: Math.round(duration),
+                completionRate: currentTime / duration
+              })
+              trackConversion('audio_download', {
+                audioTitle: title,
+                downloadRequested: true,
+                listeningProgress: currentTime / duration
+              })
+              
               if (onDownloadClick) {
                 e.preventDefault();
                 onDownloadClick();

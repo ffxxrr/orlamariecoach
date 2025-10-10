@@ -1,0 +1,237 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model for authentication
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  name        String?
+  role        String   @default("user")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  bookings    Booking[]
+  enrollments Enrollment[]
+}
+
+// Booking model for Digital Samba integration
+model Booking {
+  id               String   @id @default(uuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+  sessionType      String
+  scheduledDate    DateTime
+  duration         Int      // in minutes
+  status           String   @default("pending") // pending, confirmed, cancelled, completed
+  digitalSambaLink String?
+  notes            String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+// Visitor tracking for privacy-first analytics
+model AnalyticsVisitor {
+  id          String   @id @default(uuid())
+  visitorId   String   @unique // Browser fingerprint or localStorage ID
+  firstSeen   DateTime @default(now())
+  lastSeen    DateTime @updatedAt
+  isReturning Boolean  @default(false)
+  userAgent   String?
+  country     String?
+  region      String?
+  city        String?
+  timezone    String?
+  language    String?
+  screenSize  String?
+  deviceType  String?  // mobile, tablet, desktop
+  osName      String?
+  browserName String?
+  
+  sessions    AnalyticsSession[]
+  pageviews   AnalyticsPageview[]
+  events      AnalyticsEvent[]
+  
+  @@index([visitorId])
+  @@index([firstSeen])
+  @@index([lastSeen])
+  @@index([country, firstSeen])
+  @@index([deviceType, firstSeen])
+}
+
+// Session tracking
+model AnalyticsSession {
+  id            String   @id @default(uuid())
+  sessionId     String   @unique
+  visitorId     String
+  visitor       AnalyticsVisitor @relation(fields: [visitorId], references: [visitorId])
+  startedAt     DateTime @default(now())
+  endedAt       DateTime?
+  duration      Int?     // in seconds
+  pageviews     Int      @default(0)
+  bounced       Boolean  @default(true)
+  entryPage     String?
+  exitPage      String?
+  referrer      String?
+  referrerDomain String?
+  utmSource     String?
+  utmMedium     String?
+  utmCampaign   String?
+  utmTerm       String?
+  utmContent    String?
+  
+  pageviewsList AnalyticsPageview[]
+  events        AnalyticsEvent[]
+  
+  @@index([sessionId])
+  @@index([visitorId, startedAt])
+  @@index([startedAt])
+  @@index([referrerDomain, startedAt])
+  @@index([utmSource, startedAt])
+}
+
+// Page view tracking
+model AnalyticsPageview {
+  id          String   @id @default(uuid())
+  visitorId   String
+  visitor     AnalyticsVisitor @relation(fields: [visitorId], references: [visitorId])
+  sessionId   String
+  session     AnalyticsSession @relation(fields: [sessionId], references: [sessionId])
+  page        String
+  title       String?
+  duration    Int?     // Time spent on page in seconds
+  scrollDepth Int?     // Percentage scrolled
+  timestamp   DateTime @default(now())
+  
+  @@index([visitorId, timestamp])
+  @@index([sessionId, timestamp])
+  @@index([page, timestamp])
+  @@index([timestamp])
+}
+
+// Custom event tracking
+model AnalyticsEvent {
+  id         String   @id @default(uuid())
+  visitorId  String
+  visitor    AnalyticsVisitor @relation(fields: [visitorId], references: [visitorId])
+  sessionId  String
+  session    AnalyticsSession @relation(fields: [sessionId], references: [sessionId])
+  eventType  String   // click, download, form_submit, video_play, etc.
+  eventName  String?  // Custom event name
+  page       String
+  element    String?  // CSS selector or element description
+  value      Float?   // Numeric value for conversion events
+  metadata   Json?    // Additional event data
+  timestamp  DateTime @default(now())
+  
+  @@index([visitorId, timestamp])
+  @@index([sessionId, timestamp])
+  @@index([eventType, timestamp])
+  @@index([eventName, timestamp])
+  @@index([page, eventType, timestamp])
+  @@index([timestamp])
+}
+
+// User consent tracking for GDPR compliance
+model AnalyticsConsent {
+  id           String   @id @default(uuid())
+  visitorId    String   @unique
+  hasConsented Boolean
+  consentDate  DateTime @default(now())
+  consentType  String   // essential, analytics, marketing
+  ipAddress    String?  // Anonymized for legal record
+  userAgent    String?
+  
+  @@index([visitorId])
+  @@index([hasConsented, consentDate])
+}
+
+// Course model for online courses
+model Course {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique
+  description String
+  price       Float
+  currency    String   @default("EUR")
+  duration    String   // e.g., "6 weeks"
+  level       String   // beginner, intermediate, advanced
+  image       String?
+  modules     Module[]
+  enrollments Enrollment[]
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Module model for course content
+model Module {
+  id          String   @id @default(uuid())
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id])
+  title       String
+  description String?
+  order       Int
+  lessons     Lesson[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Lesson model for module content
+model Lesson {
+  id          String   @id @default(uuid())
+  moduleId    String
+  module      Module   @relation(fields: [moduleId], references: [id])
+  title       String
+  content     String
+  videoUrl    String?
+  audioUrl    String?
+  resources   Json?    // Array of downloadable resources
+  order       Int
+  duration    Int?     // in minutes
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Enrollment model for course purchases
+model Enrollment {
+  id          String   @id @default(uuid())
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id])
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  progress    Json?    // Track completed lessons
+  completedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Newsletter subscription model
+model Newsletter {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  name        String?
+  subscribed  Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Contact form submissions
+model Contact {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  status    String   @default("new") // new, read, responded
+  createdAt DateTime @default(now())
+}

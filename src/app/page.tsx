@@ -1,3 +1,4 @@
+'use client'
 import Hero from '@/components/home/Hero'
 import Services from '@/components/home/Services'
 import OMMethod from '@/components/home/OMMethod'
@@ -9,8 +10,11 @@ import Newsletter from '@/components/home/Newsletter'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import BotanicalAccents from '@/components/ui/BotanicalAccents'
+// Analytics handled by AnalyticsProvider
 
 export default function HomePage() {
+  // Page view tracking handled by AnalyticsProvider
+
   return (
     <>
       <BotanicalAccents />

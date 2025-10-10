@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 
 export default function Hero() {
+  const { trackNavigation } = useEventTracker();
   return (
     <section className="relative bg-gradient-to-br from-pure-light to-light-border min-h-screen flex items-center justify-center px-4 overflow-hidden z-0">
       {/* Background Pattern - Using simpler pattern without SVG data URL */}
@@ -30,12 +32,14 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link 
             href="/book-session"
+            onClick={() => trackNavigation('cta_clicked', '/book-session', 'hero')}
             className="btn btn-primary px-8 py-4 text-lg hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
           >
             Start Your Journey
           </Link>
           <Link 
             href="/about"
+            onClick={() => trackNavigation('cta_clicked', '/about', 'hero')}
             className="btn btn-secondary px-8 py-4 text-lg hover:bg-forest-deep hover:text-white transition-all duration-300"
           >
             Learn More

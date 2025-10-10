@@ -1,3 +1,4 @@
+'use client'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import BotanicalAccents from '@/components/ui/BotanicalAccents'
@@ -7,13 +8,13 @@ import ContactForm from '@/components/contact/ContactForm'
 import ContactInfo from '@/components/contact/ContactInfo'
 import ContactFAQ from '@/components/contact/ContactFAQ'
 import ContactCTA from '@/components/contact/ContactCTA'
+// Analytics handled by AnalyticsProvider
 
-export const metadata = {
-  title: 'Contact & Questions | Orla Marie Meditation Coach',
-  description: 'Get personalized guidance for your meditation journey. Ask questions about The OM Method, courses, or meditation practices tailored to your needs.',
-}
+// Metadata is handled by layout.tsx for client components
 
 export default function ContactPage() {
+  // Page view tracking handled by AnalyticsProvider
+
   return (
     <>
       <BotanicalAccents />

@@ -1,3 +1,4 @@
+'use client'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import BotanicalAccents from '@/components/ui/BotanicalAccents'
@@ -7,13 +8,24 @@ import BookingWidget from '@/components/booking/BookingWidget'
 import BookingTestimonials from '@/components/booking/BookingTestimonials'
 import BookingFAQ from '@/components/booking/BookingFAQ'
 import BookingCTA from '@/components/booking/BookingCTA'
+import { useEventTracker } from '@/components/ui/AnalyticsProvider'
+import { useEffect } from 'react'
 
-export const metadata = {
-  title: 'Book Your Session | Orla Marie Meditation Coach',
-  description: 'Schedule your personalised meditation session with Orla Marie. Choose from individual sessions or package deals using The OM Method approach to mindfulness.',
-}
+// Metadata is handled by layout.tsx for client components
 
 export default function BookSessionPage() {
+  // Page view tracking handled by AnalyticsProvider
+
+  const { trackBookingFlow } = useEventTracker()
+
+  // Track that user reached booking page
+  useEffect(() => {
+    trackBookingFlow('started', {
+      entryPoint: 'booking_page',
+      timestamp: new Date().toISOString()
+    })
+  }, [])
+
   return (
     <>
       <BotanicalAccents />
