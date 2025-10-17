@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { projectStatus } from '@/lib/project-status'
 import type { ProjectStatus, FeedbackItem, TaskItem } from '@/lib/project-status'
 import { AlertCircle, CheckCircle, Clock, Download, RefreshCw } from 'lucide-react'
 
@@ -17,9 +16,11 @@ export default function StatusDashboard() {
   const loadStatus = async () => {
     try {
       setLoading(true)
-      // In a real implementation, this would come from an API endpoint
-      const currentStatus = projectStatus.getStatus()
-      setStatus(currentStatus)
+      const response = await fetch('/api/status')
+      if (!response.ok) throw new Error('Failed to fetch status')
+
+      const data = await response.json()
+      setStatus(data.status)
       setLastSync(new Date().toLocaleTimeString())
     } catch (error) {
       console.error('Error loading status:', error)
@@ -31,29 +32,47 @@ export default function StatusDashboard() {
   const updateTaskStatus = async (taskId: string, newStatus: TaskItem['status']) => {
     if (!status) return
 
-    projectStatus.updateTask(taskId, { status: newStatus })
-    await loadStatus()
-    
-    // Sync to Obsidian
-    await syncToObsidian()
+    try {
+      const response = await fetch('/api/status/tasks', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ taskId, status: newStatus })
+      })
+
+      if (response.ok) {
+        await loadStatus()
+        await syncToObsidian()
+      }
+    } catch (error) {
+      console.error('Error updating task:', error)
+    }
   }
 
   const updateFeedbackStatus = async (feedbackId: string, newStatus: FeedbackItem['status']) => {
     if (!status) return
 
-    projectStatus.updateFeedback(feedbackId, { 
-      status: newStatus,
-      resolvedAt: newStatus === 'completed' ? new Date().toISOString() : undefined
-    })
-    await loadStatus()
+    try {
+      const response = await fetch('/api/status/feedback', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          feedbackId,
+          status: newStatus,
+          resolvedAt: newStatus === 'completed' ? new Date().toISOString() : undefined
+        })
+      })
 
-    // Sync to Obsidian
-    await syncToObsidian()
+      if (response.ok) {
+        await loadStatus()
+        await syncToObsidian()
+      }
+    } catch (error) {
+      console.error('Error updating feedback:', error)
+    }
   }
 
   const syncToObsidian = async () => {
     try {
-      // This would trigger a sync to update Obsidian files
       const response = await fetch('/api/status/sync-obsidian', {
         method: 'POST'
       })
@@ -65,17 +84,23 @@ export default function StatusDashboard() {
     }
   }
 
-  const downloadReport = () => {
+  const downloadReport = async () => {
     if (!status) return
 
-    const report = projectStatus.generateStatusReport()
-    const blob = new Blob([report], { type: 'text/markdown' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `project-status-${new Date().toISOString().split('T')[0]}.md`
-    a.click()
-    URL.revokeObjectURL(url)
+    try {
+      const response = await fetch('/api/status/report')
+      if (!response.ok) throw new Error('Failed to generate report')
+
+      const blob = await response.blob()
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `project-status-${new Date().toISOString().split('T')[0]}.md`
+      a.click()
+      URL.revokeObjectURL(url)
+    } catch (error) {
+      console.error('Error downloading report:', error)
+    }
   }
 
   if (loading) {
@@ -106,7 +131,11 @@ export default function StatusDashboard() {
     )
   }
 
-  const realProgress = projectStatus.calculateRealProgress()
+  // Calculate real progress
+  const weights = { coreWebsite: 0.65, analytics: 0.35 }
+  const coreProgress = 0.90
+  const analyticsProgress = status.analytics.progress / 100
+  const realProgress = Math.round((weights.coreWebsite * coreProgress + weights.analytics * analyticsProgress) * 100)
 
   return (
     <div className="min-h-screen bg-gray-50">

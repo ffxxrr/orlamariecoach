@@ -47,12 +47,12 @@ async function updateProjectOverview(obsidianPath: string, status: any) {
   
   // Update the project health section
   const realProgress = projectStatus.calculateRealProgress()
-  const healthRegex = /## 🚦 Project Health:.*?\n\n/s
+  const healthRegex = /## 🚦 Project Health:[\s\S]*?\n\n/
   const newHealth = `## 🚦 Project Health: **${getHealthStatus(realProgress)}** ${getHealthEmoji(realProgress)} **AUTO-UPDATED**
 
-**Current Phase:** ${status.currentPhase}  
-**Overall Progress:** **${realProgress}%** complete 📈 **(Real-time tracking active)**  
-**Timeline Status:** 📅 **UPDATED** - See resurrection roadmap  
+**Current Phase:** ${status.currentPhase}
+**Overall Progress:** **${realProgress}%** complete 📈 **(Real-time tracking active)**
+**Timeline Status:** 📅 **UPDATED** - See resurrection roadmap
 **Next Milestone:** ${getNextMilestone(status)}
 
 `
@@ -65,7 +65,7 @@ async function updateProjectOverview(obsidianPath: string, status: any) {
   }
 
   // Update the analytics section
-  const analyticsRegex = /### Analytics Implementation:.*?\n\n/s
+  const analyticsRegex = /### Analytics Implementation:[\s\S]*?\n\n/
   const newAnalytics = `### Analytics Implementation:
 - Implemented: ${status.analytics.implemented ? 'Yes ✅' : 'No ❌'}
 - Progress: ${status.analytics.progress}%
