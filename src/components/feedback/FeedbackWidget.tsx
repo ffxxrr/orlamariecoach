@@ -30,8 +30,17 @@ export default function FeedbackWidget({ currentPage, isPreviewMode = false }: F
     email: ''
   })
 
-  // Only show in preview mode or development
-  if (!isPreviewMode && process.env.NODE_ENV === 'production') {
+  // Check if this is a Vercel preview deployment
+  const isVercelPreview = typeof window !== 'undefined' &&
+    (window.location.hostname.includes('vercel.app') ||
+     window.location.hostname === 'orlamariecoach.vercel.app')
+
+  // Only show in preview mode, development, or on Vercel preview deployments
+  const shouldShow = isPreviewMode ||
+                    process.env.NODE_ENV === 'development' ||
+                    isVercelPreview
+
+  if (!shouldShow) {
     return null
   }
 

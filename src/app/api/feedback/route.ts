@@ -1,35 +1,55 @@
 import { NextResponse } from 'next/server'
 import { projectStatus } from '@/lib/project-status'
 import type { FeedbackItem } from '@/lib/project-status'
+import prisma from '@/lib/db'
 import fs from 'fs'
 import path from 'path'
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    
+
+    const timestamp = new Date().toISOString()
+    const feedbackId = `feedback-${Date.now()}`
+
+    // Store in database for persistence
+    const dbFeedback = await prisma.feedback.create({
+      data: {
+        page: body.page,
+        type: body.type || 'general',
+        message: body.message || body.description,
+        priority: body.priority || 'medium',
+        status: 'new',
+        userEmail: body.userEmail || body.email || null,
+        userName: body.userName || null,
+        screenshot: body.screenshot || null,
+        browserInfo: body.browserInfo || null,
+        metadata: body.metadata || null,
+      }
+    })
+
+    // Also keep in project status for backward compatibility
     const feedback: FeedbackItem = {
-      id: `feedback-${Date.now()}`,
+      id: feedbackId,
       page: body.page,
       element: body.element,
-      type: body.type,
-      priority: body.priority,
-      description: body.description,
+      type: body.type || 'general',
+      priority: body.priority || 'medium',
+      description: body.message || body.description,
       suggestedFix: body.suggestedFix,
-      createdBy: body.email || 'stakeholder',
-      createdAt: body.createdAt,
+      createdBy: body.userEmail || body.email || 'stakeholder',
+      createdAt: timestamp,
       status: 'new'
     }
 
-    // Add to project status system
     projectStatus.addFeedback(feedback)
 
-    // Also create/update Obsidian feedback file
+    // Sync to Obsidian for stakeholder review
     await syncFeedbackToObsidian(feedback, body)
 
-    return NextResponse.json({ 
-      success: true, 
-      id: feedback.id,
+    return NextResponse.json({
+      success: true,
+      id: dbFeedback.id,
       message: 'Feedback submitted successfully'
     })
 
@@ -133,20 +153,54 @@ This file tracks all feedback from Orla and stakeholders during the preview phas
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const status = projectStatus.getStatus()
+    const { searchParams } = new URL(request.url)
+    const status = searchParams.get('status')
+    const type = searchParams.get('type')
+    const page = searchParams.get('page')
+    const priority = searchParams.get('priority')
+
+    // Build filter object
+    const where: any = {}
+    if (status) where.status = status
+    if (type) where.type = type
+    if (page) where.page = page
+    if (priority) where.priority = priority
+
+    // Fetch from database
+    const feedback = await prisma.feedback.findMany({
+      where,
+      orderBy: [
+        { createdAt: 'desc' }
+      ],
+    })
+
+    // Get counts by status
+    const newCount = await prisma.feedback.count({ where: { status: 'new' } })
+    const acknowledgedCount = await prisma.feedback.count({ where: { status: 'acknowledged' } })
+    const inProgressCount = await prisma.feedback.count({ where: { status: 'in-progress' } })
+    const resolvedCount = await prisma.feedback.count({ where: { status: 'resolved' } })
+    const wontFixCount = await prisma.feedback.count({ where: { status: 'wont-fix' } })
+
     return NextResponse.json({
-      feedback: status.feedback,
-      total: status.feedback.length,
-      newCount: status.feedback.filter(f => f.status === 'new').length,
-      inProgressCount: status.feedback.filter(f => f.status === 'in_progress').length,
-      completedCount: status.feedback.filter(f => f.status === 'completed').length
+      success: true,
+      feedback,
+      total: feedback.length,
+      stats: {
+        byStatus: {
+          new: newCount,
+          acknowledged: acknowledgedCount,
+          inProgress: inProgressCount,
+          resolved: resolvedCount,
+          wontFix: wontFixCount
+        }
+      }
     })
   } catch (error) {
     console.error('Error fetching feedback:', error)
     return NextResponse.json(
-      { error: 'Failed to fetch feedback' },
+      { success: false, error: 'Failed to fetch feedback' },
       { status: 500 }
     )
   }
