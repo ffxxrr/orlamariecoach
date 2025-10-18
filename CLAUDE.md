@@ -4,23 +4,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-The OrlaMarieCoach website is a professional Next.js 14 application for Orla's meditation and mindfulness coaching services. The project features custom privacy-focused analytics, an online course platform, and Digital Samba integration for bookings.
+OrlaMarieCoach is a professional Next.js 14 website for meditation and mindfulness coaching services. Features include custom privacy-focused analytics, an online course platform, and Digital Samba integration for bookings.
 
 ## Technology Stack
 
-- **Framework**: Next.js 14 (React-based) with App Router
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS with custom nature-inspired color system
+- **Framework**: Next.js 14 with App Router
+- **Language**: TypeScript (strict mode enabled)
+- **Styling**: Tailwind CSS with custom nature-inspired design system
 - **Database**: PostgreSQL with Prisma ORM
-- **Analytics**: Custom privacy-first analytics system (NOT YET IMPLEMENTED)
-- **Authentication**: Planned secure admin authentication
+- **Analytics**: Custom privacy-first analytics system
+- **Authentication**: Admin authentication system
 
 ## Commands
 
 ### Development
 ```bash
 npm run dev          # Start development server on port 3004
-npm run build        # Build production application
+npm run build        # Build production application (includes Prisma generation)
 npm run start        # Start production server
 npm run lint         # Run ESLint
 npm run type-check   # Run TypeScript type checking
@@ -41,53 +41,58 @@ npm run test:watch   # Run tests in watch mode
 
 ## Architecture Overview
 
-### File Structure
+### Directory Structure
 - `/src/app/` - Next.js App Router pages and layouts
-  - Core pages: homepage, about, services, booking, contact, courses, brand
-  - Global styles and root layout configuration
-- `/src/components/` - Reusable React components organized by feature
-  - `home/` - Homepage sections (Hero, Services, Testimonials, etc.)
-  - `about/` - About page components
-  - `services/` - Services page components  
-  - `booking/` - Booking system components
-  - `contact/` - Contact form and information components
-  - `courses/` - Course platform components
-  - `layout/` - Navbar and Footer
-  - `ui/` - Shared UI components (BotanicalAccents, ImagePlaceholder)
-  - `audio/` - Audio player for meditation samples
-  - `brand/` - Logo and brand system components
-- `/src/lib/` - Utility libraries and custom analytics system
-- `/public/` - Static assets including optimized images and audio files
+  - Pages: homepage, about, services, booking, contact, courses, brand
+  - Admin dashboard with authentication and real-time analytics
+  - API routes for health checks, analytics, and admin functions
+- `/src/components/` - Feature-based component organization
+  - Page-specific components: `home/`, `about/`, `services/`, `booking/`, `contact/`, `courses/`
+  - Shared components: `layout/` (Navbar, Footer), `ui/` (reusable UI components)
+  - Specialized: `audio/` (meditation player), `brand/` (logo system), `analytics/` (tracking)
+- `/src/lib/` - Utilities and custom systems
+  - `analytics/` - Privacy-first analytics implementation
+  - `db.ts` - Prisma client singleton
+  - `auth.ts` - Admin authentication utilities
+- `/public/` - Static assets (images, audio)
 - `/designs/` - Design mockups and style guide
-- `/docs/` - Comprehensive project documentation
+- `/docs/` - Project documentation
 
-### Key Features Implemented
-1. **Responsive Design**: Mobile-first approach with Tailwind CSS
-2. **Audio Player**: Custom meditation audio player with email-gated downloads
-3. **Image Optimization**: WebP format with multiple sizes for performance
-4. **Botanical Accents**: Nature-inspired design elements throughout
-5. **Component Architecture**: Modular, reusable components
+### Key Patterns
+
+1. **Component Architecture**: Section-based layouts with Container and BotanicalAccents for consistent styling
+2. **Database Access**: Singleton Prisma client pattern to prevent connection issues
+3. **Privacy-First Analytics**: Consent-based tracking with GDPR compliance
+4. **Image Optimization**: WebP format with multiple sizes for responsive loading
+5. **Type Safety**: Zod validation for forms and API routes
 
 ### Design System
-- **Colors**: Forest Deep (primary), Sage Calm, Living Green, Ocean Breath
-- **Typography**: Crimson Pro (headings), Inter (body text)
-- **Imagery**: Professional photos of Orla, optimized for web
 
-## Project Management
-
-The project is managed from an Obsidian vault located at:
-`/config/Obsidian Vault/01-Projects/Personal/OrlaMarieCoach-Website/`
-
-Current Progress: ~85% complete (Analytics Phase 1 Week 3 COMPLETED, Week 4 STARTED)
-- Homepage, About, and Services pages are production-ready  
-- Book Session, Contact, and Course Platform pages in progress
-- Analytics system: Phase 1 Weeks 1-3 complete (foundation + data collection + working dashboard)
-- Admin dashboard: Authentication working, real-time data integration complete
+- **Colors**: 
+  - Primary: Forest Deep (#2d5a27), Sage Calm (#4a7c59), Living Green (#7fb069)
+  - Accent: Ocean Breath (#87ceeb), Earth Warm (#d2691e)
+- **Typography**: Crimson Pro (headings), Inter (body)
+- **Animations**: Botanical-themed (leaf floating, gentle pulse, ripple)
 
 ## Development Notes
 
-1. **Port Configuration**: Development server runs on port 3004 (configured in package.json)
-2. **Image Handling**: Use Next.js Image component for all images
-3. **Audio Files**: Multiple formats (MP3, OGG, MP4) for browser compatibility
-4. **TypeScript**: Strict type checking enabled - run `npm run type-check` before commits
-5. **Environment Variables**: Copy `.env.example` to `.env` and configure as needed
+1. **Port Configuration**: Dev server runs on port 3004 (configured in package.json)
+2. **Environment Setup**: Copy `.env.example` to `.env.local` and configure DATABASE_URL
+3. **Admin Dev Login**: `admin@orlamariecoach.com` / `admin123!` (development only)
+4. **Database Setup**: Run `docker compose up -d` for local Postgres, then `npm run db:setup`
+5. **Type Checking**: Always run `npm run type-check` before commits
+6. **Branch Strategy**: Active development on `feature/initial-setup`, main branch is `main`
+
+## Current Status
+
+~85% complete - Analytics Phase 1 Week 3 completed
+- ✅ Homepage, About, Services pages production-ready
+- 🚧 Book Session, Contact, Course Platform in progress
+- ✅ Admin dashboard with real-time analytics
+- 🚧 Analytics Phase 1 Week 4 started
+
+## Project Management
+
+Managed from Obsidian vault at: `/config/Obsidian Vault/01-Projects/Personal/OrlaMarieCoach-Website/`
+
+Contains strategic planning, task tracking, client communications, and content strategy.

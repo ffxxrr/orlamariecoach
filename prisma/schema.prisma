@@ -235,3 +235,28 @@ model Contact {
   status    String   @default("new") // new, read, responded
   createdAt DateTime @default(now())
 }
+
+// Stakeholder feedback for preview deployments
+model Feedback {
+  id          String   @id @default(uuid())
+  page        String   // Which page the feedback was submitted from
+  type        String   // bug, suggestion, design, content, other
+  message     String
+  priority    String   @default("medium") // low, medium, high, critical
+  status      String   @default("new") // new, acknowledged, in-progress, resolved, wont-fix
+  userEmail   String?  // Optional stakeholder email for follow-up
+  userName    String?  // Optional stakeholder name
+  screenshot  String?  // Optional screenshot URL
+  browserInfo Json?    // Browser/device details for bug reports
+  metadata    Json?    // Additional context (viewport size, URL params, etc.)
+  adminNotes  String?  // Internal notes from review
+  resolvedAt  DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([page, createdAt])
+  @@index([type, createdAt])
+  @@index([status, createdAt])
+  @@index([priority, status])
+  @@index([createdAt])
+}

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Crimson_Pro } from 'next/font/google'
 import './globals.css'
 import { AnalyticsProvider } from '@/components/ui/AnalyticsProvider'
+import FeedbackProvider from '@/components/layout/FeedbackProvider'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -46,7 +47,9 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${crimsonPro.variable}`}>
       <body className="font-inter antialiased bg-pure-light text-deep-text">
         <AnalyticsProvider>
-          {children}
+          <FeedbackProvider>
+            {children}
+          </FeedbackProvider>
         </AnalyticsProvider>
       </body>
     </html>
