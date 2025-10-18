@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { projectStatus } from '@/lib/project-status'
 import type { FeedbackItem } from '@/lib/project-status'
-import prisma from '@/lib/db'
+import { getPrisma } from '@/lib/db'
 import fs from 'fs'
 import path from 'path'
 
@@ -13,6 +13,7 @@ export async function POST(request: Request) {
     const feedbackId = `feedback-${Date.now()}`
 
     // Store in database for persistence
+    const prisma = getPrisma()
     const dbFeedback = await prisma.feedback.create({
       data: {
         page: body.page,
@@ -169,6 +170,7 @@ export async function GET(request: Request) {
     if (priority) where.priority = priority
 
     // Fetch from database
+    const prisma = getPrisma()
     const feedback = await prisma.feedback.findMany({
       where,
       orderBy: [

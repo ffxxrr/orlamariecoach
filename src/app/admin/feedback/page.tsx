@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import {
   MessageSquare, RefreshCw, Filter, Bug, Lightbulb,
-  Palette, FileText, AlertCircle, CheckCircle, X
+  Palette, FileText, AlertCircle
 } from 'lucide-react'
 
 interface Feedback {
@@ -58,7 +58,6 @@ export default function FeedbackAdmin() {
   const [feedback, setFeedback] = useState<Feedback[]>([])
   const [stats, setStats] = useState<FeedbackStats | null>(null)
   const [loading, setLoading] = useState(true)
-  const [selectedFeedback, setSelectedFeedback] = useState<Feedback | null>(null)
   const [filters, setFilters] = useState({
     status: '',
     type: '',

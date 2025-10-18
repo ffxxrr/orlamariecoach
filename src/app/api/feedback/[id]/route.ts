@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import prisma from '@/lib/db'
+import { getPrisma } from '@/lib/db'
 
 export async function PATCH(
   request: NextRequest,
@@ -9,6 +9,7 @@ export async function PATCH(
     const body = await request.json()
     const { status, adminNotes } = body
 
+    const prisma = getPrisma()
     const feedback = await prisma.feedback.update({
       where: { id: params.id },
       data: {
@@ -39,6 +40,7 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+    const prisma = getPrisma()
     await prisma.feedback.delete({
       where: { id: params.id },
     })
