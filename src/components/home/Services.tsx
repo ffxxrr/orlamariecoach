@@ -2,21 +2,18 @@ import Link from 'next/link'
 
 const services = [
   {
-    icon: '🧘‍♀️',
     title: '1-on-1 Sessions',
     description: 'Personalised meditation guidance tailored to your specific needs, challenges, and goals. Experience the power of individual attention in a supportive, non-judgmental environment.',
     link: '/book-session',
     gradient: 'from-forest-deep to-sage-calm'
   },
   {
-    icon: '📚',
     title: 'Online Courses',
     description: 'Self-paced learning programmes that guide you step-by-step through foundational meditation practices. Learn at your own rhythm with lifetime access to comprehensive materials.',
     link: '/courses',
     gradient: 'from-living-green to-sage-calm'
   },
   {
-    icon: '👥',
     title: 'Group Workshops',
     description: 'Connect with like-minded individuals in supportive group settings. Experience the power of community whilst learning practical techniques for daily life.',
     link: '/workshops',
@@ -65,9 +62,8 @@ export default function Services() {
                 />
               </div>
 
-              {/* Service Icon */}
-              <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${service.gradient} flex items-center justify-center text-3xl text-white mb-6 mx-auto`}>
-                {service.icon}
+              {/* Service Icon - Decorative gradient circle */}
+              <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${service.gradient} mb-6 mx-auto`}>
               </div>
 
               {/* Content */}

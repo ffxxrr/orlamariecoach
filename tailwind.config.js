@@ -12,15 +12,16 @@ module.exports = {
         'crimson': ['var(--font-crimson)', 'Crimson Pro', 'serif'],
       },
       colors: {
-        'forest-deep': '#2d5a27',
-        'sage-calm': '#4a7c59',
-        'living-green': '#7fb069',
-        'ocean-breath': '#5a9bb5',
-        'earth-warmth': '#d4a574',
-        'pure-light': '#f8fffe',
-        'deep-text': '#2c3e50',
-        'medium-text': '#5a7c5a',
-        'light-border': '#e8f5f0',
+        // Orla's New Color Palette (October 2025)
+        'forest-deep': '#56140F',      // Deep Brown/Burgundy - Primary dark, CTAs
+        'sage-calm': '#6E5A2F',        // Dark Olive Brown - Secondary dark, text
+        'living-green': '#C9A475',     // Golden Brown - Primary brand color
+        'ocean-breath': '#C9A475',     // Mapped to Golden Brown for consistency
+        'earth-warmth': '#F1CBB8',     // Warm Peach - Accents, highlights
+        'pure-light': '#FFFCF1',       // Cream/Off-white - Backgrounds
+        'deep-text': '#000000',        // Black - Primary text
+        'medium-text': '#6E5A2F',      // Dark Olive Brown - Secondary text
+        'light-border': '#F1CBB8',     // Warm Peach - Borders, dividers
       },
       spacing: {
         'xs': '0.5rem',

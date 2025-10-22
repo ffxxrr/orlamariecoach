@@ -101,9 +101,8 @@ export default function BookingOptions() {
               <ul className="space-y-3 mb-8">
                 {option.features.map((feature, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <div className={`w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5
-                                   ${option.featured ? 'bg-white/30 text-white' : 'bg-living-green text-white'}`}>
-                      ✓
+                    <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2
+                                   ${option.featured ? 'bg-white' : 'bg-living-green'}`}>
                     </div>
                     <span className={option.featured ? 'text-white/90' : 'text-medium-text'}>
                       {feature}

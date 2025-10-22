@@ -23,7 +23,6 @@ export default function Hero() {
           Find Your Inner Peace Through{' '}
           <span className="relative">
             Authentic Meditation
-            <span className="absolute -top-2 -right-8 text-4xl">🌸</span>
           </span>
         </h1>
         

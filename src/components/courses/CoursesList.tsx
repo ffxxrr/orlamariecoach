@@ -24,8 +24,7 @@ const courses = [
     duration: "8 weeks",
     format: "Online Live + Recordings",
     nextStart: "June 10, 2025",
-    image: "/images/content/courses/foundations.webp",
-    icon: "🌱"
+    image: "/images/content/courses/foundations.webp"
   },
   {
     id: 2,
@@ -45,8 +44,7 @@ const courses = [
     duration: "6 weeks",
     format: "Online Live + Recordings",
     nextStart: "July 15, 2025",
-    image: "/images/content/courses/deepening.webp",
-    icon: "🌿"
+    image: "/images/content/courses/deepening.webp"
   },
   {
     id: 3,
@@ -66,8 +64,7 @@ const courses = [
     duration: "6 weeks",
     format: "Online Live + Recordings",
     nextStart: "August 5, 2025",
-    image: "/images/content/courses/daily-life.webp",
-    icon: "🍃"
+    image: "/images/content/courses/daily-life.webp"
   }
 ]
 
@@ -106,9 +103,8 @@ export default function CoursesList() {
             >
               <div className="grid grid-cols-1 md:grid-cols-2">
                 <div className="h-full">
-                  <ImagePlaceholder 
+                  <ImagePlaceholder
                     text={course.title}
-                    icon={course.icon || undefined}
                     aspectRatio="h-full"
                   />
                 </div>
@@ -132,22 +128,22 @@ export default function CoursesList() {
                   
                   <div className="grid grid-cols-2 gap-4 mb-6 fade-in-up">
                     <div className="flex items-center gap-2">
-                      <span className="text-forest-deep">⚡</span>
+                      <div className="w-1.5 h-1.5 bg-forest-deep rounded-full"></div>
                       <span className="text-medium-text text-sm">Level: {course.level}</span>
                     </div>
-                    
+
                     <div className="flex items-center gap-2">
-                      <span className="text-forest-deep">⏱️</span>
+                      <div className="w-1.5 h-1.5 bg-forest-deep rounded-full"></div>
                       <span className="text-medium-text text-sm">Duration: {course.duration}</span>
                     </div>
-                    
+
                     <div className="flex items-center gap-2">
-                      <span className="text-forest-deep">🌐</span>
+                      <div className="w-1.5 h-1.5 bg-forest-deep rounded-full"></div>
                       <span className="text-medium-text text-sm">Format: {course.format}</span>
                     </div>
-                    
+
                     <div className="flex items-center gap-2">
-                      <span className="text-forest-deep">📅</span>
+                      <div className="w-1.5 h-1.5 bg-forest-deep rounded-full"></div>
                       <span className="text-medium-text text-sm">Next: {course.nextStart}</span>
                     </div>
                   </div>
@@ -157,7 +153,7 @@ export default function CoursesList() {
                     <ul className="space-y-2">
                       {course.features.map((feature, i) => (
                         <li key={i} className="flex items-start gap-2 text-medium-text">
-                          <span className="text-forest-deep">✓</span>
+                          <div className="w-1.5 h-1.5 bg-forest-deep rounded-full mt-2 flex-shrink-0"></div>
                           <span>{feature}</span>
                         </li>
                       ))}

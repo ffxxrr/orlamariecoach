@@ -3,12 +3,10 @@ import { CelticTriskelion } from '@/components/brand'
 
 const pillarsLeft = [
   {
-    icon: '🌱',
     title: 'Organic',
     description: 'Natural progression that honors your individual pace and authentic needs, allowing meditation to unfold organically in your life.'
   },
   {
-    icon: '🧠',
     title: 'Mindful',
     description: 'Conscious awareness brought to every moment, cultivating a deeper understanding of your thoughts, emotions, and responses.'
   }
@@ -16,12 +14,10 @@ const pillarsLeft = [
 
 const pillarsRight = [
   {
-    icon: '🌸',
     title: 'Compassionate',
     description: 'Gentle, non-judgmental approach that meets you exactly where you are, fostering growth through kindness and understanding.'
   },
   {
-    icon: '🌊',
     title: 'Flowing',
     description: 'Adaptive practices that move with life\'s changes, creating sustainable habits that strengthen rather than strain your daily rhythm.'
   }
@@ -29,22 +25,18 @@ const pillarsRight = [
 
 const benefits = [
   {
-    icon: '⏰',
     title: 'Sustainable Practice',
     description: 'Build a meditation routine that fits naturally into your life without overwhelming your schedule.'
   },
   {
-    icon: '🎯',
     title: 'Personal Relevance',
     description: 'Techniques adapted to your specific challenges, goals, and learning style for maximum effectiveness.'
   },
   {
-    icon: '🌊',
     title: 'Gentle Progress',
     description: 'Compassionate approach that meets you where you are, fostering growth without pressure or judgment.'
   },
   {
-    icon: '🔄',
     title: 'Lasting Change',
     description: 'Integration strategies that help meditation principles flow into all areas of your daily experience.'
   }
@@ -100,8 +92,7 @@ export default function OMMethod() {
                     }}
                   />
                 </div>
-                <div className="text-3xl mb-3">{pillar.icon}</div>
-                <h3 className="font-crimson text-lg font-medium text-forest-deep mb-3">
+                <h3 className="font-crimson text-lg font-medium text-forest-deep mb-4">
                   {pillar.title}
                 </h3>
                 <p className="text-sm text-medium-text leading-relaxed">
@@ -147,8 +138,7 @@ export default function OMMethod() {
                     }}
                   />
                 </div>
-                <div className="text-3xl mb-3">{pillar.icon}</div>
-                <h3 className="font-crimson text-lg font-medium text-forest-deep mb-3">
+                <h3 className="font-crimson text-lg font-medium text-forest-deep mb-4">
                   {pillar.title}
                 </h3>
                 <p className="text-sm text-medium-text leading-relaxed">
@@ -167,8 +157,7 @@ export default function OMMethod() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => (
               <div key={index} className="text-center p-4">
-                <div className="text-3xl mb-4 block">{benefit.icon}</div>
-                <h4 className="font-crimson text-lg font-medium text-forest-deep mb-2">
+                <h4 className="font-crimson text-lg font-medium text-forest-deep mb-3">
                   {benefit.title}
                 </h4>
                 <p className="text-sm text-medium-text leading-relaxed">

@@ -34,9 +34,7 @@ export default function AboutCredentials() {
             <div className="space-y-8">
               <div className="bg-white/70 backdrop-blur-sm rounded-lg p-6 shadow-sm">
                 <div className="flex gap-4 items-start">
-                  <div className="w-12 h-12 bg-forest-deep/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">🎓</span>
-                  </div>
+                  <div className="w-3 h-3 bg-forest-deep rounded-full flex-shrink-0 mt-2"></div>
                   <div>
                     <h3 className="text-xl text-forest-deep font-medium mb-2">MBSR Certification</h3>
                     <p className="text-medium-text">
@@ -49,9 +47,7 @@ export default function AboutCredentials() {
               
               <div className="bg-white/70 backdrop-blur-sm rounded-lg p-6 shadow-sm">
                 <div className="flex gap-4 items-start">
-                  <div className="w-12 h-12 bg-forest-deep/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">👶</span>
-                  </div>
+                  <div className="w-3 h-3 bg-forest-deep rounded-full flex-shrink-0 mt-2"></div>
                   <div>
                     <h3 className="text-xl text-forest-deep font-medium mb-2">Kids Mindfulness Certification</h3>
                     <p className="text-medium-text">
@@ -64,9 +60,7 @@ export default function AboutCredentials() {
               
               <div className="bg-white/70 backdrop-blur-sm rounded-lg p-6 shadow-sm">
                 <div className="flex gap-4 items-start">
-                  <div className="w-12 h-12 bg-forest-deep/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">🧘‍♀️</span>
-                  </div>
+                  <div className="w-3 h-3 bg-forest-deep rounded-full flex-shrink-0 mt-2"></div>
                   <div>
                     <h3 className="text-xl text-forest-deep font-medium mb-2">Teaching Experience</h3>
                     <p className="text-medium-text">
@@ -79,9 +73,7 @@ export default function AboutCredentials() {
               
               <div className="bg-white/70 backdrop-blur-sm rounded-lg p-6 shadow-sm">
                 <div className="flex gap-4 items-start">
-                  <div className="w-12 h-12 bg-forest-deep/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">✨</span>
-                  </div>
+                  <div className="w-3 h-3 bg-forest-deep rounded-full flex-shrink-0 mt-2"></div>
                   <div>
                     <h3 className="text-xl text-forest-deep font-medium mb-2">The OM Method Developer</h3>
                     <p className="text-medium-text">
