@@ -1,6 +1,5 @@
 import Hero from '@/components/home/Hero'
 import Services from '@/components/home/Services'
-import OMMethod from '@/components/home/OMMethod'
 import About from '@/components/home/About'
 import FreeMeditationSection from '@/components/home/FreeMeditationSection'
 import Testimonials from '@/components/home/Testimonials'
@@ -25,9 +24,6 @@ export default function HomePage() {
 
         {/* Divider */}
         <SectionDivider variant="dots" />
-
-        {/* OM Method */}
-        <OMMethod />
 
         {/* Free Meditation */}
         <FreeMeditationSection />
