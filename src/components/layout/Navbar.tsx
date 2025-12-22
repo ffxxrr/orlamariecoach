@@ -83,29 +83,32 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <ul className="hidden lg:flex items-center space-x-6">
+          <ul className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <Link 
-                  href={link.href} 
-                  className={`font-medium px-3 py-2 rounded-full transition-all duration-300 ${
+                <Link
+                  href={link.href}
+                  className={`relative font-medium px-4 py-2 rounded-full transition-all duration-300 ${
                     pathname === link.href
-                      ? 'text-forest-deep bg-forest-deep/10'
-                      : 'text-deep-text hover:text-forest-deep hover:bg-forest-deep/10'
+                      ? 'text-forest-deep'
+                      : 'text-medium-text hover:text-forest-deep'
                   }`}
                 >
                   {link.label}
+                  {pathname === link.href && (
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-forest-deep rounded-full" />
+                  )}
                 </Link>
               </li>
             ))}
           </ul>
 
           {/* CTA Button */}
-          <Link href="/book-session" className="hidden lg:inline-block">
+          <Link href="/book-session" className="hidden lg:inline-block group">
             <span className="sr-only">Book Session</span>
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-forest-deep to-sage-calm text-white px-6 py-3 rounded-full font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6l4 2" />
+            <div className="inline-flex items-center gap-2 bg-forest-deep text-white px-5 py-2.5 rounded-full font-medium hover:bg-sage-calm hover:shadow-md transition-all duration-300">
+              <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               Book Session
             </div>

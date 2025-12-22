@@ -17,19 +17,19 @@ export default function CelticTriskelion({
       className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Background Gradient Circle */}
+      {/* Background Gradient Circle - Earthy palette */}
       <defs>
         <radialGradient id="bgGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-          <stop offset="0%" stopColor="#c8e6cb" />
-          <stop offset="100%" stopColor="#79b98a" />
+          <stop offset="0%" stopColor="#F1CBB8" />
+          <stop offset="100%" stopColor="#C9A475" />
         </radialGradient>
       </defs>
-      
+
       {/* Background Circle */}
       <circle cx="50" cy="50" r="48" fill="url(#bgGradient)" />
-      
+
       {/* Celtic Triskelion Symbol */}
-      <g fill="#324238">
+      <g fill="#56140F">
         {/* First Spiral */}
         <path d="M50,50 C53,40 60,35 68,38 C76,41 78,52 72,58 C66,64 55,62 52,54 C51,52 50,50 50,50 Z" />
         <path d="M68,38 C70,32 68,25 62,22 C56,19 49,22 46,28 C43,34 46,41 52,44 C52,44 62,38 68,38 Z" />

@@ -1,5 +1,8 @@
+'use client'
+
 import React from 'react'
 import { CelticTriskelion } from '@/components/brand'
+import ScrollReveal from '@/components/ui/ScrollReveal'
 
 const pillarsLeft = [
   {
@@ -45,60 +48,63 @@ const benefits = [
 export default function OMMethod() {
   return (
     <section className="py-16 lg:py-24 bg-gradient-to-br from-light-border/30 via-pure-light to-light-border/30 relative overflow-hidden">
-      {/* Background Decorations */}
+      {/* Background Decorations - Earthy palette */}
       <div className="absolute top-[5%] left-[3%] w-12 h-16 opacity-15">
-        <div 
+        <div
           className="w-full h-full bg-no-repeat bg-contain animate-sway"
           style={{
-            backgroundImage: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 70'><path d='M25 10 Q35 25 40 45 Q35 65 25 68 Q15 65 10 45 Q15 25 25 10' fill='%234a7c59' opacity='0.15'/><circle cx='28' cy='30' r='2' fill='%237fb069' opacity='0.2'/><circle cx='22' cy='50' r='1.5' fill='%235a9bb5' opacity='0.2'/></svg>")`
+            backgroundImage: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 70'><path d='M25 10 Q35 25 40 45 Q35 65 25 68 Q15 65 10 45 Q15 25 25 10' fill='%236E5A2F' opacity='0.15'/><circle cx='28' cy='30' r='2' fill='%23C9A475' opacity='0.2'/><circle cx='22' cy='50' r='1.5' fill='%23F1CBB8' opacity='0.2'/></svg>")`
           }}
         />
       </div>
-      
+
       <div className="absolute bottom-[8%] right-[5%] w-16 h-16 opacity-15">
-        <div 
+        <div
           className="w-full h-full bg-no-repeat bg-contain animate-float-flower"
           style={{
-            backgroundImage: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='30' r='8' fill='%23d4a574' opacity='0.1'/><circle cx='25' cy='55' r='6' fill='%237fb069' opacity='0.1'/><circle cx='75' cy='55' r='6' fill='%235a9bb5' opacity='0.1'/><circle cx='50' cy='75' r='5' fill='%23d4a574' opacity='0.1'/></svg>")`
+            backgroundImage: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='30' r='8' fill='%23F1CBB8' opacity='0.1'/><circle cx='25' cy='55' r='6' fill='%23C9A475' opacity='0.1'/><circle cx='75' cy='55' r='6' fill='%236E5A2F' opacity='0.1'/><circle cx='50' cy='75' r='5' fill='%23F1CBB8' opacity='0.1'/></svg>")`
           }}
         />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="font-crimson text-3xl lg:text-4xl text-forest-deep mb-6">
-            The OM Method
-          </h2>
-          <p className="text-lg text-medium-text max-w-3xl mx-auto leading-relaxed">
-            A unique approach that blends ancient wisdom with modern understanding, creating a pathway to lasting inner peace.
-          </p>
-        </div>
+        <ScrollReveal animation="fadeInUp">
+          <div className="text-center mb-16">
+            <h2 className="font-crimson text-3xl lg:text-4xl text-forest-deep mb-6">
+              The OM Method
+            </h2>
+            <p className="text-lg text-medium-text max-w-3xl mx-auto leading-relaxed">
+              A unique approach that blends ancient wisdom with modern understanding, creating a pathway to lasting inner peace.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* Method Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center mb-16">
           {/* Left Pillars */}
           <div className="space-y-6 lg:order-1">
             {pillarsLeft.map((pillar, index) => (
-              <div 
-                key={index}
-                className="group bg-white p-6 rounded-xl shadow-sm border border-light-border hover:shadow-md hover:-translate-y-1 transition-all duration-300 text-center relative overflow-hidden"
-              >
-                <div className="absolute -top-1 -right-1 w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div 
-                    className="w-full h-full bg-no-repeat bg-contain animate-float-flower"
-                    style={{
-                      backgroundImage: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='25' fill='%237fb069' opacity='0.1'/></svg>")`
-                    }}
-                  />
+              <ScrollReveal key={index} animation="fadeInLeft" delay={index * 150}>
+                <div
+                  className="group bg-white p-6 rounded-xl shadow-sm border border-light-border hover:shadow-md hover:-translate-y-1 transition-all duration-300 text-center relative overflow-hidden"
+                >
+                  <div className="absolute -top-1 -right-1 w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div
+                      className="w-full h-full bg-no-repeat bg-contain animate-float-flower"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='25' fill='%23C9A475' opacity='0.1'/></svg>")`
+                      }}
+                    />
+                  </div>
+                  <h3 className="font-crimson text-lg font-medium text-forest-deep mb-4">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-sm text-medium-text leading-relaxed">
+                    {pillar.description}
+                  </p>
                 </div>
-                <h3 className="font-crimson text-lg font-medium text-forest-deep mb-4">
-                  {pillar.title}
-                </h3>
-                <p className="text-sm text-medium-text leading-relaxed">
-                  {pillar.description}
-                </p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
 
@@ -126,25 +132,26 @@ export default function OMMethod() {
           {/* Right Pillars */}
           <div className="space-y-6 lg:order-3">
             {pillarsRight.map((pillar, index) => (
-              <div 
-                key={index}
-                className="group bg-white p-6 rounded-xl shadow-sm border border-light-border hover:shadow-md hover:-translate-y-1 transition-all duration-300 text-center relative overflow-hidden"
-              >
-                <div className="absolute -top-1 -right-1 w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div 
-                    className="w-full h-full bg-no-repeat bg-contain animate-float-flower"
-                    style={{
-                      backgroundImage: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='25' fill='%237fb069' opacity='0.1'/></svg>")`
-                    }}
-                  />
+              <ScrollReveal key={index} animation="fadeInRight" delay={index * 150}>
+                <div
+                  className="group bg-white p-6 rounded-xl shadow-sm border border-light-border hover:shadow-md hover:-translate-y-1 transition-all duration-300 text-center relative overflow-hidden"
+                >
+                  <div className="absolute -top-1 -right-1 w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div
+                      className="w-full h-full bg-no-repeat bg-contain animate-float-flower"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='25' fill='%23C9A475' opacity='0.1'/></svg>")`
+                      }}
+                    />
+                  </div>
+                  <h3 className="font-crimson text-lg font-medium text-forest-deep mb-4">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-sm text-medium-text leading-relaxed">
+                    {pillar.description}
+                  </p>
                 </div>
-                <h3 className="font-crimson text-lg font-medium text-forest-deep mb-4">
-                  {pillar.title}
-                </h3>
-                <p className="text-sm text-medium-text leading-relaxed">
-                  {pillar.description}
-                </p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>

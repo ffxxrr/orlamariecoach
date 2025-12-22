@@ -82,68 +82,52 @@ export default function BrandSystem() {
       <section className="mb-12">
         <h2 className="text-2xl font-crimson text-forest-deep mb-4 border-b pb-2">Brand Colors</h2>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           <div>
             <div className="h-24 bg-forest-deep rounded-lg shadow-sm mb-2"></div>
             <div className="text-sm">
               <p className="font-medium">Forest Deep</p>
-              <p className="text-medium-text">#2d5a27</p>
+              <p className="text-medium-text">#56140F</p>
             </div>
           </div>
-          
+
           <div>
             <div className="h-24 bg-sage-calm rounded-lg shadow-sm mb-2"></div>
             <div className="text-sm">
               <p className="font-medium">Sage Calm</p>
-              <p className="text-medium-text">#4a7c59</p>
+              <p className="text-medium-text">#6E5A2F</p>
             </div>
           </div>
-          
+
           <div>
             <div className="h-24 bg-living-green rounded-lg shadow-sm mb-2"></div>
             <div className="text-sm">
               <p className="font-medium">Living Green</p>
-              <p className="text-medium-text">#7fb069</p>
+              <p className="text-medium-text">#C9A475</p>
             </div>
           </div>
-          
-          <div>
-            <div className="h-24 bg-ocean-breath rounded-lg shadow-sm mb-2"></div>
-            <div className="text-sm">
-              <p className="font-medium">Ocean Breath</p>
-              <p className="text-medium-text">#5a9bb5</p>
-            </div>
-          </div>
-          
+
           <div>
             <div className="h-24 bg-earth-warmth rounded-lg shadow-sm mb-2"></div>
             <div className="text-sm">
               <p className="font-medium">Earth Warmth</p>
-              <p className="text-medium-text">#d4a574</p>
+              <p className="text-medium-text">#F1CBB8</p>
             </div>
           </div>
-          
+
           <div>
             <div className="h-24 bg-pure-light rounded-lg shadow-sm mb-2 border border-light-border"></div>
             <div className="text-sm">
               <p className="font-medium">Pure Light</p>
-              <p className="text-medium-text">#f8fffe</p>
+              <p className="text-medium-text">#FFFCF1</p>
             </div>
           </div>
-          
+
           <div>
             <div className="h-24 bg-deep-text rounded-lg shadow-sm mb-2"></div>
             <div className="text-sm">
               <p className="font-medium">Deep Text</p>
-              <p className="text-medium-text">#2c3e50</p>
-            </div>
-          </div>
-          
-          <div>
-            <div className="h-24 bg-medium-text rounded-lg shadow-sm mb-2"></div>
-            <div className="text-sm">
-              <p className="font-medium">Medium Text</p>
-              <p className="text-medium-text">#5a7c5a</p>
+              <p className="text-medium-text">#000000</p>
             </div>
           </div>
         </div>

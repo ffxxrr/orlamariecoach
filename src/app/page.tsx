@@ -9,71 +9,46 @@ import Newsletter from '@/components/home/Newsletter'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import BotanicalAccents from '@/components/ui/BotanicalAccents'
-import Container from '@/components/ui/Container'
-import Section from '@/components/ui/Section'
-import Divider from '@/components/ui/Divider'
-// Analytics handled by AnalyticsProvider
+import SectionDivider from '@/components/ui/SectionDivider'
 
 export default function HomePage() {
-  // Page view tracking handled by AnalyticsProvider
-
   return (
     <>
       <BotanicalAccents />
       <Navbar />
       <main>
-        {/* Hero is full-bleed, not wrapped in Container */}
+        {/* Hero - full-bleed video background */}
         <Hero />
-        <Section padded className="bg-white/60">
-          <Container>
-            <Services />
-          </Container>
-        </Section>
-        <Section padded={false}>
-          <Container>
-            <Divider className="my-2" />
-          </Container>
-        </Section>
-        <Section padded>
-          <Container>
-            <OMMethod />
-          </Container>
-        </Section>
-        <Section padded className="bg-white/60">
-          <Container>
-            <FreeMeditationSection />
-          </Container>
-        </Section>
-        <Section padded={false}>
-          <Container>
-            <Divider className="my-2" />
-          </Container>
-        </Section>
-        <Section padded>
-          <Container>
-            <About />
-          </Container>
-        </Section>
-        <Section padded className="bg-white/60">
-          <Container>
-            <Testimonials />
-          </Container>
-        </Section>
-        <Section padded={false}>
-          <Container>
-            <Divider className="my-2" />
-          </Container>
-        </Section>
-        <Section padded>
-          <Container>
-            <FeaturedCourse />
-          </Container>
-        </Section>
-        <Section padded className="bg-white/60">
-          <Container>
-            <Newsletter />
-          </Container>
-        </Section>
+
+        {/* Services */}
+        <Services />
+
+        {/* Divider */}
+        <SectionDivider variant="dots" />
+
+        {/* OM Method */}
+        <OMMethod />
+
+        {/* Free Meditation */}
+        <FreeMeditationSection />
+
+        {/* Divider */}
+        <SectionDivider variant="line" />
+
+        {/* About Orla */}
+        <About />
+
+        {/* Testimonials */}
+        <Testimonials />
+
+        {/* Divider */}
+        <SectionDivider variant="dots" />
+
+        {/* Featured Course */}
+        <FeaturedCourse />
+
+        {/* Newsletter */}
+        <Newsletter />
       </main>
       <Footer />
     </>

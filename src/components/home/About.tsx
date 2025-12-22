@@ -1,14 +1,17 @@
+'use client'
+
 import Link from 'next/link'
+import ScrollReveal from '@/components/ui/ScrollReveal'
 
 export default function About() {
   return (
     <section className="py-16 lg:py-24 bg-gradient-to-br from-pure-light via-light-border/50 to-pure-light relative">
-      {/* Decorative Element */}
+      {/* Decorative Element - Earthy palette */}
       <div className="absolute bottom-[10%] right-[5%] w-16 h-20 opacity-15">
-        <div 
+        <div
           className="w-full h-full bg-no-repeat bg-contain animate-sway"
           style={{
-            backgroundImage: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 80'><path d='M30 5 Q45 25 50 45 Q45 65 30 75 Q15 65 10 45 Q15 25 30 5' fill='%234a7c59' opacity='0.15'/><path d='M30 5 L30 75' stroke='%232d5a27' stroke-width='2' opacity='0.2'/><circle cx='35' cy='20' r='2' fill='%237fb069' opacity='0.3'/><circle cx='25' cy='35' r='1.5' fill='%235a9bb5' opacity='0.3'/><circle cx='35' cy='50' r='2' fill='%23d4a574' opacity='0.3'/></svg>")`
+            backgroundImage: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 80'><path d='M30 5 Q45 25 50 45 Q45 65 30 75 Q15 65 10 45 Q15 25 30 5' fill='%236E5A2F' opacity='0.15'/><path d='M30 5 L30 75' stroke='%2356140F' stroke-width='2' opacity='0.2'/><circle cx='35' cy='20' r='2' fill='%23C9A475' opacity='0.3'/><circle cx='25' cy='35' r='1.5' fill='%23F1CBB8' opacity='0.3'/><circle cx='35' cy='50' r='2' fill='%23C9A475' opacity='0.3'/></svg>")`
           }}
         />
       </div>
@@ -16,8 +19,9 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Image/Avatar */}
-          <div className="relative">
-            <div className="w-full max-w-md mx-auto h-96 lg:h-[400px] bg-gradient-to-br from-sage-calm to-living-green rounded-2xl flex items-center justify-center text-white relative overflow-hidden">
+          <ScrollReveal animation="fadeInLeft" duration={700}>
+            <div className="relative">
+              <div className="w-full max-w-md mx-auto h-96 lg:h-[400px] bg-gradient-to-br from-sage-calm to-living-green rounded-2xl flex items-center justify-center text-white relative overflow-hidden">
               {/* Background decoration */}
               <div className="absolute top-3 left-3 w-6 h-6 opacity-30">
                 <div 
@@ -34,13 +38,15 @@ export default function About() {
                 </svg>
               </div>
             </div>
-          </div>
+            </div>
+          </ScrollReveal>
 
           {/* Content */}
-          <div className="space-y-6">
-            <h2 className="font-crimson text-3xl lg:text-4xl text-forest-deep">
-              Meet Orla Marie
-            </h2>
+          <ScrollReveal animation="fadeInRight" duration={700} delay={200}>
+            <div className="space-y-6">
+              <h2 className="font-crimson text-3xl lg:text-4xl text-forest-deep">
+                Meet Orla Marie
+              </h2>
             
             <div className="space-y-4 text-lg leading-relaxed">
               <p className="text-medium-text">
@@ -85,13 +91,14 @@ export default function About() {
               </ul>
             </div>
 
-            <Link 
-              href="/about"
-              className="inline-block bg-transparent border-2 border-forest-deep text-forest-deep px-8 py-3 rounded-full font-medium hover:bg-forest-deep hover:text-white transition-all duration-300"
-            >
-              Read My Story
-            </Link>
-          </div>
+              <Link
+                href="/about"
+                className="inline-block bg-transparent border-2 border-forest-deep text-forest-deep px-8 py-3 rounded-full font-medium hover:bg-forest-deep hover:text-white transition-all duration-300"
+              >
+                Read My Story
+              </Link>
+            </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>
