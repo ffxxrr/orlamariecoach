@@ -49,6 +49,10 @@ module.exports = {
         'gentle-pulse': 'gentlePulse 6s ease-in-out infinite',
         'ripple': 'ripple 4s ease-in-out infinite',
         'fade-in-up': 'fadeInUp 0.6s ease-out',
+        // Mobile hero effects
+        'ken-burns': 'kenBurns 25s ease-in-out infinite',
+        'breathe': 'breathe 6s ease-in-out infinite',
+        'light-drift': 'lightDrift 12s ease-in-out infinite',
       },
       keyframes: {
         floatLeaf: {
@@ -83,6 +87,24 @@ module.exports = {
             transform: 'translateY(0)',
           },
         },
+        // Mobile hero effects
+        kenBurns: {
+          '0%': { transform: 'scale(1) translate(0, 0)' },
+          '50%': { transform: 'scale(1.1) translate(-2%, -1%)' },
+          '100%': { transform: 'scale(1) translate(0, 0)' },
+        },
+        breathe: {
+          '0%, 100%': { opacity: '0.15' },
+          '50%': { opacity: '0.35' },
+        },
+        lightDrift: {
+          '0%': { transform: 'translateX(-5%) rotate(0deg)', opacity: '0.03' },
+          '50%': { transform: 'translateX(5%) rotate(2deg)', opacity: '0.08' },
+          '100%': { transform: 'translateX(-5%) rotate(0deg)', opacity: '0.03' },
+        },
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
     },
   },

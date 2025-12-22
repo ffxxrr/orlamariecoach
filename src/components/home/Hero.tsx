@@ -1,64 +1,18 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useEventTracker } from '@/components/ui/AnalyticsProvider'
+import VideoHeroBackground from '@/components/ui/VideoHeroBackground'
 
 export default function Hero() {
   const { trackNavigation } = useEventTracker()
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [videoLoaded, setVideoLoaded] = useState(false)
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
-
-  useEffect(() => {
-    // Check for reduced motion preference
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setPrefersReducedMotion(mediaQuery.matches)
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches)
-    }
-    mediaQuery.addEventListener('change', handleChange)
-    return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [])
-
-  useEffect(() => {
-    // Handle video load state
-    const video = videoRef.current
-    if (video) {
-      const handleCanPlay = () => setVideoLoaded(true)
-      video.addEventListener('canplay', handleCanPlay)
-      return () => video.removeEventListener('canplay', handleCanPlay)
-    }
-  }, [])
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Video Background */}
-      {!prefersReducedMotion && (
-        <video
-          ref={videoRef}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-            videoLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
-          poster="/media/sora/hero-forest-light-poster.jpg"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-        >
-          <source src="/media/sora/hero-forest-light.mp4" type="video/mp4" />
-        </video>
-      )}
-
-      {/* Poster fallback for reduced motion or before video loads */}
-      <div
-        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-          videoLoaded && !prefersReducedMotion ? 'opacity-0' : 'opacity-100'
-        }`}
-        style={{
-          backgroundImage: 'url(/media/sora/hero-forest-light-poster.jpg)',
-        }}
+      {/* Video/Poster Background */}
+      <VideoHeroBackground
+        videoSrc="/media/sora/hero-forest-light.mp4"
+        posterSrc="/media/sora/hero-forest-light-poster.jpg"
+        mobileFocalPoint="center center"
       />
 
       {/* Overlay for text contrast */}
