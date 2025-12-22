@@ -24,4 +24,10 @@ Wrap up the current development session for OrlaMarieCoach.
 
 5. **Final output** - Provide a one-liner summary I could paste into a commit message or note.
 
-Do NOT commit without my approval. Do NOT push to remote without explicit request.
+6. **Commit & Push** - After user approval:
+   - Stage all changes with `git add -A`
+   - Commit with descriptive message
+   - Push to origin main
+   - Confirm deployment to Vercel
+
+Do NOT commit or push without my explicit approval.
