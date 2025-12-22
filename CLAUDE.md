@@ -4,95 +4,176 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-OrlaMarieCoach is a professional Next.js 14 website for meditation and mindfulness coaching services. Features include custom privacy-focused analytics, an online course platform, and Digital Samba integration for bookings.
+OrlaMarieCoach is a professional Next.js 14 website for Orla Marie, an Irish meditation and mindfulness coach from Donegal with 30 years of practice and 500+ clients helped. The site targets both UK/Ireland and the US Irish diaspora market (32+ million Irish-Americans).
+
+**Vision:** Create a beautiful, engaging website that honors Irish heritage and enables sustainable revenue through courses, 1:1 sessions, and packages.
+
+**Live URL:** https://orlamariecoach.vercel.app
+**GitHub:** https://github.com/ffxxrr/orlamariecoach
 
 ## Technology Stack
 
 - **Framework**: Next.js 14 with App Router
 - **Language**: TypeScript (strict mode enabled)
-- **Styling**: Tailwind CSS with custom nature-inspired design system
+- **Styling**: Tailwind CSS with earthy color palette
 - **Database**: PostgreSQL with Prisma ORM
-- **Analytics**: Custom privacy-first analytics system
-- **Authentication**: Admin authentication system
+- **Deployment**: Vercel (auto-deploys from main)
+- **Analytics**: Custom privacy-first system (partial)
 
 ## Commands
 
 ### Development
 ```bash
 npm run dev          # Start development server on port 3004
-npm run build        # Build production application (includes Prisma generation)
-npm run start        # Start production server
+npm run build        # Build production (includes Prisma generation)
+npm run type-check   # TypeScript checking - run before commits
 npm run lint         # Run ESLint
-npm run type-check   # Run TypeScript type checking
 ```
 
 ### Database
 ```bash
-npm run db:setup     # Generate Prisma client and push schema to database
-npm run db:studio    # Open Prisma Studio for database management
-npm run db:reset     # Reset database (WARNING: destroys all data)
+npm run db:setup     # Generate Prisma client and push schema
+npm run db:studio    # Open Prisma Studio GUI
+npm run db:reset     # Reset database (WARNING: destroys data)
 ```
 
-### Testing
+### Deployment
 ```bash
-npm run test         # Run Jest tests
-npm run test:watch   # Run tests in watch mode
+git push origin main    # Auto-deploys to Vercel
 ```
 
-## Architecture Overview
+## Architecture
 
 ### Directory Structure
-- `/src/app/` - Next.js App Router pages and layouts
-  - Pages: homepage, about, services, booking, contact, courses, brand
-  - Admin dashboard with authentication and real-time analytics
-  - API routes for health checks, analytics, and admin functions
-- `/src/components/` - Feature-based component organization
-  - Page-specific components: `home/`, `about/`, `services/`, `booking/`, `contact/`, `courses/`
-  - Shared components: `layout/` (Navbar, Footer), `ui/` (reusable UI components)
-  - Specialized: `audio/` (meditation player), `brand/` (logo system), `analytics/` (tracking)
-- `/src/lib/` - Utilities and custom systems
-  - `analytics/` - Privacy-first analytics implementation
-  - `db.ts` - Prisma client singleton
-  - `auth.ts` - Admin authentication utilities
-- `/public/` - Static assets (images, audio)
-- `/designs/` - Design mockups and style guide
-- `/docs/` - Project documentation
+```
+/src/app/           # Next.js App Router pages
+  /about/           # About page
+  /services/        # Services page
+  /courses/         # Courses page
+  /book-session/    # Booking page
+  /contact/         # Contact page
+  /admin/           # Admin dashboard
+  /api/             # API routes
+/src/components/    # Feature-based components
+  /home/            # Homepage sections
+  /layout/          # Navbar, Footer
+  /brand/           # Logo, Celtic elements
+  /ui/              # Shared components
+  /feedback/        # Stakeholder feedback widget
+/src/lib/           # Utilities
+  /analytics/       # Tracking system
+  db.ts             # Prisma singleton
+/content/copy/      # Written content
+/public/            # Static assets
+/.claude/commands/  # Slash commands for session management
+```
 
-### Key Patterns
+### Key Components
+- `CelticTriskelion.tsx` - Celtic branding SVG
+- `AudioPlayer.tsx` - Meditation sample player
+- `FeedbackWidget.tsx` - Stakeholder feedback collection
+- `BotanicalAccents.tsx` - Nature-themed decorations
 
-1. **Component Architecture**: Section-based layouts with Container and BotanicalAccents for consistent styling
-2. **Database Access**: Singleton Prisma client pattern to prevent connection issues
-3. **Privacy-First Analytics**: Consent-based tracking with GDPR compliance
-4. **Image Optimization**: WebP format with multiple sizes for responsive loading
-5. **Type Safety**: Zod validation for forms and API routes
+## Design System
 
-### Design System
+### Color Palette (October 2025 - Orla Approved)
+```javascript
+colors: {
+  'forest-deep': '#56140F',      // Deep Burgundy - CTAs
+  'sage-calm': '#6E5A2F',        // Dark Olive - Secondary text
+  'living-green': '#C9A475',     // Golden Brown - Primary brand
+  'earth-warmth': '#F1CBB8',     // Warm Peach - Accents
+  'pure-light': '#FFFCF1',       // Cream - Backgrounds
+  'deep-text': '#000000',        // Black - Primary text
+}
+```
 
-- **Colors**: 
-  - Primary: Forest Deep (#2d5a27), Sage Calm (#4a7c59), Living Green (#7fb069)
-  - Accent: Ocean Breath (#87ceeb), Earth Warm (#d2691e)
-- **Typography**: Crimson Pro (headings), Inter (body)
-- **Animations**: Botanical-themed (leaf floating, gentle pulse, ripple)
+### Typography
+- **Headings**: Crimson Pro (elegant serif)
+- **Body**: Inter (clean sans-serif)
+
+### Design Reference
+Orla referenced [mindfulnesspatagonia.com](https://mindfulnesspatagonia.com/) for inspiration - warm earthy tones, generous whitespace, nature photography.
+
+## Business Context
+
+### Pricing (Confirmed)
+- Individual Session: €100/hour
+- 6-Session Package: €400 (33% savings)
+- Online Courses: €250
+
+### Payment Methods
+- Revolut, PayPal (current)
+- Stripe (to be added)
+
+### Target Audience
+- Women 35-55 seeking mindfulness guidance
+- UK/Ireland market (primary)
+- US Irish diaspora (growth opportunity)
 
 ## Development Notes
 
-1. **Port Configuration**: Dev server runs on port 3004 (configured in package.json)
-2. **Environment Setup**: Copy `.env.example` to `.env.local` and configure DATABASE_URL
-3. **Admin Dev Login**: `admin@orlamariecoach.com` / `admin123!` (development only)
-4. **Database Setup**: Run `docker compose up -d` for local Postgres, then `npm run db:setup`
-5. **Type Checking**: Always run `npm run type-check` before commits
-6. **Branch Strategy**: Active development on `feature/initial-setup`, main branch is `main`
+1. **Port**: Dev server runs on port 3004
+2. **Environment**: Copy `.env.example` to `.env.local`
+3. **Admin Login**: `admin@orlamariecoach.com` / `admin123!` (dev only)
+4. **Database**: `docker compose up -d` then `npm run db:setup`
+5. **Type Check**: Always run before commits
 
 ## Current Status
 
-~85% complete - Analytics Phase 1 Week 3 completed
-- ✅ Homepage, About, Services pages production-ready
-- 🚧 Book Session, Contact, Course Platform in progress
-- ✅ Admin dashboard with real-time analytics
-- 🚧 Analytics Phase 1 Week 4 started
+**Phase:** Design iteration with stakeholder
+
+### Completed
+- Core website structure (6 pages)
+- New earthy color palette
+- Emoji removal (per Orla's feedback)
+- Feedback widget system
+- Admin dashboard
+- Basic analytics tracking
+
+### In Progress
+- Visual polish (photography, animations)
+- Payment integration (Stripe)
+- Course platform details
+- Final content placement
+
+### Pending
+- Professional photography from Orla
+- Final testimonials collection
+- SEO optimization
+- Launch preparation
 
 ## Project Management
 
-Managed from Obsidian vault at: `/config/Obsidian Vault/01-Projects/Personal/OrlaMarieCoach-Website/`
+All project planning and session tracking lives in Obsidian (not in this repo).
 
-Contains strategic planning, task tracking, client communications, and content strategy.
+**Obsidian Vault:** `/Users/conalmullan/Documents/Obsidian Vault/01-Projects/Personal/OrlaMarieCoach-Website-V2/`
+
+Key files:
+- `BACKLOG.md` - Living task list, updated each session
+- `README.md` - Project overview and navigation
+- `01-09` docs - Vision, strategy, roadmap, etc.
+
+### Slash Commands
+
+Use these to manage dev sessions:
+- `/start` - Load context from Obsidian, check feedback, show git status
+- `/end` - Summarize session, update BACKLOG.md, prep for next session
+- `/feedback` - Check Orla's feedback from Vercel API
+- `/status` - Quick project health check
+
+## Stakeholder Feedback
+
+**Client:** Orla Marie Mullan (ommullan@gmail.com)
+**Method:** Feedback widget on Vercel deployment
+
+### Check for New Feedback
+```bash
+curl -s https://orlamariecoach.vercel.app/api/feedback | jq '.feedback | length'
+```
+
+### Recent Design Direction
+- Remove all emojis ("they look childish")
+- Earthy browns/creams (not bright greens)
+- Reference: mindfulnesspatagonia.com aesthetic
+- Classic, sophisticated, not primary colors
