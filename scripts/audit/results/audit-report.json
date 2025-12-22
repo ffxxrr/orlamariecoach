@@ -1,0 +1,856 @@
+{
+  "baseUrl": "http://localhost:3004",
+  "timestamp": "2025-12-22T20:29:39.928Z",
+  "pages": [
+    {
+      "path": "/",
+      "name": "homepage",
+      "screenshot": "scripts/audit/results/screenshots/homepage.png",
+      "links": [
+        {
+          "url": "http://localhost:3004/",
+          "status": 200,
+          "page": "/",
+          "text": "OrlaMarieCoach"
+        },
+        {
+          "url": "http://localhost:3004/about",
+          "status": 200,
+          "page": "/",
+          "text": "About"
+        },
+        {
+          "url": "http://localhost:3004/services",
+          "status": 200,
+          "page": "/",
+          "text": "Services"
+        },
+        {
+          "url": "http://localhost:3004/courses",
+          "status": 200,
+          "page": "/",
+          "text": "Courses"
+        },
+        {
+          "url": "http://localhost:3004/resources",
+          "status": 404,
+          "page": "/",
+          "text": "Resources"
+        },
+        {
+          "url": "http://localhost:3004/contact",
+          "status": 200,
+          "page": "/",
+          "text": "Contact"
+        },
+        {
+          "url": "http://localhost:3004/book-session",
+          "status": 200,
+          "page": "/",
+          "text": "Book SessionBook Session"
+        },
+        {
+          "url": "https://www.facebook.com/orlamariecoach",
+          "status": 400,
+          "page": "/",
+          "text": ""
+        },
+        {
+          "url": "https://www.instagram.com/orlamariecoach",
+          "status": 200,
+          "page": "/",
+          "text": ""
+        },
+        {
+          "url": "https://www.youtube.com/orlamariecoach",
+          "status": 200,
+          "page": "/",
+          "text": ""
+        },
+        {
+          "url": "http://localhost:3004/workshops",
+          "status": 404,
+          "page": "/",
+          "text": "Learn more about Group WorkshopsLearn More"
+        },
+        {
+          "url": "http://localhost:3004/media/audio/meditations/irish-countryside-meditation.mp3",
+          "status": 404,
+          "page": "/",
+          "text": ""
+        },
+        {
+          "url": "http://localhost:3004/privacy",
+          "status": 404,
+          "page": "/",
+          "text": "Privacy Policy"
+        },
+        {
+          "url": "http://localhost:3004/terms",
+          "status": 404,
+          "page": "/",
+          "text": "Terms of Service"
+        },
+        {
+          "url": "http://localhost:3004/cookies",
+          "status": 404,
+          "page": "/",
+          "text": "Cookie Policy"
+        }
+      ],
+      "brokenLinks": [
+        {
+          "url": "http://localhost:3004/resources",
+          "status": 404,
+          "page": "/",
+          "text": "Resources"
+        },
+        {
+          "url": "https://www.facebook.com/orlamariecoach",
+          "status": 400,
+          "page": "/",
+          "text": ""
+        },
+        {
+          "url": "http://localhost:3004/workshops",
+          "status": 404,
+          "page": "/",
+          "text": "Learn more about Group WorkshopsLearn More"
+        },
+        {
+          "url": "http://localhost:3004/media/audio/meditations/irish-countryside-meditation.mp3",
+          "status": 404,
+          "page": "/",
+          "text": ""
+        },
+        {
+          "url": "http://localhost:3004/privacy",
+          "status": 404,
+          "page": "/",
+          "text": "Privacy Policy"
+        },
+        {
+          "url": "http://localhost:3004/terms",
+          "status": 404,
+          "page": "/",
+          "text": "Terms of Service"
+        },
+        {
+          "url": "http://localhost:3004/cookies",
+          "status": 404,
+          "page": "/",
+          "text": "Cookie Policy"
+        }
+      ],
+      "loadTime": 2067,
+      "errors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "In HTML, %s cannot be a descendant of <%s>.\nThis will cause a hydration error.%s <button> button \n\n  ...\n    <HTTPAccessFallbackErrorBoundary pathname=\"/\" notFound={<SegmentViewNode>} forbidden={undefined} ...>\n      <RedirectBoundary>\n        <RedirectErrorBoundary router={{...}}>\n          <InnerLayoutRouter url=\"/\" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} segmentPath={[...]} ...>\n            <SegmentViewNode type=\"page\" pagePath=\"/work/orla...\">\n              <SegmentTrieNode>\n              <HomePage>\n                <div>\n                <Navbar>\n                <HomePage>\n                  <main>\n                    <Hero>\n                    <Services>\n                    <div>\n                    <OMMethod>\n                    <FreeMeditationSection>\n                      <section className=\"py-16 px-4...\">\n                        <div>\n                        <div>\n                        <div className=\"max-w-6xl ...\">\n                          <div className=\"grid grid-...\">\n                            <div>\n                              <h2>\n                              <p>\n                              <div>\n                              <div className=\"bg-white/7...\">\n                                <h3>\n                                <p>\n>                               <button onClick={function onClick} className=\"w-full sm:w-auto\">\n                                  <Button variant=\"secondary\" className=\"w-full sm:...\">\n>                                   <button\n>                                     className=\"inline-flex items-center justify-center rounded-full font-medium tran...\"\n>                                   >\n                            ...\n                    ...\n                ...\n            ...\n          ...\n",
+        "<%s> cannot contain a nested %s.\nSee this log for the ancestor stack trace. button <button>",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "path": "/about",
+      "name": "about",
+      "screenshot": "scripts/audit/results/screenshots/about.png",
+      "links": [
+        {
+          "url": "http://localhost:3004/",
+          "status": 200,
+          "page": "/about",
+          "text": "OrlaMarieCoach"
+        },
+        {
+          "url": "http://localhost:3004/about",
+          "status": 200,
+          "page": "/about",
+          "text": "About"
+        },
+        {
+          "url": "http://localhost:3004/services",
+          "status": 200,
+          "page": "/about",
+          "text": "Services"
+        },
+        {
+          "url": "http://localhost:3004/courses",
+          "status": 200,
+          "page": "/about",
+          "text": "Courses"
+        },
+        {
+          "url": "http://localhost:3004/resources",
+          "status": 404,
+          "page": "/about",
+          "text": "Resources"
+        },
+        {
+          "url": "http://localhost:3004/contact",
+          "status": 200,
+          "page": "/about",
+          "text": "Contact"
+        },
+        {
+          "url": "http://localhost:3004/book-session",
+          "status": 200,
+          "page": "/about",
+          "text": "Book SessionBook Session"
+        },
+        {
+          "url": "https://www.facebook.com/orlamariecoach",
+          "status": 400,
+          "page": "/about",
+          "text": ""
+        },
+        {
+          "url": "https://www.instagram.com/orlamariecoach",
+          "status": 200,
+          "page": "/about",
+          "text": ""
+        },
+        {
+          "url": "https://www.youtube.com/orlamariecoach",
+          "status": 200,
+          "page": "/about",
+          "text": ""
+        },
+        {
+          "url": "http://localhost:3004/privacy",
+          "status": 404,
+          "page": "/about",
+          "text": "Privacy Policy"
+        },
+        {
+          "url": "http://localhost:3004/terms",
+          "status": 404,
+          "page": "/about",
+          "text": "Terms of Service"
+        },
+        {
+          "url": "http://localhost:3004/cookies",
+          "status": 404,
+          "page": "/about",
+          "text": "Cookie Policy"
+        }
+      ],
+      "brokenLinks": [
+        {
+          "url": "http://localhost:3004/resources",
+          "status": 404,
+          "page": "/about",
+          "text": "Resources"
+        },
+        {
+          "url": "https://www.facebook.com/orlamariecoach",
+          "status": 400,
+          "page": "/about",
+          "text": ""
+        },
+        {
+          "url": "http://localhost:3004/privacy",
+          "status": 404,
+          "page": "/about",
+          "text": "Privacy Policy"
+        },
+        {
+          "url": "http://localhost:3004/terms",
+          "status": 404,
+          "page": "/about",
+          "text": "Terms of Service"
+        },
+        {
+          "url": "http://localhost:3004/cookies",
+          "status": 404,
+          "page": "/about",
+          "text": "Cookie Policy"
+        }
+      ],
+      "loadTime": 2137,
+      "errors": []
+    },
+    {
+      "path": "/services",
+      "name": "services",
+      "screenshot": "scripts/audit/results/screenshots/services.png",
+      "links": [
+        {
+          "url": "http://localhost:3004/",
+          "status": 200,
+          "page": "/services",
+          "text": "OrlaMarieCoach"
+        },
+        {
+          "url": "http://localhost:3004/about",
+          "status": 200,
+          "page": "/services",
+          "text": "About"
+        },
+        {
+          "url": "http://localhost:3004/services",
+          "status": 200,
+          "page": "/services",
+          "text": "Services"
+        },
+        {
+          "url": "http://localhost:3004/courses",
+          "status": 200,
+          "page": "/services",
+          "text": "Courses"
+        },
+        {
+          "url": "http://localhost:3004/resources",
+          "status": 404,
+          "page": "/services",
+          "text": "Resources"
+        },
+        {
+          "url": "http://localhost:3004/contact",
+          "status": 200,
+          "page": "/services",
+          "text": "Contact"
+        },
+        {
+          "url": "http://localhost:3004/book-session",
+          "status": 200,
+          "page": "/services",
+          "text": "Book SessionBook Session"
+        },
+        {
+          "url": "https://www.facebook.com/orlamariecoach",
+          "status": 400,
+          "page": "/services",
+          "text": ""
+        },
+        {
+          "url": "https://www.instagram.com/orlamariecoach",
+          "status": 200,
+          "page": "/services",
+          "text": ""
+        },
+        {
+          "url": "https://www.youtube.com/orlamariecoach",
+          "status": 200,
+          "page": "/services",
+          "text": ""
+        },
+        {
+          "url": "http://localhost:3004/courses/foundation",
+          "status": 404,
+          "page": "/services",
+          "text": "Explore Course Details"
+        },
+        {
+          "url": "http://localhost:3004/corporate",
+          "status": 404,
+          "page": "/services",
+          "text": "Request Corporate Information"
+        },
+        {
+          "url": "http://localhost:3004/privacy",
+          "status": 404,
+          "page": "/services",
+          "text": "Privacy Policy"
+        },
+        {
+          "url": "http://localhost:3004/terms",
+          "status": 404,
+          "page": "/services",
+          "text": "Terms of Service"
+        },
+        {
+          "url": "http://localhost:3004/cookies",
+          "status": 404,
+          "page": "/services",
+          "text": "Cookie Policy"
+        }
+      ],
+      "brokenLinks": [
+        {
+          "url": "http://localhost:3004/resources",
+          "status": 404,
+          "page": "/services",
+          "text": "Resources"
+        },
+        {
+          "url": "https://www.facebook.com/orlamariecoach",
+          "status": 400,
+          "page": "/services",
+          "text": ""
+        },
+        {
+          "url": "http://localhost:3004/courses/foundation",
+          "status": 404,
+          "page": "/services",
+          "text": "Explore Course Details"
+        },
+        {
+          "url": "http://localhost:3004/corporate",
+          "status": 404,
+          "page": "/services",
+          "text": "Request Corporate Information"
+        },
+        {
+          "url": "http://localhost:3004/privacy",
+          "status": 404,
+          "page": "/services",
+          "text": "Privacy Policy"
+        },
+        {
+          "url": "http://localhost:3004/terms",
+          "status": 404,
+          "page": "/services",
+          "text": "Terms of Service"
+        },
+        {
+          "url": "http://localhost:3004/cookies",
+          "status": 404,
+          "page": "/services",
+          "text": "Cookie Policy"
+        }
+      ],
+      "loadTime": 2136,
+      "errors": []
+    },
+    {
+      "path": "/courses",
+      "name": "courses",
+      "screenshot": "scripts/audit/results/screenshots/courses.png",
+      "links": [
+        {
+          "url": "http://localhost:3004/",
+          "status": 200,
+          "page": "/courses",
+          "text": "OrlaMarieCoach"
+        },
+        {
+          "url": "http://localhost:3004/about",
+          "status": 200,
+          "page": "/courses",
+          "text": "About"
+        },
+        {
+          "url": "http://localhost:3004/services",
+          "status": 200,
+          "page": "/courses",
+          "text": "Services"
+        },
+        {
+          "url": "http://localhost:3004/courses",
+          "status": 200,
+          "page": "/courses",
+          "text": "Courses"
+        },
+        {
+          "url": "http://localhost:3004/resources",
+          "status": 404,
+          "page": "/courses",
+          "text": "Resources"
+        },
+        {
+          "url": "http://localhost:3004/contact",
+          "status": 200,
+          "page": "/courses",
+          "text": "Contact"
+        },
+        {
+          "url": "http://localhost:3004/book-session",
+          "status": 200,
+          "page": "/courses",
+          "text": "Book SessionBook Session"
+        },
+        {
+          "url": "https://www.facebook.com/orlamariecoach",
+          "status": 400,
+          "page": "/courses",
+          "text": ""
+        },
+        {
+          "url": "https://www.instagram.com/orlamariecoach",
+          "status": 200,
+          "page": "/courses",
+          "text": ""
+        },
+        {
+          "url": "https://www.youtube.com/orlamariecoach",
+          "status": 200,
+          "page": "/courses",
+          "text": ""
+        },
+        {
+          "url": "http://localhost:3004/courses/1",
+          "status": 404,
+          "page": "/courses",
+          "text": "Course Details"
+        },
+        {
+          "url": "http://localhost:3004/courses/2",
+          "status": 404,
+          "page": "/courses",
+          "text": "Course Details"
+        },
+        {
+          "url": "http://localhost:3004/courses/3",
+          "status": 404,
+          "page": "/courses",
+          "text": "Course Details"
+        },
+        {
+          "url": "http://localhost:3004/booking",
+          "status": 404,
+          "page": "/courses",
+          "text": "Enroll Now"
+        },
+        {
+          "url": "http://localhost:3004/privacy",
+          "status": 404,
+          "page": "/courses",
+          "text": "Privacy Policy"
+        },
+        {
+          "url": "http://localhost:3004/terms",
+          "status": 404,
+          "page": "/courses",
+          "text": "Terms of Service"
+        },
+        {
+          "url": "http://localhost:3004/cookies",
+          "status": 404,
+          "page": "/courses",
+          "text": "Cookie Policy"
+        }
+      ],
+      "brokenLinks": [
+        {
+          "url": "http://localhost:3004/resources",
+          "status": 404,
+          "page": "/courses",
+          "text": "Resources"
+        },
+        {
+          "url": "https://www.facebook.com/orlamariecoach",
+          "status": 400,
+          "page": "/courses",
+          "text": ""
+        },
+        {
+          "url": "http://localhost:3004/courses/1",
+          "status": 404,
+          "page": "/courses",
+          "text": "Course Details"
+        },
+        {
+          "url": "http://localhost:3004/courses/2",
+          "status": 404,
+          "page": "/courses",
+          "text": "Course Details"
+        },
+        {
+          "url": "http://localhost:3004/courses/3",
+          "status": 404,
+          "page": "/courses",
+          "text": "Course Details"
+        },
+        {
+          "url": "http://localhost:3004/booking",
+          "status": 404,
+          "page": "/courses",
+          "text": "Enroll Now"
+        },
+        {
+          "url": "http://localhost:3004/privacy",
+          "status": 404,
+          "page": "/courses",
+          "text": "Privacy Policy"
+        },
+        {
+          "url": "http://localhost:3004/terms",
+          "status": 404,
+          "page": "/courses",
+          "text": "Terms of Service"
+        },
+        {
+          "url": "http://localhost:3004/cookies",
+          "status": 404,
+          "page": "/courses",
+          "text": "Cookie Policy"
+        }
+      ],
+      "loadTime": 2030,
+      "errors": []
+    },
+    {
+      "path": "/book-session",
+      "name": "book-session",
+      "screenshot": "scripts/audit/results/screenshots/book-session.png",
+      "links": [
+        {
+          "url": "http://localhost:3004/",
+          "status": 200,
+          "page": "/book-session",
+          "text": "OrlaMarieCoach"
+        },
+        {
+          "url": "http://localhost:3004/about",
+          "status": 200,
+          "page": "/book-session",
+          "text": "About"
+        },
+        {
+          "url": "http://localhost:3004/services",
+          "status": 200,
+          "page": "/book-session",
+          "text": "Services"
+        },
+        {
+          "url": "http://localhost:3004/courses",
+          "status": 200,
+          "page": "/book-session",
+          "text": "Courses"
+        },
+        {
+          "url": "http://localhost:3004/resources",
+          "status": 404,
+          "page": "/book-session",
+          "text": "Resources"
+        },
+        {
+          "url": "http://localhost:3004/contact",
+          "status": 200,
+          "page": "/book-session",
+          "text": "Contact"
+        },
+        {
+          "url": "http://localhost:3004/book-session",
+          "status": 200,
+          "page": "/book-session",
+          "text": "Book SessionBook Session"
+        },
+        {
+          "url": "https://www.facebook.com/orlamariecoach",
+          "status": 400,
+          "page": "/book-session",
+          "text": ""
+        },
+        {
+          "url": "https://www.instagram.com/orlamariecoach",
+          "status": 200,
+          "page": "/book-session",
+          "text": ""
+        },
+        {
+          "url": "https://www.youtube.com/orlamariecoach",
+          "status": 200,
+          "page": "/book-session",
+          "text": ""
+        },
+        {
+          "url": "#booking-widget",
+          "status": 200,
+          "page": "/book-session",
+          "text": "Book Single Session"
+        },
+        {
+          "url": "http://localhost:3004/privacy",
+          "status": 404,
+          "page": "/book-session",
+          "text": "Privacy Policy"
+        },
+        {
+          "url": "http://localhost:3004/terms",
+          "status": 404,
+          "page": "/book-session",
+          "text": "Terms of Service"
+        },
+        {
+          "url": "http://localhost:3004/cookies",
+          "status": 404,
+          "page": "/book-session",
+          "text": "Cookie Policy"
+        }
+      ],
+      "brokenLinks": [
+        {
+          "url": "http://localhost:3004/resources",
+          "status": 404,
+          "page": "/book-session",
+          "text": "Resources"
+        },
+        {
+          "url": "https://www.facebook.com/orlamariecoach",
+          "status": 400,
+          "page": "/book-session",
+          "text": ""
+        },
+        {
+          "url": "http://localhost:3004/privacy",
+          "status": 404,
+          "page": "/book-session",
+          "text": "Privacy Policy"
+        },
+        {
+          "url": "http://localhost:3004/terms",
+          "status": 404,
+          "page": "/book-session",
+          "text": "Terms of Service"
+        },
+        {
+          "url": "http://localhost:3004/cookies",
+          "status": 404,
+          "page": "/book-session",
+          "text": "Cookie Policy"
+        }
+      ],
+      "loadTime": 2031,
+      "errors": []
+    },
+    {
+      "path": "/contact",
+      "name": "contact",
+      "screenshot": "scripts/audit/results/screenshots/contact.png",
+      "links": [
+        {
+          "url": "http://localhost:3004/",
+          "status": 200,
+          "page": "/contact",
+          "text": "OrlaMarieCoach"
+        },
+        {
+          "url": "http://localhost:3004/about",
+          "status": 200,
+          "page": "/contact",
+          "text": "About"
+        },
+        {
+          "url": "http://localhost:3004/services",
+          "status": 200,
+          "page": "/contact",
+          "text": "Services"
+        },
+        {
+          "url": "http://localhost:3004/courses",
+          "status": 200,
+          "page": "/contact",
+          "text": "Courses"
+        },
+        {
+          "url": "http://localhost:3004/resources",
+          "status": 404,
+          "page": "/contact",
+          "text": "Resources"
+        },
+        {
+          "url": "http://localhost:3004/contact",
+          "status": 200,
+          "page": "/contact",
+          "text": "Contact"
+        },
+        {
+          "url": "http://localhost:3004/book-session",
+          "status": 200,
+          "page": "/contact",
+          "text": "Book SessionBook Session"
+        },
+        {
+          "url": "https://www.facebook.com/orlamariecoach",
+          "status": 400,
+          "page": "/contact",
+          "text": ""
+        },
+        {
+          "url": "https://www.instagram.com/orlamariecoach",
+          "status": 200,
+          "page": "/contact",
+          "text": ""
+        },
+        {
+          "url": "https://www.youtube.com/orlamariecoach",
+          "status": 200,
+          "page": "/contact",
+          "text": ""
+        },
+        {
+          "url": "#contact-form",
+          "status": 200,
+          "page": "/contact",
+          "text": "Ask About Starting"
+        },
+        {
+          "url": "mailto:admin@orlamariecoach.com",
+          "status": 200,
+          "page": "/contact",
+          "text": "admin@orlamariecoach.com"
+        },
+        {
+          "url": "http://localhost:3004/privacy",
+          "status": 404,
+          "page": "/contact",
+          "text": "Privacy Policy"
+        },
+        {
+          "url": "http://localhost:3004/terms",
+          "status": 404,
+          "page": "/contact",
+          "text": "Terms of Service"
+        },
+        {
+          "url": "http://localhost:3004/cookies",
+          "status": 404,
+          "page": "/contact",
+          "text": "Cookie Policy"
+        }
+      ],
+      "brokenLinks": [
+        {
+          "url": "http://localhost:3004/resources",
+          "status": 404,
+          "page": "/contact",
+          "text": "Resources"
+        },
+        {
+          "url": "https://www.facebook.com/orlamariecoach",
+          "status": 400,
+          "page": "/contact",
+          "text": ""
+        },
+        {
+          "url": "http://localhost:3004/privacy",
+          "status": 404,
+          "page": "/contact",
+          "text": "Privacy Policy"
+        },
+        {
+          "url": "http://localhost:3004/terms",
+          "status": 404,
+          "page": "/contact",
+          "text": "Terms of Service"
+        },
+        {
+          "url": "http://localhost:3004/cookies",
+          "status": 404,
+          "page": "/contact",
+          "text": "Cookie Policy"
+        }
+      ],
+      "loadTime": 2033,
+      "errors": []
+    },
+    {
+      "path": "/brand",
+      "name": "brand",
+      "screenshot": "scripts/audit/results/screenshots/brand.png",
+      "links": [],
+      "brokenLinks": [],
+      "loadTime": 2202,
+      "errors": []
+    }
+  ],
+  "summary": {
+    "totalPages": 7,
+    "totalLinks": 89,
+    "brokenLinks": 38,
+    "pagesWithErrors": 1
+  }
+}
