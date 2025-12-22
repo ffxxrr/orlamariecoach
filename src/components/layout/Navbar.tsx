@@ -9,7 +9,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const isHomepage = pathname === '/'
-  const hasVideoHero = ['/', '/about', '/services'].includes(pathname)
+  const hasVideoHero = ['/', '/about', '/services', '/courses', '/contact', '/book-session'].includes(pathname)
 
   useEffect(() => {
     const handleScroll = () => {

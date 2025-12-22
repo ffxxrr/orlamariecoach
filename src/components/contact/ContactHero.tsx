@@ -1,24 +1,22 @@
 'use client'
 
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
-import Image from 'next/image'
+import VideoHeroBackground from '@/components/ui/VideoHeroBackground'
 
 export default function ContactHero() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
     <section className="relative min-h-[60vh] flex items-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
-        <Image
-          src="/images/orla/optimized/service/7R500362.webp"
-          alt="Peaceful Irish landscape"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
-      </div>
+      {/* Video/Poster Background */}
+      <VideoHeroBackground
+        videoSrc="/media/sora/contact.mp4"
+        posterSrc="/media/sora/contact-poster.jpg"
+        mobileFocalPoint="center center"
+      />
+
+      {/* Overlay for text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
 
       {/* Content */}
       <div
