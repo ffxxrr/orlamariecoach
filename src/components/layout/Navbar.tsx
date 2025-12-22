@@ -9,6 +9,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const isHomepage = pathname === '/'
+  const hasVideoHero = ['/', '/about', '/services'].includes(pathname)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,7 +49,7 @@ export default function Navbar() {
   ]
 
   // Determine navbar style based on scroll and page
-  const isTransparent = isHomepage && !isScrolled && !isMobileMenuOpen
+  const isTransparent = hasVideoHero && !isScrolled && !isMobileMenuOpen
 
   return (
     <>
