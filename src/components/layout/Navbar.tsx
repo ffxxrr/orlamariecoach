@@ -1,236 +1,220 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import Logo from '@/components/brand/Logo'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const mobileMenuRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
+  const isHomepage = pathname === '/'
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      setIsScrolled(window.scrollY > 80)
     }
-
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Handle click outside to close mobile menu
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        mobileMenuRef.current && 
-        !mobileMenuRef.current.contains(event.target as Node) &&
-        !(event.target as Element).closest('button[aria-label="Toggle mobile menu"]')
-      ) {
-        setIsMobileMenuOpen(false)
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
-
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false)
   }, [pathname])
 
-  // Handle ESC key to close mobile menu
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsMobileMenuOpen(false)
-      }
+      if (event.key === 'Escape') setIsMobileMenuOpen(false)
     }
-
     document.addEventListener('keydown', handleEscKey)
     return () => document.removeEventListener('keydown', handleEscKey)
   }, [])
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [isMobileMenuOpen])
 
   const navLinks = [
-    { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/services', label: 'Services' },
     { href: '/courses', label: 'Courses' },
     { href: '/contact', label: 'Contact' }
   ]
 
+  // Determine navbar style based on scroll and page
+  const isTransparent = isHomepage && !isScrolled && !isMobileMenuOpen
+
   return (
-    <header>
-      <nav 
-        className={`sticky top-0 z-[1000] transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-pure-light/98 backdrop-blur-[12px] shadow-sm' 
-            : 'bg-pure-light/95 backdrop-blur-[12px]'
-        } border-b border-light-border`}
-      >
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3 lg:px-8">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0 z-10">
-            <Logo size="md" variant="default" withText={true} />
-          </Link>
-
-          {/* Desktop Navigation */}
-          <ul className="hidden lg:flex items-center space-x-1">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`relative font-medium px-4 py-2 rounded-full transition-all duration-300 ${
-                    pathname === link.href
-                      ? 'text-forest-deep'
-                      : 'text-medium-text hover:text-forest-deep'
-                  }`}
-                >
-                  {link.label}
-                  {pathname === link.href && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-forest-deep rounded-full" />
-                  )}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* CTA Button */}
-          <Link href="/book-session" className="hidden lg:inline-block group">
-            <span className="sr-only">Book Session</span>
-            <div className="inline-flex items-center gap-2 bg-forest-deep text-white px-5 py-2.5 rounded-full font-medium hover:bg-sage-calm hover:shadow-md transition-all duration-300">
-              <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              Book Session
-            </div>
-          </Link>
-
-          {/* Mobile Menu Button */}
-          <button 
-            className="lg:hidden p-2 rounded-full hover:bg-forest-deep/10 transition-colors z-10"
-            onClick={toggleMobileMenu}
-            aria-label="Toggle mobile menu"
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
-          >
-            <span className="sr-only">Menu</span>
-            {isMobileMenuOpen ? (
-              <svg className="w-6 h-6 text-forest-deep" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6 text-deep-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
-        </div>
-
-        {/* Mobile Menu Overlay */}
-        <div 
-          id="mobile-menu"
-          className={`fixed inset-0 bg-deep-text/50 backdrop-blur-sm z-[990] transition-opacity duration-300 lg:hidden ${
-            isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+    <>
+      <header className="fixed top-0 left-0 right-0 z-[1000]">
+        <nav
+          className={`transition-all duration-500 ease-out ${
+            isTransparent
+              ? 'bg-transparent'
+              : 'bg-pure-light/95 backdrop-blur-xl shadow-sm'
           }`}
-          aria-hidden={!isMobileMenuOpen}
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-
-        {/* Mobile Menu Panel */}
-        <div 
-          ref={mobileMenuRef}
-          className={`fixed top-[72px] right-0 w-[85%] max-w-sm h-[calc(100vh-72px)] bg-pure-light shadow-lg z-[999] transform transition-transform duration-300 ease-in-out lg:hidden ${
-            isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-          aria-hidden={!isMobileMenuOpen}
         >
-          <div className="h-full overflow-y-auto">
-            <nav className="px-4 py-6">
-              <ul className="space-y-4">
-                {navLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link 
-                      href={link.href}
-                      className={`block w-full text-left font-medium px-4 py-3 rounded-lg transition-all duration-300 ${
-                        pathname === link.href
-                          ? 'text-forest-deep bg-forest-deep/10'
-                          : 'text-deep-text hover:text-forest-deep hover:bg-forest-deep/10'
-                      }`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-                <li className="pt-4">
-                  <Link 
-                    href="/book-session"
-                    className="block w-full bg-gradient-to-r from-forest-deep to-sage-calm text-white px-6 py-3 rounded-full font-medium text-center hover:shadow-lg transition-all duration-300"
-                    onClick={() => setIsMobileMenuOpen(false)}
+          <div className="max-w-7xl mx-auto flex justify-between items-center px-6 lg:px-12 h-20">
+            {/* Logo - Text based for elegance */}
+            <Link
+              href="/"
+              className="flex-shrink-0 z-10 group"
+            >
+              <span className={`font-crimson text-2xl tracking-wide transition-colors duration-300 ${
+                isTransparent ? 'text-white' : 'text-forest-deep'
+              }`}>
+                Orla Marie
+              </span>
+            </Link>
+
+            {/* Desktop Navigation - Centered */}
+            <ul className="hidden lg:flex items-center gap-1">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={`relative px-5 py-2 text-sm uppercase tracking-[0.15em] font-medium transition-all duration-300 ${
+                      isTransparent
+                        ? pathname === link.href
+                          ? 'text-white'
+                          : 'text-white/80 hover:text-white'
+                        : pathname === link.href
+                          ? 'text-forest-deep'
+                          : 'text-sage-calm hover:text-forest-deep'
+                    }`}
                   >
-                    Book Session
+                    {link.label}
+                    {/* Active indicator - subtle line */}
+                    <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] transition-all duration-300 ${
+                      pathname === link.href
+                        ? 'w-6 bg-current'
+                        : 'w-0'
+                    }`} />
                   </Link>
                 </li>
-              </ul>
+              ))}
+            </ul>
 
-              {/* Additional Mobile Menu Items */}
-              <div className="mt-8 pt-6 border-t border-light-border">
-                <h3 className="text-sm font-medium text-medium-text mb-4">Follow Us</h3>
-                <div className="flex space-x-4">
-                  <a 
-                    href="https://www.facebook.com/orlamariecoach" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-medium-text hover:text-forest-deep transition-colors"
-                    aria-label="Facebook"
-                  >
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
-                    </svg>
-                  </a>
-                  <a 
-                    href="https://www.instagram.com/orlamariecoach" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-medium-text hover:text-forest-deep transition-colors"
-                    aria-label="Instagram"
-                  >
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" />
-                    </svg>
-                  </a>
-                  <a 
-                    href="https://www.youtube.com/orlamariecoach" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-medium-text hover:text-forest-deep transition-colors"
-                    aria-label="YouTube"
-                  >
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
+            {/* CTA Button - Pill shape */}
+            <Link
+              href="/book-session"
+              className={`hidden lg:inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium uppercase tracking-wider transition-all duration-300 ${
+                isTransparent
+                  ? 'bg-white/20 text-white border border-white/40 hover:bg-white hover:text-forest-deep'
+                  : 'bg-forest-deep text-white hover:bg-sage-calm hover:shadow-md'
+              }`}
+            >
+              Begin
+            </Link>
 
-              <div className="mt-8 pt-4 border-t border-light-border">
-                <p className="text-sm text-medium-text">
-                  &copy; {new Date().getFullYear()} Orla Marie Coach<br />
-                  <small>Professional Meditation & Mindfulness</small>
-                </p>
+            {/* Mobile Menu Button */}
+            <button
+              className={`lg:hidden p-2 z-[1010] transition-colors duration-300 ${
+                isMobileMenuOpen
+                  ? 'text-forest-deep'
+                  : isTransparent
+                    ? 'text-white'
+                    : 'text-forest-deep'
+              }`}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+            >
+              <div className="w-6 h-5 relative flex flex-col justify-between">
+                <span className={`w-full h-0.5 bg-current transform transition-all duration-300 origin-center ${
+                  isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
+                }`} />
+                <span className={`w-full h-0.5 bg-current transition-all duration-300 ${
+                  isMobileMenuOpen ? 'opacity-0 scale-0' : ''
+                }`} />
+                <span className={`w-full h-0.5 bg-current transform transition-all duration-300 origin-center ${
+                  isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
+                }`} />
               </div>
-            </nav>
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Full Screen Mobile Menu */}
+      <div
+        className={`fixed inset-0 z-[999] lg:hidden transition-all duration-500 ${
+          isMobileMenuOpen
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        {/* Background */}
+        <div className="absolute inset-0 bg-pure-light" />
+
+        {/* Content */}
+        <div className="relative h-full flex flex-col justify-center items-center px-8">
+          <nav className="w-full max-w-sm">
+            <ul className="space-y-2">
+              {navLinks.map((link, index) => (
+                <li
+                  key={link.href}
+                  className={`transform transition-all duration-500 ${
+                    isMobileMenuOpen
+                      ? 'translate-y-0 opacity-100'
+                      : 'translate-y-8 opacity-0'
+                  }`}
+                  style={{ transitionDelay: isMobileMenuOpen ? `${index * 100}ms` : '0ms' }}
+                >
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block text-center font-crimson text-4xl py-4 transition-colors duration-300 ${
+                      pathname === link.href
+                        ? 'text-forest-deep'
+                        : 'text-sage-calm hover:text-forest-deep'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {/* Mobile CTA */}
+            <div
+              className={`mt-12 transform transition-all duration-500 ${
+                isMobileMenuOpen
+                  ? 'translate-y-0 opacity-100'
+                  : 'translate-y-8 opacity-0'
+              }`}
+              style={{ transitionDelay: isMobileMenuOpen ? '400ms' : '0ms' }}
+            >
+              <Link
+                href="/book-session"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block w-full bg-forest-deep text-white text-center py-4 rounded-full font-medium uppercase tracking-wider hover:bg-sage-calm transition-colors duration-300"
+              >
+                Begin Your Journey
+              </Link>
+            </div>
+          </nav>
+
+          {/* Decorative element */}
+          <div
+            className={`absolute bottom-12 left-1/2 -translate-x-1/2 transition-all duration-700 ${
+              isMobileMenuOpen ? 'opacity-30' : 'opacity-0'
+            }`}
+            style={{ transitionDelay: isMobileMenuOpen ? '500ms' : '0ms' }}
+          >
+            <svg className="w-12 h-12 text-living-green" viewBox="0 0 100 100" fill="currentColor">
+              <path d="M50 5C50 5 30 25 30 45C30 58 38 70 50 70C62 70 70 58 70 45C70 25 50 5 50 5ZM50 15C50 15 60 30 60 45C60 53 56 60 50 60C44 60 40 53 40 45C40 30 50 15 50 15Z"/>
+              <path d="M50 70C50 70 35 80 25 80C15 80 10 73 15 65C20 57 35 55 50 70C65 55 80 57 85 65C90 73 85 80 75 80C65 80 50 70 50 70Z"/>
+            </svg>
           </div>
         </div>
-      </nav>
-    </header>
+      </div>
+    </>
   )
 }

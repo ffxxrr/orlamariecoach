@@ -1,50 +1,34 @@
 import Hero from '@/components/home/Hero'
-import Services from '@/components/home/Services'
-import About from '@/components/home/About'
-import FreeMeditationSection from '@/components/home/FreeMeditationSection'
-import Testimonials from '@/components/home/Testimonials'
-import FeaturedCourse from '@/components/home/FeaturedCourse'
-import Newsletter from '@/components/home/Newsletter'
+import Invitation from '@/components/home/Invitation'
+import ThreePaths from '@/components/home/ThreePaths'
+import TestimonialFeature from '@/components/home/TestimonialFeature'
+import AboutGlimpse from '@/components/home/AboutGlimpse'
+import SoftCTA from '@/components/home/SoftCTA'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import BotanicalAccents from '@/components/ui/BotanicalAccents'
-import SectionDivider from '@/components/ui/SectionDivider'
 
 export default function HomePage() {
   return (
     <>
-      <BotanicalAccents />
       <Navbar />
       <main>
-        {/* Hero - full-bleed video background */}
+        {/* Hero - Full viewport with Sora video */}
         <Hero />
 
-        {/* Services */}
-        <Services />
+        {/* The Invitation - Breathing intro */}
+        <Invitation />
 
-        {/* Divider */}
-        <SectionDivider variant="dots" />
+        {/* Three Paths - Services as journey */}
+        <ThreePaths />
 
-        {/* Free Meditation */}
-        <FreeMeditationSection />
+        {/* Single Testimonial - One powerful quote */}
+        <TestimonialFeature />
 
-        {/* Divider */}
-        <SectionDivider variant="line" />
+        {/* About Glimpse - Meet Orla */}
+        <AboutGlimpse />
 
-        {/* About Orla */}
-        <About />
-
-        {/* Testimonials */}
-        <Testimonials />
-
-        {/* Divider */}
-        <SectionDivider variant="dots" />
-
-        {/* Featured Course */}
-        <FeaturedCourse />
-
-        {/* Newsletter */}
-        <Newsletter />
+        {/* Soft CTA - Gentle ending */}
+        <SoftCTA />
       </main>
       <Footer />
     </>

@@ -1,0 +1,152 @@
+'use client'
+
+import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import Image from 'next/image'
+import Link from 'next/link'
+
+interface PathProps {
+  title: string
+  subtitle: string
+  description: string
+  image: string
+  href: string
+  cta: string
+  reverse?: boolean
+  index: number
+}
+
+function Path({ title, subtitle, description, image, href, cta, reverse, index }: PathProps) {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
+
+  return (
+    <div
+      ref={ref}
+      className={`relative min-h-[70vh] md:min-h-[80vh] flex items-center ${
+        index % 2 === 0 ? 'bg-pure-light' : 'bg-earth-warmth/20'
+      }`}
+    >
+      <div className="w-full max-w-7xl mx-auto px-6 lg:px-12">
+        <div className={`grid md:grid-cols-2 gap-12 lg:gap-20 items-center ${
+          reverse ? 'md:grid-flow-dense' : ''
+        }`}>
+          {/* Image */}
+          <div
+            className={`relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-2xl ${
+              reverse ? 'md:col-start-2' : ''
+            } ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            } transition-all duration-1000 ease-out`}
+            style={{ transitionDelay: '200ms' }}
+          >
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+            {/* Subtle overlay gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+          </div>
+
+          {/* Content */}
+          <div className={`${reverse ? 'md:col-start-1 md:row-start-1' : ''}`}>
+            {/* Subtitle */}
+            <p
+              className={`text-sm uppercase tracking-[0.2em] text-living-green mb-4 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } transition-all duration-700`}
+              style={{ transitionDelay: '100ms' }}
+            >
+              {subtitle}
+            </p>
+
+            {/* Title */}
+            <h2
+              className={`font-crimson text-3xl md:text-4xl lg:text-5xl text-forest-deep mb-6 leading-tight ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } transition-all duration-700`}
+              style={{ transitionDelay: '200ms' }}
+            >
+              {title}
+            </h2>
+
+            {/* Description */}
+            <p
+              className={`text-lg text-sage-calm leading-relaxed mb-8 max-w-lg ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } transition-all duration-700`}
+              style={{ transitionDelay: '300ms' }}
+            >
+              {description}
+            </p>
+
+            {/* CTA Link */}
+            <Link
+              href={href}
+              className={`inline-flex items-center gap-3 group ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } transition-all duration-700`}
+              style={{ transitionDelay: '400ms' }}
+            >
+              <span className="text-forest-deep font-medium uppercase tracking-wider text-sm">
+                {cta}
+              </span>
+              <span className="w-8 h-px bg-forest-deep group-hover:w-12 transition-all duration-300" />
+              <svg
+                className="w-4 h-4 text-forest-deep transform group-hover:translate-x-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default function ThreePaths() {
+  const paths = [
+    {
+      title: 'One-to-One Sessions',
+      subtitle: 'Personal Guidance',
+      description: 'Bespoke meditation sessions tailored entirely to your needs, your pace, your life. Whether you\'re seeking relief from anxiety, deeper self-awareness, or simply a moment of peace in a busy world.',
+      image: '/images/orla/optimized/service/7R500130.webp',
+      href: '/book-session',
+      cta: 'Book a Session',
+    },
+    {
+      title: 'Mindfulness Courses',
+      subtitle: 'Structured Learning',
+      description: 'Journey through comprehensive programmes designed to build lasting practice. From foundations for beginners to deepening work for experienced practitioners. Learn at your own rhythm.',
+      image: '/images/orla/optimized/service/7R500406.webp',
+      href: '/courses',
+      cta: 'Explore Courses',
+    },
+    {
+      title: 'Free Guided Meditation',
+      subtitle: 'Begin Today',
+      description: 'Experience a taste of what mindfulness can offer with a complimentary guided meditation. Twelve minutes of gentle guidance to help you find stillness, wherever you are.',
+      image: '/images/orla/optimized/service/7R500154.webp',
+      href: '#free-meditation',
+      cta: 'Listen Now',
+    },
+  ]
+
+  return (
+    <section>
+      {paths.map((path, index) => (
+        <Path
+          key={path.title}
+          {...path}
+          reverse={index % 2 === 1}
+          index={index}
+        />
+      ))}
+    </section>
+  )
+}
