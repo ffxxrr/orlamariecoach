@@ -1,114 +1,49 @@
 'use client'
 
-import { useState } from 'react'
+import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 
-const testimonials = [
-  {
-    id: 1,
-    name: "Laura Kennedy",
-    location: "Dublin, Ireland",
-    course: "OM Method Foundations",
-    text: "The OM Method Foundations course was transformative. Orla's teaching style makes mindfulness approachable and practical. I've gone from skeptical to practicing daily, and the benefits in my stress levels and sleep quality have been remarkable.",
-    image: "/images/testimonials/laura.webp"
-  },
-  {
-    id: 2,
-    name: "John Fitzgerald",
-    location: "Cork, Ireland",
-    course: "OM Method in Daily Life",
-    text: "As a busy executive, I was looking for practical ways to manage stress. This course delivered exactly that. The techniques for integrating mindfulness into meetings and difficult conversations have been game-changing for my leadership approach.",
-    image: "/images/testimonials/john.webp"
-  },
-  {
-    id: 3,
-    name: "Siobhan McBride",
-    location: "Galway, Ireland",
-    course: "OM Method Deepening",
-    text: "Having practiced meditation for years, I was looking to deepen my practice. Orla's advanced course provided subtle techniques and insights that have taken my meditation to a new level. The community of practitioners was also incredibly supportive.",
-    image: "/images/testimonials/siobhan.webp"
-  }
-]
+const testimonial = {
+  quote: "The Mindfulness Foundations course was transformative. Orla's teaching style makes mindfulness approachable and practical. I've gone from skeptical to practicing daily, and the benefits in my stress levels and sleep quality have been remarkable.",
+  name: "Laura Kennedy",
+  location: "Dublin, Ireland",
+  course: "Mindfulness Foundations"
+}
 
 export default function CoursesTestimonials() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  
-  const nextTestimonial = () => {
-    setActiveIndex((current) => (current + 1) % testimonials.length)
-  }
-  
-  const prevTestimonial = () => {
-    setActiveIndex((current) => (current - 1 + testimonials.length) % testimonials.length)
-  }
-  
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
+
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-pure-light to-light-border relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-forest-deep/5 rounded-full -translate-y-1/2 -translate-x-1/2"></div>
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-sage-calm/5 rounded-full translate-y-1/2 translate-x-1/2"></div>
-      
-      <div className="max-w-4xl mx-auto">
-        <h2 className="font-crimson text-3xl md:text-4xl text-forest-deep mb-6 text-center">
-          Student Experiences
-        </h2>
-        
-        <div className="w-20 h-1 bg-forest-deep/20 mx-auto mb-12"></div>
-        
-        <div className="bg-white/80 backdrop-blur-sm rounded-xl p-8 shadow-sm relative">
-          <div className="flex justify-center mb-8">
-            <span className="text-6xl">❝</span>
-          </div>
-          
-          <p className="text-medium-text text-lg text-center mb-8 min-h-[100px]">
-            {testimonials[activeIndex].text}
-          </p>
-          
-          <div className="flex flex-col items-center">
-            <div className="w-16 h-16 bg-forest-deep/10 rounded-full flex items-center justify-center mb-4">
-              <span className="text-2xl">👤</span>
-            </div>
-            <p className="text-forest-deep font-medium">{testimonials[activeIndex].name}</p>
-            <p className="text-medium-text text-sm">{testimonials[activeIndex].location}</p>
-            <p className="text-forest-deep text-sm mt-2">
-              Course: {testimonials[activeIndex].course}
-            </p>
-          </div>
-          
-          <div className="flex justify-center mt-8">
-            <div className="flex gap-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveIndex(index)}
-                  className={`w-3 h-3 rounded-full ${
-                    index === activeIndex ? 'bg-forest-deep' : 'bg-light-border'
-                  }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-          
-          <div className="absolute left-4 top-1/2 -translate-y-1/2">
-            <button 
-              onClick={prevTestimonial}
-              className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-forest-deep hover:bg-forest-deep hover:text-white transition-colors"
-              aria-label="Previous testimonial"
-            >
-              &larr;
-            </button>
-          </div>
-          
-          <div className="absolute right-4 top-1/2 -translate-y-1/2">
-            <button 
-              onClick={nextTestimonial}
-              className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-forest-deep hover:bg-forest-deep hover:text-white transition-colors"
-              aria-label="Next testimonial"
-            >
-              &rarr;
-            </button>
-          </div>
+    <section className="relative py-24 md:py-32 bg-earth-warmth/20 overflow-hidden">
+      {/* Subtle decorative line */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-living-green/30 to-transparent" />
+
+      <div
+        ref={ref}
+        className={`max-w-4xl mx-auto px-6 text-center transition-all duration-1000 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+      >
+        {/* Large quote mark */}
+        <div className="text-6xl md:text-8xl text-forest-deep/20 font-crimson mb-8">
+          &ldquo;
+        </div>
+
+        {/* Quote */}
+        <blockquote className="font-crimson text-2xl md:text-3xl lg:text-4xl text-forest-deep leading-relaxed mb-12">
+          {testimonial.quote}
+        </blockquote>
+
+        {/* Attribution */}
+        <div className="flex flex-col items-center">
+          <div className="w-12 h-px bg-living-green/50 mb-6" />
+          <p className="text-forest-deep font-medium">{testimonial.name}</p>
+          <p className="text-sage-calm text-sm">{testimonial.location}</p>
+          <p className="text-living-green text-sm mt-2">{testimonial.course}</p>
         </div>
       </div>
+
+      {/* Subtle decorative line */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-t from-transparent via-living-green/30 to-transparent" />
     </section>
   )
 }

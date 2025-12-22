@@ -1,36 +1,82 @@
+'use client'
+
+import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import Image from 'next/image'
+
 export default function ServicesHero() {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
+
   return (
-    <section className="relative bg-gradient-to-br from-pure-light to-light-border py-20 px-4 overflow-hidden z-0">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-80">
-        <div 
-          className="w-full h-full bg-no-repeat bg-cover bg-center"
-          style={{
-            background: 'linear-gradient(135deg, rgba(74, 124, 89, 0.05) 0%, rgba(127, 176, 105, 0.05) 100%)'
-          }}
+    <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/orla/optimized/service/7R500325.webp"
+          alt="Peaceful meditation setting"
+          fill
+          className="object-cover"
+          priority
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <h1 className="font-crimson text-4xl md:text-5xl font-light text-forest-deep mb-6 leading-tight">
-          The OM Method Services
-        </h1>
-        
-        <p className="text-lg md:text-xl text-medium-text mb-8 max-w-3xl mx-auto">
-          Personalised mindfulness and meditation services designed to meet you where you are
-          and guide you toward greater balance, clarity, and wellbeing.
-        </p>
-        
-        <div className="flex justify-center">
-          <div className="flex items-center gap-3 bg-white/70 backdrop-blur-sm px-6 py-3 rounded-full shadow-sm">
-            <span className="text-forest-deep font-medium">As featured in:</span>
-            <div className="flex items-center gap-4">
-              <div className="text-medium-text font-semibold">Irish Times</div>
-              <div className="h-4 w-px bg-light-border"></div>
-              <div className="text-medium-text font-semibold">Mindful Magazine</div>
-              <div className="h-4 w-px bg-light-border"></div>
-              <div className="text-medium-text font-semibold">RTE Lifestyle</div>
+      <div
+        ref={ref}
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 py-20"
+      >
+        <div className="max-w-2xl">
+          {/* Subtitle */}
+          <p
+            className={`text-sm uppercase tracking-[0.2em] text-earth-warmth mb-6 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+            style={{ transitionDelay: '100ms' }}
+          >
+            Services & Guidance
+          </p>
+
+          {/* Main Headline */}
+          <h1
+            className={`font-crimson text-4xl sm:text-5xl md:text-6xl font-light text-white mb-6 leading-[1.1] ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+            style={{ transitionDelay: '200ms' }}
+          >
+            Your path to
+            <br />
+            <span className="text-earth-warmth">inner peace.</span>
+          </h1>
+
+          {/* Description */}
+          <p
+            className={`text-lg md:text-xl text-white/90 mb-8 leading-relaxed ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+            style={{ transitionDelay: '300ms' }}
+          >
+            Personalised mindfulness guidance designed to meet you where you are
+            and lead you toward greater balance, clarity, and wellbeing.
+          </p>
+
+          {/* Trust Indicators */}
+          <div
+            className={`flex flex-wrap gap-6 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+            style={{ transitionDelay: '400ms' }}
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-earth-warmth" />
+              <span className="text-white/80 text-sm">Online & In-Person</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-earth-warmth" />
+              <span className="text-white/80 text-sm">Global Timezone Support</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-earth-warmth" />
+              <span className="text-white/80 text-sm">Flexible Scheduling</span>
             </div>
           </div>
         </div>

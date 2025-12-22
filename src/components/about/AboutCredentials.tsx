@@ -1,90 +1,75 @@
-import Image from 'next/image'
+'use client'
+
+import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+
+const credentials = [
+  {
+    title: 'MBSR Certification',
+    description: 'Certified teacher of Mindfulness-Based Stress Reduction, the gold standard evidence-based programme developed at the University of Massachusetts Medical School.',
+  },
+  {
+    title: 'Kids Mindfulness',
+    description: 'Specialised training in teaching mindfulness to children and adolescents, with age-appropriate techniques for developing attention and emotional regulation.',
+  },
+  {
+    title: '500+ Teaching Hours',
+    description: 'Extensive experience across group classes, workshops, corporate programmes, and one-to-one coaching sessions throughout Ireland and online.',
+  },
+  {
+    title: 'Personalised Approach',
+    description: 'A tailored approach to mindfulness practice that integrates traditional techniques with practical applications for modern life.',
+  },
+]
 
 export default function AboutCredentials() {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
+
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-pure-light to-light-border relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-living-green/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-sage-calm/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-      
-      <div className="max-w-6xl mx-auto">
-        <h2 className="font-crimson text-3xl md:text-4xl text-forest-deep mb-6 text-center">
-          Qualifications & Experience
-        </h2>
-        
-        <div className="w-20 h-1 bg-forest-deep/20 mx-auto mb-12"></div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="relative">
-            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-md">
-              <Image
-                src="/images/orla/optimized/about/7R500406.webp"
-                alt="Orla Marie teaching a meditation class"
-                width={600}
-                height={600}
-                className="object-cover w-full h-full"
-              />
-            </div>
-            
-            <div className="absolute -bottom-6 -right-6 transform rotate-12 w-40 h-40 bg-sage-calm/20 rounded-full -z-10"></div>
-            <div className="absolute -top-6 -left-6 transform -rotate-12 w-32 h-32 bg-living-green/20 rounded-full -z-10"></div>
-          </div>
-          
-          <div>
-            <div className="space-y-8">
-              <div className="bg-white/70 backdrop-blur-sm rounded-lg p-6 shadow-sm">
-                <div className="flex gap-4 items-start">
-                  <div className="w-3 h-3 bg-forest-deep rounded-full flex-shrink-0 mt-2"></div>
-                  <div>
-                    <h3 className="text-xl text-forest-deep font-medium mb-2">MBSR Certification</h3>
-                    <p className="text-medium-text">
-                      Certified teacher of Mindfulness-Based Stress Reduction, the gold standard
-                      evidence-based mindfulness programme developed at the University of Massachusetts Medical School.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-white/70 backdrop-blur-sm rounded-lg p-6 shadow-sm">
-                <div className="flex gap-4 items-start">
-                  <div className="w-3 h-3 bg-forest-deep rounded-full flex-shrink-0 mt-2"></div>
-                  <div>
-                    <h3 className="text-xl text-forest-deep font-medium mb-2">Kids Mindfulness Certification</h3>
-                    <p className="text-medium-text">
-                      Specialised training in teaching mindfulness to children and adolescents,
-                      with age-appropriate techniques for developing attention and emotional regulation.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-white/70 backdrop-blur-sm rounded-lg p-6 shadow-sm">
-                <div className="flex gap-4 items-start">
-                  <div className="w-3 h-3 bg-forest-deep rounded-full flex-shrink-0 mt-2"></div>
-                  <div>
-                    <h3 className="text-xl text-forest-deep font-medium mb-2">Teaching Experience</h3>
-                    <p className="text-medium-text">
-                      Over 500 hours of teaching experience across group classes, workshops,
-                      corporate programmes, and one-to-one coaching sessions throughout Ireland and online.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-white/70 backdrop-blur-sm rounded-lg p-6 shadow-sm">
-                <div className="flex gap-4 items-start">
-                  <div className="w-3 h-3 bg-forest-deep rounded-full flex-shrink-0 mt-2"></div>
-                  <div>
-                    <h3 className="text-xl text-forest-deep font-medium mb-2">The OM Method Developer</h3>
-                    <p className="text-medium-text">
-                      Creator of The OM Method, a personalised approach to mindfulness practice
-                      that integrates traditional techniques with practical applications for modern life.
-                    </p>
-                  </div>
+    <section className="relative py-24 md:py-32 bg-earth-warmth/20 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <p
+            className={`text-sm uppercase tracking-[0.2em] text-living-green mb-4 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+          >
+            Qualifications
+          </p>
+          <h2
+            ref={ref}
+            className={`font-crimson text-3xl md:text-4xl lg:text-5xl text-forest-deep leading-tight ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+            style={{ transitionDelay: '100ms' }}
+          >
+            Training & Experience
+          </h2>
+        </div>
+
+        {/* Credentials Grid */}
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+          {credentials.map((credential, index) => (
+            <div
+              key={credential.title}
+              className={`bg-white/70 backdrop-blur-sm rounded-2xl p-8 lg:p-10 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              } transition-all duration-700`}
+              style={{ transitionDelay: `${200 + index * 100}ms` }}
+            >
+              <div className="flex items-start gap-4">
+                <div className="w-3 h-3 bg-forest-deep rounded-full flex-shrink-0 mt-2" />
+                <div>
+                  <h3 className="font-crimson text-xl lg:text-2xl text-forest-deep mb-3">
+                    {credential.title}
+                  </h3>
+                  <p className="text-sage-calm leading-relaxed">
+                    {credential.description}
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

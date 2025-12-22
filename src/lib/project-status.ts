@@ -106,7 +106,7 @@ class ProjectStatusManager {
         'Contact Page',
         'Book Session Page',
         'Celtic Branding',
-        'OM Method Integration',
+        'Personalised Approach',
         'Audio Player',
         'Mobile Responsive Design'
       ],

@@ -20,8 +20,8 @@ export default function BookingHero() {
         </h1>
         
         <p className="text-lg md:text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-          Experience The OM Method with individual guidance tailored to your unique needs, 
-          goals, and lifestyle. Transform stress into peace with authentic Celtic wisdom 
+          Experience personalised guidance tailored to your unique needs,
+          goals, and lifestyle. Transform stress into peace with authentic Celtic wisdom
           and modern techniques.
         </p>
         

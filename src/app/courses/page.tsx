@@ -1,63 +1,35 @@
-'use client'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
-import BotanicalAccents from '@/components/ui/BotanicalAccents'
 import CoursesHero from '@/components/courses/CoursesHero'
 import CoursesList from '@/components/courses/CoursesList'
 import CoursesTestimonials from '@/components/courses/CoursesTestimonials'
 import CoursesFAQ from '@/components/courses/CoursesFAQ'
 import CoursesCTA from '@/components/courses/CoursesCTA'
-import Container from '@/components/ui/Container'
-import Section from '@/components/ui/Section'
-import Divider from '@/components/ui/Divider'
-// Analytics handled by AnalyticsProvider
-import { useEffect } from 'react'
+import Navbar from '@/components/layout/Navbar'
+import Footer from '@/components/layout/Footer'
 
-// Metadata is handled by layout.tsx for client components
+export const metadata = {
+  title: 'Mindfulness Courses | Orla Marie Meditation Coach',
+  description: 'Join structured mindfulness courses including Foundations for beginners, Deepening for advanced practitioners, and Daily Life integration. Online courses with live sessions.',
+}
 
 export default function CoursesPage() {
-  // Page view tracking handled by AnalyticsProvider
-
   return (
     <>
-      <BotanicalAccents />
       <Navbar />
       <main>
-        <Section padded>
-          <Container>
-            <CoursesHero />
-          </Container>
-        </Section>
-        <Section padded className="bg-white/60">
-          <Container>
-            <CoursesList />
-          </Container>
-        </Section>
-        <Section padded={false}>
-          <Container>
-            <Divider className="my-2" />
-          </Container>
-        </Section>
-        <Section padded>
-          <Container>
-            <CoursesTestimonials />
-          </Container>
-        </Section>
-        <Section padded={false}>
-          <Container>
-            <Divider className="my-2" />
-          </Container>
-        </Section>
-        <Section padded className="bg-white/60">
-          <Container>
-            <CoursesFAQ />
-          </Container>
-        </Section>
-        <Section padded>
-          <Container>
-            <CoursesCTA />
-          </Container>
-        </Section>
+        {/* Hero - Full bleed immersive */}
+        <CoursesHero />
+
+        {/* Courses - Full width alternating bands */}
+        <CoursesList />
+
+        {/* Testimonial - Large quote */}
+        <CoursesTestimonials />
+
+        {/* FAQ - Clean accordion */}
+        <CoursesFAQ />
+
+        {/* Soft CTA */}
+        <CoursesCTA />
       </main>
       <Footer />
     </>

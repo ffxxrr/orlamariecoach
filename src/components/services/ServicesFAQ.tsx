@@ -1,93 +1,112 @@
 'use client'
 
 import { useState } from 'react'
+import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 
 const faqs = [
   {
     id: 1,
-    question: "What is The OM Method approach?",
-    answer: "The OM Method is a personalised approach to mindfulness that combines traditional meditation techniques with practical applications for modern life. It focuses on three core elements: Observe (developing non-judgmental awareness), Mindfulness (cultivating present-moment attention), and Meaning (connecting practice to your values). This method is designed to make meditation accessible and relevant to your unique circumstances."
+    question: "What is your approach to mindfulness coaching?",
+    answer: "My approach combines traditional meditation techniques with practical applications for modern life. It focuses on three core elements: observing with non-judgmental awareness, cultivating present-moment attention, and connecting your practice to your personal values. This method is designed to make meditation accessible and relevant to your unique circumstances."
   },
   {
     id: 2,
     question: "I've never meditated before. Is this suitable for beginners?",
-    answer: "Absolutely! The OM Method Foundation Course is specifically designed to welcome beginners and guide you step by step. One-to-one sessions are also excellent for beginners as they provide personalised guidance tailored to your experience level. No prior knowledge or experience is necessary—just an open mind and willingness to learn."
+    answer: "Absolutely! The Mindfulness Foundation Course is specifically designed to welcome beginners and guide you step by step. One-to-one sessions are also excellent for beginners as they provide personalised guidance tailored to your experience level. No prior knowledge or experience is necessary—just an open mind and willingness to learn."
   },
   {
     id: 3,
     question: "How often should I attend sessions to see results?",
-    answer: "For one-to-one sessions, most clients begin with weekly sessions for 4-6 weeks to establish a strong foundation, then transition to fortnightly or monthly sessions. The Foundation Course runs weekly for 8 weeks. Consistency is key with mindfulness practice—regular short practices are more effective than occasional long ones. You'll likely notice subtle benefits after just a few sessions, with more significant shifts emerging over 4-8 weeks of regular practice."
+    answer: "For one-to-one sessions, most clients begin with weekly sessions for 4-6 weeks to establish a strong foundation, then transition to fortnightly or monthly sessions. The Foundation Course runs weekly for 8 weeks. Consistency is key—regular short practices are more effective than occasional long ones."
   },
   {
     id: 4,
     question: "Are online sessions as effective as in-person?",
-    answer: "Yes, The OM Method works wonderfully in both formats. Online sessions offer convenience and accessibility while maintaining the personal connection essential for effective guidance. All online sessions use high-quality audio to ensure clear instruction, and pre-session guidance helps you create an optimal environment at home. Many clients actually prefer online sessions as they learn to practice in their everyday environment."
+    answer: "Yes, my approach works wonderfully in both formats. Online sessions offer convenience and accessibility while maintaining the personal connection essential for effective guidance. Many clients actually prefer online sessions as they learn to practice in their everyday environment."
   },
   {
     id: 5,
-    question: "What's the difference between mindfulness and meditation?",
-    answer: "Meditation refers to formal practices where you set aside time to train your attention, while mindfulness is the quality of awareness you develop through these practices. Think of meditation as the gym workout, and mindfulness as the fitness you develop. The OM Method teaches formal meditation techniques as well as ways to bring mindful awareness into your daily activities, giving you a comprehensive approach to both practices."
-  },
-  {
-    id: 6,
     question: "Do you offer gift certificates?",
-    answer: "Yes! OM Method gift certificates are available for both one-to-one sessions and courses. They make thoughtful presents for birthdays, anniversaries, or anyone going through a challenging time. Each certificate is personalised and valid for 12 months. Contact me directly to arrange a gift certificate with a personal message for your recipient."
+    answer: "Yes! Gift certificates are available for both one-to-one sessions and courses. They make thoughtful presents for birthdays, anniversaries, or anyone going through a challenging time. Contact me directly to arrange a gift certificate with a personal message."
   }
 ]
 
 export default function ServicesFAQ() {
   const [openId, setOpenId] = useState<number | null>(null)
-  
-  const toggleFAQ = (id: number) => {
-    setOpenId(openId === id ? null : id)
-  }
-  
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
+
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-pure-light to-light-border relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-living-green/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-sage-calm/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-      
-      <div className="max-w-4xl mx-auto">
-        <h2 className="font-crimson text-3xl md:text-4xl text-forest-deep mb-6 text-center">
-          Frequently Asked Questions
-        </h2>
-        
-        <div className="w-20 h-1 bg-forest-deep/20 mx-auto mb-12"></div>
-        
+    <section className="relative py-24 md:py-32 bg-pure-light overflow-hidden">
+      {/* Subtle decorative line */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-living-green/30 to-transparent" />
+
+      <div className="max-w-3xl mx-auto px-6">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <p
+            className={`text-sm uppercase tracking-[0.2em] text-living-green mb-4 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+          >
+            Questions
+          </p>
+          <h2
+            ref={ref}
+            className={`font-crimson text-3xl md:text-4xl lg:text-5xl text-forest-deep leading-tight ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+            style={{ transitionDelay: '100ms' }}
+          >
+            Frequently Asked
+          </h2>
+        </div>
+
+        {/* FAQ Items */}
         <div className="space-y-4">
-          {faqs.map((faq) => (
-            <div 
+          {faqs.map((faq, index) => (
+            <div
               key={faq.id}
-              className="bg-white/70 backdrop-blur-sm rounded-lg shadow-sm overflow-hidden"
+              className={`bg-white/70 backdrop-blur-sm rounded-xl overflow-hidden ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } transition-all duration-700`}
+              style={{ transitionDelay: `${200 + index * 50}ms` }}
             >
               <button
-                onClick={() => toggleFAQ(faq.id)}
-                className="w-full text-left px-6 py-4 flex items-center justify-between focus:outline-none"
+                onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
+                className="w-full text-left px-6 py-5 flex items-center justify-between focus:outline-none group"
               >
-                <span className="font-medium text-forest-deep">{faq.question}</span>
-                <span className="text-forest-deep text-xl">
-                  {openId === faq.id ? '−' : '+'}
+                <span className="font-crimson text-lg text-forest-deep group-hover:text-sage-calm transition-colors">
+                  {faq.question}
+                </span>
+                <span className={`text-living-green text-2xl transition-transform duration-300 ${
+                  openId === faq.id ? 'rotate-45' : ''
+                }`}>
+                  +
                 </span>
               </button>
-              
-              {openId === faq.id && (
-                <div className="px-6 pb-4">
-                  <p className="text-medium-text">
-                    {faq.answer}
-                  </p>
-                </div>
-              )}
+
+              <div className={`overflow-hidden transition-all duration-300 ${
+                openId === faq.id ? 'max-h-96' : 'max-h-0'
+              }`}>
+                <p className="px-6 pb-5 text-sage-calm leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
             </div>
           ))}
         </div>
-        
-        <div className="mt-12 text-center">
-          <p className="text-medium-text">
-            Have more questions? Feel free to <a href="/contact" className="text-forest-deep underline">contact me</a> and I'll be happy to help.
-          </p>
-        </div>
+
+        {/* Contact prompt */}
+        <p className="text-center mt-12 text-sage-calm">
+          Have another question?{' '}
+          <a href="/contact" className="text-forest-deep hover:underline">
+            Get in touch
+          </a>
+        </p>
       </div>
+
+      {/* Subtle decorative line */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-t from-transparent via-living-green/30 to-transparent" />
     </section>
   )
 }

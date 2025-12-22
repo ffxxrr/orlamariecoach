@@ -20,8 +20,8 @@ export default function BookingCTA() {
         </h2>
         
         <p className="text-white/90 mb-10 max-w-2xl mx-auto fade-in-up">
-          Take the first step toward lasting peace and clarity. Book your personalised 
-          meditation session and discover how The OM Method can transform your relationship 
+          Take the first step toward lasting peace and clarity. Book your personalised
+          meditation session and discover how mindfulness can transform your relationship
           with stress and bring authentic calm to your life.
         </p>
         

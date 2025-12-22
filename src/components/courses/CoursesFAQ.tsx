@@ -1,89 +1,112 @@
 'use client'
 
 import { useState } from 'react'
+import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 
 const faqs = [
   {
     id: 1,
-    question: "Do I need any previous meditation experience for these courses?",
-    answer: "Not at all for the OM Method Foundations course, which is specifically designed for beginners. The Daily Life course is suitable for all levels, while the Deepening course is better suited for those with some previous meditation experience. Each course clearly indicates the recommended experience level."
+    question: "Do I need any previous meditation experience?",
+    answer: "Not at all for the Mindfulness Foundations course, which is specifically designed for beginners. The Daily Life course is suitable for all levels, while the Deepening course is better suited for those with some previous meditation experience."
   },
   {
     id: 2,
     question: "How are the online courses structured?",
-    answer: "All courses include weekly live sessions conducted via Zoom, guided meditation recordings for daily practice, comprehensive course materials, and access to a private community group. The live sessions combine teaching, guided practice, Q&A, and group discussion. All live sessions are recorded for those who cannot attend in real-time."
+    answer: "All courses include weekly live sessions conducted via Zoom, guided meditation recordings for daily practice, comprehensive course materials, and access to a private community group. All live sessions are recorded for those who cannot attend in real-time."
   },
   {
     id: 3,
     question: "What if I miss a live session?",
-    answer: "No problem! All live sessions are recorded and made available within 24 hours. You can watch the recording, complete the practices, and post any questions in the community group. Many students successfully complete courses by using the recordings exclusively due to time zone differences or scheduling conflicts."
+    answer: "No problem! All live sessions are recorded and made available within 24 hours. Many students successfully complete courses using the recordings exclusively due to time zone differences or scheduling conflicts."
   },
   {
     id: 4,
-    question: "How much time should I commit to practice between sessions?",
-    answer: "For optimal results, we recommend 15-30 minutes of daily practice using the guided meditations provided. However, even 5-10 minutes daily is beneficial. The courses emphasize quality and consistency over duration, and include strategies for establishing a sustainable practice that fits your lifestyle."
+    question: "How much practice time is needed between sessions?",
+    answer: "For optimal results, we recommend 15-30 minutes of daily practice using the guided meditations provided. However, even 5-10 minutes daily is beneficial. The courses emphasize quality and consistency over duration."
   },
   {
     id: 5,
     question: "Is there a payment plan available?",
-    answer: "Yes, all courses offer the option to pay in three monthly installments instead of the full amount upfront. This option is available during the checkout process. There's no additional fee for choosing the payment plan."
-  },
-  {
-    id: 6,
-    question: "What happens after I complete a course?",
-    answer: "After completing any course, you'll retain lifetime access to all course materials and recordings. Graduates are also invited to join our alumni community for ongoing support. Many students choose to progress through the course sequence, moving from Foundations to Daily Life to Deepening, though each course can also be taken independently."
+    answer: "Yes, all courses offer the option to pay in three monthly installments instead of the full amount upfront. There's no additional fee for choosing the payment plan."
   }
 ]
 
 export default function CoursesFAQ() {
   const [openId, setOpenId] = useState<number | null>(null)
-  
-  const toggleFAQ = (id: number) => {
-    setOpenId(openId === id ? null : id)
-  }
-  
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
+
   return (
-    <section className="py-16 px-4 bg-white">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="font-crimson text-3xl md:text-4xl text-forest-deep mb-6 text-center">
-          Frequently Asked Questions
-        </h2>
-        
-        <div className="w-20 h-1 bg-forest-deep/20 mx-auto mb-12"></div>
-        
+    <section className="relative py-24 md:py-32 bg-pure-light overflow-hidden">
+      {/* Subtle decorative line */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-living-green/30 to-transparent" />
+
+      <div className="max-w-3xl mx-auto px-6">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <p
+            className={`text-sm uppercase tracking-[0.2em] text-living-green mb-4 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+          >
+            Course Questions
+          </p>
+          <h2
+            ref={ref}
+            className={`font-crimson text-3xl md:text-4xl lg:text-5xl text-forest-deep leading-tight ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+            style={{ transitionDelay: '100ms' }}
+          >
+            Frequently Asked
+          </h2>
+        </div>
+
+        {/* FAQ Items */}
         <div className="space-y-4">
-          {faqs.map((faq) => (
-            <div 
+          {faqs.map((faq, index) => (
+            <div
               key={faq.id}
-              className="bg-pure-light rounded-lg shadow-sm overflow-hidden"
+              className={`bg-white/70 backdrop-blur-sm rounded-xl overflow-hidden ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } transition-all duration-700`}
+              style={{ transitionDelay: `${200 + index * 50}ms` }}
             >
               <button
-                onClick={() => toggleFAQ(faq.id)}
-                className="w-full text-left px-6 py-4 flex items-center justify-between focus:outline-none"
+                onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
+                className="w-full text-left px-6 py-5 flex items-center justify-between focus:outline-none group"
               >
-                <span className="font-medium text-forest-deep">{faq.question}</span>
-                <span className="text-forest-deep text-xl">
-                  {openId === faq.id ? '−' : '+'}
+                <span className="font-crimson text-lg text-forest-deep group-hover:text-sage-calm transition-colors">
+                  {faq.question}
+                </span>
+                <span className={`text-living-green text-2xl transition-transform duration-300 ${
+                  openId === faq.id ? 'rotate-45' : ''
+                }`}>
+                  +
                 </span>
               </button>
-              
-              {openId === faq.id && (
-                <div className="px-6 pb-4">
-                  <p className="text-medium-text">
-                    {faq.answer}
-                  </p>
-                </div>
-              )}
+
+              <div className={`overflow-hidden transition-all duration-300 ${
+                openId === faq.id ? 'max-h-96' : 'max-h-0'
+              }`}>
+                <p className="px-6 pb-5 text-sage-calm leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
             </div>
           ))}
         </div>
-        
-        <div className="mt-12 text-center">
-          <p className="text-medium-text">
-            Have more questions? Feel free to <a href="/contact" className="text-forest-deep underline">contact me</a> and I'll be happy to help.
-          </p>
-        </div>
+
+        {/* Contact prompt */}
+        <p className="text-center mt-12 text-sage-calm">
+          Have another question?{' '}
+          <a href="/contact" className="text-forest-deep hover:underline">
+            Get in touch
+          </a>
+        </p>
       </div>
+
+      {/* Subtle decorative line */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-t from-transparent via-living-green/30 to-transparent" />
     </section>
   )
 }

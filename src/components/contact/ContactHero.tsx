@@ -1,46 +1,74 @@
-import Link from 'next/link'
+'use client'
+
+import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import Image from 'next/image'
 
 export default function ContactHero() {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
+
   return (
-    <section className="relative bg-gradient-to-br from-pure-light to-light-border py-16 px-4 text-center overflow-hidden z-0">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-60 z-0">
-        <div 
-          className="w-full h-full bg-no-repeat bg-cover bg-center"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cdefs%3E%3Cpattern id='contactPattern' x='0' y='0' width='50' height='50' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='15' cy='15' r='1' fill='%234a7c59' opacity='0.1'/%3E%3Ccircle cx='35' cy='35' r='1.5' fill='%237fb069' opacity='0.1'/%3E%3Cpath d='M10 25 Q25 20 40 25' stroke='%23d4a574' stroke-width='0.5' fill='none' opacity='0.15'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23contactPattern)'/%3E%3C/svg%3E")`
-          }}
+    <section className="relative min-h-[60vh] flex items-center overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/orla/optimized/service/7R500362.webp"
+          alt="Peaceful Irish landscape"
+          fill
+          className="object-cover"
+          priority
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
       </div>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto relative z-10">
-        <h1 className="font-crimson text-4xl md:text-5xl font-light text-forest-deep mb-6 leading-tight fade-in-up">
-          Have Questions? Get Personalised Guidance
-        </h1>
-        
-        <p className="text-lg text-medium-text mb-8 max-w-2xl mx-auto fade-in-up">
-          Whether you're curious about meditation, need course recommendations, or want to understand 
-          which approach might work best for you, I'm here to help with personalised guidance.
-        </p>
-        
-        <div className="inline-block bg-forest-deep/10 text-forest-deep font-medium px-6 py-3 rounded-full mb-6 border border-forest-deep/20 fade-in-up">
-          <span className="inline-flex items-center gap-2">
-            <svg viewBox="0 0 24 24" className="w-5 h-5 text-forest-deep"><path fill="currentColor" d="M11 21h-1l1-7H7l9-12h1l-1 7h4l-9 12z"/></svg>
-            Personal response within 24 hours
-          </span>
-        </div>
-        
-        <div className="mt-6">
-          <p className="text-medium-text">
-            Ready to book a session?{' '}
-            <Link 
-              href="/book-session" 
-              className="text-forest-deep font-medium hover:underline"
-            >
-              Schedule your personalised meditation session →
-            </Link>
+      <div
+        ref={ref}
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 py-20"
+      >
+        <div className="max-w-2xl">
+          {/* Subtitle */}
+          <p
+            className={`text-sm uppercase tracking-[0.2em] text-earth-warmth mb-6 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+            style={{ transitionDelay: '100ms' }}
+          >
+            Get in Touch
           </p>
+
+          {/* Main Headline */}
+          <h1
+            className={`font-crimson text-4xl sm:text-5xl md:text-6xl font-light text-white mb-6 leading-[1.1] ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+            style={{ transitionDelay: '200ms' }}
+          >
+            Let&apos;s start
+            <br />
+            <span className="text-earth-warmth">a conversation.</span>
+          </h1>
+
+          {/* Description */}
+          <p
+            className={`text-lg md:text-xl text-white/90 mb-8 leading-relaxed ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+            style={{ transitionDelay: '300ms' }}
+          >
+            Whether you&apos;re curious about meditation, need guidance on where to start,
+            or have a specific question, I&apos;m here to help.
+          </p>
+
+          {/* Trust Indicator */}
+          <div
+            className={`flex items-center gap-3 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+            style={{ transitionDelay: '400ms' }}
+          >
+            <div className="w-2 h-2 rounded-full bg-earth-warmth" />
+            <span className="text-white/80 text-sm">Personal response within 24 hours</span>
+          </div>
         </div>
       </div>
     </section>

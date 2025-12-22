@@ -163,7 +163,7 @@ export default function FreeMeditationSection() {
                 <div className="text-3xl">🍃</div>
                 <div>
                   <p className="text-sm text-medium-text italic">
-                    "The OM Method creates harmony between your inner world and daily life, 
+                    "My approach creates harmony between your inner world and daily life,
                     making meditation not just a practice, but a way of being."
                   </p>
                   <p className="text-forest-deep font-medium text-sm mt-2">

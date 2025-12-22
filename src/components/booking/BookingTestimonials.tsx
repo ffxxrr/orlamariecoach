@@ -32,7 +32,7 @@ export default function BookingTestimonials() {
           </h2>
           
           <p className="text-medium-text max-w-2xl mx-auto">
-            Real transformations from people who've experienced The OM Method 
+            Real transformations from people who've experienced Orla's personalised
             approach to meditation and mindfulness.
           </p>
         </div>

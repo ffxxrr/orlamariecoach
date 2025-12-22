@@ -26,7 +26,7 @@ const sessionOptions = [
     subtitle: "Complete transformation journey with ongoing support",
     price: "€400",
     note: "save €200",
-    description: "Transform your relationship with stress and discover lasting peace. This comprehensive package provides structured progression through The OM Method with continuous support and refinement.",
+    description: "Transform your relationship with stress and discover lasting peace. This comprehensive package provides structured progression with continuous support and refinement.",
     features: [
       "6 × 90-minute sessions",
       "Progressive skill development",
@@ -52,8 +52,8 @@ export default function BookingOptions() {
           </h2>
           
           <p className="text-medium-text max-w-2xl mx-auto">
-            Whether you're looking for a single transformative session or ongoing support, 
-            each option includes personalised guidance using The OM Method approach.
+            Whether you're looking for a single transformative session or ongoing support,
+            each option includes personalised guidance tailored to your unique needs.
           </p>
         </div>
         

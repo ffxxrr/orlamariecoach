@@ -1,180 +1,212 @@
 'use client'
-import Link from 'next/link'
-import Button from '@/components/ui/Button'
+
+import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import Image from 'next/image'
-import { useEventTracker } from '@/components/ui/AnalyticsProvider'
+import Link from 'next/link'
 
 const courses = [
   {
-    id: 1,
-    title: "OM Method Foundations",
-    subtitle: "8-Week Mindfulness Course",
-    description: "A comprehensive introduction to mindfulness meditation designed for beginners. This course provides a structured path to establishing a sustainable practice using The OM Method approach.",
-    price: "€250",
+    title: 'Mindfulness Foundations',
+    subtitle: '8-Week Beginner Course',
+    description: 'A comprehensive introduction to mindfulness meditation designed for beginners. This course provides a structured path to establishing a sustainable practice with personalised guidance.',
+    price: '€250',
     features: [
-      "8 weekly live group sessions (90 minutes each)",
-      "Progressive guided meditations for daily practice",
-      "Comprehensive workbook and practice materials",
-      "Personalised feedback and guidance",
-      "Lifetime access to course recordings",
-      "Private community support group"
+      '8 weekly live group sessions (90 minutes each)',
+      'Progressive guided meditations for daily practice',
+      'Comprehensive workbook and practice materials',
+      'Lifetime access to course recordings',
     ],
-    level: "Beginner",
-    duration: "8 weeks",
-    format: "Online Live + Recordings",
-    nextStart: "June 10, 2025",
-    image: "/images/orla/optimized/service/7R500150.webp"
+    level: 'Beginner',
+    duration: '8 weeks',
+    nextStart: 'June 10, 2025',
+    image: '/images/orla/optimized/service/7R500150.webp',
   },
   {
-    id: 2,
-    title: "OM Method Deepening",
-    subtitle: "Advanced Meditation Course",
-    description: "For those with an established practice seeking to explore deeper aspects of meditation. This course builds on foundational skills to develop subtler awareness and insight.",
-    price: "€250",
+    title: 'Meditation Deepening',
+    subtitle: 'Advanced Course',
+    description: 'For those with an established practice seeking to explore deeper aspects of meditation. This course builds on foundational skills to develop subtler awareness and insight.',
+    price: '€250',
     features: [
-      "6 weekly live sessions (2 hours each)",
-      "Advanced meditation techniques and practices",
-      "Exploration of subtle mind states and insight",
-      "Personal guidance on deepening your practice",
-      "Intensive practice periods with support",
-      "Advanced meditation resources and materials"
+      '6 weekly live sessions (2 hours each)',
+      'Advanced meditation techniques and practices',
+      'Exploration of subtle mind states and insight',
+      'Advanced meditation resources and materials',
     ],
-    level: "Intermediate/Advanced",
-    duration: "6 weeks",
-    format: "Online Live + Recordings",
-    nextStart: "July 15, 2025",
-    image: "/images/orla/optimized/service/7R500169.webp"
+    level: 'Intermediate/Advanced',
+    duration: '6 weeks',
+    nextStart: 'July 15, 2025',
+    image: '/images/orla/optimized/service/7R500169.webp',
   },
   {
-    id: 3,
-    title: "OM Method in Daily Life",
-    subtitle: "Practical Mindfulness Integration",
-    description: "Learn to apply mindfulness to everyday challenges and relationships. This course focuses on the practical application of meditation insights to enhance all aspects of your life.",
-    price: "€250",
+    title: 'Mindfulness in Daily Life',
+    subtitle: 'Practical Integration',
+    description: 'Learn to apply mindfulness to everyday challenges and relationships. This course focuses on the practical application of meditation insights to enhance all aspects of your life.',
+    price: '€250',
     features: [
-      "6 weekly live sessions (90 minutes each)",
-      "Real-life application exercises and practices",
-      "Mindfulness for relationships and communication",
-      "Stress response tools and emotional resilience",
-      "Personalised integration strategy development",
-      "Ongoing implementation support"
+      '6 weekly live sessions (90 minutes each)',
+      'Real-life application exercises and practices',
+      'Mindfulness for relationships and communication',
+      'Personalised integration strategy development',
     ],
-    level: "All Levels",
-    duration: "6 weeks",
-    format: "Online Live + Recordings",
-    nextStart: "August 5, 2025",
-    image: "/images/orla/optimized/service/7R500154.webp"
-  }
+    level: 'All Levels',
+    duration: '6 weeks',
+    nextStart: 'August 5, 2025',
+    image: '/images/orla/optimized/service/7R500154.webp',
+  },
 ]
 
-export default function CoursesList() {
-  const { trackCourseInteraction } = useEventTracker()
+interface CourseCardProps {
+  course: typeof courses[0]
+  index: number
+  reverse: boolean
+}
 
-  const handleCourseView = (course: any) => {
-    trackCourseInteraction('view', {
-      courseId: course.id.toString(),
-      courseName: course.title,
-      coursePrice: parseInt(course.price.replace('€', '')),
-      courseLevel: course.level,
-      source: 'courses_page_list'
-    })
-  }
-
-  const handleCourseEnquiry = (course: any, action: string) => {
-    trackCourseInteraction('enquiry', {
-      courseId: course.id.toString(),
-      courseName: course.title,
-      coursePrice: parseInt(course.price.replace('€', '')),
-      action,
-      source: 'courses_page_list'
-    })
-  }
+function CourseCard({ course, index, reverse }: CourseCardProps) {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="py-16 px-4 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <div className="space-y-16">
-          {courses.map((course) => (
-            <div 
-              key={course.id}
-              onMouseEnter={() => handleCourseView(course)}
-              className="bg-pure-light rounded-2xl overflow-hidden shadow-md"
+    <div
+      ref={ref}
+      className={`relative min-h-[70vh] md:min-h-[80vh] flex items-center ${
+        index % 2 === 0 ? 'bg-pure-light' : 'bg-earth-warmth/20'
+      }`}
+    >
+      <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 py-16">
+        <div className={`grid md:grid-cols-2 gap-12 lg:gap-20 items-center ${
+          reverse ? 'md:grid-flow-dense' : ''
+        }`}>
+          {/* Image */}
+          <div
+            className={`relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-2xl ${
+              reverse ? 'md:col-start-2' : ''
+            } ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            } transition-all duration-1000 ease-out`}
+            style={{ transitionDelay: '200ms' }}
+          >
+            <Image
+              src={course.image}
+              alt={course.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+
+            {/* Price Badge */}
+            <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full">
+              <span className="font-crimson text-xl text-forest-deep font-medium">{course.price}</span>
+            </div>
+
+            {/* Level Badge */}
+            <div className="absolute bottom-6 left-6 bg-forest-deep/90 backdrop-blur-sm px-4 py-2 rounded-full">
+              <span className="text-white text-sm">{course.level}</span>
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className={`${reverse ? 'md:col-start-1 md:row-start-1' : ''}`}>
+            {/* Subtitle */}
+            <p
+              className={`text-sm uppercase tracking-[0.2em] text-living-green mb-4 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } transition-all duration-700`}
+              style={{ transitionDelay: '100ms' }}
             >
-              <div className="grid grid-cols-1 md:grid-cols-2">
-                <div className="relative h-full min-h-[300px]">
-                  <Image
-                    src={course.image}
-                    alt={course.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                
-                <div className="p-8">
-                  <div className="flex justify-between items-start mb-4 fade-in-up">
-                    <div>
-                      <h2 className="font-crimson text-2xl md:text-3xl text-forest-deep">
-                        {course.title}
-                      </h2>
-                      <p className="text-medium-text">{course.subtitle}</p>
-                    </div>
-                    <div className="bg-forest-deep text-white px-4 py-2 rounded-full text-lg font-medium">
-                      {course.price}
-                    </div>
-                  </div>
-                  
-                  <p className="text-medium-text mb-6 fade-in-up">
-                    {course.description}
-                  </p>
-                  
-                  <div className="grid grid-cols-2 gap-4 mb-6 fade-in-up">
-                    <div className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-forest-deep rounded-full"></div>
-                      <span className="text-medium-text text-sm">Level: {course.level}</span>
-                    </div>
+              {course.subtitle}
+            </p>
 
-                    <div className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-forest-deep rounded-full"></div>
-                      <span className="text-medium-text text-sm">Duration: {course.duration}</span>
-                    </div>
+            {/* Title */}
+            <h2
+              className={`font-crimson text-3xl md:text-4xl lg:text-5xl text-forest-deep mb-6 leading-tight ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } transition-all duration-700`}
+              style={{ transitionDelay: '200ms' }}
+            >
+              {course.title}
+            </h2>
 
-                    <div className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-forest-deep rounded-full"></div>
-                      <span className="text-medium-text text-sm">Format: {course.format}</span>
-                    </div>
+            {/* Description */}
+            <p
+              className={`text-lg text-sage-calm leading-relaxed mb-6 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } transition-all duration-700`}
+              style={{ transitionDelay: '300ms' }}
+            >
+              {course.description}
+            </p>
 
-                    <div className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-forest-deep rounded-full"></div>
-                      <span className="text-medium-text text-sm">Next: {course.nextStart}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="mb-6">
-                    <h3 className="text-forest-deep font-medium mb-2">Course Includes:</h3>
-                    <ul className="space-y-2">
-                      {course.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2 text-medium-text">
-                          <div className="w-1.5 h-1.5 bg-forest-deep rounded-full mt-2 flex-shrink-0"></div>
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  <div className="flex gap-4">
-                    <Link href={`/courses/${course.id}`} onClick={() => handleCourseEnquiry(course, 'details_clicked')}>
-                      <Button variant="primary">Course Details</Button>
-                    </Link>
-                    <Link href="/book-session" onClick={() => handleCourseEnquiry(course, 'enroll_clicked')}>
-                      <Button variant="secondary">Enroll Now</Button>
-                    </Link>
-                  </div>
-                </div>
+            {/* Course Details */}
+            <div
+              className={`flex flex-wrap gap-4 mb-6 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } transition-all duration-700`}
+              style={{ transitionDelay: '320ms' }}
+            >
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-living-green" />
+                <span className="text-sage-calm text-sm">{course.duration}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-living-green" />
+                <span className="text-sage-calm text-sm">Starts {course.nextStart}</span>
               </div>
             </div>
-          ))}
+
+            {/* Features */}
+            <ul
+              className={`space-y-3 mb-8 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } transition-all duration-700`}
+              style={{ transitionDelay: '350ms' }}
+            >
+              {course.features.map((feature, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-living-green flex-shrink-0 mt-2" />
+                  <span className="text-sage-calm">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* CTA Link */}
+            <Link
+              href="/book-session"
+              className={`inline-flex items-center gap-3 group ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } transition-all duration-700`}
+              style={{ transitionDelay: '400ms' }}
+            >
+              <span className="text-forest-deep font-medium uppercase tracking-wider text-sm">
+                Enroll Now
+              </span>
+              <span className="w-8 h-px bg-forest-deep group-hover:w-12 transition-all duration-300" />
+              <svg
+                className="w-4 h-4 text-forest-deep transform group-hover:translate-x-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+export default function CoursesList() {
+  return (
+    <section>
+      {courses.map((course, index) => (
+        <CourseCard
+          key={course.title}
+          course={course}
+          index={index}
+          reverse={index % 2 === 1}
+        />
+      ))}
     </section>
   )
 }

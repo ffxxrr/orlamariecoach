@@ -143,7 +143,7 @@ export default function BrandSystem() {
             <div className="space-y-4">
               <p className="font-crimson text-4xl">Mindful Living</p>
               <p className="font-crimson text-3xl">Find Your Center</p>
-              <p className="font-crimson text-2xl">The OM Method</p>
+              <p className="font-crimson text-2xl">Orla Marie</p>
               <p className="font-crimson text-xl">Peaceful Journey</p>
             </div>
           </div>
