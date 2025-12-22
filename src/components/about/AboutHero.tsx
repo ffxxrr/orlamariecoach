@@ -1,24 +1,61 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
-import Image from 'next/image'
 
 export default function AboutHero() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [videoLoaded, setVideoLoaded] = useState(false)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setPrefersReducedMotion(mediaQuery.matches)
+    const handleChange = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches)
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
+  }, [])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (video) {
+      const handleCanPlay = () => setVideoLoaded(true)
+      video.addEventListener('canplay', handleCanPlay)
+      return () => video.removeEventListener('canplay', handleCanPlay)
+    }
+  }, [])
 
   return (
     <section className="relative min-h-[80vh] flex items-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
-        <Image
-          src="/images/orla/optimized/about/7R500130.webp"
-          alt="Orla Marie meditation coach"
-          fill
-          className="object-cover object-top"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
-      </div>
+      {/* Video Background */}
+      {!prefersReducedMotion && (
+        <video
+          ref={videoRef}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+            videoLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          poster="/media/sora/about-poster.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        >
+          <source src="/media/sora/about.mp4" type="video/mp4" />
+        </video>
+      )}
+
+      {/* Poster fallback */}
+      <div
+        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+          videoLoaded && !prefersReducedMotion ? 'opacity-0' : 'opacity-100'
+        }`}
+        style={{ backgroundImage: 'url(/media/sora/about-poster.jpg)' }}
+      />
+
+      {/* Overlay for text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
 
       {/* Content */}
       <div
