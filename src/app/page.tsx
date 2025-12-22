@@ -22,11 +22,8 @@ export default function HomePage() {
       <BotanicalAccents />
       <Navbar />
       <main>
-        <Section padded>
-          <Container>
-            <Hero />
-          </Container>
-        </Section>
+        {/* Hero is full-bleed, not wrapped in Container */}
+        <Hero />
         <Section padded className="bg-white/60">
           <Container>
             <Services />

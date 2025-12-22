@@ -115,7 +115,7 @@ interface TrackingWrapperProps {
     action: string;
     data?: any;
   };
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
   className?: string;
 }
 
@@ -277,11 +277,18 @@ export function AudioTracker({
     onComplete?.();
   };
 
-  return React.cloneElement(children as React.ReactElement, {
-    onPlay: handlePlay,
-    onPause: handlePause,
-    onEnded: handleComplete,
-  });
+  return React.cloneElement(
+    children as React.ReactElement<{
+      onPlay?: () => void;
+      onPause?: () => void;
+      onEnded?: () => void;
+    }>,
+    {
+      onPlay: handlePlay,
+      onPause: handlePause,
+      onEnded: handleComplete,
+    }
+  );
 }
 
 /**

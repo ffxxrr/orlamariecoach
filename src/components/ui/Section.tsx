@@ -1,7 +1,7 @@
 import React, { ElementType } from 'react'
 
 type Props = {
-  as?: keyof JSX.IntrinsicElements
+  as?: keyof React.JSX.IntrinsicElements
   className?: string
   padded?: boolean
   children: React.ReactNode

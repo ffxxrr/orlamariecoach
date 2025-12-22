@@ -3,15 +3,16 @@ import { getPrisma } from '@/lib/db'
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const body = await request.json()
     const { status, adminNotes } = body
 
     const prisma = getPrisma()
     const feedback = await prisma.feedback.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         status,
         adminNotes: adminNotes || undefined,
@@ -37,12 +38,13 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const prisma = getPrisma()
     await prisma.feedback.delete({
-      where: { id: params.id },
+      where: { id },
     })
 
     return NextResponse.json({
