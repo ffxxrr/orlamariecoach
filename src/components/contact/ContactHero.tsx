@@ -7,7 +7,7 @@ export default function ContactHero() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="relative min-h-[60vh] flex items-center overflow-hidden">
+    <section className="relative h-screen flex items-center overflow-hidden">
       {/* Video/Poster Background */}
       <VideoHeroBackground
         videoSrc="/media/sora/contact.mp4"

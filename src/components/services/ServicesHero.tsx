@@ -7,7 +7,7 @@ export default function ServicesHero() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+    <section className="relative h-screen flex items-center overflow-hidden">
       {/* Video/Poster Background - right focal point to keep candle visible on mobile */}
       <VideoHeroBackground
         videoSrc="/media/sora/services.mp4"
