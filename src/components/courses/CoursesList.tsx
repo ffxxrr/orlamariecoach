@@ -2,7 +2,6 @@
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import Image from 'next/image'
-import ImagePlaceholder from '@/components/ui/ImagePlaceholder'
 import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 
 const courses = [
@@ -24,7 +23,7 @@ const courses = [
     duration: "8 weeks",
     format: "Online Live + Recordings",
     nextStart: "June 10, 2025",
-    image: "/images/content/courses/foundations.webp"
+    image: "/images/orla/optimized/service/7R500150.webp"
   },
   {
     id: 2,
@@ -44,7 +43,7 @@ const courses = [
     duration: "6 weeks",
     format: "Online Live + Recordings",
     nextStart: "July 15, 2025",
-    image: "/images/content/courses/deepening.webp"
+    image: "/images/orla/optimized/service/7R500169.webp"
   },
   {
     id: 3,
@@ -64,7 +63,7 @@ const courses = [
     duration: "6 weeks",
     format: "Online Live + Recordings",
     nextStart: "August 5, 2025",
-    image: "/images/content/courses/daily-life.webp"
+    image: "/images/orla/optimized/service/7R500154.webp"
   }
 ]
 
@@ -102,10 +101,12 @@ export default function CoursesList() {
               className="bg-pure-light rounded-2xl overflow-hidden shadow-md"
             >
               <div className="grid grid-cols-1 md:grid-cols-2">
-                <div className="h-full">
-                  <ImagePlaceholder
-                    text={course.title}
-                    aspectRatio="h-full"
+                <div className="relative h-full min-h-[300px]">
+                  <Image
+                    src={course.image}
+                    alt={course.title}
+                    fill
+                    className="object-cover"
                   />
                 </div>
                 

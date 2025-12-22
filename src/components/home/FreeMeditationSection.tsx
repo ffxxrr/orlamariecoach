@@ -114,13 +114,9 @@ export default function FreeMeditationSection() {
                           required
                           className="flex-1 px-4 py-3 rounded-full border border-light-border focus:outline-none focus:ring-2 focus:ring-forest-deep/20"
                         />
-                        <button
-                          type="submit"
-                          disabled={isSubscribing}
-                          className=""
-                        >
-                          <Button>{isSubscribing ? 'Processing...' : 'Download Now'}</Button>
-                        </button>
+                        <Button type="submit" disabled={isSubscribing}>
+                          {isSubscribing ? 'Processing...' : 'Download Now'}
+                        </Button>
                       </div>
                       
                       <p className="text-xs text-medium-text mt-3">

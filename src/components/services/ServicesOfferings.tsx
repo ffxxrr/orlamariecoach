@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import Image from 'next/image'
-import ImagePlaceholder from '@/components/ui/ImagePlaceholder'
 
 const services = [
   {
@@ -34,7 +33,7 @@ const services = [
     ],
     image: "/images/services/group-course.webp",
     cta: "Explore Course Details",
-    link: "/courses/foundation"
+    link: "/courses"
   },
   {
     id: 3,
@@ -50,7 +49,7 @@ const services = [
     ],
     image: "/images/services/corporate.webp",
     cta: "Request Corporate Information",
-    link: "/corporate"
+    link: "/contact"
   }
 ]
 

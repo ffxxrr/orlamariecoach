@@ -7,7 +7,7 @@ const footerLinks = {
     { name: 'About Orla', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Online Courses', href: '/courses' },
-    { name: 'Resources', href: '/resources' }
+    { name: 'Contact', href: '/contact' }
   ],
   legal: [
     { name: 'Privacy Policy', href: '/privacy' },

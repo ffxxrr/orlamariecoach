@@ -22,7 +22,7 @@ export default function CoursesCTA() {
           <Link href="/contact">
             <Button variant="secondary">Ask a Question</Button>
           </Link>
-          <Link href="/booking">
+          <Link href="/book-session">
             <Button variant="primary">Enroll Now</Button>
           </Link>
         </div>

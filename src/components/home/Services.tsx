@@ -29,7 +29,7 @@ const services = [
   {
     title: 'Group Workshops',
     description: 'Connect with like-minded individuals in supportive group settings. Experience the power of community whilst learning practical techniques for daily life.',
-    link: '/workshops',
+    link: '/contact',
     gradient: 'from-earth-warmth to-living-green',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-10 h-10">
