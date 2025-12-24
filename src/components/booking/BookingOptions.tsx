@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 
 const sessionOptions = [
   {
@@ -43,35 +46,49 @@ const sessionOptions = [
 ]
 
 export default function BookingOptions() {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
+
   return (
     <section className="py-16 px-4 bg-white">
-      <div className="max-w-6xl mx-auto">
+      <div ref={ref} className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="font-crimson text-3xl md:text-4xl text-forest-deep mb-4">
+          <h2
+            className={`font-crimson text-3xl md:text-4xl text-forest-deep mb-4 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+          >
             Choose Your Session Experience
           </h2>
-          
-          <p className="text-medium-text max-w-2xl mx-auto">
+
+          <p
+            className={`text-medium-text max-w-2xl mx-auto ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+            style={{ transitionDelay: '100ms' }}
+          >
             Whether you're looking for a single transformative session or ongoing support,
             each option includes personalised guidance tailored to your unique needs.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {sessionOptions.map((option) => (
-            <div 
+          {sessionOptions.map((option, index) => (
+            <div
               key={option.id}
               className={`relative bg-pure-light rounded-xl p-6 md:p-8 border border-living-green/10
                          ${option.featured ? 'transform md:scale-105 bg-gradient-to-br from-living-green to-sage-calm text-white' : ''}
-                         shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}
+                         shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: `${150 + index * 100}ms` }}
             >
               {option.featured && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-amber-500 text-forest-deep 
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-amber-500 text-forest-deep
                                text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full">
                   Most Popular
                 </div>
               )}
-              
+
               <div className="flex flex-col md:flex-row justify-between mb-6">
                 <div>
                   <h3 className={`font-crimson text-2xl ${option.featured ? 'text-white' : 'text-forest-deep'} mb-1`}>
@@ -81,7 +98,7 @@ export default function BookingOptions() {
                     {option.subtitle}
                   </p>
                 </div>
-                
+
                 <div className="mt-4 md:mt-0 text-right">
                   <div className={`font-crimson text-3xl font-semibold ${option.featured ? 'text-white' : 'text-forest-deep'}`}>
                     {option.price}
@@ -91,16 +108,16 @@ export default function BookingOptions() {
                   </div>
                 </div>
               </div>
-              
+
               <div className={`${option.featured ? 'bg-white/20' : 'bg-white/70'} rounded-lg p-4 mb-6`}>
                 <p className={option.featured ? 'text-white/90' : 'text-medium-text'}>
                   {option.description}
                 </p>
               </div>
-              
+
               <ul className="space-y-3 mb-8">
-                {option.features.map((feature, index) => (
-                  <li key={index} className="flex items-start gap-3">
+                {option.features.map((feature, fIndex) => (
+                  <li key={fIndex} className="flex items-start gap-3">
                     <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 mt-2
                                    ${option.featured ? 'bg-white' : 'bg-living-green'}`}>
                     </div>
@@ -110,12 +127,12 @@ export default function BookingOptions() {
                   </li>
                 ))}
               </ul>
-              
+
               <Link
                 href={option.link}
                 className={`block w-full text-center py-3 px-6 rounded-lg font-medium transition-all duration-300
-                          ${option.featured 
-                            ? 'bg-white text-forest-deep hover:bg-pure-light' 
+                          ${option.featured
+                            ? 'bg-white text-forest-deep hover:bg-pure-light'
                             : 'bg-forest-deep text-white hover:bg-sage-calm'}`}
               >
                 {option.cta}
@@ -123,10 +140,15 @@ export default function BookingOptions() {
             </div>
           ))}
         </div>
-        
-        <div className="text-center mt-10 text-medium-text">
+
+        <div
+          className={`text-center mt-10 text-medium-text ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          } transition-all duration-700`}
+          style={{ transitionDelay: '350ms' }}
+        >
           <p className="font-medium">
-            All sessions include: Secure video calls via Digital Samba, global timezone accommodation, 
+            All sessions include: Secure video calls via Digital Samba, global timezone accommodation,
             and payment via Revolut or PayPal. Sessions are recorded for your reference (with permission).
           </p>
         </div>

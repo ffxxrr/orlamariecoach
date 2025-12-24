@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 
 const faqs = [
   {
@@ -32,29 +33,42 @@ const faqs = [
 
 export default function ContactFAQ() {
   const [activeId, setActiveId] = useState<number | null>(null)
-  
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
+
   const toggleFAQ = (id: number) => {
     setActiveId(activeId === id ? null : id)
   }
-  
+
   return (
     <section className="py-16 px-4 bg-gradient-to-br from-pure-light to-light-border">
-      <div className="max-w-3xl mx-auto">
+      <div ref={ref} className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="font-crimson text-3xl md:text-4xl text-forest-deep mb-4">
+          <h2
+            className={`font-crimson text-3xl md:text-4xl text-forest-deep mb-4 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+          >
             Quick Answers
           </h2>
-          
-          <p className="text-medium-text max-w-2xl mx-auto">
+
+          <p
+            className={`text-medium-text max-w-2xl mx-auto ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            } transition-all duration-700`}
+            style={{ transitionDelay: '100ms' }}
+          >
             Common questions about getting in touch and what to expect.
           </p>
         </div>
-        
+
         <div className="space-y-4">
-          {faqs.map((faq) => (
+          {faqs.map((faq, index) => (
             <div
               key={faq.id}
-              className="bg-white rounded-lg shadow-sm overflow-hidden border border-living-green/10"
+              className={`bg-white rounded-lg shadow-sm overflow-hidden border border-living-green/10 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } transition-all duration-700`}
+              style={{ transitionDelay: `${150 + index * 50}ms` }}
             >
               <button
                 onClick={() => toggleFAQ(faq.id)}
@@ -67,9 +81,9 @@ export default function ContactFAQ() {
                   {activeId === faq.id ? '−' : '+'}
                 </span>
               </button>
-              
+
               {activeId === faq.id && (
-                <div 
+                <div
                   id={`faq-answer-${faq.id}`}
                   className="px-6 pb-4 text-medium-text"
                 >

@@ -25,7 +25,7 @@ export default function AboutCredentials() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="relative py-24 md:py-32 bg-earth-warmth/20 overflow-hidden">
+    <section className="relative py-28 md:py-36 bg-earth-warmth/20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Header */}
         <div className="text-center mb-16">

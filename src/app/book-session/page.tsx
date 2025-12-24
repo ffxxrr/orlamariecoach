@@ -33,11 +33,9 @@ export default function BookSessionPage() {
       <BotanicalAccents />
       <Navbar />
       <main>
-        <Section padded>
-          <Container>
-            <BookingHero />
-          </Container>
-        </Section>
+        {/* Hero - Full bleed immersive */}
+        <BookingHero />
+
         <Section padded className="bg-white/60">
           <Container>
             <BookingOptions />

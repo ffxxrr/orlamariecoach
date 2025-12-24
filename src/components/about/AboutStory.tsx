@@ -7,7 +7,7 @@ export default function AboutStory() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="relative py-24 md:py-32 bg-pure-light overflow-hidden">
+    <section className="relative py-28 md:py-36 bg-pure-light overflow-hidden">
       {/* Subtle decorative line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-living-green/30 to-transparent" />
 
