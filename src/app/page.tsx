@@ -3,7 +3,6 @@ import Invitation from '@/components/home/Invitation'
 import ThreePaths from '@/components/home/ThreePaths'
 import TestimonialFeature from '@/components/home/TestimonialFeature'
 import AboutGlimpse from '@/components/home/AboutGlimpse'
-import SoftCTA from '@/components/home/SoftCTA'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
@@ -26,9 +25,6 @@ export default function HomePage() {
 
         {/* About Glimpse - Meet Orla */}
         <AboutGlimpse />
-
-        {/* Soft CTA - Gentle ending */}
-        <SoftCTA />
       </main>
       <Footer />
     </>

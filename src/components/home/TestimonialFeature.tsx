@@ -6,7 +6,7 @@ export default function TestimonialFeature() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
 
   return (
-    <section className="relative py-32 md:py-40 bg-earth-warmth/30 overflow-hidden">
+    <section className="relative py-32 md:py-40 bg-earth-warmth/30">
       {/* Layered atmospheric light mist effect */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Primary soft glow - asymmetric light pools */}
@@ -78,9 +78,18 @@ export default function TestimonialFeature() {
         </div>
       </div>
 
-      {/* Subtle corner decorations */}
-      <div className="absolute top-12 left-12 w-24 h-24 border-l-2 border-t-2 border-living-green/10 rounded-tl-3xl" />
-      <div className="absolute bottom-12 right-12 w-24 h-24 border-r-2 border-b-2 border-living-green/10 rounded-br-3xl" />
+      {/* Celtic circle divider - top */}
+      <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 z-20 pointer-events-none">
+        <svg viewBox="0 0 200 200" className="w-full h-full text-living-green/40">
+          <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" strokeWidth="3" />
+          <circle cx="100" cy="100" r="70" fill="none" stroke="currentColor" strokeWidth="2" />
+          <circle cx="100" cy="100" r="50" fill="none" stroke="currentColor" strokeWidth="2" />
+          <path d="M100 30 Q140 65 100 100 Q60 65 100 30" fill="none" stroke="currentColor" strokeWidth="2" />
+          <path d="M170 100 Q135 140 100 100 Q135 60 170 100" fill="none" stroke="currentColor" strokeWidth="2" />
+          <path d="M100 170 Q60 135 100 100 Q140 135 100 170" fill="none" stroke="currentColor" strokeWidth="2" />
+          <path d="M30 100 Q65 60 100 100 Q65 140 30 100" fill="none" stroke="currentColor" strokeWidth="2" />
+        </svg>
+      </div>
     </section>
   )
 }

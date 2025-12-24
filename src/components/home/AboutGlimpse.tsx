@@ -1,41 +1,39 @@
 'use client'
 
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
-import Image from 'next/image'
 import Link from 'next/link'
 
 export default function AboutGlimpse() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 bg-pure-light overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid md:grid-cols-5 gap-12 lg:gap-20 items-center">
-          {/* Image - Takes 2 columns */}
+    <section ref={ref} className="relative py-24 md:py-32 bg-pure-light">
+      {/* Celtic circle divider - top */}
+      <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 z-20 pointer-events-none">
+        <svg viewBox="0 0 200 200" className="w-full h-full text-living-green/40">
+          <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" strokeWidth="3" />
+          <circle cx="100" cy="100" r="70" fill="none" stroke="currentColor" strokeWidth="2" />
+          <circle cx="100" cy="100" r="50" fill="none" stroke="currentColor" strokeWidth="2" />
+          <path d="M100 30 Q140 65 100 100 Q60 65 100 30" fill="none" stroke="currentColor" strokeWidth="2" />
+          <path d="M170 100 Q135 140 100 100 Q135 60 170 100" fill="none" stroke="currentColor" strokeWidth="2" />
+          <path d="M100 170 Q60 135 100 100 Q140 135 100 170" fill="none" stroke="currentColor" strokeWidth="2" />
+          <path d="M30 100 Q65 60 100 100 Q65 140 30 100" fill="none" stroke="currentColor" strokeWidth="2" />
+        </svg>
+      </div>
+
+      <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
+          {/* Small decorative element */}
           <div
-            className={`md:col-span-2 transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
+            className={`mb-8 transition-all duration-700 ${
+              isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
             }`}
           >
-            <div className="relative">
-              {/* Main image */}
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
-                <Image
-                  src="/images/orla/optimized/about/7R500325.webp"
-                  alt="Orla Marie - Meditation Coach"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 40vw"
-                />
-              </div>
-              {/* Decorative frame offset */}
-              <div className="absolute -bottom-4 -right-4 w-full h-full border-2 border-living-green/20 rounded-2xl -z-10" />
-            </div>
+            <svg className="w-8 h-8 mx-auto text-living-green/30" viewBox="0 0 32 32" fill="currentColor">
+              <circle cx="16" cy="16" r="3" />
+            </svg>
           </div>
 
-          {/* Content - Takes 3 columns */}
-          <div className="md:col-span-3">
-            {/* Label */}
+          {/* Label */}
             <p
               className={`text-sm uppercase tracking-[0.2em] text-living-green mb-6 transition-all duration-700 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -98,8 +96,6 @@ export default function AboutGlimpse() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
-          </div>
-        </div>
       </div>
     </section>
   )

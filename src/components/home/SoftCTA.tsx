@@ -7,19 +7,30 @@ export default function SoftCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
 
   return (
-    <section className="relative py-24 md:py-32 bg-gradient-to-b from-pure-light via-earth-warmth/35 to-earth-warmth/50 overflow-hidden">
-      {/* Warm radial glow behind CTA area */}
+    <section className="relative py-24 md:py-32 bg-pure-light overflow-hidden">
+      {/* Soft organic wave at top */}
+      <div className="absolute top-0 left-0 right-0 h-24 overflow-hidden">
+        <svg
+          className="absolute bottom-0 w-full h-24 text-earth-warmth/20"
+          viewBox="0 0 1200 100"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,60 C200,100 400,20 600,60 C800,100 1000,20 1200,60 L1200,100 L0,100 Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+
+      {/* Warm radial glow - softer */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 90% 70% at 50% 60%, rgba(201, 164, 117, 0.45) 0%, transparent 50%),
-            radial-gradient(ellipse 70% 50% at 50% 50%, rgba(241, 203, 184, 0.35) 0%, transparent 40%)
+            radial-gradient(ellipse 100% 80% at 50% 70%, rgba(241, 203, 184, 0.25) 0%, transparent 60%)
           `,
         }}
       />
-      {/* Decorative top fade */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-pure-light to-transparent" />
 
       <div
         ref={ref}
@@ -70,15 +81,16 @@ export default function SoftCTA() {
         >
           <Link
             href="/book-session"
-            className="inline-flex items-center justify-center bg-forest-deep text-white px-8 py-4 rounded-full font-medium hover:bg-sage-calm hover:shadow-lg transition-all duration-300"
+            className="inline-flex items-center justify-center bg-forest-deep/90 text-white px-8 py-3.5 rounded-full font-medium hover:bg-forest-deep hover:shadow-md transition-all duration-300"
           >
             Book a Session
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center bg-transparent text-forest-deep border-2 border-forest-deep/30 px-8 py-4 rounded-full font-medium hover:border-forest-deep hover:bg-forest-deep/5 transition-all duration-300"
+            className="inline-flex items-center justify-center text-forest-deep px-8 py-3.5 font-medium hover:text-sage-calm transition-all duration-300 group"
           >
-            Get in Touch
+            <span>Get in Touch</span>
+            <span className="ml-2 w-5 h-px bg-forest-deep group-hover:w-8 group-hover:bg-sage-calm transition-all duration-300" />
           </Link>
         </div>
 

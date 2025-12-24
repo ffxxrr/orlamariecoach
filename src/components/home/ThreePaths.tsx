@@ -10,13 +10,14 @@ interface PathProps {
   subtitle: string
   description: string
   image: string
+  imagePosition?: string
   href: string
   cta: string
   reverse?: boolean
   index: number
 }
 
-function Path({ title, subtitle, description, image, href, cta, reverse, index }: PathProps) {
+function Path({ title, subtitle, description, image, imagePosition, href, cta, reverse, index }: PathProps) {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
@@ -44,6 +45,7 @@ function Path({ title, subtitle, description, image, href, cta, reverse, index }
                   alt={title}
                   fill
                   className="object-cover"
+                  style={{ objectPosition: imagePosition || 'center' }}
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 {/* Subtle overlay gradient */}
@@ -115,7 +117,7 @@ export default function ThreePaths() {
       title: 'One-to-One Sessions',
       subtitle: 'Personal Guidance',
       description: 'Bespoke meditation sessions tailored entirely to your needs, your pace, your life. Whether you\'re seeking relief from anxiety, deeper self-awareness, or simply a moment of peace in a busy world.',
-      image: '/images/orla/optimized/service/7R500130.webp',
+      image: '/images/orla/optimized/about/7R500325.webp',
       href: '/book-session',
       cta: 'Book a Session',
     },
@@ -123,7 +125,7 @@ export default function ThreePaths() {
       title: 'Mindfulness Courses',
       subtitle: 'Structured Learning',
       description: 'Journey through comprehensive programmes designed to build lasting practice. From foundations for beginners to deepening work for experienced practitioners. Learn at your own rhythm.',
-      image: '/images/orla/optimized/service/7R500406.webp',
+      image: '/images/orla/optimized/service/7R500333.webp',
       href: '/courses',
       cta: 'Explore Courses',
     },
@@ -131,7 +133,7 @@ export default function ThreePaths() {
       title: 'Free Guided Meditation',
       subtitle: 'Begin Today',
       description: 'Experience a taste of what mindfulness can offer with a complimentary guided meditation. Twelve minutes of gentle guidance to help you find stillness, wherever you are.',
-      image: '/images/orla/optimized/service/7R500154.webp',
+      image: '/images/orla/optimized/mobile/7R500154.webp',
       href: '#free-meditation',
       cta: 'Listen Now',
     },
