@@ -7,7 +7,17 @@ export default function SoftCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
 
   return (
-    <section className="relative py-24 md:py-32 bg-gradient-to-b from-pure-light to-earth-warmth/20 overflow-hidden">
+    <section className="relative py-24 md:py-32 bg-gradient-to-b from-pure-light via-earth-warmth/35 to-earth-warmth/50 overflow-hidden">
+      {/* Warm radial glow behind CTA area */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 90% 70% at 50% 60%, rgba(201, 164, 117, 0.45) 0%, transparent 50%),
+            radial-gradient(ellipse 70% 50% at 50% 50%, rgba(241, 203, 184, 0.35) 0%, transparent 40%)
+          `,
+        }}
+      />
       {/* Decorative top fade */}
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-pure-light to-transparent" />
 

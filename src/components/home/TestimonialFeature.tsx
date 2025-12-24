@@ -7,13 +7,24 @@ export default function TestimonialFeature() {
 
   return (
     <section className="relative py-32 md:py-40 bg-earth-warmth/30 overflow-hidden">
-      {/* Background texture - could be replaced with Sora video */}
-      <div className="absolute inset-0 opacity-10">
+      {/* Layered atmospheric light mist effect */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Primary soft glow - asymmetric light pools */}
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `radial-gradient(circle at 20% 50%, rgba(201, 164, 117, 0.3) 0%, transparent 50%),
-                             radial-gradient(circle at 80% 50%, rgba(241, 203, 184, 0.3) 0%, transparent 50%)`,
+            background: `
+              radial-gradient(ellipse 140% 100% at 10% 20%, rgba(241, 203, 184, 0.75) 0%, transparent 40%),
+              radial-gradient(ellipse 130% 90% at 90% 80%, rgba(201, 164, 117, 0.6) 0%, transparent 35%),
+              radial-gradient(ellipse 100% 70% at 50% 50%, rgba(255, 252, 241, 0.65) 0%, transparent 50%)
+            `,
+          }}
+        />
+        {/* Darker vignette edges for depth */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse 110% 90% at 50% 50%, transparent 25%, rgba(86, 20, 15, 0.12) 100%)',
           }}
         />
       </div>

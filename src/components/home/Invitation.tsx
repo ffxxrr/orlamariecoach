@@ -7,6 +7,17 @@ export default function Invitation() {
 
   return (
     <section className="relative py-32 md:py-40 bg-pure-light overflow-hidden">
+      {/* Warm center glow - visible radiance */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 100% 80% at 50% 50%, rgba(241, 203, 184, 0.55) 0%, transparent 55%),
+            radial-gradient(ellipse 80% 60% at 50% 45%, rgba(201, 164, 117, 0.35) 0%, transparent 45%)
+          `,
+        }}
+      />
+
       {/* Subtle decorative line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-living-green/30 to-transparent" />
 
@@ -17,7 +28,7 @@ export default function Invitation() {
         }`}
       >
         {/* Small intro text */}
-        <p className="text-sm uppercase tracking-[0.2em] text-living-green mb-8">
+        <p className="text-lg md:text-xl uppercase tracking-[0.15em] text-living-green mb-8 font-medium">
           Welcome
         </p>
 

@@ -22,39 +22,45 @@ function Path({ title, subtitle, description, image, href, cta, reverse, index }
   return (
     <div
       ref={ref}
-      className={`relative min-h-[70vh] md:min-h-[80vh] flex items-center ${
+      className={`relative py-20 md:py-28 ${
         index % 2 === 0 ? 'bg-pure-light' : 'bg-earth-warmth/20'
       }`}
     >
       <div className="w-full max-w-7xl mx-auto px-6 lg:px-12">
-        <div className={`grid md:grid-cols-2 gap-12 lg:gap-20 items-center ${
+        <div className={`grid md:grid-cols-2 gap-12 lg:gap-16 items-center ${
           reverse ? 'md:grid-flow-dense' : ''
         }`}>
-          {/* Image */}
+          {/* Image with decorative frame */}
           <div
-            className={`relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-2xl ${
-              reverse ? 'md:col-start-2' : ''
-            } ${
+            className={`relative ${reverse ? 'md:col-start-2' : ''} ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
             } transition-all duration-1000 ease-out`}
             style={{ transitionDelay: '200ms' }}
           >
-            <Image
-              src={image}
-              alt={title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-            {/* Subtle overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+            <div className="relative aspect-[4/5] md:aspect-square lg:aspect-[4/5] max-h-[500px] md:max-h-[550px]">
+              <div className="relative w-full h-full overflow-hidden rounded-2xl">
+                <Image
+                  src={image}
+                  alt={title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                {/* Subtle overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+              </div>
+              {/* Decorative frame offset - alternates direction */}
+              <div className={`absolute inset-0 border-2 border-living-green/20 rounded-2xl -z-10 ${
+                reverse ? 'translate-y-3 -translate-x-3' : 'translate-y-3 translate-x-3'
+              }`} />
+            </div>
           </div>
 
           {/* Content */}
           <div className={`${reverse ? 'md:col-start-1 md:row-start-1' : ''}`}>
             {/* Subtitle */}
             <p
-              className={`text-sm uppercase tracking-[0.2em] text-living-green mb-4 ${
+              className={`text-lg md:text-xl uppercase tracking-[0.15em] text-living-green mb-4 font-medium ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               } transition-all duration-700`}
               style={{ transitionDelay: '100ms' }}

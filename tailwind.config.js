@@ -22,6 +22,7 @@ module.exports = {
         'deep-text': '#000000',        // Black - Primary text
         'medium-text': '#6E5A2F',      // Dark Olive Brown - Secondary text
         'light-border': '#F1CBB8',     // Warm Peach - Borders, dividers
+        'footer-moss': '#1E3A2F',      // Dark velvet green - Footer background
       },
       spacing: {
         'xs': '0.5rem',
