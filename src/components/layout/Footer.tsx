@@ -1,6 +1,13 @@
 import Link from 'next/link'
 import Logo from '@/components/brand/Logo'
-import { Facebook, Instagram, Youtube } from 'lucide-react'
+import {
+  EmailIcon,
+  LocationIcon,
+  GlobeIcon,
+  FacebookIcon,
+  InstagramIcon,
+  YoutubeIcon,
+} from '@/components/brand/CelticIcons'
 
 const footerLinks = {
   quickLinks: [
@@ -32,10 +39,19 @@ export default function Footer() {
             </p>
             
             {/* Contact Info */}
-            <div className="space-y-2 text-white/80">
-              <p>📧 admin@orlamariecoach.com</p>
-              <p>📍 Sligo, Ireland</p>
-              <p>🌍 Serving clients worldwide</p>
+            <div className="space-y-3 text-white/80">
+              <p className="flex items-center gap-3">
+                <EmailIcon size={18} className="text-living-green" />
+                admin@orlamariecoach.com
+              </p>
+              <p className="flex items-center gap-3">
+                <LocationIcon size={18} className="text-living-green" />
+                Donegal, Ireland
+              </p>
+              <p className="flex items-center gap-3">
+                <GlobeIcon size={18} className="text-living-green" />
+                Serving clients worldwide
+              </p>
             </div>
           </div>
 
@@ -84,31 +100,31 @@ export default function Footer() {
 
             {/* Social Links */}
             <div className="flex space-x-4">
-              <a 
+              <a
                 href="https://www.facebook.com/orlamariecoach"
                 className="text-white/70 hover:text-living-green transition-colors"
                 aria-label="Facebook"
               >
                 <div className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center">
-                  <Facebook className="w-5 h-5" />
+                  <FacebookIcon size={20} />
                 </div>
               </a>
-              <a 
+              <a
                 href="https://www.instagram.com/orlamariecoach"
                 className="text-white/70 hover:text-living-green transition-colors"
                 aria-label="Instagram"
               >
                 <div className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center">
-                  <Instagram className="w-5 h-5" />
+                  <InstagramIcon size={20} />
                 </div>
               </a>
-              <a 
+              <a
                 href="https://www.youtube.com/orlamariecoach"
                 className="text-white/70 hover:text-living-green transition-colors"
                 aria-label="YouTube"
               >
                 <div className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center">
-                  <Youtube className="w-5 h-5" />
+                  <YoutubeIcon size={20} />
                 </div>
               </a>
             </div>

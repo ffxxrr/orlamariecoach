@@ -3,6 +3,7 @@
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ArrowFlow, SeedBullet } from '@/components/brand/CelticIcons'
 
 const services = [
   {
@@ -141,7 +142,7 @@ function ServicePath({ service, reverse, index }: ServicePathProps) {
             >
               {service.features.map((feature, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-living-green flex-shrink-0 mt-2" />
+                  <SeedBullet size={8} className="text-living-green flex-shrink-0 mt-2" />
                   <span className="text-sage-calm">{feature}</span>
                 </li>
               ))}
@@ -159,14 +160,7 @@ function ServicePath({ service, reverse, index }: ServicePathProps) {
                 {service.cta}
               </span>
               <span className="w-8 h-px bg-forest-deep group-hover:w-12 transition-all duration-300" />
-              <svg
-                className="w-4 h-4 text-forest-deep transform group-hover:translate-x-1 transition-transform duration-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              <ArrowFlow size={20} className="text-forest-deep transform group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </div>
         </div>
