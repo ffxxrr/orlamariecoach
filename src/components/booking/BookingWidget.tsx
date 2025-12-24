@@ -7,7 +7,7 @@ export default function BookingWidget() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="py-16 px-4 bg-pure-light" id="booking-widget">
+    <section className="py-24 md:py-32 px-6 bg-pure-light" id="booking-widget">
       <div ref={ref} className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2

@@ -8,7 +8,7 @@ export default function BookingCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-forest-deep to-sage-calm text-white relative overflow-hidden">
+    <section className="py-24 md:py-32 px-6 bg-gradient-to-br from-forest-deep to-sage-calm text-white relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div

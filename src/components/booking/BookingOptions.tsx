@@ -49,7 +49,7 @@ export default function BookingOptions() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="py-16 px-4 bg-white">
+    <section className="py-24 md:py-32 px-6 bg-white">
       <div ref={ref} className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2

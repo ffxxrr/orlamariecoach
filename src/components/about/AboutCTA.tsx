@@ -7,7 +7,7 @@ export default function AboutCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
 
   return (
-    <section className="relative py-28 md:py-36 bg-earth-warmth/30 overflow-hidden">
+    <section className="relative py-32 md:py-40 bg-earth-warmth/30 overflow-hidden">
       <div
         ref={ref}
         className={`max-w-3xl mx-auto px-6 text-center transition-all duration-1000 ${

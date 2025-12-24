@@ -45,7 +45,7 @@ export default function BookingFAQ() {
   }
 
   return (
-    <section className="py-16 px-4 bg-pure-light">
+    <section className="py-24 md:py-32 px-6 bg-pure-light">
       <div ref={ref} className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
           <h2
