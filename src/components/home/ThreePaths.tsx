@@ -4,6 +4,7 @@ import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowFlow } from '@/components/brand/CelticIcons'
+import CelticDivider from '@/components/ui/CelticDivider'
 
 interface PathProps {
   title: string
@@ -15,18 +16,21 @@ interface PathProps {
   cta: string
   reverse?: boolean
   index: number
+  isLast?: boolean
 }
 
-function Path({ title, subtitle, description, image, imagePosition, href, cta, reverse, index }: PathProps) {
+function Path({ title, subtitle, description, image, imagePosition, href, cta, reverse, index, isLast }: PathProps) {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
     <div
       ref={ref}
       className={`relative py-20 md:py-28 ${
-        index % 2 === 0 ? 'bg-pure-light' : 'bg-earth-warmth/20'
+        index % 2 === 0 ? 'bg-pure-light' : 'bg-living-green/20'
       }`}
     >
+      {/* Divider between paths (not after the last one) */}
+      {!isLast && <CelticDivider position="bottom" />}
       <div className="w-full max-w-7xl mx-auto px-6 lg:px-12">
         <div className={`grid md:grid-cols-2 gap-12 lg:gap-16 items-center ${
           reverse ? 'md:grid-flow-dense' : ''
@@ -147,6 +151,7 @@ export default function ThreePaths() {
           {...path}
           reverse={index % 2 === 1}
           index={index}
+          isLast={index === paths.length - 1}
         />
       ))}
     </section>

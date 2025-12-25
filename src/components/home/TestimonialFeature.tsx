@@ -1,6 +1,7 @@
 'use client'
 
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import CelticDivider from '@/components/ui/CelticDivider'
 
 export default function TestimonialFeature() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
@@ -78,18 +79,7 @@ export default function TestimonialFeature() {
         </div>
       </div>
 
-      {/* Celtic circle divider - top */}
-      <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 z-20 pointer-events-none">
-        <svg viewBox="0 0 200 200" className="w-full h-full text-living-green/40">
-          <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" strokeWidth="3" />
-          <circle cx="100" cy="100" r="70" fill="none" stroke="currentColor" strokeWidth="2" />
-          <circle cx="100" cy="100" r="50" fill="none" stroke="currentColor" strokeWidth="2" />
-          <path d="M100 30 Q140 65 100 100 Q60 65 100 30" fill="none" stroke="currentColor" strokeWidth="2" />
-          <path d="M170 100 Q135 140 100 100 Q135 60 170 100" fill="none" stroke="currentColor" strokeWidth="2" />
-          <path d="M100 170 Q60 135 100 100 Q140 135 100 170" fill="none" stroke="currentColor" strokeWidth="2" />
-          <path d="M30 100 Q65 60 100 100 Q65 140 30 100" fill="none" stroke="currentColor" strokeWidth="2" />
-        </svg>
-      </div>
+      <CelticDivider position="top" />
     </section>
   )
 }

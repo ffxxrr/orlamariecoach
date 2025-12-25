@@ -2,34 +2,62 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-b from-pure-light to-earth-warmth/30">
-      {/* Soft top fade */}
-      <div className="absolute -top-8 left-0 right-0 h-8 bg-gradient-to-b from-transparent to-pure-light pointer-events-none" />
+    <footer className="relative bg-[#1E3A2F] overflow-hidden">
+      {/* Roots gradient overlay - suggests depth, earth, grounding */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 120% 50% at 50% 100%, rgba(86, 20, 15, 0.4) 0%, transparent 60%),
+            radial-gradient(ellipse 80% 40% at 20% 90%, rgba(110, 90, 47, 0.3) 0%, transparent 50%),
+            radial-gradient(ellipse 80% 40% at 80% 95%, rgba(110, 90, 47, 0.25) 0%, transparent 50%),
+            linear-gradient(to bottom, rgba(30, 58, 47, 0.8) 0%, rgba(20, 40, 32, 1) 100%)
+          `,
+        }}
+      />
 
-      <div className="relative px-6 py-12 text-center">
-        {/* Small decorative dot */}
-        <div className="mb-6">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-living-green/40" />
+      {/* Subtle organic root-like lines */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 opacity-10 pointer-events-none">
+        <svg viewBox="0 0 400 100" className="w-full h-full" preserveAspectRatio="xMidYMax slice">
+          <path d="M0 100 Q50 80 100 90 T200 85 T300 92 T400 88 L400 100 Z" fill="rgba(201, 164, 117, 0.3)" />
+          <path d="M0 100 Q80 70 150 85 T280 75 T400 82 L400 100 Z" fill="rgba(201, 164, 117, 0.2)" />
+        </svg>
+      </div>
+
+      {/* Top edge transition - blend from page */}
+      <div className="absolute -top-12 left-0 right-0 h-12 bg-gradient-to-b from-transparent via-[#1E3A2F]/50 to-[#1E3A2F] pointer-events-none" />
+
+      <div className="relative px-6 py-16 text-center">
+        {/* Small decorative Celtic knot */}
+        <div className="mb-8">
+          <svg className="w-8 h-8 mx-auto text-earth-warmth/40" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="16" cy="16" r="10" />
+            <circle cx="16" cy="16" r="6" />
+            <path d="M16 6 Q20 11 16 16 Q12 11 16 6" />
+            <path d="M26 16 Q21 20 16 16 Q21 12 26 16" />
+            <path d="M16 26 Q12 21 16 16 Q20 21 16 26" />
+            <path d="M6 16 Q11 12 16 16 Q11 20 6 16" />
+          </svg>
         </div>
 
         {/* Personal closing message */}
-        <p className="font-crimson italic text-lg text-sage-calm mb-6">
+        <p className="font-crimson italic text-lg text-earth-warmth/90 mb-6">
           Wishing you stillness on your journey.
         </p>
 
         {/* Email */}
         <a
           href="mailto:hello@orlamariecoach.com"
-          className="inline-block text-forest-deep hover:text-sage-calm transition-colors duration-300 mb-6"
+          className="inline-block text-pure-light/90 hover:text-earth-warmth transition-colors duration-300 mb-8"
         >
           hello@orlamariecoach.com
         </a>
 
         {/* Social icons */}
-        <div className="flex justify-center gap-6 mb-8">
+        <div className="flex justify-center gap-6 mb-10">
           <a
             href="https://www.instagram.com/orlamariecoach"
-            className="text-living-green/70 hover:text-living-green transition-colors duration-300"
+            className="text-earth-warmth/60 hover:text-earth-warmth transition-colors duration-300"
             aria-label="Instagram"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -38,7 +66,7 @@ export default function Footer() {
           </a>
           <a
             href="https://www.facebook.com/orlamariecoach"
-            className="text-living-green/70 hover:text-living-green transition-colors duration-300"
+            className="text-earth-warmth/60 hover:text-earth-warmth transition-colors duration-300"
             aria-label="Facebook"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -47,7 +75,7 @@ export default function Footer() {
           </a>
           <a
             href="https://www.youtube.com/orlamariecoach"
-            className="text-living-green/70 hover:text-living-green transition-colors duration-300"
+            className="text-earth-warmth/60 hover:text-earth-warmth transition-colors duration-300"
             aria-label="YouTube"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -57,17 +85,17 @@ export default function Footer() {
         </div>
 
         {/* Subtle divider */}
-        <div className="w-16 h-px bg-sage-calm/20 mx-auto mb-6" />
+        <div className="w-16 h-px bg-earth-warmth/20 mx-auto mb-6" />
 
         {/* Copyright and legal */}
-        <div className="text-xs text-sage-calm/60 space-x-3">
+        <div className="text-xs text-pure-light/40 space-x-3">
           <span>© 2025 Orla Marie</span>
           <span>·</span>
-          <Link href="/privacy" className="hover:text-sage-calm transition-colors">
+          <Link href="/privacy" className="hover:text-pure-light/70 transition-colors">
             Privacy
           </Link>
           <span>·</span>
-          <Link href="/terms" className="hover:text-sage-calm transition-colors">
+          <Link href="/terms" className="hover:text-pure-light/70 transition-colors">
             Terms
           </Link>
         </div>

@@ -23,7 +23,8 @@ const defaultProps = {
 }
 
 /**
- * Flowing arrow for CTAs - organic river-like curve instead of rigid pointer
+ * Flowing arrow for CTAs - organic curve with Celtic spiral tip
+ * Echoes the triskelion motif in a subtle, functional way
  */
 export function ArrowFlow({ size = 24, ...props }: IconProps) {
   return (
@@ -34,10 +35,10 @@ export function ArrowFlow({ size = 24, ...props }: IconProps) {
       {...defaultProps}
       {...props}
     >
-      {/* Flowing line with gentle S-curve */}
-      <path d="M4 12c3-0.5 6 0.5 9 0c2-0.3 4-0.2 7 0" />
-      {/* Organic arrowhead - curved, not angular */}
-      <path d="M16 8c1.5 1.5 3 3 4 4c-1 1-2.5 2.5-4 4" />
+      {/* Flowing line with gentle curve */}
+      <path d="M3 12c4-0.5 8 0.5 12 0" />
+      {/* Spiral tip - triskelion echo, unfurling motion */}
+      <path d="M15 12c2 0 4 0 5.5-1.5c1-1 1-2 0.5-2.5c-0.5-0.5-1.5-0.3-2 0.5c-0.5 1 0 2 1 2.5c1.5 0.8 2.5 0 3-1" />
     </svg>
   )
 }
