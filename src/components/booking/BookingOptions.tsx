@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import CelticDivider from '@/components/ui/CelticDivider'
 
 const sessionOptions = [
   {
@@ -49,7 +50,11 @@ export default function BookingOptions() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-white">
+    <section className="relative py-24 md:py-32 px-6 bg-pure-light overflow-hidden">
+      {/* Celtic dividers */}
+      <CelticDivider position="top" />
+      <CelticDivider position="bottom" />
+
       <div ref={ref} className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2

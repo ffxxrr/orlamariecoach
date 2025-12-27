@@ -2,12 +2,17 @@
 
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import { PhoneIcon, CheckIcon, SeedBullet } from '@/components/brand/CelticIcons'
+import CelticDivider from '@/components/ui/CelticDivider'
 
 export default function BookingWidget() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-pure-light" id="booking-widget">
+    <section className="relative py-24 md:py-32 px-6 bg-living-green/20 overflow-hidden" id="booking-widget">
+      {/* Celtic dividers */}
+      <CelticDivider position="top" />
+      <CelticDivider position="bottom" />
+
       <div ref={ref} className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2

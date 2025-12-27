@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import CelticDivider from '@/components/ui/CelticDivider'
 
 export default function ContactForm() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
@@ -43,7 +44,11 @@ export default function ContactForm() {
   }
 
   return (
-    <section className="relative py-24 md:py-32 bg-pure-light overflow-hidden" id="contact-form">
+    <section className="relative py-24 md:py-32 bg-living-green/20 overflow-hidden" id="contact-form">
+      {/* Celtic dividers */}
+      <CelticDivider position="top" />
+      <CelticDivider position="bottom" />
+
       <div className="max-w-3xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">

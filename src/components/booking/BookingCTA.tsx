@@ -3,12 +3,16 @@
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import CelticDivider from '@/components/ui/CelticDivider'
 
 export default function BookingCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
     <section className="py-24 md:py-32 px-6 bg-gradient-to-br from-forest-deep to-sage-calm text-white relative overflow-hidden">
+      {/* Celtic divider */}
+      <CelticDivider position="top" className="text-white/30" />
+
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div

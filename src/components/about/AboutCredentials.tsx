@@ -1,6 +1,7 @@
 'use client'
 
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import CelticDivider from '@/components/ui/CelticDivider'
 
 const credentials = [
   {
@@ -25,7 +26,11 @@ export default function AboutCredentials() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="relative py-32 md:py-40 bg-earth-warmth/20 overflow-hidden">
+    <section className="relative py-32 md:py-40 bg-living-green/20 overflow-hidden">
+      {/* Celtic dividers */}
+      <CelticDivider position="top" />
+      <CelticDivider position="bottom" />
+
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Header */}
         <div className="text-center mb-16">

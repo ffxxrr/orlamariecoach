@@ -1,6 +1,7 @@
 'use client'
 
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import CelticDivider from '@/components/ui/CelticDivider'
 
 const testimonial = {
   quote: "Working with Orla transformed my relationship with stress. Her approach is grounded, practical, and free from jargon. Six months later, I'm sleeping better and handling work pressure with much more ease.",
@@ -13,8 +14,20 @@ export default function AboutTestimonials() {
 
   return (
     <section className="relative py-32 md:py-40 bg-pure-light overflow-hidden">
-      {/* Subtle decorative line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-living-green/30 to-transparent" />
+      {/* Celtic dividers */}
+      <CelticDivider position="top" />
+      <CelticDivider position="bottom" />
+
+      {/* Warm atmospheric glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 100% 80% at 50% 50%, rgba(241, 203, 184, 0.45) 0%, transparent 55%),
+            radial-gradient(ellipse 80% 60% at 50% 45%, rgba(201, 164, 117, 0.25) 0%, transparent 45%)
+          `,
+        }}
+      />
 
       <div
         ref={ref}
@@ -40,8 +53,6 @@ export default function AboutTestimonials() {
         </div>
       </div>
 
-      {/* Subtle decorative line */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-t from-transparent via-living-green/30 to-transparent" />
     </section>
   )
 }

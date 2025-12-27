@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import CelticDivider from '@/components/ui/CelticDivider'
 
 const faqs = [
   {
@@ -45,7 +46,11 @@ export default function BookingFAQ() {
   }
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-pure-light">
+    <section className="relative py-24 md:py-32 px-6 bg-living-green/20 overflow-hidden">
+      {/* Celtic dividers */}
+      <CelticDivider position="top" />
+      <CelticDivider position="bottom" />
+
       <div ref={ref} className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
           <h2

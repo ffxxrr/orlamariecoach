@@ -1,6 +1,7 @@
 'use client'
 
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import CelticDivider from '@/components/ui/CelticDivider'
 
 const testimonials = [
   {
@@ -30,8 +31,23 @@ export default function BookingTestimonials() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-white">
-      <div ref={ref} className="max-w-6xl mx-auto">
+    <section className="relative py-24 md:py-32 px-6 bg-pure-light overflow-hidden">
+      {/* Celtic dividers */}
+      <CelticDivider position="top" />
+      <CelticDivider position="bottom" />
+
+      {/* Warm atmospheric glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 100% 80% at 50% 50%, rgba(241, 203, 184, 0.35) 0%, transparent 55%),
+            radial-gradient(ellipse 80% 60% at 50% 45%, rgba(201, 164, 117, 0.2) 0%, transparent 45%)
+          `,
+        }}
+      />
+
+      <div ref={ref} className="relative max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2
             className={`font-crimson text-3xl md:text-4xl text-forest-deep mb-4 ${

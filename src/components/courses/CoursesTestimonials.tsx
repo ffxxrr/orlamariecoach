@@ -1,6 +1,7 @@
 'use client'
 
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import CelticDivider from '@/components/ui/CelticDivider'
 
 const testimonial = {
   quote: "The Mindfulness Foundations course was transformative. Orla's teaching style makes mindfulness approachable and practical. I've gone from skeptical to practicing daily, and the benefits in my stress levels and sleep quality have been remarkable.",
@@ -13,9 +14,21 @@ export default function CoursesTestimonials() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
 
   return (
-    <section className="relative py-24 md:py-32 bg-earth-warmth/20 overflow-hidden">
-      {/* Subtle decorative line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-living-green/30 to-transparent" />
+    <section className="relative py-24 md:py-32 bg-pure-light overflow-hidden">
+      {/* Celtic dividers */}
+      <CelticDivider position="top" />
+      <CelticDivider position="bottom" />
+
+      {/* Warm atmospheric glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 100% 80% at 50% 50%, rgba(241, 203, 184, 0.45) 0%, transparent 55%),
+            radial-gradient(ellipse 80% 60% at 50% 45%, rgba(201, 164, 117, 0.25) 0%, transparent 45%)
+          `,
+        }}
+      />
 
       <div
         ref={ref}
@@ -42,8 +55,6 @@ export default function CoursesTestimonials() {
         </div>
       </div>
 
-      {/* Subtle decorative line */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-t from-transparent via-living-green/30 to-transparent" />
     </section>
   )
 }

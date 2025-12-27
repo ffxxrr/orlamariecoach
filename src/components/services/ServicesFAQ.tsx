@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import CelticDivider from '@/components/ui/CelticDivider'
 
 const faqs = [
   {
@@ -37,8 +38,9 @@ export default function ServicesFAQ() {
 
   return (
     <section className="relative py-24 md:py-32 bg-pure-light overflow-hidden">
-      {/* Subtle decorative line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-living-green/30 to-transparent" />
+      {/* Celtic dividers */}
+      <CelticDivider position="top" />
+      <CelticDivider position="bottom" />
 
       <div className="max-w-3xl mx-auto px-6">
         {/* Header */}
@@ -104,9 +106,6 @@ export default function ServicesFAQ() {
           </a>
         </p>
       </div>
-
-      {/* Subtle decorative line */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-t from-transparent via-living-green/30 to-transparent" />
     </section>
   )
 }

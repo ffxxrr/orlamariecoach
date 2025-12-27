@@ -2,12 +2,16 @@
 
 import Link from 'next/link'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import CelticDivider from '@/components/ui/CelticDivider'
 
 export default function CoursesCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
 
   return (
     <section className="relative py-24 md:py-32 bg-pure-light overflow-hidden">
+      {/* Celtic divider */}
+      <CelticDivider position="top" />
+
       <div
         ref={ref}
         className={`max-w-3xl mx-auto px-6 text-center transition-all duration-1000 ${
