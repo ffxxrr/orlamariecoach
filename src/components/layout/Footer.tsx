@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#1E3A2F] overflow-hidden">
+    <footer className="relative bg-[#1E3A2F] overflow-hidden rounded-t-3xl">
       {/* Roots gradient overlay - suggests depth, earth, grounding */}
       <div
         className="absolute inset-0 pointer-events-none"
