@@ -24,26 +24,24 @@ const defaultProps = {
 
 /**
  * Flowing arrow for CTAs - Celtic spiral start, flowing body, clean arrowhead
- * Based on Sora-generated celtic-arrow.png
+ * Uses Sora-generated celtic-arrow-cropped.png with blend mode
  */
-export function ArrowFlow({ size = 24, ...props }: IconProps) {
+export function ArrowFlow({ size = 24, className = '', ...props }: IconProps) {
+  // Aspect ratio of cropped image is ~3.8:1 (950x250)
+  const width = typeof size === 'number' ? size : parseInt(size as string)
+  const height = Math.round(width / 3.8)
+
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 48 24"
-      {...defaultProps}
-      {...props}
-    >
-      {/* Spiral curl at start */}
-      <path d="M2 14c0-3 2-5 4-5c2.5 0 4 2 4 4c0 1.5-1 2.5-2 2.5" />
-      {/* Upper flowing line */}
-      <path d="M6 11c4-2 10-2 16 0c4 1.5 8 1 12-1" />
-      {/* Lower flowing line - creates the weave */}
-      <path d="M8 15c4 2 10 2 16 0c4-1.5 8-1 12 1" />
-      {/* Arrowhead */}
-      <path d="M38 12l6 0m0 0l-4-3.5m4 3.5l-4 3.5" />
-    </svg>
+    <img
+      src="/images/sora/celtic-arrow-cropped.png"
+      alt=""
+      width={width}
+      height={height}
+      className={`mix-blend-multiply ${className}`}
+      style={{ width, height }}
+      aria-hidden="true"
+      {...(props as React.ImgHTMLAttributes<HTMLImageElement>)}
+    />
   )
 }
 
