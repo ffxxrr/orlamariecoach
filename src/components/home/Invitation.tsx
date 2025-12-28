@@ -20,7 +20,7 @@ export default function Invitation() {
           alt=""
           width={800}
           height={800}
-          className="opacity-[0.08] mix-blend-multiply"
+          className="opacity-[0.05] mix-blend-multiply"
           aria-hidden="true"
         />
       </div>
