@@ -194,8 +194,7 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
               <span className="text-forest-deep font-medium uppercase tracking-wider text-sm">
                 Enroll Now
               </span>
-              <span className="w-8 h-px bg-forest-deep group-hover:w-12 transition-all duration-300" />
-              <ArrowFlow size={20} className="text-forest-deep transform group-hover:translate-x-1 transition-transform duration-300" />
+              <ArrowFlow size={32} className="text-forest-deep transform group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" />
             </Link>
           </div>
         </div>
