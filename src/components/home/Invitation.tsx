@@ -2,6 +2,7 @@
 
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import CelticDivider from '@/components/ui/CelticDivider'
+import Image from 'next/image'
 
 export default function Invitation() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
@@ -11,6 +12,18 @@ export default function Invitation() {
       {/* Celtic dividers */}
       <CelticDivider position="top" />
       <CelticDivider position="bottom" />
+
+      {/* Vesica Piscis sacred geometry background */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+        <Image
+          src="/images/sora/vesica-piscis.png"
+          alt=""
+          width={800}
+          height={800}
+          className="opacity-[0.08] mix-blend-multiply"
+          aria-hidden="true"
+        />
+      </div>
 
       {/* Warm center glow - visible radiance */}
       <div
