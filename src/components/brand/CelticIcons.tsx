@@ -38,7 +38,11 @@ export function ArrowFlow({ size = 24, className = '', ...props }: IconProps) {
       width={width}
       height={height}
       className={`mix-blend-multiply ${className}`}
-      style={{ width, height }}
+      style={{
+        width,
+        height,
+        filter: 'drop-shadow(0 0 0.5px currentColor) drop-shadow(0 0 0.5px currentColor)'
+      }}
       aria-hidden="true"
       {...(props as React.ImgHTMLAttributes<HTMLImageElement>)}
     />
