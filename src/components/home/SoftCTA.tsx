@@ -71,7 +71,7 @@ export default function SoftCTA() {
           style={{ transitionDelay: '200ms' }}
         >
           There&apos;s no pressure here. When the time feels right, I&apos;d be honoured
-          to walk alongside you on your mindfulness journey.
+          to walk alongside you—as your Anam Chara—on this journey inward.
         </p>
 
         {/* CTAs */}

@@ -23,14 +23,14 @@ export default function Hero() {
         <div className="max-w-4xl mx-auto">
           {/* Main Headline */}
           <h1 className="font-crimson text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-6 leading-[1.1] tracking-tight">
-            Find stillness.
+            Enter the thin place.
             <br />
             <span className="text-earth-warmth">Find yourself.</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-            Personalised meditation guidance rooted in 30 years of practice and ancient Irish wisdom.
+            Personalised meditation guidance rooted in 30 years of practice and the ancient wisdom of Ireland's sacred landscapes.
           </p>
 
           {/* CTAs */}

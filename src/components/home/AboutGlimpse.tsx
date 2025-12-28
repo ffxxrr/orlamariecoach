@@ -62,9 +62,9 @@ export default function AboutGlimpse() {
                 mindfulness across the world.
               </p>
               <p className="text-lg text-sage-calm leading-relaxed">
-                Today, I blend traditional contemplative practices with modern understanding,
-                creating approaches that honour the wisdom of the past while meeting the
-                challenges of contemporary life.
+                Today, from the hills of Donegal where the Atlantic meets ancient stone, I blend
+                traditional contemplative practices with modern understanding—creating approaches
+                that honour Ireland&apos;s wisdom while meeting the challenges of contemporary life.
               </p>
             </div>
 

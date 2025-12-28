@@ -119,16 +119,16 @@ export default function ThreePaths() {
   const paths = [
     {
       title: 'One-to-One Sessions',
-      subtitle: 'Personal Guidance',
-      description: 'Bespoke meditation sessions tailored entirely to your needs, your pace, your life. Whether you\'re seeking relief from anxiety, deeper self-awareness, or simply a moment of peace in a busy world.',
+      subtitle: 'Your Anam Chara',
+      description: 'In the Celtic tradition, an Anam Chara is a soul friend—a trusted guide for the inner journey. These bespoke sessions are tailored to your needs, your pace, your life. Whether you\'re seeking relief from anxiety, deeper self-awareness, or a moment of peace.',
       image: '/images/orla/optimized/about/7R500325.webp',
       href: '/book-session',
       cta: 'Book a Session',
     },
     {
       title: 'Mindfulness Courses',
-      subtitle: 'Structured Learning',
-      description: 'Journey through comprehensive programmes designed to build lasting practice. From foundations for beginners to deepening work for experienced practitioners. Learn at your own rhythm.',
+      subtitle: 'The Celtic Wheel',
+      description: 'Journey through programmes that follow the ancient rhythms of the Irish year—seasons of inward reflection and outward growth. From foundations for beginners to deepening work for experienced practitioners.',
       image: '/images/orla/optimized/service/7R500333.webp',
       href: '/courses',
       cta: 'Explore Courses',

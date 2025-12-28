@@ -42,7 +42,10 @@ export default function Invitation() {
           In a world that never stops moving, finding stillness isn&apos;t a luxury
           <span className="text-sage-calm">&mdash;</span>
           it&apos;s essential. I&apos;m Orla Marie, and for thirty years I&apos;ve walked
-          the path of meditation, from the ancient standing stones of Donegal
+          the path of meditation, through Ireland&apos;s thin places
+          <span className="text-sage-calm">&mdash;</span>
+          those sacred spaces where the veil between worlds grows thin
+          <span className="text-sage-calm">&mdash;</span>
           to guiding over 500 people home to themselves.
         </p>
 
@@ -55,8 +58,9 @@ export default function Invitation() {
 
         {/* Second paragraph */}
         <p className="font-crimson text-xl md:text-2xl text-sage-calm leading-relaxed">
-          This isn&apos;t about apps or algorithms. It&apos;s about the irreplaceable
-          gift of human guidance, tailored to your unique journey.
+          This isn&apos;t about apps or algorithms. It&apos;s about the ancient tradition
+          of the <em className="text-forest-deep not-italic">Anam Chara</em>&mdash;the soul friend&mdash;offering
+          human guidance tailored to your unique journey.
         </p>
       </div>
     </section>
