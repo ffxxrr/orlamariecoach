@@ -10,7 +10,7 @@ export default function ContactCTA() {
   const { trackNavigation, trackContactInteraction } = useEventTracker()
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-forest-deep to-sage-calm text-white relative overflow-hidden">
+    <section className="py-16 px-4 bg-gradient-to-br from-forest-deep to-sage-calm text-white relative">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div

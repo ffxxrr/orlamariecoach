@@ -11,9 +11,10 @@ export default function BookingCTA() {
   const { trackNavigation, trackBookingFlow } = useEventTracker()
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-gradient-to-br from-forest-deep to-sage-calm text-white relative overflow-hidden">
-      {/* Celtic divider */}
+    <section className="py-24 md:py-32 px-6 bg-gradient-to-br from-forest-deep to-sage-calm text-white relative">
+      {/* Celtic dividers */}
       <CelticDivider position="top" className="text-white/30" />
+      <CelticDivider position="bottom" className="text-white/30" />
 
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">

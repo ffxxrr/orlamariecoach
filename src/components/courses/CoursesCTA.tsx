@@ -4,15 +4,17 @@ import Link from 'next/link'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import CelticDivider from '@/components/ui/CelticDivider'
 import { useEventTracker } from '@/components/ui/AnalyticsProvider'
+import { ArrowFlow } from '@/components/brand/CelticIcons'
 
 export default function CoursesCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
   const { trackNavigation, trackCourseInteraction } = useEventTracker()
 
   return (
-    <section className="relative py-24 md:py-32 bg-pure-light overflow-hidden">
-      {/* Celtic divider */}
+    <section className="relative py-24 md:py-32 bg-pure-light">
+      {/* Celtic dividers */}
       <CelticDivider position="top" />
+      <CelticDivider position="bottom" />
 
       <div
         ref={ref}
@@ -53,15 +55,7 @@ export default function CoursesCTA() {
             <span className="text-forest-deep font-medium uppercase tracking-wider text-sm">
               Ask a Question
             </span>
-            <span className="w-8 h-px bg-forest-deep group-hover:w-12 transition-all duration-300" />
-            <svg
-              className="w-4 h-4 text-forest-deep transform group-hover:translate-x-1 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
+            <ArrowFlow size={72} className="transform group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" />
           </Link>
         </div>
       </div>
