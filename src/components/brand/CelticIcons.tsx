@@ -27,22 +27,18 @@ const defaultProps = {
  * Uses Sora-generated celtic-arrow-cropped.png with blend mode
  */
 export function ArrowFlow({ size = 24, className = '', ...props }: IconProps) {
-  // Aspect ratio of cropped image is ~3.8:1 (950x250)
+  // Aspect ratio of image is ~3.8:1 (950x250)
   const width = typeof size === 'number' ? size : parseInt(size as string)
   const height = Math.round(width / 3.8)
 
   return (
     <img
-      src="/images/sora/celtic-arrow-cropped.png"
+      src="/images/sora/celtic-arrow-final.png"
       alt=""
       width={width}
       height={height}
-      className={`mix-blend-multiply ${className}`}
-      style={{
-        width,
-        height,
-        filter: 'drop-shadow(0 0 0.5px currentColor) drop-shadow(0 0 0.5px currentColor)'
-      }}
+      className={className}
+      style={{ width, height }}
       aria-hidden="true"
       {...(props as React.ImgHTMLAttributes<HTMLImageElement>)}
     />
