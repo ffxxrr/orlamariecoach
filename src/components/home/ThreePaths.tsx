@@ -136,7 +136,7 @@ export default function ThreePaths() {
       title: 'Free Guided Meditation',
       subtitle: 'Begin Today',
       description: 'Experience a taste of what mindfulness can offer with a complimentary guided meditation. Twelve minutes of gentle guidance to help you find stillness, wherever you are.',
-      image: '/images/orla/optimized/mobile/7R500154.webp',
+      image: '/images/orla/optimized/mobile/7R500154-cropped.webp',
       href: '#free-meditation',
       cta: 'Listen Now',
     },
