@@ -41,15 +41,20 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IE',
     siteName: 'OrlaMarieCoach',
-    // TODO: Add OG image when created
-    // images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'OrlaMarieCoach' }],
+    images: [
+      {
+        url: '/images/og/og-home.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'OrlaMarieCoach - Irish Meditation & Mindfulness',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'OrlaMarieCoach - Authentic Meditation & Mindfulness',
     description: 'Personalised meditation guidance with traditional wisdom and modern understanding.',
-    // TODO: Add Twitter image when created
-    // images: ['/twitter-image.jpg'],
+    images: ['/images/og/og-home.jpg'],
   },
   robots: {
     index: false, // Dev site - change to true for production
