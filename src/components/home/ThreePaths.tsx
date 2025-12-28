@@ -105,7 +105,7 @@ function Path({ title, subtitle, description, image, imagePosition, href, cta, r
               <span className="text-forest-deep font-medium uppercase tracking-wider text-sm">
                 {cta}
               </span>
-              <ArrowFlow size={48} className="text-forest-deep transform group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" />
+              <ArrowFlow size={72} className="transform group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" />
             </Link>
           </div>
         </div>
