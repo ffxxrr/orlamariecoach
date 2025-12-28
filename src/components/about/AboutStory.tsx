@@ -52,7 +52,7 @@ export default function AboutStory() {
               } transition-all duration-700`}
               style={{ transitionDelay: '200ms' }}
             >
-              From the hills of Donegal to guiding souls home
+              A pilgrimage through the thin places
             </h2>
 
             <div
@@ -62,25 +62,26 @@ export default function AboutStory() {
               style={{ transitionDelay: '300ms' }}
             >
               <p>
-                My path to mindfulness began in the rolling hills of Donegal. Growing up
-                surrounded by nature&apos;s serene beauty, I developed an appreciation for
-                stillness long before I understood its power.
+                My journey has been a thirty-year <em>Turas</em>&mdash;a guided pilgrimage
+                through the inner and outer landscapes of the soul. From discovering the
+                Bhagavad Gita at sixteen to walking the ancient stations of the Inishowen
+                Peninsula, my practice is a continuous circle of return and renewal.
               </p>
 
               <p>
-                Like many, my deeper journey started during a challenging time. Working in
-                a high-pressure corporate environment, I found myself disconnected from
-                the present moment, constantly anxious about the future. Meditation
-                offered not just relief, but a fundamental shift in how I related to
-                my thoughts and experiences.
+                I grew up in Donegal&apos;s thin places&mdash;those thresholds where the veil
+                between worlds grows thin and the ordinary becomes sacred. The earthy scent
+                of damp moss, the raw energy of the Atlantic, the stillness at ancient
+                standing stones. These landscapes taught me that peace isn&apos;t something
+                we find&mdash;it&apos;s something we return to.
               </p>
 
               <p>
-                Returning to Donegal, I began sharing these practices with others.
-                What started as small group sessions grew as people experienced
-                transformation for themselves. Through working with hundreds of
-                students, I developed a personalised approach that makes mindfulness
-                accessible and relevant to modern life.
+                Now I guide others to their own internal thin place. In a world of
+                disconnected algorithms, I offer the ancient Irish tradition of the
+                <em> Anam Chara</em>&mdash;a soul friend who walks beside you. My purpose
+                is to help you build your own architecture of resilience, rooted in
+                three thousand years of heritage and thirty years of practice.
               </p>
             </div>
 
@@ -97,7 +98,7 @@ export default function AboutStory() {
               } transition-all duration-700`}
               style={{ transitionDelay: '400ms' }}
             >
-              &ldquo;Mindfulness isn&apos;t just a practice&mdash;it&apos;s a way of being.&rdquo;
+              &ldquo;I guide you to the threshold&mdash;you step through.&rdquo;
             </p>
           </div>
         </div>

@@ -27,12 +27,12 @@ export default function AboutCTA() {
         </p>
 
         <h2 className="font-crimson text-3xl md:text-4xl lg:text-5xl text-forest-deep mb-6 leading-tight">
-          Ready to find your stillness?
+          Ready to find your thin place?
         </h2>
 
         <p className="text-lg text-sage-calm mb-10 max-w-2xl mx-auto leading-relaxed">
-          Whether you&apos;re seeking personal growth, stress reduction, or simply curious
-          about meditation, I&apos;m here to support your unique path to mindfulness.
+          Whether you seek a threshold to stillness, relief from the weight of worry,
+          or simply a soul friend to walk beside you&mdash;I&apos;m here.
         </p>
 
         {/* CTAs */}

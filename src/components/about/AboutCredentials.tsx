@@ -17,8 +17,8 @@ const credentials = [
     description: 'Extensive experience across group classes, workshops, corporate programmes, and one-to-one coaching sessions throughout Ireland and online.',
   },
   {
-    title: 'Personalised Approach',
-    description: 'A tailored approach to mindfulness practice that integrates traditional techniques with practical applications for modern life.',
+    title: 'Your Anam Chara',
+    description: 'The ancient Irish tradition of the soul friend—human-guided presence that walks beside you, offering a circular approach to mindfulness where there are no corners for worry to hide.',
   },
 ]
 

@@ -41,9 +41,9 @@ export default function AboutHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '200ms' }}
           >
-            Thirty years of practice.
+            A thirty-year Turas.
             <br />
-            <span className="text-earth-warmth">One calling.</span>
+            <span className="text-earth-warmth">One sacred calling.</span>
           </h1>
 
           {/* Description */}
@@ -53,8 +53,8 @@ export default function AboutHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '300ms' }}
           >
-            Mindfulness coach and meditation teacher from Donegal, Ireland.
-            Guiding people home to themselves since 2015.
+            Your Anam Chara&mdash;a soul friend rooted in the thin places of Donegal.
+            Guiding you home to yourself.
           </p>
 
           {/* Trust Indicators */}
