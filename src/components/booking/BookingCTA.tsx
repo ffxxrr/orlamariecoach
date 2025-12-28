@@ -4,9 +4,11 @@ import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import CelticDivider from '@/components/ui/CelticDivider'
+import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 
 export default function BookingCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
+  const { trackNavigation, trackBookingFlow } = useEventTracker()
 
   return (
     <section className="py-24 md:py-32 px-6 bg-gradient-to-br from-forest-deep to-sage-calm text-white relative overflow-hidden">
@@ -49,10 +51,19 @@ export default function BookingCTA() {
           } transition-all duration-700`}
           style={{ transitionDelay: '200ms' }}
         >
-          <Link href="#booking-widget">
+          <Link
+            href="#booking-widget"
+            onClick={() => {
+              trackBookingFlow('widget_clicked', { source: 'booking_cta' })
+              trackNavigation('cta_clicked', '#booking-widget', 'booking_cta')
+            }}
+          >
             <Button variant="secondary">Schedule Your Session</Button>
           </Link>
-          <Link href="/contact">
+          <Link
+            href="/contact"
+            onClick={() => trackNavigation('link_clicked', '/contact', 'booking_cta')}
+          >
             <Button variant="ghost" className="border-2 border-white text-white hover:bg-white hover:text-forest-deep">
               Ask Questions First
             </Button>

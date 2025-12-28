@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowFlow, SeedBullet } from '@/components/brand/CelticIcons'
 import CelticDivider from '@/components/ui/CelticDivider'
+import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 
 const courses = [
   {
@@ -66,6 +67,7 @@ interface CourseCardProps {
 
 function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
+  const { trackCourseInteraction } = useEventTracker()
 
   return (
     <div
@@ -181,6 +183,13 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               } transition-all duration-700`}
               style={{ transitionDelay: '400ms' }}
+              onClick={() => trackCourseInteraction('enroll_clicked', {
+                courseName: course.title,
+                coursePrice: course.price,
+                courseLevel: course.level,
+                courseDuration: course.duration,
+                source: 'courses_list'
+              })}
             >
               <span className="text-forest-deep font-medium uppercase tracking-wider text-sm">
                 Enroll Now

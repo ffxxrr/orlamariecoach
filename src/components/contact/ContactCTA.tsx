@@ -3,9 +3,11 @@
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
+import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 
 export default function ContactCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
+  const { trackNavigation, trackContactInteraction } = useEventTracker()
 
   return (
     <section className="py-16 px-4 bg-gradient-to-br from-forest-deep to-sage-calm text-white relative overflow-hidden">
@@ -44,10 +46,19 @@ export default function ContactCTA() {
           } transition-all duration-700`}
           style={{ transitionDelay: '200ms' }}
         >
-          <Link href="#contact-form">
+          <Link
+            href="#contact-form"
+            onClick={() => {
+              trackContactInteraction('form_viewed', { source: 'contact_cta' })
+              trackNavigation('cta_clicked', '#contact-form', 'contact_cta')
+            }}
+          >
             <Button variant="secondary">Send Your Questions</Button>
           </Link>
-          <Link href="/book-session">
+          <Link
+            href="/book-session"
+            onClick={() => trackNavigation('cta_clicked', '/book-session', 'contact_cta')}
+          >
             <Button variant="ghost" className="border-2 border-white text-white hover:bg-white hover:text-forest-deep">
               Book a Session
             </Button>

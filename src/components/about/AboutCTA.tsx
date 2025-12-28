@@ -3,9 +3,11 @@
 import Link from 'next/link'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import CelticDivider from '@/components/ui/CelticDivider'
+import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 
 export default function AboutCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
+  const { trackNavigation } = useEventTracker()
 
   return (
     <section className="relative py-32 md:py-40 bg-living-green/20 overflow-hidden">
@@ -36,12 +38,14 @@ export default function AboutCTA() {
           <Link
             href="/book-session"
             className="inline-flex items-center justify-center bg-forest-deep text-white px-8 py-4 rounded-full font-medium hover:bg-sage-calm transition-all duration-300 min-w-[200px]"
+            onClick={() => trackNavigation('cta_clicked', '/book-session', 'about_cta')}
           >
             Book a Session
           </Link>
           <Link
             href="/services"
             className="inline-flex items-center gap-3 group"
+            onClick={() => trackNavigation('link_clicked', '/services', 'about_cta')}
           >
             <span className="text-forest-deep font-medium uppercase tracking-wider text-sm">
               Explore Services

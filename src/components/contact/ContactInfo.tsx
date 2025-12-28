@@ -8,56 +8,49 @@ import {
   LocationIcon,
   CalendarIcon,
 } from '@/components/brand/CelticIcons'
+import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 
-const contactInfo = [
+interface ContactInfoItem {
+  id: number
+  icon: React.ReactNode
+  title: string
+  hasEmail?: boolean
+  hasBookingLink?: boolean
+  description: string
+}
+
+const contactInfoData: ContactInfoItem[] = [
   {
     id: 1,
     icon: <EmailIcon size={24} />,
     title: "Direct Email",
-    content: (
-      <>
-        <a href="mailto:admin@orlamariecoach.com" className="text-forest-deep hover:underline">admin@orlamariecoach.com</a><br />
-        Personal response within 24 hours
-      </>
-    )
+    hasEmail: true,
+    description: "Personal response within 24 hours"
   },
   {
     id: 2,
     icon: <ClockIcon size={24} />,
     title: "Response Time",
-    content: (
-      <>
-        Typically respond within 12-24 hours<br />
-        All messages answered personally by Orla
-      </>
-    )
+    description: "Typically respond within 12-24 hours. All messages answered personally by Orla"
   },
   {
     id: 3,
     icon: <LocationIcon size={24} />,
     title: "Based in Ireland",
-    content: (
-      <>
-        Donegal, Ireland (GMT timezone)<br />
-        Serving clients globally online
-      </>
-    )
+    description: "Donegal, Ireland (GMT timezone). Serving clients globally online"
   },
   {
     id: 4,
     icon: <CalendarIcon size={24} />,
     title: "Ready to Start?",
-    content: (
-      <>
-        <Link href="/book-session" className="text-forest-deep hover:underline">Book a personalised session</Link><br />
-        Direct path to one-on-one guidance
-      </>
-    )
+    hasBookingLink: true,
+    description: "Direct path to one-on-one guidance"
   }
 ]
 
 export default function ContactInfo() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
+  const { trackContactInteraction, trackNavigation } = useEventTracker()
 
   return (
     <section className="py-24 md:py-32 px-6 bg-white">
@@ -82,7 +75,7 @@ export default function ContactInfo() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {contactInfo.map((info, index) => (
+          {contactInfoData.map((info, index) => (
             <div
               key={info.id}
               className={`bg-pure-light rounded-xl p-6 text-center shadow-sm border border-living-green/10
@@ -101,7 +94,34 @@ export default function ContactInfo() {
               </h3>
 
               <p className="text-medium-text">
-                {info.content}
+                {info.hasEmail && (
+                  <>
+                    <a
+                      href="mailto:admin@orlamariecoach.com"
+                      className="text-forest-deep hover:underline"
+                      onClick={() => trackContactInteraction('email_clicked', { contactMethod: 'email' })}
+                    >
+                      admin@orlamariecoach.com
+                    </a>
+                    <br />
+                  </>
+                )}
+                {info.hasBookingLink && (
+                  <>
+                    <Link
+                      href="/book-session"
+                      className="text-forest-deep hover:underline"
+                      onClick={() => {
+                        trackContactInteraction('form_viewed', { contactMethod: 'booking_link' })
+                        trackNavigation('cta_clicked', '/book-session', 'contact_info')
+                      }}
+                    >
+                      Book a personalised session
+                    </Link>
+                    <br />
+                  </>
+                )}
+                {info.description}
               </p>
             </div>
           ))}

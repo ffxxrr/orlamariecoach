@@ -2,9 +2,11 @@
 
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import Link from 'next/link'
+import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 
 export default function SoftCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
+  const { trackNavigation, trackContactInteraction } = useEventTracker()
 
   return (
     <section className="relative py-24 md:py-32 bg-pure-light overflow-hidden">
@@ -82,12 +84,14 @@ export default function SoftCTA() {
           <Link
             href="/book-session"
             className="inline-flex items-center justify-center bg-forest-deep/90 text-white px-8 py-3.5 rounded-full font-medium hover:bg-forest-deep hover:shadow-md transition-all duration-300"
+            onClick={() => trackNavigation('cta_clicked', '/book-session', 'soft_cta')}
           >
             Book a Session
           </Link>
           <Link
             href="/contact"
             className="inline-flex items-center justify-center text-forest-deep px-8 py-3.5 font-medium hover:text-sage-calm transition-all duration-300 group"
+            onClick={() => trackNavigation('link_clicked', '/contact', 'soft_cta')}
           >
             <span>Get in Touch</span>
             <span className="ml-2 w-5 h-px bg-forest-deep group-hover:w-8 group-hover:bg-sage-calm transition-all duration-300" />
@@ -105,6 +109,7 @@ export default function SoftCTA() {
           <a
             href="mailto:hello@orlamariecoach.com"
             className="text-forest-deep hover:underline"
+            onClick={() => trackContactInteraction('email_clicked', { contactMethod: 'email', source: 'soft_cta' })}
           >
             hello@orlamariecoach.com
           </a>

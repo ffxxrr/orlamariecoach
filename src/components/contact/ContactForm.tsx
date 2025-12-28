@@ -1,11 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import CelticDivider from '@/components/ui/CelticDivider'
+import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 
 export default function ContactForm() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
+  const { trackContactInteraction, trackConversion } = useEventTracker()
+  const hasStartedForm = useRef(false)
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -16,6 +19,13 @@ export default function ContactForm() {
     newsletter: false,
     privacy: false
   })
+
+  const handleFormStart = () => {
+    if (!hasStartedForm.current) {
+      hasStartedForm.current = true
+      trackContactInteraction('form_started')
+    }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -29,8 +39,21 @@ export default function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Track form submission
+    trackContactInteraction('form_submitted', {
+      inquiryType: formData.inquiryType,
+      experience: formData.experience,
+      newsletterOptIn: formData.newsletter
+    })
+    trackConversion('course_enquiry', {
+      source: 'contact_form',
+      inquiryType: formData.inquiryType
+    })
+
     console.log('Form submitted:', formData)
     alert('Thank you for your message! I will respond within 24 hours.')
+    hasStartedForm.current = false
     setFormData({
       firstName: '',
       lastName: '',
@@ -97,6 +120,7 @@ export default function ContactForm() {
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
+                onFocus={handleFormStart}
                 required
                 className="w-full px-4 py-3 bg-white border border-earth-warmth/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-living-green/30 focus:border-living-green/50 transition-all"
               />
