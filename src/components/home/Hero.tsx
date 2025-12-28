@@ -30,7 +30,7 @@ export default function Hero() {
 
           {/* Subheadline */}
           <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-            Personalised meditation guidance rooted in 30 years of practice and the ancient wisdom of Ireland's sacred landscapes.
+            Personalised meditation guidance rooted in 30 years of practice from the ancient wisdom of Ireland's sacred landscapes.
           </p>
 
           {/* CTAs */}
@@ -66,23 +66,6 @@ export default function Hero() {
               <div className="text-sm text-white/70 mt-1">Personal Sessions</div>
             </div>
           </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg
-            className="w-6 h-6 text-white/60"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
         </div>
       </div>
     </section>

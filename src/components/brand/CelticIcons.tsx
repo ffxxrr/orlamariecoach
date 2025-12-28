@@ -23,22 +23,26 @@ const defaultProps = {
 }
 
 /**
- * Flowing arrow for CTAs - organic curve with Celtic spiral tip
- * Echoes the triskelion motif in a subtle, functional way
+ * Flowing arrow for CTAs - Celtic spiral start, flowing body, clean arrowhead
+ * Based on Sora-generated celtic-arrow.png
  */
 export function ArrowFlow({ size = 24, ...props }: IconProps) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 24 24"
+      viewBox="0 0 48 24"
       {...defaultProps}
       {...props}
     >
-      {/* Flowing line with gentle curve */}
-      <path d="M3 12c4-0.5 8 0.5 12 0" />
-      {/* Spiral tip - triskelion echo, unfurling motion */}
-      <path d="M15 12c2 0 4 0 5.5-1.5c1-1 1-2 0.5-2.5c-0.5-0.5-1.5-0.3-2 0.5c-0.5 1 0 2 1 2.5c1.5 0.8 2.5 0 3-1" />
+      {/* Spiral curl at start */}
+      <path d="M2 14c0-3 2-5 4-5c2.5 0 4 2 4 4c0 1.5-1 2.5-2 2.5" />
+      {/* Upper flowing line */}
+      <path d="M6 11c4-2 10-2 16 0c4 1.5 8 1 12-1" />
+      {/* Lower flowing line - creates the weave */}
+      <path d="M8 15c4 2 10 2 16 0c4-1.5 8-1 12 1" />
+      {/* Arrowhead */}
+      <path d="M38 12l6 0m0 0l-4-3.5m4 3.5l-4 3.5" />
     </svg>
   )
 }
