@@ -10,7 +10,7 @@ export default function ServicesHero() {
     <section className="relative h-screen flex items-center overflow-hidden">
       {/* Video/Poster Background - light beam through ancient stone fort */}
       <VideoHeroBackground
-        videoSrc="/media/sora/services-final.mp4"
+        videoSrc="/media/sora/services-final-v2.mp4"
         posterSrc="/media/sora/services-final-poster.jpg"
         mobileFocalPoint="center center"
       />
