@@ -37,7 +37,7 @@ export default function ServicesFAQ() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="relative py-24 md:py-32 bg-pure-light overflow-hidden">
+    <section className="relative py-24 md:py-32 bg-pure-light">
       {/* Celtic dividers */}
       <CelticDivider position="top" />
       <CelticDivider position="bottom" />
