@@ -8,11 +8,11 @@ export default function ServicesHero() {
 
   return (
     <section className="relative h-screen flex items-center overflow-hidden">
-      {/* Video/Poster Background - right focal point to keep candle visible on mobile */}
+      {/* Video/Poster Background - light beam through ancient stone fort */}
       <VideoHeroBackground
-        videoSrc="/media/sora/services.mp4"
-        posterSrc="/media/sora/services-poster.jpg"
-        mobileFocalPoint="right center"
+        videoSrc="/media/sora/services-final.mp4"
+        posterSrc="/media/sora/services-final-poster.jpg"
+        mobileFocalPoint="center center"
       />
 
       {/* Overlay for text contrast */}
@@ -31,7 +31,7 @@ export default function ServicesHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '100ms' }}
           >
-            Services & Guidance
+            Ancient Wisdom, Modern Practice
           </p>
 
           {/* Main Headline */}
@@ -41,9 +41,9 @@ export default function ServicesHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '200ms' }}
           >
-            Your path to
+            Build your own
             <br />
-            <span className="text-earth-warmth">inner peace.</span>
+            <span className="text-earth-warmth">architecture of resilience.</span>
           </h1>
 
           {/* Description */}
@@ -53,8 +53,8 @@ export default function ServicesHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '300ms' }}
           >
-            Personalised mindfulness guidance designed to meet you where you are
-            and lead you toward greater balance, clarity, and wellbeing.
+            Access a mindfulness practice rooted in 4,000 years of Irish heritage—as
+            enduring as the ancient stone forts that shelter the spirit within.
           </p>
 
           {/* Trust Indicators */}

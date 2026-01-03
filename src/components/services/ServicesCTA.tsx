@@ -23,16 +23,16 @@ export default function ServicesCTA() {
         }`}
       >
         <p className="text-sm uppercase tracking-[0.2em] text-living-green mb-6">
-          Take the First Step
+          Cross the Threshold
         </p>
 
         <h2 className="font-crimson text-3xl md:text-4xl lg:text-5xl text-forest-deep mb-6 leading-tight">
-          Begin your mindfulness journey
+          Find your thin place
         </h2>
 
         <p className="text-lg text-sage-calm mb-10 max-w-2xl mx-auto leading-relaxed">
-          Ready to experience the transformative benefits of mindfulness with personalised guidance?
-          Choose the path that best suits your needs and take the first step today.
+          As your Anam Chara, I guide you to the threshold—you step through.
+          Choose the path that calls to you and begin your Turas today.
         </p>
 
         {/* CTAs */}
