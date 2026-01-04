@@ -22,7 +22,7 @@ const courses = [
     level: 'Beginner',
     duration: '8 stations',
     nextStart: 'Samhain (November)',
-    image: '/images/orla/optimized/service/7R500150.webp',
+    image: '/images/orla/optimized/service/winter-woods-dark-half.webp',
     phase: 'dark' as const,
   },
   {
