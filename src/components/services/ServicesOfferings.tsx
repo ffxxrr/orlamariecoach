@@ -20,6 +20,7 @@ const services = [
       'Ongoing support between sessions',
     ],
     image: '/images/orla/optimized/service/7R500362.webp',
+    imagePosition: 'top',
     href: '/book-session',
     cta: 'Book a Session',
   },
@@ -57,8 +58,21 @@ const services = [
   },
 ]
 
+interface Service {
+  title: string
+  subtitle: string
+  description: string
+  price: string
+  priceNote: string
+  features: string[]
+  image: string
+  imagePosition?: string
+  href: string
+  cta: string
+}
+
 interface ServicePathProps {
-  service: typeof services[0]
+  service: Service
   reverse: boolean
   index: number
   isLast?: boolean
@@ -95,6 +109,7 @@ function ServicePath({ service, reverse, index, isLast }: ServicePathProps) {
               alt={service.title}
               fill
               className="object-cover"
+              style={{ objectPosition: service.imagePosition || 'center' }}
               sizes="(max-width: 768px) 100vw, 50vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
