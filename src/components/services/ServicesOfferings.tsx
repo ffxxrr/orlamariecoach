@@ -19,7 +19,7 @@ const services = [
       'Purification and release practices',
       'Ongoing support between sessions',
     ],
-    image: '/images/orla/optimized/service/7R500130.webp',
+    image: '/images/placeholder-anam-chara.webp',
     href: '/book-session',
     cta: 'Book a Session',
   },
