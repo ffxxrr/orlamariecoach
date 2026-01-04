@@ -94,29 +94,37 @@ function ServicePath({ service, reverse, index, isLast }: ServicePathProps) {
         <div className={`grid md:grid-cols-2 gap-12 lg:gap-20 items-center ${
           reverse ? 'md:grid-flow-dense' : ''
         }`}>
-          {/* Image */}
+          {/* Image with decorative frame */}
           <div
-            className={`relative aspect-[4/5] md:aspect-square overflow-hidden rounded-2xl ${
+            className={`relative ${
               reverse ? 'md:col-start-2' : ''
             } ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
             } transition-all duration-1000 ease-out`}
             style={{ transitionDelay: '200ms' }}
           >
-            <Image
-              src={service.image}
-              alt={service.title}
-              fill
-              className="object-cover"
-              style={{ objectPosition: service.imagePosition || 'center' }}
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+            <div className="relative aspect-[4/5] md:aspect-square">
+              <div className="relative w-full h-full overflow-hidden rounded-2xl">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: service.imagePosition || 'center' }}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
 
-            {/* Price Badge */}
-            <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full">
-              <span className="font-crimson text-xl text-forest-deep font-medium">{service.price}</span>
-              <span className="text-sage-calm text-sm ml-1">{service.priceNote}</span>
+                {/* Price Badge */}
+                <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full">
+                  <span className="font-crimson text-xl text-forest-deep font-medium">{service.price}</span>
+                  <span className="text-sage-calm text-sm ml-1">{service.priceNote}</span>
+                </div>
+              </div>
+              {/* Decorative frame offset - alternates direction */}
+              <div className={`absolute inset-0 border-2 border-living-green/20 rounded-2xl -z-10 ${
+                reverse ? 'translate-y-3 -translate-x-3' : 'translate-y-3 translate-x-3'
+              }`} />
             </div>
           </div>
 

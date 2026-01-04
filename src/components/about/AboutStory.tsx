@@ -18,21 +18,27 @@ export default function AboutStory() {
           ref={ref}
           className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center"
         >
-          {/* Image */}
+          {/* Image with decorative frame */}
           <div
-            className={`relative aspect-[4/5] overflow-hidden rounded-2xl ${
+            className={`relative ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
             } transition-all duration-1000 ease-out`}
             style={{ transitionDelay: '200ms' }}
           >
-            <Image
-              src="/images/orla/optimized/about/7R500406.webp"
-              alt="Orla Marie teaching meditation"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+            <div className="relative aspect-[4/5]">
+              <div className="relative w-full h-full overflow-hidden rounded-2xl">
+                <Image
+                  src="/images/orla/optimized/about/7R500406.webp"
+                  alt="Orla Marie teaching meditation"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+              </div>
+              {/* Decorative frame offset */}
+              <div className="absolute inset-0 border-2 border-living-green/20 rounded-2xl -z-10 translate-y-3 translate-x-3" />
+            </div>
           </div>
 
           {/* Content */}
