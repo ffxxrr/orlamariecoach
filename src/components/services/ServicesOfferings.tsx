@@ -51,7 +51,7 @@ const services = [
       'Progress measurement and reporting',
       'Flexible delivery (in-person/online)',
     ],
-    image: '/images/placeholder-anam-chara.webp',
+    image: '/images/orla/optimized/service/orla-sage-blazer.webp',
     href: '/contact',
     cta: 'Get in Touch',
   },
