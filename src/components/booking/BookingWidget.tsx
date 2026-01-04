@@ -8,7 +8,7 @@ export default function BookingWidget() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="relative py-24 md:py-32 px-6 bg-living-green/20 overflow-hidden" id="booking-widget">
+    <section className="relative py-24 md:py-32 px-6 bg-living-green/20" id="booking-widget">
       {/* Celtic dividers */}
       <CelticDivider position="top" />
       <CelticDivider position="bottom" />

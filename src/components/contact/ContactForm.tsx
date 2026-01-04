@@ -67,7 +67,7 @@ export default function ContactForm() {
   }
 
   return (
-    <section className="relative py-24 md:py-32 bg-living-green/20 overflow-hidden" id="contact-form">
+    <section className="relative py-24 md:py-32 bg-living-green/20" id="contact-form">
       {/* Celtic dividers */}
       <CelticDivider position="top" />
       <CelticDivider position="bottom" />

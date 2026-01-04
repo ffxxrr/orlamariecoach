@@ -26,7 +26,7 @@ export default function AboutCredentials() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
-    <section className="relative py-32 md:py-40 bg-living-green/20 overflow-hidden">
+    <section className="relative py-32 md:py-40 bg-living-green/20">
       {/* Celtic dividers */}
       <CelticDivider position="top" />
       <CelticDivider position="bottom" />

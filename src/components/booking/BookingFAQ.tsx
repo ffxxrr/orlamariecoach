@@ -46,7 +46,7 @@ export default function BookingFAQ() {
   }
 
   return (
-    <section className="relative py-24 md:py-32 px-6 bg-living-green/20 overflow-hidden">
+    <section className="relative py-24 md:py-32 px-6 bg-living-green/20">
       {/* Celtic dividers */}
       <CelticDivider position="top" />
       <CelticDivider position="bottom" />

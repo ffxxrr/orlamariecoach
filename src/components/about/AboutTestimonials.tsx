@@ -13,7 +13,7 @@ export default function AboutTestimonials() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
 
   return (
-    <section className="relative py-32 md:py-40 bg-pure-light overflow-hidden">
+    <section className="relative py-32 md:py-40 bg-pure-light">
       {/* Celtic dividers */}
       <CelticDivider position="top" />
       <CelticDivider position="bottom" />
