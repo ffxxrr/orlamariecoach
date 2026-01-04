@@ -19,7 +19,7 @@ const services = [
       'Purification and release practices',
       'Ongoing support between sessions',
     ],
-    image: '/images/orla/optimized/service/7R500362-extended.webp',
+    image: '/images/orla/optimized/service/7R500362.webp',
     href: '/book-session',
     cta: 'Book a Session',
   },
@@ -96,7 +96,7 @@ function ServicePath({ service, reverse, index, isLast }: ServicePathProps) {
         }`}>
           {/* Image */}
           <div
-            className={`relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-2xl ${
+            className={`relative aspect-[4/5] md:aspect-square overflow-hidden rounded-2xl ${
               reverse ? 'md:col-start-2' : ''
             } ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
