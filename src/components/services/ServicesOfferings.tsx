@@ -20,7 +20,7 @@ const services = [
       'Ongoing support between sessions',
     ],
     image: '/images/orla/optimized/service/7R500362.webp',
-    imagePosition: 'center 15%',
+    imagePosition: 'center 0%',
     href: '/book-session',
     cta: 'Book a Session',
   },
