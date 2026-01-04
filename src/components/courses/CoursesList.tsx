@@ -9,52 +9,55 @@ import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 
 const courses = [
   {
-    title: 'Mindfulness Foundations',
-    subtitle: '8-Week Beginner Course',
-    description: 'A comprehensive introduction to mindfulness meditation designed for beginners. This course provides a structured path to establishing a sustainable practice with personalised guidance.',
+    title: 'The Dark Half',
+    subtitle: 'Inner Foundations',
+    description: 'Just as the land withdraws into stillness to prepare for renewal, this course invites you to turn inward. Learn to quiet the noise, release old burdens like the fires of the Winter Woods, and build a structural framework for grounding before you attempt to grow.',
     price: '€250',
     features: [
-      '8 weekly live group sessions (90 minutes each)',
-      'Progressive guided meditations for daily practice',
-      'Comprehensive workbook and practice materials',
-      'Lifetime access to course recordings',
+      'Station 1–4: Stillness, breath, and body awareness',
+      'Station 5–6: Forgiveness and releasing practices',
+      'Station 7–8: Inner child work and self-compassion',
+      'Lifetime access to guided meditations',
     ],
     level: 'Beginner',
-    duration: '8 weeks',
-    nextStart: 'June 10, 2025',
+    duration: '8 stations',
+    nextStart: 'Samhain (November)',
     image: '/images/orla/optimized/service/7R500150.webp',
+    phase: 'dark' as const,
   },
   {
-    title: 'Meditation Deepening',
-    subtitle: 'Advanced Course',
-    description: 'For those with an established practice seeking to explore deeper aspects of meditation. This course builds on foundational skills to develop subtler awareness and insight.',
+    title: 'The Bright Half',
+    subtitle: 'Solar Alignment',
+    description: 'Align your practice with the energy of the Sun Palace. This course focuses on outward resilience, positive intentionality, and standing tall like the stones of Beltany—aloof, imposing, and profoundly spiritual—against the winds of daily life.',
     price: '€250',
     features: [
-      '6 weekly live sessions (2 hours each)',
-      'Advanced meditation techniques and practices',
-      'Exploration of subtle mind states and insight',
+      'Station 1–2: Grounding in the present moment',
+      'Station 3–4: Positive intentionality practices',
+      'Station 5–6: Manifestation and expansion',
       'Advanced meditation resources and materials',
     ],
-    level: 'Intermediate/Advanced',
-    duration: '6 weeks',
-    nextStart: 'July 15, 2025',
+    level: 'Intermediate',
+    duration: '6 stations',
+    nextStart: 'Bealtaine (May)',
     image: '/images/orla/optimized/service/7R500169.webp',
+    phase: 'bright' as const,
   },
   {
-    title: 'Mindfulness in Daily Life',
-    subtitle: 'Practical Integration',
-    description: 'Learn to apply mindfulness to everyday challenges and relationships. This course focuses on the practical application of meditation insights to enhance all aspects of your life.',
+    title: 'The Turas',
+    subtitle: 'Daily Pilgrimage',
+    description: 'A guided pilgrimage of the mind where you circle the stations of your own heart. Like pilgrims leaving clooties at the Holy Wells of Donegal, learn to deposit your emotional burdens and watch them dissolve over time.',
     price: '€250',
     features: [
-      '6 weekly live sessions (90 minutes each)',
-      'Real-life application exercises and practices',
+      'Apply stillness to everyday challenges',
       'Mindfulness for relationships and communication',
-      'Personalised integration strategy development',
+      'Build your inner fortress of resilience',
+      'Personalised integration strategy',
     ],
     level: 'All Levels',
-    duration: '6 weeks',
-    nextStart: 'August 5, 2025',
+    duration: '6 stations',
+    nextStart: 'Rolling enrolment',
     image: '/images/orla/optimized/service/7R500154.webp',
+    phase: 'integration' as const,
   },
 ]
 
@@ -65,6 +68,13 @@ interface CourseCardProps {
   isLast?: boolean
 }
 
+// Phase-based background colors
+const phaseBackgrounds = {
+  dark: 'bg-gradient-to-br from-[#1a2f2a]/5 via-pure-light to-[#2d4a44]/5', // Cool forest greens
+  bright: 'bg-gradient-to-br from-[#f5e6d3]/40 via-pure-light to-earth-warmth/20', // Warm ambers
+  integration: 'bg-pure-light', // Neutral
+}
+
 function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
   const { trackCourseInteraction } = useEventTracker()
@@ -72,9 +82,7 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
   return (
     <div
       ref={ref}
-      className={`relative min-h-[70vh] md:min-h-[80vh] flex items-center ${
-        index % 2 === 0 ? 'bg-pure-light' : 'bg-living-green/20'
-      }`}
+      className={`relative min-h-[70vh] md:min-h-[80vh] flex items-center ${phaseBackgrounds[course.phase]}`}
     >
       {/* Divider between courses (not after the last one) */}
       {!isLast && <CelticDivider position="bottom" />}
@@ -108,8 +116,12 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
                   <span className="font-crimson text-xl text-forest-deep font-medium">{course.price}</span>
                 </div>
 
-                {/* Level Badge */}
-                <div className="absolute bottom-6 left-6 bg-forest-deep/90 backdrop-blur-sm px-4 py-2 rounded-full">
+                {/* Phase Badge */}
+                <div className={`absolute bottom-6 left-6 backdrop-blur-sm px-4 py-2 rounded-full ${
+                  course.phase === 'dark' ? 'bg-[#1a2f2a]/90' :
+                  course.phase === 'bright' ? 'bg-[#8B6914]/90' :
+                  'bg-forest-deep/90'
+                }`}>
                   <span className="text-white text-sm">{course.level}</span>
                 </div>
               </div>

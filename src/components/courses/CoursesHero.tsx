@@ -31,7 +31,7 @@ export default function CoursesHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '100ms' }}
           >
-            Structured Learning
+            The Ancient Wheel
           </p>
 
           {/* Main Headline */}
@@ -41,9 +41,9 @@ export default function CoursesHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '200ms' }}
           >
-            Mindfulness
+            Walk the
             <br />
-            <span className="text-earth-warmth">courses.</span>
+            <span className="text-earth-warmth">Celtic Wheel.</span>
           </h1>
 
           {/* Description */}
@@ -53,8 +53,9 @@ export default function CoursesHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '300ms' }}
           >
-            Structured programmes designed to help you establish a sustainable meditation
-            practice and integrate mindfulness into your daily life.
+            In the old Irish worldview, time was a breathing cycle. Our courses help you
+            step out of linear time and into the rhythms of the ancient wheel&mdash;balancing
+            inward reflection with outward growth.
           </p>
 
           {/* Trust Indicators */}

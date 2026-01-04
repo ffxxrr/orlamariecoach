@@ -23,16 +23,16 @@ export default function CoursesCTA() {
         }`}
       >
         <p className="text-sm uppercase tracking-[0.2em] text-living-green mb-6">
-          Ready to Begin
+          Begin Your Turas
         </p>
 
         <h2 className="font-crimson text-3xl md:text-4xl lg:text-5xl text-forest-deep mb-6 leading-tight">
-          Start your journey today
+          Walk the ancient wheel
         </h2>
 
         <p className="text-lg text-sage-calm mb-10 max-w-2xl mx-auto leading-relaxed">
-          Join hundreds of students who have transformed their lives through these mindfulness courses.
-          Expert guidance every step of the way.
+          Join fellow travellers who have circled the stations of their own hearts.
+          This is not a course to complete&mdash;it&apos;s a landscape to travel.
         </p>
 
         {/* CTAs */}
@@ -45,7 +45,7 @@ export default function CoursesCTA() {
               trackNavigation('cta_clicked', '/book-session', 'courses_cta')
             }}
           >
-            Enroll Now
+            Begin the Journey
           </Link>
           <Link
             href="/contact"
