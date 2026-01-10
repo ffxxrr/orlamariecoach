@@ -115,29 +115,14 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
             style={{ transitionDelay: '200ms' }}
           >
             {/* Image container */}
-            <div className="relative aspect-[9/14]">
-              <div className="relative w-full h-full overflow-hidden rounded-2xl">
-                <Image
-                  src={course.image}
-                  alt={course.title}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-
-                {/* Phase Badge - stays on image */}
-                <div className={`absolute bottom-6 left-6 backdrop-blur-sm px-4 py-2 rounded-full ${
-                  course.phase === 'dark' ? 'bg-[#1a2f2a]/90' :
-                  course.phase === 'bright' ? 'bg-[#8B6914]/90' :
-                  'bg-forest-deep/90'
-                }`}>
-                  <span className="text-white text-sm">{course.level}</span>
-                </div>
-              </div>
-              {/* Decorative frame offset - alternates direction */}
-              <div className={`absolute inset-0 border-2 border-living-green/20 rounded-2xl -z-10 ${
-                reverse ? 'translate-y-3 -translate-x-3' : 'translate-y-3 translate-x-3'
-              }`} />
+            <div className="relative aspect-[9/14] bg-earth-warmth/10 rounded-2xl overflow-hidden">
+              <Image
+                src={course.image}
+                alt={course.title}
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
 
             {/* Course metadata bar */}
