@@ -115,7 +115,7 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
             style={{ transitionDelay: '200ms' }}
           >
             {/* Image container */}
-            <div className="relative aspect-[9/16]">
+            <div className="relative aspect-[9/14]">
               <div className="relative w-full h-full overflow-hidden rounded-2xl">
                 <Image
                   src={course.image}
