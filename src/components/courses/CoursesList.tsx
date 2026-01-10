@@ -24,7 +24,7 @@ const courses = [
     level: 'Beginner',
     duration: '8 stations',
     nextStart: 'Samhain (November)',
-    image: '/images/orla/optimized/service/winter-woods-dark-half.webp',
+    image: '/images/courses/optimized/dark-half-potrait.webp',
     journeyMap: '/images/courses/optimized/dark-half-landscape.webp',
     phase: 'dark' as const,
   },
@@ -42,7 +42,7 @@ const courses = [
     level: 'Intermediate',
     duration: '6 stations',
     nextStart: 'Bealtaine (May)',
-    image: '/images/orla/optimized/service/7R500169.webp',
+    image: '/images/courses/optimized/bright-half-potrait.webp',
     journeyMap: '/images/courses/optimized/bright-half-landscape.webp',
     phase: 'bright' as const,
   },
@@ -60,7 +60,7 @@ const courses = [
     level: 'All Levels',
     duration: '6 stations',
     nextStart: 'Rolling enrolment',
-    image: '/images/orla/optimized/service/7R500154.webp',
+    image: '/images/courses/optimized/turas-portrait.webp',
     journeyMap: '/images/courses/optimized/turas-landscape.webp',
     phase: 'integration' as const,
   },
@@ -129,6 +129,28 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
                 <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full">
                   <span className="font-crimson text-xl text-forest-deep font-medium">{course.price}</span>
                 </div>
+
+                {/* View Journey Button - on image */}
+                <button
+                  onClick={handleViewJourney}
+                  className="absolute top-20 right-6 bg-white/90 backdrop-blur-sm px-3 py-2 rounded-full flex items-center gap-2 hover:bg-white transition-colors group"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-forest-deep group-hover:scale-110 transition-transform"
+                  >
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                  </svg>
+                  <span className="text-xs font-medium text-forest-deep">View Journey</span>
+                </button>
 
                 {/* Phase Badge */}
                 <div className={`absolute bottom-6 left-6 backdrop-blur-sm px-4 py-2 rounded-full ${
@@ -209,30 +231,6 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
                 </li>
               ))}
             </ul>
-
-            {/* View Journey Button */}
-            <button
-              onClick={handleViewJourney}
-              className={`mb-6 inline-flex items-center gap-2 text-living-green hover:text-forest-deep transition-colors ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              } transition-all duration-700`}
-              style={{ transitionDelay: '380ms' }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-              </svg>
-              <span className="text-sm font-medium">View Full Journey</span>
-            </button>
 
             {/* CTA Link */}
             <Link
