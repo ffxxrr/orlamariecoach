@@ -71,7 +71,7 @@ export default function CourseJourneyModal({
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center"
+      className="fixed inset-0 z-[1001] flex items-center justify-center"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
@@ -94,8 +94,8 @@ export default function CourseJourneyModal({
         }`}
       >
         {/* Header - overlays top with gradient */}
-        <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 via-black/40 to-transparent pt-6 pb-16 px-6 md:px-12">
-          <div className="max-w-7xl mx-auto flex items-start justify-between">
+        <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/80 via-black/40 to-transparent pt-6 pb-16 px-6 md:px-12 pointer-events-none">
+          <div className="max-w-7xl mx-auto flex items-start justify-between pointer-events-auto">
             <div>
               <p className="text-white/50 text-xs md:text-sm uppercase tracking-[0.25em] mb-1">
                 {subtitle}
