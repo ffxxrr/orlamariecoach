@@ -140,17 +140,26 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
               }`} />
             </div>
 
-            {/* Price and View Journey - below image */}
-            <div className="flex items-center justify-between mt-4 px-1">
-              <span className="font-crimson text-2xl text-forest-deep font-medium">{course.price}</span>
+            {/* Course metadata bar */}
+            <div className="mt-4 space-y-3">
+              {/* Price + details row */}
+              <p className="text-sage-calm text-sm flex items-center gap-2 flex-wrap">
+                <span className="font-crimson text-xl text-forest-deep font-medium">{course.price}</span>
+                <span className="text-living-green">·</span>
+                <span>{course.duration}</span>
+                <span className="text-living-green">·</span>
+                <span>Starts {course.nextStart}</span>
+              </p>
+
+              {/* View Journey button - prominent */}
               <button
                 onClick={handleViewJourney}
-                className="flex items-center gap-2 text-living-green hover:text-forest-deep transition-colors group"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-earth-warmth/40 text-forest-deep rounded-full border border-living-green/30 hover:bg-earth-warmth/60 transition-all font-medium text-sm tracking-wide group"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -161,7 +170,7 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
                 >
                   <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                 </svg>
-                <span className="text-sm font-medium">View Journey</span>
+                <span>View Full Journey</span>
               </button>
             </div>
           </div>
@@ -197,23 +206,6 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
             >
               {course.description}
             </p>
-
-            {/* Course Details */}
-            <div
-              className={`flex flex-wrap gap-4 mb-6 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              } transition-all duration-700`}
-              style={{ transitionDelay: '320ms' }}
-            >
-              <div className="flex items-center gap-2">
-                <SeedBullet size={6} className="text-living-green" />
-                <span className="text-sage-calm text-sm">{course.duration}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <SeedBullet size={6} className="text-living-green" />
-                <span className="text-sage-calm text-sm">Starts {course.nextStart}</span>
-              </div>
-            </div>
 
             {/* Features */}
             <ul
