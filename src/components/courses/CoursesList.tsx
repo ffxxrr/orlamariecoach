@@ -114,7 +114,7 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
             } transition-all duration-1000 ease-out`}
             style={{ transitionDelay: '200ms' }}
           >
-            <div className="relative aspect-[4/5] md:aspect-[3/4]">
+            <div className="relative aspect-[9/16] md:aspect-[9/14]">
               <div className="relative w-full h-full overflow-hidden rounded-2xl">
                 <Image
                   src={course.image}
@@ -123,7 +123,7 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
 
                 {/* Price Badge */}
                 <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full">

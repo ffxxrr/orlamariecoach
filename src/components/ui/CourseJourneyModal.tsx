@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useCallback } from 'react'
+import { useEffect, useCallback, useState } from 'react'
 import Image from 'next/image'
 import { createPortal } from 'react-dom'
 
@@ -19,6 +19,13 @@ export default function CourseJourneyModal({
   title,
   subtitle,
 }: CourseJourneyModalProps) {
+  const [mounted, setMounted] = useState(false)
+
+  // Ensure component is mounted before using portal
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   // Handle escape key
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -38,7 +45,7 @@ export default function CourseJourneyModal({
     }
   }, [isOpen, handleKeyDown])
 
-  if (!isOpen) return null
+  if (!mounted || !isOpen) return null
 
   const modalContent = (
     <div
@@ -91,18 +98,16 @@ export default function CourseJourneyModal({
           </button>
         </div>
 
-        {/* Image Container */}
-        <div className="relative flex-1 min-h-0 rounded-xl overflow-hidden bg-pure-light/5">
-          <div className="relative w-full h-full">
-            <Image
-              src={imageSrc}
-              alt={`${title} - Course Journey Map`}
-              fill
-              className="object-contain"
-              sizes="(max-width: 768px) 100vw, 90vw"
-              priority
-            />
-          </div>
+        {/* Image Container - landscape aspect ratio for journey maps */}
+        <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-pure-light/5">
+          <Image
+            src={imageSrc}
+            alt={`${title} - Course Journey Map`}
+            fill
+            className="object-contain"
+            sizes="(max-width: 768px) 100vw, 90vw"
+            priority
+          />
         </div>
 
         {/* Footer hint */}
@@ -113,7 +118,5 @@ export default function CourseJourneyModal({
     </div>
   )
 
-  // Use portal to render at document root
-  if (typeof window === 'undefined') return null
   return createPortal(modalContent, document.body)
 }
