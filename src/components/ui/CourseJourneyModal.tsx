@@ -20,12 +20,24 @@ export default function CourseJourneyModal({
   subtitle,
 }: CourseJourneyModalProps) {
   const [mounted, setMounted] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
   const [isAnimatingOut, setIsAnimatingOut] = useState(false)
 
   // Ensure component is mounted before using portal
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  // Trigger entrance animation after mount
+  useEffect(() => {
+    if (isOpen && mounted) {
+      // Small delay to ensure DOM is ready, then animate in
+      const timer = setTimeout(() => setIsVisible(true), 50)
+      return () => clearTimeout(timer)
+    } else {
+      setIsVisible(false)
+    }
+  }, [isOpen, mounted])
 
   // Handle escape key
   const handleKeyDown = useCallback(
@@ -68,7 +80,7 @@ export default function CourseJourneyModal({
       {/* Backdrop with fade */}
       <div
         className={`absolute inset-0 bg-black transition-opacity duration-500 ${
-          isAnimatingOut ? 'opacity-0' : 'opacity-95'
+          isVisible && !isAnimatingOut ? 'opacity-95' : 'opacity-0'
         }`}
         onClick={handleClose}
         aria-hidden="true"
@@ -77,13 +89,10 @@ export default function CourseJourneyModal({
       {/* Fullscreen Content */}
       <div
         className={`relative w-full h-full flex flex-col transition-all duration-500 ease-out ${
-          isAnimatingOut
-            ? 'opacity-0 scale-95 translate-y-8'
-            : 'opacity-100 scale-100 translate-y-0'
+          isVisible && !isAnimatingOut
+            ? 'opacity-100 scale-100 translate-y-0'
+            : 'opacity-0 scale-95 translate-y-8'
         }`}
-        style={{
-          animationDelay: '100ms',
-        }}
       >
         {/* Header - overlays top with gradient */}
         <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 via-black/40 to-transparent pt-6 pb-16 px-6 md:px-12">
