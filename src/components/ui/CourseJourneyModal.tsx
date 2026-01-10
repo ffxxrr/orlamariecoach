@@ -39,15 +39,6 @@ export default function CourseJourneyModal({
     }
   }, [isOpen, mounted])
 
-  // Handle escape key
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'Escape') handleClose()
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  )
-
   // Animate out before closing
   const handleClose = useCallback(() => {
     setIsAnimatingOut(true)
@@ -56,6 +47,14 @@ export default function CourseJourneyModal({
       onClose()
     }, 400)
   }, [onClose])
+
+  // Handle escape key
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleClose()
+    },
+    [handleClose]
+  )
 
   useEffect(() => {
     if (isOpen) {
@@ -72,7 +71,7 @@ export default function CourseJourneyModal({
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center"
+      className="fixed inset-0 z-[100] flex items-center justify-center"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
