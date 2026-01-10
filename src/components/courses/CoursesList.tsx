@@ -114,45 +114,18 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
             } transition-all duration-1000 ease-out`}
             style={{ transitionDelay: '200ms' }}
           >
-            <div className="relative aspect-[9/16] md:aspect-[9/14]">
+            {/* Image container */}
+            <div className="relative aspect-[9/16]">
               <div className="relative w-full h-full overflow-hidden rounded-2xl">
                 <Image
                   src={course.image}
                   alt={course.title}
                   fill
-                  className="object-cover"
+                  className="object-contain"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
 
-                {/* Price Badge */}
-                <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full">
-                  <span className="font-crimson text-xl text-forest-deep font-medium">{course.price}</span>
-                </div>
-
-                {/* View Journey Button - on image */}
-                <button
-                  onClick={handleViewJourney}
-                  className="absolute top-20 right-6 bg-white/90 backdrop-blur-sm px-3 py-2 rounded-full flex items-center gap-2 hover:bg-white transition-colors group"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-forest-deep group-hover:scale-110 transition-transform"
-                  >
-                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                  </svg>
-                  <span className="text-xs font-medium text-forest-deep">View Journey</span>
-                </button>
-
-                {/* Phase Badge */}
+                {/* Phase Badge - stays on image */}
                 <div className={`absolute bottom-6 left-6 backdrop-blur-sm px-4 py-2 rounded-full ${
                   course.phase === 'dark' ? 'bg-[#1a2f2a]/90' :
                   course.phase === 'bright' ? 'bg-[#8B6914]/90' :
@@ -165,6 +138,31 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
               <div className={`absolute inset-0 border-2 border-living-green/20 rounded-2xl -z-10 ${
                 reverse ? 'translate-y-3 -translate-x-3' : 'translate-y-3 translate-x-3'
               }`} />
+            </div>
+
+            {/* Price and View Journey - below image */}
+            <div className="flex items-center justify-between mt-4 px-1">
+              <span className="font-crimson text-2xl text-forest-deep font-medium">{course.price}</span>
+              <button
+                onClick={handleViewJourney}
+                className="flex items-center gap-2 text-living-green hover:text-forest-deep transition-colors group"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="group-hover:scale-110 transition-transform"
+                >
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                </svg>
+                <span className="text-sm font-medium">View Journey</span>
+              </button>
             </div>
           </div>
 
