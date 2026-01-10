@@ -1,11 +1,13 @@
 'use client'
 
+import { useState } from 'react'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowFlow, SeedBullet } from '@/components/brand/CelticIcons'
 import CelticDivider from '@/components/ui/CelticDivider'
 import { useEventTracker } from '@/components/ui/AnalyticsProvider'
+import CourseJourneyModal from '@/components/ui/CourseJourneyModal'
 
 const courses = [
   {
@@ -23,6 +25,7 @@ const courses = [
     duration: '8 stations',
     nextStart: 'Samhain (November)',
     image: '/images/orla/optimized/service/winter-woods-dark-half.webp',
+    journeyMap: '/images/courses/optimized/dark-half-landscape.webp',
     phase: 'dark' as const,
   },
   {
@@ -40,6 +43,7 @@ const courses = [
     duration: '6 stations',
     nextStart: 'Bealtaine (May)',
     image: '/images/orla/optimized/service/7R500169.webp',
+    journeyMap: '/images/courses/optimized/bright-half-landscape.webp',
     phase: 'bright' as const,
   },
   {
@@ -57,6 +61,7 @@ const courses = [
     duration: '6 stations',
     nextStart: 'Rolling enrolment',
     image: '/images/orla/optimized/service/7R500154.webp',
+    journeyMap: '/images/courses/optimized/turas-landscape.webp',
     phase: 'integration' as const,
   },
 ]
@@ -78,6 +83,15 @@ const phaseBackgrounds = {
 function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
   const { trackCourseInteraction } = useEventTracker()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleViewJourney = () => {
+    setIsModalOpen(true)
+    trackCourseInteraction('journey_map_viewed', {
+      courseName: course.title,
+      source: 'courses_list'
+    })
+  }
 
   return (
     <div
@@ -196,6 +210,30 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
               ))}
             </ul>
 
+            {/* View Journey Button */}
+            <button
+              onClick={handleViewJourney}
+              className={`mb-6 inline-flex items-center gap-2 text-living-green hover:text-forest-deep transition-colors ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } transition-all duration-700`}
+              style={{ transitionDelay: '380ms' }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+              </svg>
+              <span className="text-sm font-medium">View Full Journey</span>
+            </button>
+
             {/* CTA Link */}
             <Link
               href="/book-session"
@@ -219,6 +257,15 @@ function CourseCard({ course, index, reverse, isLast }: CourseCardProps) {
           </div>
         </div>
       </div>
+
+      {/* Journey Map Modal */}
+      <CourseJourneyModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        imageSrc={course.journeyMap}
+        title={course.title}
+        subtitle={course.subtitle}
+      />
     </div>
   )
 }

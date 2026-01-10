@@ -50,6 +50,7 @@ module.exports = {
         'gentle-pulse': 'gentlePulse 6s ease-in-out infinite',
         'ripple': 'ripple 4s ease-in-out infinite',
         'fade-in-up': 'fadeInUp 0.6s ease-out',
+        'fade-in': 'fadeIn 0.3s ease-out',
         // Mobile hero effects
         'ken-burns': 'kenBurns 25s ease-in-out infinite',
         'breathe': 'breathe 6s ease-in-out infinite',
@@ -87,6 +88,10 @@ module.exports = {
             opacity: '1',
             transform: 'translateY(0)',
           },
+        },
+        fadeIn: {
+          from: { opacity: '0', transform: 'scale(0.95)' },
+          to: { opacity: '1', transform: 'scale(1)' },
         },
         // Mobile hero effects
         kenBurns: {
