@@ -1,6 +1,5 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import BotanicalAccents from '@/components/ui/BotanicalAccents'
 import Container from '@/components/ui/Container'
 import Section from '@/components/ui/Section'
 import Link from 'next/link'
@@ -13,7 +12,6 @@ export const metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <BotanicalAccents />
       <Navbar />
       <main>
         <Section padded>
