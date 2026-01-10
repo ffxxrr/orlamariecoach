@@ -1,7 +1,6 @@
 'use client'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import BotanicalAccents from '@/components/ui/BotanicalAccents'
 import BookingHero from '@/components/booking/BookingHero'
 import BookingOptions from '@/components/booking/BookingOptions'
 import BookingWidget from '@/components/booking/BookingWidget'
@@ -28,7 +27,6 @@ export default function BookSessionPage() {
 
   return (
     <>
-      <BotanicalAccents />
       <Navbar />
       <main>
         {/* Hero - Full bleed immersive */}
