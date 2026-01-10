@@ -131,8 +131,8 @@ export default function CourseJourneyModal({
         </div>
 
         {/* Image Container - fullscreen with Ken Burns */}
-        <div className="relative w-full h-full flex items-center justify-center p-4 md:p-8">
-          <div className="relative w-full h-full max-h-[85vh] overflow-hidden rounded-lg">
+        <div className="relative w-full h-full flex items-center justify-center">
+          <div className="relative w-full h-full overflow-hidden">
             <Image
               src={imageSrc}
               alt={`${title} - Course Journey Map`}
