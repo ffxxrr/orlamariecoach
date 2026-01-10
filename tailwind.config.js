@@ -53,6 +53,7 @@ module.exports = {
         'fade-in': 'fadeIn 0.3s ease-out',
         // Mobile hero effects
         'ken-burns': 'kenBurns 25s ease-in-out infinite',
+        'ken-burns-slow': 'kenBurnsSlow 30s ease-in-out infinite',
         'breathe': 'breathe 6s ease-in-out infinite',
         'light-drift': 'lightDrift 12s ease-in-out infinite',
       },
@@ -98,6 +99,10 @@ module.exports = {
           '0%': { transform: 'scale(1) translate(0, 0)' },
           '50%': { transform: 'scale(1.1) translate(-2%, -1%)' },
           '100%': { transform: 'scale(1) translate(0, 0)' },
+        },
+        kenBurnsSlow: {
+          '0%': { transform: 'scale(1)' },
+          '100%': { transform: 'scale(1.08)' },
         },
         breathe: {
           '0%, 100%': { opacity: '0.15' },
