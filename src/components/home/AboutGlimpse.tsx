@@ -56,10 +56,10 @@ export default function AboutGlimpse() {
               style={{ transitionDelay: '300ms' }}
             >
               <p className="text-lg text-deep-text leading-relaxed">
-                My journey began at sixteen, when I discovered the Bhagavad Gita in my
-                grandmother&apos;s bookshelf. What started as curiosity became a life&apos;s
-                calling, leading me from the ancient sites of Ireland to teaching
-                mindfulness across the world.
+                My journey began at sixteen, when I discovered a simple book on meditation
+                tucked away on my grandmother&apos;s bookshelf. What started as curiosity
+                became a lifelong calling, guiding me from the sacred landscapes of Ireland
+                to teaching mindfulness across the world.
               </p>
               <p className="text-lg text-sage-calm leading-relaxed">
                 Today, from the hills of Donegal where the Atlantic meets ancient stone, I blend

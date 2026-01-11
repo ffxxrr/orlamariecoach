@@ -128,7 +128,7 @@ export default function ThreePaths() {
       title: 'Mindfulness Courses',
       subtitle: 'The Celtic Wheel',
       description: 'Journey through programmes that follow the ancient rhythms of the Irish year—seasons of inward reflection and outward growth. From foundations for beginners to deepening work for experienced practitioners.',
-      image: '/images/orla/optimized/service/7R500333.webp',
+      image: '/images/orla/orla-read.jpeg',
       href: '/courses',
       cta: 'Explore Courses',
     },

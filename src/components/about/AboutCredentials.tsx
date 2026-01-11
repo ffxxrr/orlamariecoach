@@ -5,8 +5,12 @@ import CelticDivider from '@/components/ui/CelticDivider'
 
 const credentials = [
   {
-    title: 'MBSR Certification',
-    description: 'Certified teacher of Mindfulness-Based Stress Reduction, the gold standard evidence-based programme developed at the University of Massachusetts Medical School.',
+    title: 'Creative Mindfulness Ireland',
+    description: 'Certified practitioner bringing creativity and imagination into mindfulness practice, helping clients discover their own unique path to presence.',
+  },
+  {
+    title: 'Psychotherapy Background',
+    description: 'Trained in psychotherapy at the University of Manchester, bringing a deep understanding of the therapeutic relationship to mindfulness practice.',
   },
   {
     title: 'Kids Mindfulness',

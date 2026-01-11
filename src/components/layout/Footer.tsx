@@ -47,10 +47,10 @@ export default function Footer() {
 
         {/* Email */}
         <a
-          href="mailto:hello@orlamariecoach.com"
+          href="mailto:admin@orlamariecoach.com"
           className="inline-block text-pure-light/90 hover:text-earth-warmth transition-colors duration-300 mb-8"
         >
-          hello@orlamariecoach.com
+          admin@orlamariecoach.com
         </a>
 
         {/* Social icons */}

@@ -107,11 +107,11 @@ export default function SoftCTA() {
         >
           Or simply say hello at{' '}
           <a
-            href="mailto:hello@orlamariecoach.com"
+            href="mailto:admin@orlamariecoach.com"
             className="text-forest-deep hover:underline"
             onClick={() => trackContactInteraction('email_clicked', { contactMethod: 'email', source: 'soft_cta' })}
           >
-            hello@orlamariecoach.com
+            admin@orlamariecoach.com
           </a>
         </p>
       </div>
