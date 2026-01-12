@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -62,16 +63,21 @@ export default function Navbar() {
           }`}
         >
           <div className="max-w-7xl mx-auto flex justify-between items-center px-6 lg:px-12 h-20">
-            {/* Logo - Text based for elegance */}
+            {/* Logo */}
             <Link
               href="/"
               className="flex-shrink-0 z-10 group"
             >
-              <span className={`font-crimson text-2xl tracking-wide transition-colors duration-300 ${
-                isTransparent ? 'text-white' : 'text-forest-deep'
-              }`}>
-                Orla Marie
-              </span>
+              <Image
+                src="/images/brand/om-coach-logo.webp"
+                alt="Om Coach"
+                width={120}
+                height={100}
+                className={`h-14 w-auto transition-all duration-300 ${
+                  isTransparent ? 'brightness-0 invert' : ''
+                }`}
+                priority
+              />
             </Link>
 
             {/* Desktop Navigation - Centered */}
