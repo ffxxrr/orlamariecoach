@@ -63,21 +63,26 @@ export default function Navbar() {
           }`}
         >
           <div className="max-w-7xl mx-auto flex justify-between items-center px-6 lg:px-12 h-20">
-            {/* Logo */}
+            {/* Logo + Text */}
             <Link
               href="/"
-              className="flex-shrink-0 z-10 group"
+              className="flex-shrink-0 z-10 group flex items-center gap-3"
             >
               <Image
                 src="/images/brand/om-coach-logo.webp"
                 alt="Om Coach"
-                width={120}
-                height={100}
-                className={`h-14 w-auto transition-all duration-300 ${
+                width={50}
+                height={42}
+                className={`h-10 w-auto transition-all duration-300 ${
                   isTransparent ? 'brightness-0 invert' : ''
                 }`}
                 priority
               />
+              <span className={`font-crimson text-xl tracking-wide transition-colors duration-300 ${
+                isTransparent ? 'text-white' : 'text-forest-deep'
+              }`}>
+                Orla Marie Coach
+              </span>
             </Link>
 
             {/* Desktop Navigation - Centered */}
