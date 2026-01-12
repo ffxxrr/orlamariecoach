@@ -4,6 +4,7 @@ import Invitation from '@/components/home/Invitation'
 import ThreePaths from '@/components/home/ThreePaths'
 import TestimonialFeature from '@/components/home/TestimonialFeature'
 import AboutGlimpse from '@/components/home/AboutGlimpse'
+import FreeMeditationSection from '@/components/home/FreeMeditationSection'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
@@ -46,6 +47,9 @@ export default function HomePage() {
 
         {/* About Glimpse - Meet Orla */}
         <AboutGlimpse />
+
+        {/* Free Meditation + Insight Timer */}
+        <FreeMeditationSection />
       </main>
       <Footer />
     </>

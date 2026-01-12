@@ -133,11 +133,11 @@ export default function ThreePaths() {
       cta: 'Explore Courses',
     },
     {
-      title: 'Free Guided Meditation',
-      subtitle: 'Begin Today',
-      description: 'Experience a taste of what mindfulness can offer with a complimentary guided meditation. Twelve minutes of gentle guidance to help you find stillness, wherever you are.',
+      title: 'Insight Timer',
+      subtitle: 'Listen Free',
+      description: 'Explore guided meditations on one of the world\'s most popular meditation platforms. Thousands have found stillness through these sessions.',
       image: '/images/orla/optimized/mobile/7R500154-cropped.webp',
-      href: '#free-meditation',
+      href: '#insight-timer',
       cta: 'Listen Now',
     },
   ]

@@ -14,7 +14,9 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 80)
+      // Change navbar style after scrolling past ~70% of viewport height
+      const threshold = window.innerHeight * 0.7
+      setIsScrolled(window.scrollY > threshold)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -56,7 +58,7 @@ export default function Navbar() {
     <>
       <header className="fixed top-0 left-0 right-0 z-[1000]">
         <nav
-          className={`transition-all duration-500 ease-out ${
+          className={`transition-[background-color,backdrop-filter,box-shadow] duration-500 ease-out ${
             isTransparent
               ? 'bg-transparent'
               : 'bg-pure-light/95 backdrop-blur-xl shadow-sm'

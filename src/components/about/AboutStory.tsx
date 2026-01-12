@@ -28,8 +28,8 @@ export default function AboutStory() {
             <div className="relative aspect-[4/5]">
               <div className="relative w-full h-full overflow-hidden rounded-2xl">
                 <Image
-                  src="/images/orla/optimized/about/7R500406.webp"
-                  alt="Orla Marie teaching meditation"
+                  src="/images/orla/optimized/orla-looking-away.webp"
+                  alt="Orla Marie gazing contemplatively into the distance"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
