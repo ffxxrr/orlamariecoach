@@ -55,11 +55,7 @@ export async function GET(request: NextRequest) {
             select: {
               id: true,
               duration: true,
-            },
-          },
-          pageviews: {
-            select: {
-              id: true,
+              pageviews: true, // This is the integer count field on session
             },
           },
         },
@@ -102,13 +98,15 @@ export async function GET(request: NextRequest) {
     // Format visitor data
     const formattedVisitors = visitors.map(visitor => {
       const totalDuration = visitor.sessions.reduce((sum, s) => sum + (s.duration || 0), 0);
+      // Sum pageviews from all sessions (pageviews is an integer field on session)
+      const totalPageviews = visitor.sessions.reduce((sum, s) => sum + (s.pageviews || 0), 0);
 
       return {
         id: visitor.id,
         visitorId: visitor.visitorId,
         firstSeen: visitor.firstSeen.toISOString(),
         lastSeen: visitor.lastSeen.toISOString(),
-        pageviews: visitor.pageviews.length,
+        pageviews: totalPageviews,
         sessions: visitor.sessions.length,
         deviceType: visitor.deviceType || 'desktop',
         browser: visitor.browserName || 'Unknown',
