@@ -9,8 +9,8 @@ export async function GET() {
     const now = new Date();
     // Active visitors: those with activity in the last 5 minutes
     const activeThreshold = new Date(now.getTime() - 5 * 60 * 1000);
-    // Recent activity: last 10 minutes
-    const recentThreshold = new Date(now.getTime() - 10 * 60 * 1000);
+    // Recent activity: last 30 minutes (sessions can be long)
+    const recentThreshold = new Date(now.getTime() - 30 * 60 * 1000);
     // For referrers and device stats: last 24 hours
     const dayThreshold = new Date(now.getTime() - 24 * 60 * 60 * 1000);
 
@@ -29,16 +29,17 @@ export async function GET() {
         },
       }),
 
-      // Active sessions (sessions active in last 5 mins) - for active pages
+      // Get sessions for currently active visitors (lastSeen in last 5 mins)
       prisma.analyticsSession.findMany({
         where: {
-          OR: [
-            { startedAt: { gte: activeThreshold } },
-            { endedAt: null, startedAt: { gte: recentThreshold } }, // Ongoing sessions
-          ],
+          visitor: {
+            lastSeen: { gte: activeThreshold },
+          },
         },
         select: {
           entryPage: true,
+          exitPage: true, // exitPage may be more current
+          startedAt: true,
           visitor: {
             select: {
               country: true,
@@ -47,6 +48,9 @@ export async function GET() {
             },
           },
         },
+        orderBy: {
+          startedAt: 'desc',
+        },
       }),
 
       // Recent sessions for activity feed
@@ -54,7 +58,10 @@ export async function GET() {
         where: {
           startedAt: { gte: recentThreshold },
         },
-        include: {
+        select: {
+          entryPage: true,
+          exitPage: true,
+          startedAt: true,
           visitor: {
             select: {
               country: true,
@@ -128,10 +135,23 @@ export async function GET() {
       },
     });
 
-    // Group active sessions by entry page
-    const pageGroups: Record<string, number> = {};
+    // Group active sessions by current page (exitPage if available, else entryPage)
+    // For active visitors, get their most recent session's current page
+    const visitorPages: Record<string, string> = {};
     activeSessions.forEach(session => {
-      const page = session.entryPage || '/';
+      // Use exitPage if available (more current), otherwise entryPage
+      const page = session.exitPage || session.entryPage || '/';
+      // Group by visitor to avoid counting multiple sessions per visitor
+      const visitorKey = `${session.visitor?.country}-${session.visitor?.deviceType}`;
+      // Keep the most recent page (sessions are sorted by startedAt desc)
+      if (!visitorPages[visitorKey]) {
+        visitorPages[visitorKey] = page;
+      }
+    });
+
+    // Now count pages
+    const pageGroups: Record<string, number> = {};
+    Object.values(visitorPages).forEach(page => {
       pageGroups[page] = (pageGroups[page] || 0) + 1;
     });
 
@@ -144,15 +164,18 @@ export async function GET() {
       .sort((a, b) => b.visitors - a.visitors)
       .slice(0, 10);
 
-    // Format recent activity from sessions
-    const recentActivity = recentSessions.map((session, index) => ({
-      id: (index + 1).toString(),
-      page: session.entryPage || '/',
-      timestamp: session.startedAt.toISOString(),
-      location: formatLocation(session.visitor?.country, session.visitor?.city),
-      deviceType: session.visitor?.deviceType || 'desktop',
-      title: getPageTitle(session.entryPage || '/'),
-    }));
+    // Format recent activity from sessions (use exitPage if available for current page)
+    const recentActivity = recentSessions.map((session, index) => {
+      const page = session.exitPage || session.entryPage || '/';
+      return {
+        id: (index + 1).toString(),
+        page,
+        timestamp: session.startedAt.toISOString(),
+        location: formatLocation(session.visitor?.country, session.visitor?.city),
+        deviceType: session.visitor?.deviceType || 'desktop',
+        title: getPageTitle(page),
+      };
+    });
 
     // Format referrers
     const topReferrers = [
