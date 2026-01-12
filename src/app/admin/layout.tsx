@@ -240,7 +240,7 @@ export default function AdminLayout({
         </div>
 
         {/* Page content */}
-        <main className="px-4 pt-1 pb-2 sm:px-6 sm:pt-2 sm:pb-3 lg:px-6 lg:pt-2 lg:pb-3">
+        <main className="px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-8">
           {children}
         </main>
       </div>
