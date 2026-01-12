@@ -16,8 +16,8 @@ export async function GET() {
 
     const [
       activeVisitorsCount,
-      activePageviews,
-      recentPageviews,
+      activeSessions,
+      recentSessions,
       referrerStats,
       deviceStats,
       countryStats,
@@ -29,27 +29,30 @@ export async function GET() {
         },
       }),
 
-      // Active pages (pageviews in last 5 mins grouped by page)
-      prisma.analyticsPageview.groupBy({
-        by: ['page', 'title'],
+      // Active sessions (sessions active in last 5 mins) - for active pages
+      prisma.analyticsSession.findMany({
         where: {
-          timestamp: { gte: activeThreshold },
+          OR: [
+            { startedAt: { gte: activeThreshold } },
+            { endedAt: null, startedAt: { gte: recentThreshold } }, // Ongoing sessions
+          ],
         },
-        _count: {
-          page: true,
-        },
-        orderBy: {
-          _count: {
-            page: 'desc',
+        select: {
+          entryPage: true,
+          visitor: {
+            select: {
+              country: true,
+              city: true,
+              deviceType: true,
+            },
           },
         },
-        take: 10,
       }),
 
-      // Recent pageviews for activity feed
-      prisma.analyticsPageview.findMany({
+      // Recent sessions for activity feed
+      prisma.analyticsSession.findMany({
         where: {
-          timestamp: { gte: recentThreshold },
+          startedAt: { gte: recentThreshold },
         },
         include: {
           visitor: {
@@ -61,7 +64,7 @@ export async function GET() {
           },
         },
         orderBy: {
-          timestamp: 'desc',
+          startedAt: 'desc',
         },
         take: 15,
       }),
@@ -125,21 +128,30 @@ export async function GET() {
       },
     });
 
-    // Format active pages
-    const activePages = activePageviews.map(page => ({
-      page: page.page,
-      visitors: page._count.page,
-      title: page.title || getPageTitle(page.page),
-    }));
+    // Group active sessions by entry page
+    const pageGroups: Record<string, number> = {};
+    activeSessions.forEach(session => {
+      const page = session.entryPage || '/';
+      pageGroups[page] = (pageGroups[page] || 0) + 1;
+    });
 
-    // Format recent activity
-    const recentActivity = recentPageviews.map((pv, index) => ({
+    const activePages = Object.entries(pageGroups)
+      .map(([page, count]) => ({
+        page,
+        visitors: count,
+        title: getPageTitle(page),
+      }))
+      .sort((a, b) => b.visitors - a.visitors)
+      .slice(0, 10);
+
+    // Format recent activity from sessions
+    const recentActivity = recentSessions.map((session, index) => ({
       id: (index + 1).toString(),
-      page: pv.page,
-      timestamp: pv.timestamp.toISOString(),
-      location: formatLocation(pv.visitor?.country, pv.visitor?.city),
-      deviceType: pv.visitor?.deviceType || 'desktop',
-      title: pv.title || getPageTitle(pv.page),
+      page: session.entryPage || '/',
+      timestamp: session.startedAt.toISOString(),
+      location: formatLocation(session.visitor?.country, session.visitor?.city),
+      deviceType: session.visitor?.deviceType || 'desktop',
+      title: getPageTitle(session.entryPage || '/'),
     }));
 
     // Format referrers
