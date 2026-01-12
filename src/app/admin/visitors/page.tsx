@@ -1,17 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { 
-  Users, 
+import {
+  Users,
   Globe,
   Smartphone,
   Monitor,
-  Calendar,
   Clock,
   ArrowUpRight,
   ArrowDownRight,
   Search,
-  Filter
 } from 'lucide-react';
 
 interface Visitor {
@@ -26,7 +24,7 @@ interface Visitor {
   country: string;
   city?: string;
   isReturning: boolean;
-  totalDuration: number; // in seconds
+  totalDuration: number;
 }
 
 interface VisitorsData {
@@ -35,117 +33,55 @@ interface VisitorsData {
   newVisitors: number;
   returningVisitors: number;
   avgSessionDuration: number;
+  pagination: {
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
 }
 
 export default function VisitorsPage() {
   const [visitorsData, setVisitorsData] = useState<VisitorsData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterBy, setFilterBy] = useState('all'); // all, new, returning
-  const [sortBy, setSortBy] = useState('lastSeen'); // lastSeen, firstSeen, pageviews
+  const [filterBy, setFilterBy] = useState('all');
+  const [sortBy, setSortBy] = useState('lastSeen');
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(20);
 
   useEffect(() => {
     fetchVisitorsData();
   }, [currentPage, filterBy, sortBy]);
 
+  // Debounced search
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentPage(1);
+      fetchVisitorsData();
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
   const fetchVisitorsData = async () => {
     try {
       setIsLoading(true);
-      
-      // In a real implementation, this would fetch from /api/admin/visitors
-      // For now, we'll simulate visitor data
-      const mockVisitors: Visitor[] = Array.from({ length: 50 }, (_, i) => {
-        const countries = ['Ireland', 'United Kingdom', 'United States', 'Canada', 'Australia', 'Germany', 'France'];
-        const cities = ['Dublin', 'Cork', 'London', 'Belfast', 'New York', 'Toronto', 'Sydney', 'Berlin', 'Paris'];
-        const browsers = ['Chrome', 'Safari', 'Firefox', 'Edge'];
-        const devices = ['desktop', 'mobile', 'tablet'];
-        
-        const firstSeen = new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000); // Random date within last 30 days
-        const lastSeen = new Date(firstSeen.getTime() + Math.random() * (Date.now() - firstSeen.getTime()));
-        const isReturning = Math.random() > 0.6;
-        
-        return {
-          id: (i + 1).toString(),
-          visitorId: `visitor_${i + 1}`,
-          firstSeen: firstSeen.toISOString(),
-          lastSeen: lastSeen.toISOString(),
-          pageviews: Math.floor(Math.random() * 20) + 1,
-          sessions: Math.floor(Math.random() * 5) + 1,
-          deviceType: devices[Math.floor(Math.random() * devices.length)],
-          browser: browsers[Math.floor(Math.random() * browsers.length)],
-          country: countries[Math.floor(Math.random() * countries.length)],
-          city: Math.random() > 0.3 ? cities[Math.floor(Math.random() * cities.length)] : undefined,
-          isReturning,
-          totalDuration: Math.floor(Math.random() * 1800) + 60 // 1-30 minutes
-        };
+      const params = new URLSearchParams({
+        page: currentPage.toString(),
+        limit: '20',
+        filter: filterBy,
+        sortBy,
+        search: searchTerm,
       });
-      
-      const mockData: VisitorsData = {
-        visitors: mockVisitors,
-        totalCount: mockVisitors.length,
-        newVisitors: mockVisitors.filter(v => !v.isReturning).length,
-        returningVisitors: mockVisitors.filter(v => v.isReturning).length,
-        avgSessionDuration: mockVisitors.reduce((sum, v) => sum + v.totalDuration, 0) / mockVisitors.length
-      };
-      
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-      setVisitorsData(mockData);
+
+      const response = await fetch(`/api/admin/visitors?${params}`);
+      if (response.ok) {
+        const data = await response.json();
+        setVisitorsData(data);
+      }
     } catch (error) {
       console.error('Failed to fetch visitors data:', error);
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const getFilteredVisitors = () => {
-    if (!visitorsData) return [];
-    
-    let filtered = visitorsData.visitors;
-    
-    // Apply filter
-    if (filterBy === 'new') {
-      filtered = filtered.filter(v => !v.isReturning);
-    } else if (filterBy === 'returning') {
-      filtered = filtered.filter(v => v.isReturning);
-    }
-    
-    // Apply search
-    if (searchTerm) {
-      filtered = filtered.filter(v => 
-        v.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        v.city?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        v.browser.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-    
-    // Apply sort
-    filtered.sort((a, b) => {
-      switch (sortBy) {
-        case 'firstSeen':
-          return new Date(b.firstSeen).getTime() - new Date(a.firstSeen).getTime();
-        case 'pageviews':
-          return b.pageviews - a.pageviews;
-        case 'lastSeen':
-        default:
-          return new Date(b.lastSeen).getTime() - new Date(a.lastSeen).getTime();
-      }
-    });
-    
-    return filtered;
-  };
-
-  const getPaginatedVisitors = () => {
-    const filtered = getFilteredVisitors();
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    return filtered.slice(startIndex, startIndex + itemsPerPage);
-  };
-
-  const getTotalPages = () => {
-    const filtered = getFilteredVisitors();
-    return Math.ceil(filtered.length / itemsPerPage);
   };
 
   const formatDuration = (seconds: number): string => {
@@ -160,7 +96,7 @@ export default function VisitorsPage() {
     const date = new Date(dateString);
     const diffMs = now.getTime() - date.getTime();
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-    
+
     if (diffDays === 0) return 'Today';
     if (diffDays === 1) return 'Yesterday';
     if (diffDays < 7) return `${diffDays} days ago`;
@@ -176,7 +112,7 @@ export default function VisitorsPage() {
     }
   };
 
-  if (isLoading) {
+  if (isLoading && !visitorsData) {
     return (
       <div className="flex items-center justify-center min-h-96">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-forest-deep"></div>
@@ -184,28 +120,10 @@ export default function VisitorsPage() {
     );
   }
 
-  const filteredVisitors = getPaginatedVisitors();
-  const totalPages = getTotalPages();
+  const totalPages = visitorsData?.pagination.totalPages || 1;
 
   return (
     <div className="space-y-4">
-      {/* Demo Data Notice */}
-      <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-        <div className="flex items-start">
-          <div className="flex-shrink-0">
-            <svg className="h-5 w-5 text-amber-600" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-            </svg>
-          </div>
-          <div className="ml-3">
-            <h3 className="text-sm font-medium text-amber-800">Demo Data</h3>
-            <p className="mt-1 text-sm text-amber-700">
-              This page displays sample visitor data for demonstration purposes. Real visitor tracking will be available in a future update.
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
@@ -282,26 +200,25 @@ export default function VisitorsPage() {
               />
             </div>
           </div>
-          
+
           <div className="flex gap-2">
             <select
               value={filterBy}
-              onChange={(e) => setFilterBy(e.target.value)}
+              onChange={(e) => { setFilterBy(e.target.value); setCurrentPage(1); }}
               className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-forest-deep focus:border-forest-deep"
             >
               <option value="all">All Visitors</option>
               <option value="new">New Visitors</option>
               <option value="returning">Returning Visitors</option>
             </select>
-            
+
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
+              onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }}
               className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-forest-deep focus:border-forest-deep"
             >
               <option value="lastSeen">Last Seen</option>
               <option value="firstSeen">First Seen</option>
-              <option value="pageviews">Page Views</option>
             </select>
           </div>
         </div>
@@ -331,59 +248,67 @@ export default function VisitorsPage() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredVisitors.map((visitor) => (
-                <tr key={visitor.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0">
-                        <div className={`h-8 w-8 rounded-full flex items-center justify-center text-xs font-medium ${
-                          visitor.isReturning ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
-                        }`}>
-                          {visitor.isReturning ? 'R' : 'N'}
-                        </div>
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">
-                          {visitor.visitorId.substring(0, 8)}...
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          {visitor.isReturning ? 'Returning' : 'New'} visitor
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">{visitor.country}</div>
-                    {visitor.city && (
-                      <div className="text-sm text-gray-500">{visitor.city}</div>
-                    )}
-                  </td>
-                  
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      {getDeviceIcon(visitor.deviceType)}
-                      <div className="ml-2">
-                        <div className="text-sm text-gray-900 capitalize">{visitor.deviceType}</div>
-                        <div className="text-sm text-gray-500">{visitor.browser}</div>
-                      </div>
-                    </div>
-                  </td>
-                  
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">
-                      {visitor.pageviews} pages
-                    </div>
-                    <div className="text-sm text-gray-500">
-                      {visitor.sessions} sessions
-                    </div>
-                  </td>
-                  
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {getRelativeTime(visitor.lastSeen)}
+              {visitorsData?.visitors.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="px-6 py-12 text-center text-gray-500">
+                    No visitors found. Analytics data will appear here once visitors start browsing your site.
                   </td>
                 </tr>
-              ))}
+              ) : (
+                visitorsData?.visitors.map((visitor) => (
+                  <tr key={visitor.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center">
+                        <div className="flex-shrink-0">
+                          <div className={`h-8 w-8 rounded-full flex items-center justify-center text-xs font-medium ${
+                            visitor.isReturning ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
+                          }`}>
+                            {visitor.isReturning ? 'R' : 'N'}
+                          </div>
+                        </div>
+                        <div className="ml-4">
+                          <div className="text-sm font-medium text-gray-900">
+                            {visitor.visitorId.substring(0, 8)}...
+                          </div>
+                          <div className="text-sm text-gray-500">
+                            {visitor.isReturning ? 'Returning' : 'New'} visitor
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{visitor.country}</div>
+                      {visitor.city && (
+                        <div className="text-sm text-gray-500">{visitor.city}</div>
+                      )}
+                    </td>
+
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center">
+                        {getDeviceIcon(visitor.deviceType)}
+                        <div className="ml-2">
+                          <div className="text-sm text-gray-900 capitalize">{visitor.deviceType}</div>
+                          <div className="text-sm text-gray-500">{visitor.browser}</div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">
+                        {visitor.pageviews} pages
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {visitor.sessions} sessions
+                      </div>
+                    </td>
+
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {getRelativeTime(visitor.lastSeen)}
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
@@ -394,7 +319,7 @@ export default function VisitorsPage() {
             <div className="flex-1 flex justify-between items-center">
               <div>
                 <p className="text-sm text-gray-700">
-                  Showing {(currentPage - 1) * itemsPerPage + 1} to {Math.min(currentPage * itemsPerPage, getFilteredVisitors().length)} of {getFilteredVisitors().length} results
+                  Page {currentPage} of {totalPages}
                 </p>
               </div>
               <div className="flex space-x-2">
@@ -405,9 +330,6 @@ export default function VisitorsPage() {
                 >
                   Previous
                 </button>
-                <span className="px-3 py-1 text-sm text-gray-700">
-                  {currentPage} of {totalPages}
-                </span>
                 <button
                   onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                   disabled={currentPage === totalPages}
