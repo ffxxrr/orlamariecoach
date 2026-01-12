@@ -35,7 +35,7 @@ const services = [
       'Bright Half: intentionality, manifestation',
       'Private community of fellow travellers',
     ],
-    image: '/images/orla/optimized/about/orla-celtic-wheel.webp',
+    image: '/images/orla/optimized/about/orla-celtic-wheel-v2.webp',
     href: '/courses',
     cta: 'Explore Courses',
   },
