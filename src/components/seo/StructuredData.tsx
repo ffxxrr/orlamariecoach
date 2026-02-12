@@ -9,7 +9,7 @@
  * - Service schemas
  */
 
-const BASE_URL = 'https://orlamariecoach.vercel.app'
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://orlamariecoach.vercel.app'
 
 // Organization + Person combined schema
 const organizationSchema = {
