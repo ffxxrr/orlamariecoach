@@ -96,29 +96,33 @@ export async function POST(request: NextRequest) {
 
     // Process session data
     const firstEvent = payload.events[0];
-    const sessionData = {
-      sessionId: payload.visitorInfo.sessionId,
-      visitorId: payload.visitorInfo.visitorId,
-      pageviews: payload.events.filter(e => e.type === 'pageview').length,
-      bounced: payload.events.length === 1 && payload.events[0].type === 'pageview',
-    };
+    const pageviewEvents = payload.events.filter(e => e.type === 'pageview');
+    const firstPageview = pageviewEvents[0];
+    const lastPageview = pageviewEvents[pageviewEvents.length - 1];
+
+    // Parse referrer data
+    let referrer: string | undefined;
+    let referrerDomain: string | undefined;
+    let utmSource: string | null = null;
+    let utmMedium: string | null = null;
+    let utmCampaign: string | null = null;
+    let utmTerm: string | null = null;
+    let utmContent: string | null = null;
 
     if (firstEvent?.data.referrer) {
-      const referrerUrl = new URL(firstEvent.data.referrer);
-      Object.assign(sessionData, {
-        referrer: firstEvent.data.referrer,
-        referrerDomain: referrerUrl.hostname,
-      });
-
-      // Parse UTM parameters if present
-      const urlParams = new URLSearchParams(referrerUrl.search);
-      Object.assign(sessionData, {
-        utmSource: urlParams.get('utm_source'),
-        utmMedium: urlParams.get('utm_medium'),
-        utmCampaign: urlParams.get('utm_campaign'),
-        utmTerm: urlParams.get('utm_term'),
-        utmContent: urlParams.get('utm_content'),
-      });
+      try {
+        const referrerUrl = new URL(firstEvent.data.referrer);
+        referrer = firstEvent.data.referrer;
+        referrerDomain = referrerUrl.hostname;
+        const urlParams = new URLSearchParams(referrerUrl.search);
+        utmSource = urlParams.get('utm_source');
+        utmMedium = urlParams.get('utm_medium');
+        utmCampaign = urlParams.get('utm_campaign');
+        utmTerm = urlParams.get('utm_term');
+        utmContent = urlParams.get('utm_content');
+      } catch {
+        // Invalid referrer URL, skip
+      }
     }
 
     // Upsert session
@@ -126,10 +130,25 @@ export async function POST(request: NextRequest) {
       where: { sessionId: payload.visitorInfo.sessionId },
       update: {
         endedAt: new Date(),
-        pageviews: { increment: payload.events.filter(e => e.type === 'pageview').length },
-        bounced: false, // If we're updating, it's not a bounce
+        pageviews: { increment: pageviewEvents.length },
+        bounced: false,
+        ...(lastPageview ? { exitPage: lastPageview.data.page } : {}),
       },
-      create: sessionData,
+      create: {
+        sessionId: payload.visitorInfo.sessionId,
+        visitorId: payload.visitorInfo.visitorId,
+        pageviews: pageviewEvents.length,
+        bounced: payload.events.length === 1 && payload.events[0].type === 'pageview',
+        entryPage: firstPageview?.data.page,
+        exitPage: lastPageview?.data.page,
+        referrer,
+        referrerDomain,
+        utmSource,
+        utmMedium,
+        utmCampaign,
+        utmTerm,
+        utmContent,
+      },
     });
 
     // Process individual events
