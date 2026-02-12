@@ -375,7 +375,7 @@ class AnalyticsTracker {
       const payload = {
         visitorInfo,
         events: events.map(event => {
-          if (event.eventType === 'pageview') {
+          if (event.eventType === 'pageview' || event.eventType === 'pageview_enhanced') {
             return {
               type: 'pageview',
               data: {
