@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
     response.cookies.set('admin_session', newSessionToken, {
       maxAge: 8 * 60 * 60, // 8 hours in seconds
       httpOnly: true,
-      secure: false, // Disable secure for localhost
+      secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax', // Change from strict to lax
       path: '/' // Change from /admin to / for broader access
     });
