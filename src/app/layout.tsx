@@ -15,7 +15,8 @@ const crimsonPro = Crimson_Pro({
   variable: '--font-crimson',
 })
 
-const BASE_URL = 'https://orlamariecoach.vercel.app'
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://orlamariecoach.vercel.app'
+const isProduction = BASE_URL === 'https://orlamariecoach.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -57,11 +58,11 @@ export const metadata: Metadata = {
     images: ['/images/og/og-home.jpg'],
   },
   robots: {
-    index: false, // Dev site - change to true for production
-    follow: false,
+    index: isProduction,
+    follow: isProduction,
     googleBot: {
-      index: false,
-      follow: false,
+      index: isProduction,
+      follow: isProduction,
     },
   },
   icons: {

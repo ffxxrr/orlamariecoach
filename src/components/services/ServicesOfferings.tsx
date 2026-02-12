@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowFlow, SeedBullet } from '@/components/brand/CelticIcons'
 import CelticDivider from '@/components/ui/CelticDivider'
+import { FEATURES } from '@/lib/features'
 
 const services = [
   {
@@ -20,8 +21,8 @@ const services = [
       'Ongoing support between sessions',
     ],
     image: '/images/orla/optimized/about/orla-green-door.webp',
-    href: '/book-session',
-    cta: 'Book a Session',
+    href: FEATURES.courses ? '/book-session' : '/contact',
+    cta: FEATURES.courses ? 'Book a Session' : 'Get in Touch',
   },
   {
     title: 'The Celtic Wheel',
@@ -36,8 +37,8 @@ const services = [
       'Private community of fellow travellers',
     ],
     image: '/images/orla/optimized/about/orla-celtic-wheel-v2.webp',
-    href: '/courses',
-    cta: 'Explore Courses',
+    href: FEATURES.courses ? '/courses' : '/contact',
+    cta: FEATURES.courses ? 'Explore Courses' : 'Learn More',
   },
   {
     title: 'Organisational Resilience',

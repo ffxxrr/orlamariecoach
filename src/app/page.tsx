@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     'wellness coaching',
   ],
   alternates: {
-    canonical: 'https://orlamariecoach.vercel.app',
+    canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://orlamariecoach.vercel.app',
   },
 }
 

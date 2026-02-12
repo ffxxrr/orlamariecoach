@@ -5,6 +5,7 @@ import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import CelticDivider from '@/components/ui/CelticDivider'
 import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 import { ArrowFlow } from '@/components/brand/CelticIcons'
+import { FEATURES } from '@/lib/features'
 
 export default function AboutCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
@@ -38,11 +39,11 @@ export default function AboutCTA() {
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link
-            href="/book-session"
+            href={FEATURES.courses ? '/book-session' : '/contact'}
             className="inline-flex items-center justify-center bg-forest-deep text-white px-8 py-4 rounded-full font-medium hover:bg-sage-calm transition-all duration-300 min-w-[200px]"
-            onClick={() => trackNavigation('cta_clicked', '/book-session', 'about_cta')}
+            onClick={() => trackNavigation('cta_clicked', FEATURES.courses ? '/book-session' : '/contact', 'about_cta')}
           >
-            Book a Session
+            {FEATURES.courses ? 'Book a Session' : 'Get in Touch'}
           </Link>
           <Link
             href="/services"

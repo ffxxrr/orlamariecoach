@@ -1,0 +1,55 @@
+services:
+  orlamariecoach-app:
+    image: registry.nexus3-slingshot.digitalsamba.com/orlamariecoach:latest
+    container_name: orlamariecoach-app
+    restart: unless-stopped
+    env_file:
+      - app.env
+    environment:
+      - VIRTUAL_HOST=${DOMAIN}
+      - VIRTUAL_PORT=3000
+      - LETSENCRYPT_HOST=${DOMAIN}
+      - LETSENCRYPT_EMAIL=${ADMIN_EMAIL}
+    depends_on:
+      orlamariecoach-db:
+        condition: service_healthy
+    networks:
+      - proxy
+      - orlamariecoach
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  orlamariecoach-db:
+    image: postgres:16-alpine
+    container_name: orlamariecoach-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - orlamariecoach-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - orlamariecoach
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  orlamariecoach-pgdata:
+
+networks:
+  proxy:
+    external: true
+  orlamariecoach:
+    driver: bridge

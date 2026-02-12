@@ -4,13 +4,17 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import { FEATURES } from '@/lib/features'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const isHomepage = pathname === '/'
-  const hasVideoHero = ['/', '/about', '/services', '/courses', '/contact', '/book-session'].includes(pathname)
+  const hasVideoHero = [
+    '/', '/about', '/services', '/contact',
+    ...(FEATURES.courses ? ['/courses', '/book-session'] : []),
+  ].includes(pathname)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,8 +51,8 @@ export default function Navbar() {
   const navLinks = [
     { href: '/about', label: 'About' },
     { href: '/services', label: 'Services' },
-    { href: '/courses', label: 'Courses' },
-    { href: '/contact', label: 'Contact' }
+    ...(FEATURES.courses ? [{ href: '/courses', label: 'Courses' }] : []),
+    { href: '/contact', label: 'Contact' },
   ]
 
   // Determine navbar style based on scroll and page
@@ -116,16 +120,18 @@ export default function Navbar() {
             </ul>
 
             {/* CTA Button - Pill shape */}
-            <Link
-              href="/book-session"
-              className={`hidden lg:inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium uppercase tracking-wider transition-all duration-300 ${
-                isTransparent
-                  ? 'bg-white/20 text-white border border-white/40 hover:bg-white hover:text-forest-deep'
-                  : 'bg-forest-deep text-white hover:bg-sage-calm hover:shadow-md'
-              }`}
-            >
-              Begin
-            </Link>
+            {FEATURES.courses && (
+              <Link
+                href="/book-session"
+                className={`hidden lg:inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium uppercase tracking-wider transition-all duration-300 ${
+                  isTransparent
+                    ? 'bg-white/20 text-white border border-white/40 hover:bg-white hover:text-forest-deep'
+                    : 'bg-forest-deep text-white hover:bg-sage-calm hover:shadow-md'
+                }`}
+              >
+                Begin
+              </Link>
+            )}
 
             {/* Mobile Menu Button */}
             <button
@@ -197,22 +203,24 @@ export default function Navbar() {
             </ul>
 
             {/* Mobile CTA */}
-            <div
-              className={`mt-12 transform transition-all duration-500 ${
-                isMobileMenuOpen
-                  ? 'translate-y-0 opacity-100'
-                  : 'translate-y-8 opacity-0'
-              }`}
-              style={{ transitionDelay: isMobileMenuOpen ? '400ms' : '0ms' }}
-            >
-              <Link
-                href="/book-session"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block w-full bg-forest-deep text-white text-center py-4 rounded-full font-medium uppercase tracking-wider hover:bg-sage-calm transition-colors duration-300"
+            {FEATURES.courses && (
+              <div
+                className={`mt-12 transform transition-all duration-500 ${
+                  isMobileMenuOpen
+                    ? 'translate-y-0 opacity-100'
+                    : 'translate-y-8 opacity-0'
+                }`}
+                style={{ transitionDelay: isMobileMenuOpen ? '400ms' : '0ms' }}
               >
-                Begin Your Journey
-              </Link>
-            </div>
+                <Link
+                  href="/book-session"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block w-full bg-forest-deep text-white text-center py-4 rounded-full font-medium uppercase tracking-wider hover:bg-sage-calm transition-colors duration-300"
+                >
+                  Begin Your Journey
+                </Link>
+              </div>
+            )}
           </nav>
 
           {/* Decorative element */}

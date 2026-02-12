@@ -1,12 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   reactStrictMode: true,
   images: {
     domains: [],
-  },
-  experimental: {
-    // Optional: Enable if you want to use App Router features
-    // appDir: true,
   },
 }
 

@@ -1,18 +1,12 @@
 import type { MetadataRoute } from 'next'
+import { FEATURES } from '@/lib/features'
 
-/**
- * Sitemap configuration for OrlaMarieCoach
- *
- * Note: Currently using Vercel preview URL. Update BASE_URL when
- * switching to production domain.
- */
-
-const BASE_URL = 'https://orlamariecoach.vercel.app'
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://orlamariecoach.vercel.app'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
 
-  return [
+  const entries: MetadataRoute.Sitemap = [
     // Main pages - high priority
     {
       url: BASE_URL,
@@ -31,18 +25,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/courses`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/book-session`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
     },
     {
       url: `${BASE_URL}/contact`,
@@ -71,4 +53,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
   ]
+
+  if (FEATURES.courses) {
+    entries.splice(3, 0,
+      {
+        url: `${BASE_URL}/courses`,
+        lastModified: now,
+        changeFrequency: 'weekly',
+        priority: 0.9,
+      },
+      {
+        url: `${BASE_URL}/book-session`,
+        lastModified: now,
+        changeFrequency: 'monthly',
+        priority: 0.8,
+      },
+    )
+  }
+
+  return entries
 }

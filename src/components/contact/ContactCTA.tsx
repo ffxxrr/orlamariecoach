@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import { useEventTracker } from '@/components/ui/AnalyticsProvider'
+import { FEATURES } from '@/lib/features'
 
 export default function ContactCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
@@ -55,14 +56,16 @@ export default function ContactCTA() {
           >
             <Button variant="secondary">Send Your Questions</Button>
           </Link>
-          <Link
-            href="/book-session"
-            onClick={() => trackNavigation('cta_clicked', '/book-session', 'contact_cta')}
-          >
-            <Button variant="ghost" className="border-2 border-white text-white hover:bg-white hover:text-forest-deep">
-              Book a Session
-            </Button>
-          </Link>
+          {FEATURES.courses && (
+            <Link
+              href="/book-session"
+              onClick={() => trackNavigation('cta_clicked', '/book-session', 'contact_cta')}
+            >
+              <Button variant="ghost" className="border-2 border-white text-white hover:bg-white hover:text-forest-deep">
+                Book a Session
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     </section>

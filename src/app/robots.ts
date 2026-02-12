@@ -1,43 +1,31 @@
 import type { MetadataRoute } from 'next'
 
-/**
- * robots.txt configuration
- *
- * Currently blocking all crawlers because this is a development/staging site.
- * TODO: Update to allow crawling when switching to production domain.
- */
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://orlamariecoach.vercel.app'
+const isProduction = BASE_URL === 'https://orlamariecoach.com'
+
 export default function robots(): MetadataRoute.Robots {
+  if (!isProduction) {
+    // Dev/preview: block everything
+    return {
+      rules: [{ userAgent: '*', disallow: '/' }],
+    }
+  }
+
   return {
     rules: [
       {
         userAgent: '*',
-        disallow: '/',
+        allow: '/',
+        disallow: ['/admin', '/api'],
       },
-      // Block AI training crawlers explicitly
-      {
-        userAgent: 'GPTBot',
-        disallow: '/',
-      },
-      {
-        userAgent: 'ChatGPT-User',
-        disallow: '/',
-      },
-      {
-        userAgent: 'Google-Extended',
-        disallow: '/',
-      },
-      {
-        userAgent: 'CCBot',
-        disallow: '/',
-      },
-      {
-        userAgent: 'anthropic-ai',
-        disallow: '/',
-      },
-      {
-        userAgent: 'Claude-Web',
-        disallow: '/',
-      },
+      // Block AI training crawlers
+      { userAgent: 'GPTBot', disallow: '/' },
+      { userAgent: 'ChatGPT-User', disallow: '/' },
+      { userAgent: 'Google-Extended', disallow: '/' },
+      { userAgent: 'CCBot', disallow: '/' },
+      { userAgent: 'anthropic-ai', disallow: '/' },
+      { userAgent: 'Claude-Web', disallow: '/' },
     ],
+    sitemap: `${BASE_URL}/sitemap.xml`,
   }
 }

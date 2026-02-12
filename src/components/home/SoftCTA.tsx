@@ -3,6 +3,7 @@
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import Link from 'next/link'
 import { useEventTracker } from '@/components/ui/AnalyticsProvider'
+import { FEATURES } from '@/lib/features'
 
 export default function SoftCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
@@ -82,20 +83,22 @@ export default function SoftCTA() {
           style={{ transitionDelay: '300ms' }}
         >
           <Link
-            href="/book-session"
+            href={FEATURES.courses ? '/book-session' : '/contact'}
             className="inline-flex items-center justify-center bg-forest-deep/90 text-white px-8 py-3.5 rounded-full font-medium hover:bg-forest-deep hover:shadow-md transition-all duration-300"
-            onClick={() => trackNavigation('cta_clicked', '/book-session', 'soft_cta')}
+            onClick={() => trackNavigation('cta_clicked', FEATURES.courses ? '/book-session' : '/contact', 'soft_cta')}
           >
-            Book a Session
+            {FEATURES.courses ? 'Book a Session' : 'Get in Touch'}
           </Link>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center text-forest-deep px-8 py-3.5 font-medium hover:text-sage-calm transition-all duration-300 group"
-            onClick={() => trackNavigation('link_clicked', '/contact', 'soft_cta')}
-          >
-            <span>Get in Touch</span>
-            <span className="ml-2 w-5 h-px bg-forest-deep group-hover:w-8 group-hover:bg-sage-calm transition-all duration-300" />
-          </Link>
+          {FEATURES.courses && (
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center text-forest-deep px-8 py-3.5 font-medium hover:text-sage-calm transition-all duration-300 group"
+              onClick={() => trackNavigation('link_clicked', '/contact', 'soft_cta')}
+            >
+              <span>Get in Touch</span>
+              <span className="ml-2 w-5 h-px bg-forest-deep group-hover:w-8 group-hover:bg-sage-calm transition-all duration-300" />
+            </Link>
+          )}
         </div>
 
         {/* Subtle email option */}

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowFlow } from '@/components/brand/CelticIcons'
 import CelticDivider from '@/components/ui/CelticDivider'
+import { FEATURES } from '@/lib/features'
 
 interface PathProps {
   title: string
@@ -115,7 +116,7 @@ function Path({ title, subtitle, description, image, imagePosition, href, cta, r
 }
 
 export default function ThreePaths() {
-  const paths = [
+  const allPaths = [
     {
       title: 'One-to-One Sessions',
       subtitle: 'Your Anam Chara',
@@ -123,6 +124,7 @@ export default function ThreePaths() {
       image: '/images/orla/optimized/about/7R500325.webp',
       href: '/book-session',
       cta: 'Book a Session',
+      requiresCourses: true,
     },
     {
       title: 'Mindfulness Courses',
@@ -131,6 +133,7 @@ export default function ThreePaths() {
       image: '/images/orla/orla-read.jpeg',
       href: '/courses',
       cta: 'Explore Courses',
+      requiresCourses: true,
     },
     {
       title: 'Insight Timer',
@@ -139,8 +142,11 @@ export default function ThreePaths() {
       image: '/images/orla/optimized/mobile/7R500154-cropped.webp',
       href: '#insight-timer',
       cta: 'Listen Now',
+      requiresCourses: false,
     },
   ]
+
+  const paths = allPaths.filter(p => FEATURES.courses || !p.requiresCourses)
 
   return (
     <section>

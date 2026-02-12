@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { useEventTracker } from '@/components/ui/AnalyticsProvider'
+import { FEATURES } from '@/lib/features'
 import VideoHeroBackground from '@/components/ui/VideoHeroBackground'
 
 export default function Hero() {
@@ -36,11 +37,11 @@ export default function Hero() {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
             <Link
-              href="/book-session"
-              onClick={() => trackNavigation('cta_clicked', '/book-session', 'hero')}
+              href={FEATURES.courses ? '/book-session' : '/contact'}
+              onClick={() => trackNavigation('cta_clicked', FEATURES.courses ? '/book-session' : '/contact', 'hero')}
               className="inline-flex items-center justify-center bg-earth-warmth text-forest-deep px-8 py-4 rounded-full font-medium text-lg hover:bg-white hover:shadow-lg transition-all duration-300 min-w-[200px]"
             >
-              Begin Your Journey
+              {FEATURES.courses ? 'Begin Your Journey' : 'Get in Touch'}
             </Link>
             <Link
               href="/about"
