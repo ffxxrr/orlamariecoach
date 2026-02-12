@@ -75,6 +75,9 @@ class AnalyticsTracker {
     if (this.isOptedOut || this.shouldRespectDoNotTrack()) {
       return;
     }
+    if (typeof window !== 'undefined' && window.location.pathname.startsWith('/admin')) {
+      return;
+    }
 
     const event: TrackingEvent = {
       eventType: 'pageview',
@@ -559,6 +562,9 @@ class AnalyticsTracker {
    */
   public trackPageViewWithMetrics(additionalData?: Record<string, any>): void {
     if (this.isOptedOut || this.shouldRespectDoNotTrack()) {
+      return;
+    }
+    if (typeof window !== 'undefined' && window.location.pathname.startsWith('/admin')) {
       return;
     }
 

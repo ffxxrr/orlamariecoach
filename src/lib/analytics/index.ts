@@ -95,6 +95,9 @@ class Analytics {
   private initializeTracking(): void {
     if (typeof window === 'undefined') return;
 
+    // Don't track admin pages
+    if (window.location.pathname.startsWith('/admin')) return;
+
     this.visitorInfo = VisitorManager.getVisitorInfo();
     this.sessionManager = new SessionManager();
     this.errorTracker = new ErrorTracker(this);
