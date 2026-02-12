@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const ADMIN_CREDENTIALS = {
-  email: 'admin@orlamariecoach.com',
-  password: 'admin123!',
+  email: process.env.ADMIN_EMAIL || 'admin@orlamariecoach.com',
+  password: process.env.ADMIN_PASSWORD || 'admin123!',
 };
 
 export async function POST(request: NextRequest) {
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
       response.cookies.set('admin_session', sessionToken, {
         maxAge: 8 * 60 * 60, // 8 hours in seconds
         httpOnly: true,
-        secure: false, // Disable secure for localhost
+        secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax', // Change from strict to lax
         path: '/' // Change from /admin to / for broader access
       });
