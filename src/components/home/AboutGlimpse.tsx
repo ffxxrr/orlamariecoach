@@ -57,7 +57,7 @@ export default function AboutGlimpse() {
             >
               <p className="text-lg text-deep-text leading-relaxed">
                 My journey began at sixteen, when I discovered a simple book on meditation
-                tucked away on my grandmother&apos;s bookshelf. What started as curiosity
+                which belonged to my father. What started as curiosity
                 became a lifelong calling, guiding me from the sacred landscapes of Ireland
                 to teaching mindfulness across the world.
               </p>

@@ -70,7 +70,7 @@ export default function AboutStory() {
               <p>
                 My journey has been a thirty-year <em>Turas</em>&mdash;a guided pilgrimage
                 through the inner and outer landscapes of the soul. From discovering a simple
-                book on meditation on my grandmother&apos;s bookshelf at sixteen to walking
+                book on meditation which belonged to my father at sixteen to walking
                 the ancient stations of the Inishowen Peninsula, my practice is a continuous
                 circle of return and renewal.
               </p>
