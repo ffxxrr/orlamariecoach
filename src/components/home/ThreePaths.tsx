@@ -139,7 +139,7 @@ export default function ThreePaths() {
       title: 'Insight Timer',
       subtitle: 'Listen Free',
       description: 'Explore guided meditations on one of the world\'s most popular meditation platforms. Thousands have found stillness through these sessions.',
-      image: '/images/orla/optimized/mobile/7R500154-cropped.webp',
+      image: '/images/orla/optimized/mobile/7R500325.webp',
       href: '#insight-timer',
       cta: 'Listen Now',
       requiresCourses: false,
