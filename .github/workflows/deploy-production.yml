@@ -1,0 +1,46 @@
+name: Deploy to Production
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  REGISTRY: registry.nexus3-slingshot.digitalsamba.com
+  IMAGE_NAME: orlamariecoach
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log in to DS registry
+        run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u "${{ secrets.REGISTRY_USERNAME }}" --password-stdin
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            --platform linux/amd64 \
+            --build-arg NEXT_PUBLIC_SITE_URL=https://orlamariecoach.com \
+            --build-arg NEXT_PUBLIC_FEATURES_COURSES=false \
+            -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }} \
+            -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
+            .
+
+      - name: Push to registry
+        run: |
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+      - name: Deploy to apps3
+        uses: appleboy/ssh-action@v1
+        with:
+          host: apps3.wbcnf.net
+          username: conal
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            cd /opt/deployment/orlamariecoach
+            docker compose up -d

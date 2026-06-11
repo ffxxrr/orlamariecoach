@@ -8,7 +8,8 @@ OrlaMarieCoach is a professional Next.js 14 website for Orla Marie, an Irish med
 
 **Vision:** Create a beautiful, engaging website that honors Irish heritage and enables sustainable revenue through courses, 1:1 sessions, and packages.
 
-**Live URL:** https://orlamariecoach.vercel.app
+**Live URL:** https://orlamariecoach.com
+**Staging URL:** https://orlamariecoach.vercel.app
 **GitHub:** https://github.com/ffxxrr/orlamariecoach
 
 ## Technology Stack
