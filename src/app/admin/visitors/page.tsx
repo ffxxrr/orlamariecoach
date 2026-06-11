@@ -44,22 +44,27 @@ export default function VisitorsPage() {
   const [visitorsData, setVisitorsData] = useState<VisitorsData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
   const [filterBy, setFilterBy] = useState('all');
   const [sortBy, setSortBy] = useState('lastSeen');
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    fetchVisitorsData();
-  }, [currentPage, filterBy, sortBy]);
-
-  // Debounced search
+  // Debounce the search box: when the term settles, reset to page 1 and commit
+  // it. The actual fetch is driven by the single effect below, so a search
+  // change produces exactly one request (no stale-page double-fetch).
   useEffect(() => {
     const timer = setTimeout(() => {
       setCurrentPage(1);
-      fetchVisitorsData();
+      setDebouncedSearch(searchTerm);
     }, 300);
     return () => clearTimeout(timer);
   }, [searchTerm]);
+
+  // Single source of truth for fetching.
+  useEffect(() => {
+    fetchVisitorsData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage, filterBy, sortBy, debouncedSearch]);
 
   const fetchVisitorsData = async () => {
     try {
@@ -69,7 +74,7 @@ export default function VisitorsPage() {
         limit: '20',
         filter: filterBy,
         sortBy,
-        search: searchTerm,
+        search: debouncedSearch,
       });
 
       const response = await fetch(`/api/admin/visitors?${params}`);

@@ -42,7 +42,13 @@ export async function POST(request: NextRequest) {
     // Rate limiting headers
     const forwarded = request.headers.get('x-forwarded-for');
     const ip = forwarded?.split(',')[0] || request.headers.get('x-real-ip') || 'unknown';
-    
+
+    // Drop bot/crawler traffic so it doesn't inflate visitor metrics.
+    // Acknowledge with 200 so the client doesn't retry, but store nothing.
+    if (isBot(request.headers.get('user-agent'))) {
+      return NextResponse.json({ success: true, ignored: 'bot' });
+    }
+
     // Check rate limiting (simple implementation)
     if (await isRateLimited(ip)) {
       return NextResponse.json(
@@ -53,6 +59,10 @@ export async function POST(request: NextRequest) {
 
     // Parse request body
     const payload: TrackingPayload = await request.json();
+
+    if (isBot(payload?.visitorInfo?.userAgent)) {
+      return NextResponse.json({ success: true, ignored: 'bot' });
+    }
     
     // Validate payload
     const validation = validateTrackingPayload(payload);
@@ -125,20 +135,37 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Look up the existing session so we can compute duration (endedAt - startedAt)
+    // and an accurate bounce flag. duration was previously never written, which
+    // left every "Avg Duration" on the dashboard at 0s.
+    const now = new Date();
+    const existingSession = await prisma.analyticsSession.findUnique({
+      where: { sessionId: payload.visitorInfo.sessionId },
+      select: { startedAt: true, pageviews: true },
+    });
+
+    const totalPageviews = (existingSession?.pageviews ?? 0) + pageviewEvents.length;
+    const sessionDuration = existingSession
+      ? Math.max(0, Math.round((now.getTime() - existingSession.startedAt.getTime()) / 1000))
+      : undefined;
+
     // Upsert session
     await prisma.analyticsSession.upsert({
       where: { sessionId: payload.visitorInfo.sessionId },
       update: {
-        endedAt: new Date(),
+        endedAt: now,
+        duration: sessionDuration,
         pageviews: { increment: pageviewEvents.length },
-        bounced: false,
+        // Only clear the bounce flag once the session has more than one pageview.
+        // (The unload scroll_depth event used to mark every session non-bounced.)
+        ...(totalPageviews > 1 ? { bounced: false } : {}),
         ...(lastPageview ? { exitPage: lastPageview.data.page } : {}),
       },
       create: {
         sessionId: payload.visitorInfo.sessionId,
         visitorId: payload.visitorInfo.visitorId,
         pageviews: pageviewEvents.length,
-        bounced: payload.events.length === 1 && payload.events[0].type === 'pageview',
+        bounced: pageviewEvents.length <= 1,
         entryPage: firstPageview?.data.page,
         exitPage: lastPageview?.data.page,
         referrer,
@@ -315,29 +342,27 @@ async function isRateLimited(ip: string): Promise<boolean> {
 }
 
 /**
- * Get geographic data from IP address (privacy-compliant)
+ * Get geographic data from IP address (privacy-compliant).
+ *
+ * No GeoIP provider is configured, so we return no location rather than
+ * fabricating one — the previous implementation hardcoded "Ireland/Leinster"
+ * for every visitor, which made the dashboard's location data fiction.
+ *
+ * To enable real geolocation, plug a provider in here (e.g. MaxMind GeoLite2
+ * locally, or a Cloudflare `cf-ipcountry` header) and return its values.
  */
-async function getGeographicData(ip: string): Promise<{ country?: string; region?: string; city?: string }> {
-  // For privacy, we only collect country/region level data
-  // In production, you might use a service like GeoLite2 or ipstack
-  
-  try {
-    // For development, return default values
-    if (ip === 'unknown' || ip.startsWith('127.') || ip.startsWith('192.168.')) {
-      return { country: 'Unknown', region: undefined, city: undefined };
-    }
+async function getGeographicData(_ip: string): Promise<{ country?: string; region?: string; city?: string }> {
+  return { country: undefined, region: undefined, city: undefined };
+}
 
-    // In production, implement actual geolocation lookup
-    // Example with a hypothetical service:
-    // const response = await fetch(`https://api.geolocation.service/v1/${ip}`);
-    // const data = await response.json();
-    // return { country: data.country, region: data.region, city: data.city };
-
-    return { country: 'Ireland', region: 'Leinster', city: undefined }; // Default for development
-  } catch (error) {
-    console.warn('Geolocation lookup failed:', error);
-    return { country: undefined, region: undefined, city: undefined };
-  }
+/**
+ * Detect bot/crawler user agents so automated traffic doesn't pollute metrics.
+ */
+function isBot(userAgent: string | null | undefined): boolean {
+  if (!userAgent) return true; // no UA at all is almost always automated
+  return /bot|crawl|spider|slurp|bingpreview|facebookexternalhit|embedly|quora link preview|outbrain|pinterest|vkshare|w3c_validator|headless|lighthouse|gtmetrix|pingdom|uptime|monitor|curl|wget|python-requests|axios|go-http|java\/|okhttp|phantomjs|puppeteer|playwright/i.test(
+    userAgent
+  );
 }
 
 /**

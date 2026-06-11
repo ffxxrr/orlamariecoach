@@ -1,6 +1,7 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState, ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
 import Analytics from '@/lib/analytics';
 import ConsentBanner from './ConsentBanner';
 
@@ -25,6 +26,9 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
   const [isTrackingEnabled, setIsTrackingEnabled] = useState(false);
   const [hasConsent, setHasConsent] = useState(false);
   const [showConsentBanner, setShowConsentBanner] = useState(false);
+  const pathname = usePathname();
+  // The initial pageview is tracked on analytics init; skip it here to avoid a double-count.
+  const initialPathTracked = useRef(false);
 
   useEffect(() => {
     // Only initialize on client side
@@ -71,6 +75,18 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
       window.removeEventListener('analyticsOptOut', handleConsentChange);
     };
   }, []);
+
+  // Track client-side (SPA) navigations. Next.js route changes don't reload the
+  // page, so without this only hard loads would ever record a pageview.
+  useEffect(() => {
+    if (!analytics || !isTrackingEnabled) return;
+    if (!initialPathTracked.current) {
+      // First render: analytics init already tracked this pageview.
+      initialPathTracked.current = true;
+      return;
+    }
+    analytics.trackPageView();
+  }, [pathname, analytics, isTrackingEnabled]);
 
   const handleConsentChange = (consent: boolean) => {
     setHasConsent(consent);
