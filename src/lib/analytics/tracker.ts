@@ -61,10 +61,10 @@ class AnalyticsTracker {
     // Start flush timer
     this.startFlushTimer();
     
-    // Handle page unload
+    // Handle page unload — use beacon delivery so the final batch survives navigation
     if (typeof window !== 'undefined') {
-      window.addEventListener('beforeunload', () => this.flush());
-      window.addEventListener('pagehide', () => this.flush());
+      window.addEventListener('beforeunload', () => this.flush(true));
+      window.addEventListener('pagehide', () => this.flush(true));
     }
   }
 
@@ -212,9 +212,10 @@ class AnalyticsTracker {
   }
 
   /**
-   * Manually flush the event queue
+   * Manually flush the event queue.
+   * @param useBeacon prefer navigator.sendBeacon (for page-unload flushes)
    */
-  public flush(): void {
+  public flush(useBeacon: boolean = false): void {
     if (this.eventQueue.length === 0) {
       return;
     }
@@ -222,7 +223,7 @@ class AnalyticsTracker {
     const events = [...this.eventQueue];
     this.eventQueue = [];
 
-    this.sendEvents(events);
+    this.sendEvents(events, useBeacon);
   }
 
   /**
@@ -270,26 +271,22 @@ class AnalyticsTracker {
   }
 
   /**
-   * Generate visitor fingerprint
+   * Generate a unique visitor ID.
+   *
+   * Previously this hashed a browser fingerprint (userAgent + screen + ...),
+   * but truncating it collapsed every visitor sharing a userAgent prefix into
+   * a single ID (all iPhones became one "visitor"). The ID is persisted in
+   * localStorage anyway, so a random UUID is both collision-free and more
+   * privacy-respecting than fingerprinting.
    */
   private generateFingerprint(): string {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      ctx.textBaseline = 'top';
-      ctx.font = '14px Arial';
-      ctx.fillText('Visitor fingerprint', 2, 2);
+    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+      return crypto.randomUUID();
     }
-    
-    const fingerprint = [
-      navigator.userAgent,
-      navigator.language,
-      screen.width + 'x' + screen.height,
-      new Date().getTimezoneOffset(),
-      canvas.toDataURL()
-    ].join('|');
-    
-    return btoa(fingerprint).substring(0, 32);
+    // Fallback for older browsers without crypto.randomUUID.
+    return 'v-' + Date.now().toString(36) + '-' +
+      Math.random().toString(36).substring(2, 10) +
+      Math.random().toString(36).substring(2, 10);
   }
 
   /**
@@ -359,9 +356,10 @@ class AnalyticsTracker {
   }
 
   /**
-   * Send events to server
+   * Send events to server.
+   * @param useBeacon use navigator.sendBeacon so the request survives page unload
    */
-  private async sendEvents(events: TrackingEvent[]): Promise<void> {
+  private async sendEvents(events: TrackingEvent[], useBeacon: boolean = false): Promise<void> {
     try {
       // Prepare visitor information for new schema
       const visitorInfo = {
@@ -405,12 +403,24 @@ class AnalyticsTracker {
         })
       };
 
-      const response = await fetch(this.config.apiEndpoint + '/track', {
+      const endpoint = this.config.apiEndpoint + '/track';
+      const body = JSON.stringify(payload);
+
+      // On unload, sendBeacon reliably delivers the request after the page goes away.
+      if (useBeacon && typeof navigator !== 'undefined' && typeof navigator.sendBeacon === 'function') {
+        const blob = new Blob([body], { type: 'application/json' });
+        navigator.sendBeacon(endpoint, blob);
+        return;
+      }
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(payload),
+        body,
+        // keepalive lets a normal fetch complete even if it fires during unload
+        keepalive: useBeacon,
       });
 
       if (!response.ok) {
@@ -608,8 +618,8 @@ class AnalyticsTracker {
         }
       };
       
-      // Send immediately on unload
-      this.sendEvents([scrollEvent]);
+      // Send immediately on unload via beacon so it isn't dropped
+      this.sendEvents([scrollEvent], true);
     };
 
     window.addEventListener('beforeunload', trackScrollOnUnload);

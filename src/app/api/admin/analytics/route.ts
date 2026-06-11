@@ -37,8 +37,8 @@ export async function GET(request: NextRequest) {
 
     // Parallel queries for better performance
     const [
-      currentVisitors,
-      previousVisitors,
+      currentVisitorRows,
+      previousVisitorRows,
       currentPageviews,
       previousPageviews,
       currentSessions,
@@ -47,26 +47,21 @@ export async function GET(request: NextRequest) {
       deviceStats,
       recentActivity
     ] = await Promise.all([
-      // Current period visitors
-      prisma.analyticsVisitor.count({
-        where: {
-          firstSeen: {
-            gte: startDate,
-            lte: now
-          }
-        }
+      // Current period visitors — distinct visitors *active* in the range
+      // (counting by firstSeen excluded returning visitors).
+      prisma.analyticsPageview.findMany({
+        where: { timestamp: { gte: startDate, lte: now } },
+        select: { visitorId: true },
+        distinct: ['visitorId'],
       }),
-      
-      // Previous period visitors
-      prisma.analyticsVisitor.count({
-        where: {
-          firstSeen: {
-            gte: previousStartDate,
-            lte: previousEndDate
-          }
-        }
+
+      // Previous period visitors (distinct active)
+      prisma.analyticsPageview.findMany({
+        where: { timestamp: { gte: previousStartDate, lte: previousEndDate } },
+        select: { visitorId: true },
+        distinct: ['visitorId'],
       }),
-      
+
       // Current period pageviews
       prisma.analyticsPageview.count({
         where: {
@@ -98,7 +93,8 @@ export async function GET(request: NextRequest) {
         select: {
           bounced: true,
           endedAt: true,
-          startedAt: true
+          startedAt: true,
+          duration: true
         }
       }),
       
@@ -113,7 +109,8 @@ export async function GET(request: NextRequest) {
         select: {
           bounced: true,
           endedAt: true,
-          startedAt: true
+          startedAt: true,
+          duration: true
         }
       }),
       
@@ -173,17 +170,19 @@ export async function GET(request: NextRequest) {
       })
     ]);
 
+    // Distinct active-visitor counts (derived from the rows fetched above)
+    const currentVisitors = currentVisitorRows.length;
+    const previousVisitors = previousVisitorRows.length;
+
     // Calculate metrics
     const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    
-    const todayVisitors = await prisma.analyticsVisitor.count({
-      where: {
-        firstSeen: {
-          gte: todayStart,
-          lte: now
-        }
-      }
+
+    const todayVisitorRows = await prisma.analyticsPageview.findMany({
+      where: { timestamp: { gte: todayStart, lte: now } },
+      select: { visitorId: true },
+      distinct: ['visitorId'],
     });
+    const todayVisitors = todayVisitorRows.length;
     
     const todayPageviews = await prisma.analyticsPageview.count({
       where: {
@@ -194,14 +193,17 @@ export async function GET(request: NextRequest) {
       }
     });
 
-    // Calculate session duration and bounce rate
-    const avgSessionDuration = currentSessions.length > 0 
-      ? currentSessions
-          .filter(s => s.endedAt)
-          .reduce((sum, session) => {
-            const duration = session.endedAt!.getTime() - session.startedAt.getTime();
-            return sum + duration;
-          }, 0) / currentSessions.filter(s => s.endedAt).length / 1000 // Convert to seconds
+    // Average session duration in seconds. Prefer the stored `duration` field,
+    // falling back to endedAt - startedAt. Guard the denominator so a period
+    // with no completed sessions yields 0 rather than NaN.
+    const sessionsWithDuration = currentSessions.filter(s => s.duration != null || s.endedAt);
+    const avgSessionDuration = sessionsWithDuration.length > 0
+      ? sessionsWithDuration.reduce((sum, session) => {
+          const seconds = session.duration != null
+            ? session.duration
+            : Math.round((session.endedAt!.getTime() - session.startedAt.getTime()) / 1000);
+          return sum + seconds;
+        }, 0) / sessionsWithDuration.length
       : 0;
 
     const currentBounceRate = currentSessions.length > 0

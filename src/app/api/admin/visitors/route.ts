@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Parallel queries
-    const [visitors, totalCount, newCount, returningCount, allVisitors] = await Promise.all([
+    const [visitors, totalCount, newCount, returningCount, durationAgg] = await Promise.all([
       // Paginated visitors with sessions count
       prisma.analyticsVisitor.findMany({
         where: whereClause,
@@ -70,30 +70,12 @@ export async function GET(request: NextRequest) {
       // Returning visitors count
       prisma.analyticsVisitor.count({ where: { isReturning: true } }),
 
-      // All visitors for avg session calculation
-      prisma.analyticsVisitor.findMany({
-        include: {
-          sessions: {
-            select: {
-              duration: true,
-            },
-          },
-        },
-      }),
+      // Average session duration — aggregate in the DB instead of loading
+      // every visitor + session row into memory on each request.
+      prisma.analyticsSession.aggregate({ _avg: { duration: true } }),
     ]);
 
-    // Calculate average session duration
-    let totalDuration = 0;
-    let sessionCount = 0;
-    allVisitors.forEach(visitor => {
-      visitor.sessions.forEach(session => {
-        if (session.duration) {
-          totalDuration += session.duration;
-          sessionCount++;
-        }
-      });
-    });
-    const avgSessionDuration = sessionCount > 0 ? totalDuration / sessionCount : 0;
+    const avgSessionDuration = durationAgg._avg.duration ?? 0;
 
     // Format visitor data
     const formattedVisitors = visitors.map(visitor => {

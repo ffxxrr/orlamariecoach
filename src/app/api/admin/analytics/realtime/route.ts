@@ -37,6 +37,7 @@ export async function GET() {
           },
         },
         select: {
+          visitorId: true,
           entryPage: true,
           exitPage: true, // exitPage may be more current
           startedAt: true,
@@ -141,8 +142,9 @@ export async function GET() {
     activeSessions.forEach(session => {
       // Use exitPage if available (more current), otherwise entryPage
       const page = session.exitPage || session.entryPage || '/';
-      // Group by visitor to avoid counting multiple sessions per visitor
-      const visitorKey = `${session.visitor?.country}-${session.visitor?.deviceType}`;
+      // Key by visitorId so distinct people aren't merged (was country-device,
+      // which collapsed e.g. two Irish desktop visitors into one).
+      const visitorKey = session.visitorId;
       // Keep the most recent page (sessions are sorted by startedAt desc)
       if (!visitorPages[visitorKey]) {
         visitorPages[visitorKey] = page;
