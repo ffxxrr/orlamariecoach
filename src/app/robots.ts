@@ -11,6 +11,8 @@ export default function robots(): MetadataRoute.Robots {
     }
   }
 
+  // AI crawlers intentionally allowed: being citable in AI answers
+  // helps discovery for a new site more than content protection.
   return {
     rules: [
       {
@@ -18,13 +20,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: ['/admin', '/api'],
       },
-      // Block AI training crawlers
-      { userAgent: 'GPTBot', disallow: '/' },
-      { userAgent: 'ChatGPT-User', disallow: '/' },
-      { userAgent: 'Google-Extended', disallow: '/' },
-      { userAgent: 'CCBot', disallow: '/' },
-      { userAgent: 'anthropic-ai', disallow: '/' },
-      { userAgent: 'Claude-Web', disallow: '/' },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,
   }
