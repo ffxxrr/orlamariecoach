@@ -1,49 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server';
+import {
+  AdminSession,
+  SESSION_COOKIE,
+  SESSION_DURATION_MS,
+  createSessionToken,
+  sessionCookieOptions,
+  verifySessionToken,
+} from '@/lib/auth/session';
 
 export async function GET(request: NextRequest) {
   try {
-    const sessionToken = request.cookies.get('admin_session')?.value;
+    const token = request.cookies.get(SESSION_COOKIE)?.value;
+    const session = await verifySessionToken(token);
 
-    if (!sessionToken) {
+    if (!session) {
       return NextResponse.json({ authenticated: false }, { status: 401 });
     }
 
-    // Decode session token
-    let session;
-    try {
-      const decoded = Buffer.from(sessionToken, 'base64').toString('utf-8');
-      session = JSON.parse(decoded);
-    } catch {
-      return NextResponse.json({ authenticated: false }, { status: 401 });
-    }
-
-    // Check if session is expired
-    if (!session || session.expiresAt < Date.now()) {
-      return NextResponse.json({ authenticated: false }, { status: 401 });
-    }
-
-    // Refresh session (extend expiry)
-    const refreshedSession = {
+    // Refresh (sliding expiry) and re-sign.
+    const refreshed: AdminSession = {
       ...session,
-      expiresAt: Date.now() + (8 * 60 * 60 * 1000) // 8 hours
+      expiresAt: Date.now() + SESSION_DURATION_MS,
     };
-
-    const newSessionToken = Buffer.from(JSON.stringify(refreshedSession)).toString('base64');
+    const newToken = await createSessionToken(refreshed);
 
     const response = NextResponse.json({
       authenticated: true,
-      user: session.user
+      user: session.user,
     });
-
-    // Update session cookie
-    response.cookies.set('admin_session', newSessionToken, {
-      maxAge: 8 * 60 * 60, // 8 hours in seconds
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax', // Change from strict to lax
-      path: '/' // Change from /admin to / for broader access
-    });
-
+    response.cookies.set(
+      SESSION_COOKIE,
+      newToken,
+      sessionCookieOptions(SESSION_DURATION_MS / 1000)
+    );
     return response;
   } catch (error) {
     console.error('Session validation error:', error);
