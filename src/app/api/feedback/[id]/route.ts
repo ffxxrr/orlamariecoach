@@ -1,10 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPrisma } from '@/lib/db'
+import { SESSION_COOKIE, verifySessionToken } from '@/lib/auth/session'
+
+/** Mutating feedback (resolve/edit/delete) is admin-only. */
+async function requireAdmin(request: NextRequest): Promise<NextResponse | null> {
+  const session = await verifySessionToken(request.cookies.get(SESSION_COOKIE)?.value)
+  if (!session) {
+    return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
+  }
+  return null
+}
 
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const unauthorized = await requireAdmin(request)
+  if (unauthorized) return unauthorized
+
   try {
     const { id } = await params
     const body = await request.json()
@@ -40,6 +53,9 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const unauthorized = await requireAdmin(request)
+  if (unauthorized) return unauthorized
+
   try {
     const { id } = await params
     const prisma = getPrisma()

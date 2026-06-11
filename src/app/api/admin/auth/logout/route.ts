@@ -1,16 +1,11 @@
 import { NextResponse } from 'next/server';
+import { SESSION_COOKIE, sessionCookieOptions } from '@/lib/auth/session';
 
 export async function POST() {
   const response = NextResponse.json({ success: true });
-  
-  // Clear the session cookie
-  response.cookies.set('admin_session', '', {
-    maxAge: 0,
-    httpOnly: true,
-    secure: false, // Disable secure for localhost
-    sameSite: 'lax', // Change from strict to lax
-    path: '/' // Change from /admin to / for broader access
-  });
+
+  // Clear the session cookie (same attributes as when set, maxAge 0).
+  response.cookies.set(SESSION_COOKIE, '', sessionCookieOptions(0));
 
   return response;
 }
