@@ -10,13 +10,14 @@ import Footer from '@/components/layout/Footer'
 export const metadata: Metadata = {
   title: { absolute: 'Orla Marie Coach | Mindfulness Meditation for Workplaces, Schools & Individuals' },
   description:
-    'Evidence-based mindfulness meditation programmes for workplaces, schools and individuals, led by accredited mindfulness teacher Orla Marie Mullan. Based in Donegal, Ireland, delivered in person and online.',
+    'Evidence-based, trauma-informed mindfulness meditation programmes for workplaces, schools and individuals, led by accredited mindfulness teacher Orla Marie Mullan. Based in Donegal, Ireland, delivered in person and online.',
   keywords: [
     'mindfulness teacher Ireland',
     'accredited mindfulness teacher',
     'workplace mindfulness',
     'mindfulness in schools',
     'one-to-one mindfulness',
+    'trauma-informed mindfulness',
     'mindfulness meditation Donegal',
     'employee wellbeing',
     'staff wellbeing',

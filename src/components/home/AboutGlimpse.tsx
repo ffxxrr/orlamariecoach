@@ -56,8 +56,8 @@ export default function AboutGlimpse() {
               style={{ transitionDelay: '300ms' }}
             >
               <p className="text-lg text-deep-text leading-relaxed">
-                My interest in meditation began at sixteen, when I found a simple book on
-                meditation that belonged to my father. What started as curiosity became a
+                My meditation practice began 30 years ago at the age of sixteen, when I found
+                a simple book on meditation that belonged to my father. What started as curiosity became a
                 lifelong practice, and later a profession.
               </p>
               <p className="text-lg text-sage-calm leading-relaxed">

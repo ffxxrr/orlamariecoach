@@ -53,8 +53,8 @@ export default function ServicesHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '300ms' }}
           >
-            Secular, evidence-based mindfulness for individuals, organisations and
-            schools&mdash;delivered in person in Donegal and the North West, and online.
+            Secular, evidence-based and trauma-informed mindfulness for individuals,
+            organisations and schools&mdash;delivered in person in Donegal and the North West, and online.
           </p>
 
           {/* Trust Indicators */}

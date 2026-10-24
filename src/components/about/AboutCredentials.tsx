@@ -9,6 +9,10 @@ const credentials = [
     description: 'Trained with Mindfulness Now (The UK College of Mindfulness Meditation), whose teacher training is approved under the British Psychological Society\'s CPD scheme.',
   },
   {
+    title: 'Trauma-Informed Practice',
+    description: 'My teaching follows a trauma-informed approach. Practices are always offered as invitations, with choice, safety and pacing at the centre, so everyone can take part in a way that feels right for them.',
+  },
+  {
     title: 'Psychotherapy Training',
     description: 'Trained in psychotherapy at the University of Manchester, bringing a strong understanding of safe practice, the therapeutic relationship and emotional wellbeing to my teaching.',
   },

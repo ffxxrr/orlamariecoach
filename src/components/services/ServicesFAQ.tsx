@@ -16,6 +16,11 @@ const faqs = [
     answer: "Yes. All programmes are designed for people with no previous experience of meditation. Each practice is introduced step by step, and you'll be supported throughout."
   },
   {
+    id: 7,
+    question: "What does trauma-informed mean?",
+    answer: "A trauma-informed approach recognises that many people carry difficult experiences, and that some meditation practices can bring up strong feelings. Practices are always offered as invitations, never requirements: you can keep your eyes open, adapt a practice or pause at any time, and we work at a pace that feels safe for you."
+  },
+  {
     id: 3,
     question: "What does the research say?",
     answer: "Mindfulness-based approaches have been studied extensively over the past forty years. Evidence suggests they can help reduce stress and support wellbeing, focus and resilience."

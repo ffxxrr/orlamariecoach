@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: '%s | Orla Marie Coach',
   },
   description:
-    'Evidence-based mindfulness meditation programmes for workplaces, schools and individuals, led by accredited mindfulness teacher Orla Marie Mullan. Based in Donegal, Ireland, delivered in person and online.',
+    'Evidence-based, trauma-informed mindfulness meditation programmes for workplaces, schools and individuals, led by accredited mindfulness teacher Orla Marie Mullan. Based in Donegal, Ireland, delivered in person and online.',
   keywords: ['mindfulness', 'meditation', 'workplace mindfulness', 'mindfulness in schools', 'mindfulness teacher', 'Ireland'],
   authors: [{ name: 'Orla Marie Mullan' }],
   creator: 'Orla Marie Mullan',

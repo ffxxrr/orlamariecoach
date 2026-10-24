@@ -69,7 +69,8 @@ export default function Invitation() {
         <p className="font-crimson text-xl md:text-2xl text-sage-calm leading-relaxed">
           I&apos;m Orla Marie, an accredited mindfulness teacher based in Donegal, Ireland.
           Drawing on thirty years of personal practice and professional training, I deliver
-          secular, evidence-based mindfulness programmes that help people manage stress,
+          secular, evidence-based and trauma-informed mindfulness programmes that help
+          people manage stress,
           improve focus and build resilience&mdash;in the workplace, in the classroom and
           in everyday life.
         </p>

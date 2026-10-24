@@ -30,7 +30,7 @@ export default function Hero() {
 
           {/* Subheadline */}
           <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-            Evidence-based mindfulness meditation programmes for organisations, schools and individuals, led by accredited mindfulness teacher Orla Marie.
+            Evidence-based, trauma-informed mindfulness meditation programmes for organisations, schools and individuals, led by accredited mindfulness teacher Orla Marie.
           </p>
 
           {/* CTAs */}

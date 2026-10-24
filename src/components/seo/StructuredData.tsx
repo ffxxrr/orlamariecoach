@@ -20,7 +20,7 @@ const organizationSchema = {
   url: BASE_URL,
   logo: `${BASE_URL}/images/brand/logo-square.png`,
   description:
-    'Evidence-based mindfulness meditation programmes for workplaces, schools and individuals.',
+    'Evidence-based, trauma-informed mindfulness meditation programmes for workplaces, schools and individuals.',
   foundingDate: '2015',
   founder: {
     '@type': 'Person',
@@ -32,6 +32,7 @@ const organizationSchema = {
     knowsAbout: [
       'Mindfulness',
       'Meditation',
+      'Trauma-informed mindfulness',
       'Workplace wellbeing',
       'Mindfulness in schools',
       'Stress management',

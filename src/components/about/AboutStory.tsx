@@ -68,9 +68,9 @@ export default function AboutStory() {
               style={{ transitionDelay: '300ms' }}
             >
               <p>
-                My interest in meditation began at sixteen, when I discovered a book on
-                meditation that belonged to my father. What started as curiosity became a
-                daily practice that has stayed with me for thirty years.
+                My meditation practice began 30 years ago at the age of sixteen, when I
+                discovered a book on meditation that belonged to my father. What started as
+                curiosity became a daily practice that has stayed with me ever since.
               </p>
 
               <p>
@@ -84,7 +84,8 @@ export default function AboutStory() {
                 I am an accredited mindfulness teacher, trained with Mindfulness Now, The UK
                 College of Mindfulness Meditation. My teaching draws on the established,
                 evidence-based mindfulness approaches developed over the past forty
-                years&mdash;secular, practical and adapted to the people in front of me.
+                years. It is secular, practical and trauma-informed, and always adapted to
+                the people in front of me.
               </p>
 
               <p>

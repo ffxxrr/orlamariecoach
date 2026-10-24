@@ -53,8 +53,8 @@ export default function AboutHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '300ms' }}
           >
-            Secular, evidence-based mindfulness meditation for workplaces, schools
-            and individuals.
+            Secular, evidence-based and trauma-informed mindfulness meditation for
+            workplaces, schools and individuals.
           </p>
 
           {/* Trust Indicators */}
@@ -67,6 +67,10 @@ export default function AboutHero() {
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-earth-warmth" />
               <span className="text-white/80 text-sm">Accredited Mindfulness Teacher</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-earth-warmth" />
+              <span className="text-white/80 text-sm">Trauma-Informed Practice</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-earth-warmth" />
