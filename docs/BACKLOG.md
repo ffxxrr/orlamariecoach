@@ -251,6 +251,13 @@ This is the living backlog. Update it each session.
 
 *Nothing currently in progress*
 
+### Suggested next (from Session 31 promotion discussion)
+- [ ] One-page PDF brochure for workplaces and schools (for Orla to email HR leads / principals)
+- [ ] Local SEO landing pages: workplace mindfulness Donegal / North West, mindfulness for schools Ireland
+- [ ] Email sign-up (ConvertKit or similar)
+- [ ] Re-add testimonials once Orla has real, permissioned quotes
+- [ ] Orla: request listing on Mindfulness Now "Find a Teacher" directory + MTA register; update Google Business Profile services/photos; LinkedIn headline
+
 ---
 
 ## Done (This Sprint)
