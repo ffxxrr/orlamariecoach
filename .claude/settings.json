@@ -22,8 +22,7 @@
       "Bash(gh run watch:*)",
       "Bash(gh run view:*)",
       "Bash(curl -s https://orlamariecoach.vercel.app/:*)",
-      "Bash(sips:*)",
-      "Bash(cwebp:*)",
+      "Bash(node scripts/add-image.js:*)",
       "WebFetch(domain:orlamariecoach.vercel.app)",
       "WebFetch(domain:orlamariecoach.com)"
     ],

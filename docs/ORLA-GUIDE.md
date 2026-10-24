@@ -24,21 +24,30 @@
 
 ## One-time setup (Conal)
 
-On Orla's Mac:
+On Orla's Windows PC:
 
-1. Install the Claude desktop app and sign in with her own Claude account (Pro or above, for the Code tab).
-2. Install the tools:
-   ```bash
-   xcode-select --install
-   brew install node@22 gh webp
-   gh auth login        # her GitHub account, HTTPS, and let gh set up git credentials
+1. Install the Claude desktop app from claude.ai/download and sign in with her own Claude account (Pro or above, for the Code tab).
+2. In **PowerShell**, install the tools. Git for Windows is required: Claude Code runs its commands in Git Bash.
+   ```powershell
+   winget install --id Git.Git -e
+   winget install --id OpenJS.NodeJS.22 -e
+   winget install --id GitHub.cli -e
    ```
-3. Add her GitHub account as a collaborator on `ffxxrr/orlamariecoach` and accept the invite.
+   Close and reopen PowerShell so the new commands are on the PATH.
+3. Add her GitHub account as a collaborator on `ffxxrr/orlamariecoach` and accept the invite, then:
+   ```powershell
+   gh auth login        # GitHub.com, HTTPS, "Login with a web browser", yes to git credentials
+   ```
 4. Clone the repo and set up local env:
-   ```bash
-   mkdir -p ~/Sites && cd ~/Sites
+   ```powershell
+   cd $HOME\Documents
    gh repo clone ffxxrr/orlamariecoach
-   cd orlamariecoach && cp .env.example .env.local && npm install
-   git config user.name "Orla Marie Mullan" && git config user.email "<her email>"
+   cd orlamariecoach
+   copy .env.example .env.local
+   npm install
+   git config user.name "Orla Marie Mullan"
+   git config user.email "<her email>"
    ```
-5. In Claude → Code, open `~/Sites/orlamariecoach`, check that the preview pane starts the site, then run `/start` once together.
+5. In Claude → Code, open `Documents\orlamariecoach`. Check that the preview pane starts the site, then run `/start` once together.
+
+If Windows Defender asks about Node.js the first time the preview starts, allow it on private networks.

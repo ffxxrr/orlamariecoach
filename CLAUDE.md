@@ -131,7 +131,9 @@ colors: {
 - Irish spiritual narrative: Turas, Anam Chara, thin places, the Celtic Wheel
 
 ### Images
-New photos should be converted to `.webp` and resized before adding (`sips`/`cwebp` are available on macOS via Homebrew). Keep heroes under ~300KB and videos under ~2MB.
+Convert and resize new photos before adding them: `node scripts/add-image.js <photo> public/images/<name>.webp [max width]`. It uses `sharp` and works on Windows and macOS. Keep heroes under ~300KB and videos under ~2MB.
+
+Orla works on **Windows**. Claude Code runs shell commands in Git Bash there, so stick to portable commands: no `sips`, `open` or other macOS-only tools.
 
 ## Business Context
 

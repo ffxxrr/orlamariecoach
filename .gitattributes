@@ -1,0 +1,9 @@
+# Keep LF line endings on every platform so Windows checkouts don't rewrite files
+* text=auto eol=lf
+
+*.webp binary
+*.jpg binary
+*.png binary
+*.mp4 binary
+*.mp3 binary
+*.ico binary
