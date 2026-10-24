@@ -31,7 +31,7 @@ export default function ServicesHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '100ms' }}
           >
-            Ancient Wisdom, Modern Practice
+            Programmes
           </p>
 
           {/* Main Headline */}
@@ -41,9 +41,9 @@ export default function ServicesHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '200ms' }}
           >
-            Build your own
+            Mindfulness meditation
             <br />
-            <span className="text-earth-warmth">architecture of resilience.</span>
+            <span className="text-earth-warmth">programmes.</span>
           </h1>
 
           {/* Description */}
@@ -53,8 +53,8 @@ export default function ServicesHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '300ms' }}
           >
-            Access a mindfulness practice rooted in 4,000 years of Irish heritage—as
-            enduring as the ancient stone forts that shelter the spirit within.
+            Secular, evidence-based mindfulness for individuals, organisations and
+            schools&mdash;delivered in person in Donegal and the North West, and online.
           </p>
 
           {/* Trust Indicators */}
@@ -70,7 +70,7 @@ export default function ServicesHero() {
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-earth-warmth" />
-              <span className="text-white/80 text-sm">Global Timezone Support</span>
+              <span className="text-white/80 text-sm">Tailored to Your Needs</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-earth-warmth" />

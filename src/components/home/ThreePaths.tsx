@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowFlow } from '@/components/brand/CelticIcons'
 import CelticDivider from '@/components/ui/CelticDivider'
-import { FEATURES } from '@/lib/features'
 
 interface PathProps {
   title: string
@@ -116,37 +115,32 @@ function Path({ title, subtitle, description, image, imagePosition, href, cta, r
 }
 
 export default function ThreePaths() {
-  const allPaths = [
+  const paths = [
     {
-      title: 'One-to-One Sessions',
-      subtitle: 'Your Anam Chara',
-      description: 'In the Celtic tradition, an Anam Chara is a soul friend—a trusted guide for the inner journey. These bespoke sessions are tailored to your needs, your pace, your life. Whether you\'re seeking relief from anxiety, deeper self-awareness, or a moment of peace.',
+      title: 'One-to-One Mindfulness',
+      subtitle: 'For Individuals',
+      description: 'A structured, personal programme tailored to your needs and pace. Learn core mindfulness meditation practices and practical ways to bring them into daily life, whether you\'re managing stress, looking for better focus or simply wanting to begin.',
       image: '/images/orla/optimized/about/7R500325.webp',
-      href: '/book-session',
-      cta: 'Book a Session',
-      requiresCourses: true,
+      href: '/services',
+      cta: 'Find Out More',
     },
     {
-      title: 'Mindfulness Courses',
-      subtitle: 'The Celtic Wheel',
-      description: 'Journey through programmes that follow the ancient rhythms of the Irish year—seasons of inward reflection and outward growth. From foundations for beginners to deepening work for experienced practitioners.',
+      title: 'Workplace Mindfulness',
+      subtitle: 'For Organisations',
+      description: 'Programmes for teams and leaders that support wellbeing, focus and resilience at work. From introductory workshops to multi-week courses, delivered on-site or online and tailored to your organisation.',
+      image: '/images/orla/optimized/service/office-plants.webp',
+      href: '/services',
+      cta: 'Find Out More',
+    },
+    {
+      title: 'Mindfulness in Schools',
+      subtitle: 'For Education',
+      description: 'Age-appropriate mindfulness for pupils, and wellbeing programmes for teachers and staff. Practical skills for attention, calm and emotional awareness that fit into the school day.',
       image: '/images/orla/orla-read.jpeg',
-      href: '/courses',
-      cta: 'Explore Courses',
-      requiresCourses: true,
-    },
-    {
-      title: 'Insight Timer',
-      subtitle: 'Listen Free',
-      description: 'Explore guided meditations on one of the world\'s most popular meditation platforms. Thousands have found stillness through these sessions.',
-      image: '/images/orla/optimized/mobile/7R500325.webp',
-      href: '#insight-timer',
-      cta: 'Listen Now',
-      requiresCourses: false,
+      href: '/services',
+      cta: 'Find Out More',
     },
   ]
-
-  const paths = allPaths.filter(p => FEATURES.courses || !p.requiresCourses)
 
   return (
     <section>

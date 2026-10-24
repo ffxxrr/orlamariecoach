@@ -170,11 +170,10 @@ export default function ContactForm() {
                 className="w-full px-4 py-3 bg-white border border-earth-warmth/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-living-green/30 focus:border-living-green/50 transition-all"
               >
                 <option value="">Please select...</option>
-                <option value="getting-started">Getting started with meditation</option>
-                <option value="course-info">Course information</option>
-                <option value="session-info">Session information</option>
-                <option value="corporate">Corporate programmes</option>
-                <option value="other">Other</option>
+                <option value="one-to-one">One-to-one mindfulness</option>
+                <option value="workplace">Workplace programme</option>
+                <option value="schools">Schools programme</option>
+                <option value="other">General question</option>
               </select>
             </div>
 
@@ -250,6 +249,13 @@ export default function ContactForm() {
             Send Message
           </button>
         </form>
+
+        <p className="text-center mt-8 text-sage-calm">
+          Prefer email? Write to{' '}
+          <a href="mailto:admin@orlamariecoach.com" className="text-forest-deep hover:underline">
+            admin@orlamariecoach.com
+          </a>
+        </p>
       </div>
     </section>
   )

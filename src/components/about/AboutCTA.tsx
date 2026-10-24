@@ -5,7 +5,6 @@ import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import CelticDivider from '@/components/ui/CelticDivider'
 import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 import { ArrowFlow } from '@/components/brand/CelticIcons'
-import { FEATURES } from '@/lib/features'
 
 export default function AboutCTA() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
@@ -24,26 +23,26 @@ export default function AboutCTA() {
         }`}
       >
         <p className="text-sm uppercase tracking-[0.2em] text-living-green mb-6">
-          Begin Your Journey
+          Work With Me
         </p>
 
         <h2 className="font-crimson text-3xl md:text-4xl lg:text-5xl text-forest-deep mb-6 leading-tight">
-          Ready to find your thin place?
+          Bring mindfulness to your workplace, school or life.
         </h2>
 
         <p className="text-lg text-sage-calm mb-10 max-w-2xl mx-auto leading-relaxed">
-          Whether you seek a threshold to stillness, relief from the weight of worry,
-          or simply a soul friend to walk beside you&mdash;I&apos;m here.
+          Whether you&apos;re an HR or wellbeing lead, a school principal or an individual
+          looking to begin, I&apos;d be glad to talk about what would suit you.
         </p>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link
-            href={FEATURES.courses ? '/book-session' : '/contact'}
+            href="/contact"
             className="inline-flex items-center justify-center bg-forest-deep text-white px-8 py-4 rounded-full font-medium hover:bg-sage-calm transition-all duration-300 min-w-[200px]"
-            onClick={() => trackNavigation('cta_clicked', FEATURES.courses ? '/book-session' : '/contact', 'about_cta')}
+            onClick={() => trackNavigation('cta_clicked', '/contact', 'about_cta')}
           >
-            {FEATURES.courses ? 'Book a Session' : 'Get in Touch'}
+            Get in Touch
           </Link>
           <Link
             href="/services"
@@ -51,7 +50,7 @@ export default function AboutCTA() {
             onClick={() => trackNavigation('link_clicked', '/services', 'about_cta')}
           >
             <span className="text-forest-deep font-medium uppercase tracking-wider text-sm">
-              Explore Services
+              View Programmes
             </span>
             <ArrowFlow size={72} className="transform group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" />
           </Link>

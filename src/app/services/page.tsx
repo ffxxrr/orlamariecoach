@@ -7,9 +7,9 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
-  title: 'Services & Pricing | Orla Marie Mindfulness Coach',
+  title: 'Mindfulness Programmes',
   description:
-    'Discover personalised mindfulness and meditation services including one-to-one sessions and group courses. Based in Donegal, Ireland, available worldwide.',
+    'Evidence-based mindfulness meditation programmes for individuals, workplaces and schools. Based in Donegal, Ireland, delivered in person and online.',
   openGraph: {
     images: ['/images/og/og-services.jpg'],
   },

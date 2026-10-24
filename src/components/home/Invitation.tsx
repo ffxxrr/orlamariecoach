@@ -52,14 +52,10 @@ export default function Invitation() {
 
         {/* Main invitation text - large, elegant, breathing */}
         <p className="font-crimson text-2xl md:text-3xl lg:text-4xl text-deep-text leading-relaxed md:leading-relaxed lg:leading-relaxed">
-          In a world that never stops moving, finding stillness isn&apos;t a luxury
+          Mindfulness is the practice of paying attention to the present moment, on
+          purpose and without judgement. It is a simple, practical skill
           <span className="text-sage-calm">&mdash;</span>
-          it&apos;s essential. I&apos;m Orla Marie, and for thirty years I&apos;ve walked
-          the path of meditation, through Ireland&apos;s thin places
-          <span className="text-sage-calm">&mdash;</span>
-          those sacred spaces where the veil between worlds grows thin
-          <span className="text-sage-calm">&mdash;</span>
-          to guiding over 500 people home to themselves.
+          and one that anyone can learn, at any age.
         </p>
 
         {/* Breathing space */}
@@ -71,9 +67,11 @@ export default function Invitation() {
 
         {/* Second paragraph */}
         <p className="font-crimson text-xl md:text-2xl text-sage-calm leading-relaxed">
-          This isn&apos;t about apps or algorithms. It&apos;s about the ancient tradition
-          of the <em className="text-forest-deep not-italic">Anam Chara</em>&mdash;the soul friend&mdash;offering
-          human guidance tailored to your unique journey.
+          I&apos;m Orla Marie, an accredited mindfulness teacher based in Donegal, Ireland.
+          Drawing on thirty years of personal practice and professional training, I deliver
+          secular, evidence-based mindfulness programmes that help people manage stress,
+          improve focus and build resilience&mdash;in the workplace, in the classroom and
+          in everyday life.
         </p>
       </div>
     </section>

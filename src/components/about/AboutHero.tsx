@@ -41,9 +41,9 @@ export default function AboutHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '200ms' }}
           >
-            A thirty-year Turas.
+            Accredited mindfulness teacher.
             <br />
-            <span className="text-earth-warmth">One sacred calling.</span>
+            <span className="text-earth-warmth">Thirty years of practice.</span>
           </h1>
 
           {/* Description */}
@@ -53,8 +53,8 @@ export default function AboutHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '300ms' }}
           >
-            Your Anam Chara&mdash;a soul friend rooted in the thin places of Donegal.
-            Guiding you home to yourself.
+            Secular, evidence-based mindfulness meditation for workplaces, schools
+            and individuals.
           </p>
 
           {/* Trust Indicators */}
@@ -66,15 +66,15 @@ export default function AboutHero() {
           >
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-earth-warmth" />
-              <span className="text-white/80 text-sm">500+ Clients Guided</span>
+              <span className="text-white/80 text-sm">Accredited Mindfulness Teacher</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-earth-warmth" />
-              <span className="text-white/80 text-sm">MBSR Certified</span>
+              <span className="text-white/80 text-sm">Workplaces &amp; Schools</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-earth-warmth" />
-              <span className="text-white/80 text-sm">Kids Mindfulness Trained</span>
+              <span className="text-white/80 text-sm">Children &amp; Adults</span>
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 'use client'
 import Link from 'next/link'
 import { useEventTracker } from '@/components/ui/AnalyticsProvider'
-import { FEATURES } from '@/lib/features'
 import VideoHeroBackground from '@/components/ui/VideoHeroBackground'
 
 export default function Hero() {
@@ -24,47 +23,47 @@ export default function Hero() {
         <div className="max-w-4xl mx-auto">
           {/* Main Headline */}
           <h1 className="font-crimson text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-6 leading-[1.1] tracking-tight">
-            Enter the thin place.
+            Mindfulness for
             <br />
-            <span className="text-earth-warmth">Find yourself.</span>
+            <span className="text-earth-warmth">work, school and life.</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-            Personalised meditation guidance rooted in 30 years of practice from the ancient wisdom of Ireland's sacred landscapes.
+            Evidence-based mindfulness meditation programmes for organisations, schools and individuals, led by accredited mindfulness teacher Orla Marie.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
             <Link
-              href={FEATURES.courses ? '/book-session' : '/contact'}
-              onClick={() => trackNavigation('cta_clicked', FEATURES.courses ? '/book-session' : '/contact', 'hero')}
+              href="/contact"
+              onClick={() => trackNavigation('cta_clicked', '/contact', 'hero')}
               className="inline-flex items-center justify-center bg-earth-warmth text-forest-deep px-8 py-4 rounded-full font-medium text-lg hover:bg-white hover:shadow-lg transition-all duration-300 min-w-[200px]"
             >
-              {FEATURES.courses ? 'Begin Your Journey' : 'Get in Touch'}
+              Get in Touch
             </Link>
             <Link
-              href="/about"
-              onClick={() => trackNavigation('cta_clicked', '/about', 'hero')}
+              href="/services"
+              onClick={() => trackNavigation('cta_clicked', '/services', 'hero')}
               className="inline-flex items-center justify-center bg-transparent text-white border-2 border-white/60 px-8 py-4 rounded-full font-medium text-lg hover:bg-white/10 hover:border-white transition-all duration-300 min-w-[200px]"
             >
-              Learn More
+              Explore Programmes
             </Link>
           </div>
 
           {/* Trust Indicators */}
           <div className="grid grid-cols-3 gap-8 max-w-lg mx-auto">
             <div className="text-center">
-              <div className="text-3xl sm:text-4xl font-semibold text-white">500+</div>
-              <div className="text-sm text-white/70 mt-1">Clients Guided</div>
-            </div>
-            <div className="text-center">
               <div className="text-3xl sm:text-4xl font-semibold text-white">30</div>
-              <div className="text-sm text-white/70 mt-1">Years Practice</div>
+              <div className="text-sm text-white/70 mt-1">Years&apos; Practice</div>
             </div>
             <div className="text-center">
               <div className="text-3xl sm:text-4xl font-semibold text-white">1:1</div>
-              <div className="text-sm text-white/70 mt-1">Personal Sessions</div>
+              <div className="text-sm text-white/70 mt-1">Group &amp; Team</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl sm:text-4xl font-semibold text-white">Online</div>
+              <div className="text-sm text-white/70 mt-1">&amp; In Person</div>
             </div>
           </div>
         </div>

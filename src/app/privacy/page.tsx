@@ -5,8 +5,8 @@ import Section from '@/components/ui/Section'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Privacy | OrlaMarieCoach',
-  description: 'How we respect your privacy. No tracking, no big tech sharing - just a small Irish business trying to help people find peace.',
+  title: 'Privacy',
+  description: 'How Orla Marie Coach collects, uses and protects your information.',
 }
 
 export default function PrivacyPage() {
@@ -18,44 +18,39 @@ export default function PrivacyPage() {
           <Container className="max-w-3xl">
             <div className="text-center mb-16">
               <h1 className="font-crimson text-4xl md:text-5xl text-forest-deep mb-6">
-                Your Privacy Matters
+                Privacy Policy
               </h1>
               <p className="text-lg text-sage-calm">
-                Written by a real person, for real people
+                How your information is collected, used and protected
               </p>
             </div>
 
             <div className="prose prose-lg max-w-none">
               <div className="bg-white/60 rounded-2xl p-8 md:p-12 mb-12">
                 <h2 className="font-crimson text-2xl text-forest-deep mb-6">
-                  The Short Version
+                  Summary
                 </h2>
                 <p className="text-deep-text leading-relaxed mb-6">
-                  I don&apos;t track you. I don&apos;t sell your data. I don&apos;t hand your browsing
-                  habits over to the big tech companies so they can figure out new ways to
-                  sell you things you don&apos;t need.
+                  I collect only the information needed to run this website and respond to
+                  enquiries. I do not sell your data, share it with advertisers, or use
+                  tracking that follows you across other websites.
                 </p>
                 <p className="text-deep-text leading-relaxed">
-                  This is a small meditation coaching business run from Donegal, Ireland.
-                  My interest is in helping people find peace, not in building advertising profiles.
+                  Orla Marie Coach is based in Donegal, Ireland, and handles personal data in
+                  line with the General Data Protection Regulation (GDPR).
                 </p>
               </div>
 
               <div className="space-y-12">
                 <div>
                   <h2 className="font-crimson text-2xl text-forest-deep mb-4">
-                    What I Do Collect
+                    Website Analytics
                   </h2>
-                  <p className="text-deep-text leading-relaxed mb-4">
-                    I use simple, privacy-respecting analytics to understand the basics:
-                    which pages people visit, roughly where in the world they&apos;re coming from,
-                    and how they found me. That&apos;s it.
-                  </p>
                   <p className="text-deep-text leading-relaxed">
-                    This helps me understand if my writing resonates, if people in America
-                    are finding their way here, or if a particular course is generating interest.
-                    It&apos;s the kind of insight any small business needs to survive in a world
-                    dominated by corporations with unlimited marketing budgets.
+                    With your consent, this site uses simple, privacy-respecting analytics to
+                    understand which pages are visited, roughly which country visitors come from,
+                    and how they found the site. This helps me keep the website useful and
+                    relevant. The analytics do not identify you personally.
                   </p>
                 </div>
 
@@ -66,19 +61,19 @@ export default function PrivacyPage() {
                   <ul className="space-y-3 text-deep-text">
                     <li className="flex items-start">
                       <span className="text-living-green mr-3 mt-1">&#8226;</span>
-                      <span>No Facebook Pixel, Google Analytics, or any tracking that follows you around the internet</span>
+                      <span>No Facebook Pixel, Google Analytics or cross-site tracking</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-living-green mr-3 mt-1">&#8226;</span>
-                      <span>No selling or sharing your information with third parties</span>
+                      <span>No selling or sharing of your information with third parties</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-living-green mr-3 mt-1">&#8226;</span>
-                      <span>No building profiles about you or your interests</span>
+                      <span>No advertising profiles</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-living-green mr-3 mt-1">&#8226;</span>
-                      <span>No retargeting ads that haunt you across the web</span>
+                      <span>No retargeting adverts</span>
                     </li>
                   </ul>
                 </div>
@@ -88,31 +83,27 @@ export default function PrivacyPage() {
                     If You Contact Me
                   </h2>
                   <p className="text-deep-text leading-relaxed">
-                    When you send me a message or book a session, I&apos;ll have your email address
-                    and whatever you choose to share. I keep this information secure and use it
-                    only to communicate with you about your mindfulness journey. I won&apos;t add
-                    you to marketing lists unless you specifically ask to join my newsletter.
+                    When you get in touch, I will hold your name, email address and whatever you
+                    choose to share. This information is kept securely and used only to respond to
+                    your enquiry and, where relevant, to arrange and deliver a programme. I will
+                    not add you to a mailing list unless you ask to join it.
                   </p>
                 </div>
 
                 <div>
                   <h2 className="font-crimson text-2xl text-forest-deep mb-4">
-                    A Note on Why This Matters
+                    Your Rights
                   </h2>
-                  <p className="text-deep-text leading-relaxed mb-4">
-                    Mindfulness is about presence, awareness, and respect. It would feel deeply
-                    wrong to teach these values while simultaneously harvesting your data for
-                    profit or feeding the surveillance economy.
-                  </p>
                   <p className="text-deep-text leading-relaxed">
-                    The internet doesn&apos;t have to work the way the big platforms have trained
-                    us to expect. This corner of it works differently.
+                    You can ask to see, correct or delete the personal information I hold about
+                    you at any time. To do so, please{' '}
+                    <Link href="/contact" className="text-forest-deep hover:underline">get in touch</Link>.
                   </p>
                 </div>
 
                 <div className="border-t border-earth-warmth pt-8">
                   <p className="text-sage-calm text-sm">
-                    Last updated: December 2025
+                    Last updated: October 2026
                   </p>
                   <p className="text-sage-calm text-sm mt-2">
                     Questions? <Link href="/contact" className="text-forest-deep hover:underline">Get in touch</Link>.

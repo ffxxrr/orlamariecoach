@@ -79,8 +79,8 @@ export default function ConsentBanner({ onConsentChange }: ConsentBannerProps) {
               <p className="text-deep-text leading-relaxed">
                 <span className="font-medium">We respect your privacy.</span>{' '}
                 <span className="text-sage-calm">
-                  Simple analytics help this small Irish business understand what resonates.
-                  No tracking, no big tech.{' '}
+                  This site uses simple, privacy-friendly analytics to understand which pages
+                  are useful. No advertising and no cross-site tracking.{' '}
                   <Link href="/privacy" className="text-forest-deep hover:underline">
                     Learn more
                   </Link>

@@ -12,7 +12,7 @@ export default function FreeMeditationSection() {
             Listen on Insight Timer
           </h2>
           <p className="text-medium-text max-w-2xl mx-auto">
-            Explore guided meditations on one of the world&apos;s most popular meditation platforms.
+            Try a free guided mindfulness meditation from my library on Insight Timer, one of the world&apos;s most widely used meditation apps.
           </p>
         </div>
         <div className="max-w-3xl mx-auto">

@@ -58,7 +58,7 @@ export default function AboutStory() {
               } transition-all duration-700`}
               style={{ transitionDelay: '200ms' }}
             >
-              A pilgrimage through the thin places
+              From personal practice to professional teaching
             </h2>
 
             <div
@@ -68,27 +68,29 @@ export default function AboutStory() {
               style={{ transitionDelay: '300ms' }}
             >
               <p>
-                My journey has been a thirty-year <em>Turas</em>&mdash;a guided pilgrimage
-                through the inner and outer landscapes of the soul. From discovering a simple
-                book on meditation which belonged to my father at sixteen to walking
-                the ancient stations of the Inishowen Peninsula, my practice is a continuous
-                circle of return and renewal.
+                My interest in meditation began at sixteen, when I discovered a book on
+                meditation that belonged to my father. What started as curiosity became a
+                daily practice that has stayed with me for thirty years.
               </p>
 
               <p>
-                I grew up in Donegal&apos;s thin places&mdash;those thresholds where the veil
-                between worlds grows thin and the ordinary becomes sacred. The earthy scent
-                of damp moss, the raw energy of the Atlantic, the stillness at ancient
-                standing stones. These landscapes taught me that peace isn&apos;t something
-                we find&mdash;it&apos;s something we return to.
+                Living in Donegal, close to the Atlantic coast and open landscape, I learned
+                early how much a few moments of stillness can change the way we meet the day.
+                That experience led me to train professionally, so that I could share
+                mindfulness safely and effectively with others.
               </p>
 
               <p>
-                Now I guide others to their own internal thin place. In a world of
-                disconnected algorithms, I offer the ancient Irish tradition of the
-                <em> Anam Chara</em>&mdash;a soul friend who walks beside you. My purpose
-                is to help you build your own architecture of resilience, rooted in
-                three thousand years of heritage and thirty years of practice.
+                I am an accredited mindfulness teacher, trained with Mindfulness Now, The UK
+                College of Mindfulness Meditation. My teaching draws on the established,
+                evidence-based mindfulness approaches developed over the past forty
+                years&mdash;secular, practical and adapted to the people in front of me.
+              </p>
+
+              <p>
+                Today I deliver mindfulness programmes for workplaces, schools and
+                individuals, in person and online. My aim is simple: to give people
+                practical skills they can use for life.
               </p>
             </div>
 
@@ -105,7 +107,8 @@ export default function AboutStory() {
               } transition-all duration-700`}
               style={{ transitionDelay: '400ms' }}
             >
-              &ldquo;I guide you to the threshold&mdash;you step through.&rdquo;
+              &ldquo;Mindfulness isn&apos;t about emptying the mind. It&apos;s about learning
+              to be present with whatever is here.&rdquo;
             </p>
           </div>
         </div>

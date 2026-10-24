@@ -5,24 +5,24 @@ import CelticDivider from '@/components/ui/CelticDivider'
 
 const credentials = [
   {
+    title: 'Accredited Mindfulness Teacher',
+    description: 'Trained with Mindfulness Now (The UK College of Mindfulness Meditation), whose teacher training is approved under the British Psychological Society\'s CPD scheme.',
+  },
+  {
+    title: 'Psychotherapy Training',
+    description: 'Trained in psychotherapy at the University of Manchester, bringing a strong understanding of safe practice, the therapeutic relationship and emotional wellbeing to my teaching.',
+  },
+  {
     title: 'Creative Mindfulness Ireland',
-    description: 'Certified practitioner bringing creativity and imagination into mindfulness practice, helping clients discover their own unique path to presence.',
+    description: 'Certified practitioner, bringing creative and reflective approaches into mindfulness practice.',
   },
   {
-    title: 'Psychotherapy Background',
-    description: 'Trained in psychotherapy at the University of Manchester, bringing a deep understanding of the therapeutic relationship to mindfulness practice.',
+    title: 'Mindfulness for Children & Young People',
+    description: 'Specialist training in teaching mindfulness to children and adolescents, using age-appropriate practices that support attention and emotional awareness.',
   },
   {
-    title: 'Kids Mindfulness',
-    description: 'Specialised training in teaching mindfulness to children and adolescents, with age-appropriate techniques for developing attention and emotional regulation.',
-  },
-  {
-    title: '500+ Teaching Hours',
-    description: 'Extensive experience across group classes, workshops, corporate programmes, and one-to-one coaching sessions throughout Ireland and online.',
-  },
-  {
-    title: 'Your Anam Chara',
-    description: 'The ancient Irish tradition of the soul friend—human-guided presence that walks beside you, offering a circular approach to mindfulness where there are no corners for worry to hide.',
+    title: 'Teaching Experience',
+    description: 'Group classes, workshops, workplace programmes and one-to-one sessions throughout Ireland and online.',
   },
 ]
 

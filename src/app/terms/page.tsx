@@ -5,8 +5,8 @@ import Section from '@/components/ui/Section'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Terms of Service | OrlaMarieCoach',
-  description: 'Simple, human terms for using this website. No lawyers required.',
+  title: 'Terms of Service',
+  description: 'Terms for using this website and taking part in mindfulness programmes with Orla Marie Coach.',
 }
 
 export default function TermsPage() {
@@ -21,23 +21,19 @@ export default function TermsPage() {
                 Terms of Service
               </h1>
               <p className="text-lg text-sage-calm">
-                The human version
+                Clear, straightforward terms
               </p>
             </div>
 
             <div className="prose prose-lg max-w-none">
               <div className="bg-white/60 rounded-2xl p-8 md:p-12 mb-12">
                 <h2 className="font-crimson text-2xl text-forest-deep mb-6">
-                  Let&apos;s Keep This Simple
+                  Overview
                 </h2>
-                <p className="text-deep-text leading-relaxed mb-6">
-                  This website offers information about mindfulness and meditation, along with
-                  ways to book sessions and courses with me. By using it, you&apos;re agreeing to
-                  be respectful and use it for its intended purpose.
-                </p>
                 <p className="text-deep-text leading-relaxed">
-                  I&apos;ve tried to write these terms like I&apos;d explain them over a cup of tea,
-                  not like a lawyer trying to bill by the word.
+                  This website provides information about mindfulness meditation programmes for
+                  individuals, workplaces and schools, and a way to get in touch. By using it,
+                  you agree to use it respectfully and for its intended purpose.
                 </p>
               </div>
 
@@ -47,37 +43,34 @@ export default function TermsPage() {
                     What I Offer
                   </h2>
                   <p className="text-deep-text leading-relaxed mb-4">
-                    I provide mindfulness coaching and meditation guidance. While I have years of
-                    training and experience, I&apos;m not a medical professional, therapist, or
-                    psychologist. What I offer complements but doesn&apos;t replace professional
-                    healthcare.
+                    I provide mindfulness meditation programmes for individuals, workplaces and
+                    schools. These programmes are educational and supportive in nature. They are
+                    not therapy, counselling or medical treatment, and they do not replace
+                    professional healthcare.
                   </p>
                   <p className="text-deep-text leading-relaxed">
-                    If you&apos;re experiencing serious mental health challenges, please also seek
-                    support from qualified healthcare providers.
+                    If you are experiencing significant mental health difficulties, please seek
+                    support from your GP or another qualified healthcare provider, and let me know
+                    before starting a programme so we can make sure it is suitable for you.
                   </p>
                 </div>
 
                 <div>
                   <h2 className="font-crimson text-2xl text-forest-deep mb-4">
-                    Bookings and Payments
+                    Sessions and Cancellations
                   </h2>
                   <ul className="space-y-3 text-deep-text">
                     <li className="flex items-start">
                       <span className="text-living-green mr-3 mt-1">&#8226;</span>
-                      <span>Sessions can be rescheduled with at least 24 hours notice</span>
+                      <span>One-to-one sessions can be rescheduled with at least 24 hours&apos; notice</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-living-green mr-3 mt-1">&#8226;</span>
-                      <span>Cancellations with less notice may forfeit the session fee</span>
+                      <span>Sessions cancelled with less notice may be charged</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-living-green mr-3 mt-1">&#8226;</span>
-                      <span>Course purchases are non-refundable once access is granted, but I&apos;m always happy to discuss individual circumstances</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-living-green mr-3 mt-1">&#8226;</span>
-                      <span>Payment is accepted via Revolut, PayPal, or bank transfer</span>
+                      <span>Terms for workplace and school programmes are agreed in writing before the programme begins</span>
                     </li>
                   </ul>
                 </div>
@@ -87,12 +80,12 @@ export default function TermsPage() {
                     Your Responsibilities
                   </h2>
                   <p className="text-deep-text leading-relaxed mb-4">
-                    When booking sessions or accessing content, please:
+                    When taking part in a programme, please:
                   </p>
                   <ul className="space-y-3 text-deep-text">
                     <li className="flex items-start">
                       <span className="text-living-green mr-3 mt-1">&#8226;</span>
-                      <span>Provide accurate information when booking</span>
+                      <span>Provide accurate information when enquiring or booking</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-living-green mr-3 mt-1">&#8226;</span>
@@ -100,11 +93,7 @@ export default function TermsPage() {
                     </li>
                     <li className="flex items-start">
                       <span className="text-living-green mr-3 mt-1">&#8226;</span>
-                      <span>Don&apos;t share or redistribute course materials</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-living-green mr-3 mt-1">&#8226;</span>
-                      <span>Treat this as a space for genuine learning and growth</span>
+                      <span>Don&apos;t share or redistribute programme materials or recordings</span>
                     </li>
                   </ul>
                 </div>
@@ -114,29 +103,26 @@ export default function TermsPage() {
                     Content and Copyright
                   </h2>
                   <p className="text-deep-text leading-relaxed">
-                    The words, images, audio recordings, and course materials on this site are
-                    my work. You&apos;re welcome to share links and quote small excerpts with
-                    attribution, but please don&apos;t copy or redistribute substantial portions
-                    without asking. If you want to use something, just reach out &mdash; I&apos;m
-                    usually happy to say yes.
+                    The text, images, audio recordings and programme materials on this site are my
+                    work. You are welcome to share links and quote short excerpts with attribution,
+                    but please ask before copying or redistributing anything more substantial.
                   </p>
                 </div>
 
                 <div>
                   <h2 className="font-crimson text-2xl text-forest-deep mb-4">
-                    A Small Business Reality
+                    Website Availability
                   </h2>
                   <p className="text-deep-text leading-relaxed">
-                    This is a one-person business. I do my best to ensure everything works
-                    smoothly, but I can&apos;t guarantee the website will be available 100% of
-                    the time or that every piece of information will always be perfectly current.
-                    If you notice something amiss, I&apos;d genuinely appreciate you letting me know.
+                    I take care to keep this website accurate and available, but I cannot guarantee
+                    that it will be available at all times or that all information will always be
+                    current. If you notice anything that needs correcting, please let me know.
                   </p>
                 </div>
 
                 <div className="border-t border-earth-warmth pt-8">
                   <p className="text-sage-calm text-sm">
-                    Last updated: December 2025
+                    Last updated: October 2026
                   </p>
                   <p className="text-sage-calm text-sm mt-2">
                     Questions about these terms? <Link href="/contact" className="text-forest-deep hover:underline">Get in touch</Link>.

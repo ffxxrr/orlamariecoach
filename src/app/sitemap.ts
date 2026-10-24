@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next'
-import { FEATURES } from '@/lib/features'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://orlamariecoach.vercel.app'
 
@@ -53,23 +52,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
   ]
-
-  if (FEATURES.courses) {
-    entries.splice(3, 0,
-      {
-        url: `${BASE_URL}/courses`,
-        lastModified: now,
-        changeFrequency: 'weekly',
-        priority: 0.9,
-      },
-      {
-        url: `${BASE_URL}/book-session`,
-        lastModified: now,
-        changeFrequency: 'monthly',
-        priority: 0.8,
-      },
-    )
-  }
 
   return entries
 }

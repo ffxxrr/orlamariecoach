@@ -21,40 +21,40 @@ const isProduction = BASE_URL === 'https://orlamariecoach.com'
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: 'OrlaMarieCoach - Find Your Inner Peace Through Authentic Meditation',
-    template: '%s | OrlaMarieCoach',
+    default: 'Orla Marie Coach | Mindfulness Meditation for Workplaces, Schools & Individuals',
+    template: '%s | Orla Marie Coach',
   },
   description:
-    'Discover the transformative power of mindfulness with personalised guidance rooted in traditional wisdom and modern understanding.',
-  keywords: ['meditation', 'mindfulness', 'coaching', 'Ireland', 'inner peace', 'wellness'],
-  authors: [{ name: 'Orla Marie' }],
-  creator: 'Orla Marie',
-  publisher: 'OrlaMarieCoach',
+    'Evidence-based mindfulness meditation programmes for workplaces, schools and individuals, led by accredited mindfulness teacher Orla Marie Mullan. Based in Donegal, Ireland, delivered in person and online.',
+  keywords: ['mindfulness', 'meditation', 'workplace mindfulness', 'mindfulness in schools', 'mindfulness teacher', 'Ireland'],
+  authors: [{ name: 'Orla Marie Mullan' }],
+  creator: 'Orla Marie Mullan',
+  publisher: 'Orla Marie Coach',
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   openGraph: {
-    title: 'OrlaMarieCoach - Authentic Meditation & Mindfulness',
-    description: 'Personalised meditation guidance with traditional wisdom and modern understanding.',
+    title: 'Orla Marie Coach | Mindfulness Meditation Programmes',
+    description: 'Evidence-based mindfulness meditation programmes for workplaces, schools and individuals.',
     url: BASE_URL,
     type: 'website',
     locale: 'en_IE',
-    siteName: 'OrlaMarieCoach',
+    siteName: 'Orla Marie Coach',
     images: [
       {
         url: '/images/og/og-home.jpg',
         width: 1200,
         height: 630,
-        alt: 'OrlaMarieCoach - Irish Meditation & Mindfulness',
+        alt: 'Orla Marie Coach - Mindfulness Meditation Programmes',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'OrlaMarieCoach - Authentic Meditation & Mindfulness',
-    description: 'Personalised meditation guidance with traditional wisdom and modern understanding.',
+    title: 'Orla Marie Coach | Mindfulness Meditation Programmes',
+    description: 'Evidence-based mindfulness meditation programmes for workplaces, schools and individuals.',
     images: ['/images/og/og-home.jpg'],
   },
   robots: {

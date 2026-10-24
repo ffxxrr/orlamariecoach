@@ -45,7 +45,7 @@ export default function AboutGlimpse() {
             >
               Thirty years of practice,
               <br />
-              <span className="text-sage-calm">one purpose</span>
+              <span className="text-sage-calm">a professional approach</span>
             </h2>
 
             {/* Story excerpt */}
@@ -56,15 +56,15 @@ export default function AboutGlimpse() {
               style={{ transitionDelay: '300ms' }}
             >
               <p className="text-lg text-deep-text leading-relaxed">
-                My journey began at sixteen, when I discovered a simple book on meditation
-                which belonged to my father. What started as curiosity
-                became a lifelong calling, guiding me from the sacred landscapes of Ireland
-                to teaching mindfulness across the world.
+                My interest in meditation began at sixteen, when I found a simple book on
+                meditation that belonged to my father. What started as curiosity became a
+                lifelong practice, and later a profession.
               </p>
               <p className="text-lg text-sage-calm leading-relaxed">
-                Today, from the hills of Donegal where the Atlantic meets ancient stone, I blend
-                traditional contemplative practices with modern understanding—creating approaches
-                that honour Ireland&apos;s wisdom while meeting the challenges of contemporary life.
+                Today I am an accredited mindfulness teacher, trained with Mindfulness Now
+                (The UK College of Mindfulness Meditation), with a background in psychotherapy
+                training at the University of Manchester. From my base in Donegal, I work with
+                organisations, schools and individuals across Ireland, the UK and online.
               </p>
             </div>
 
@@ -77,7 +77,7 @@ export default function AboutGlimpse() {
               style={{ transitionDelay: '400ms' }}
             >
               <span className="text-forest-deep font-medium uppercase tracking-wider text-sm">
-                Read My Story
+                Read More About Orla
               </span>
               <ArrowFlow size={72} className="transform group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" />
             </Link>

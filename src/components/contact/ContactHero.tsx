@@ -53,8 +53,8 @@ export default function ContactHero() {
             } transition-all duration-700`}
             style={{ transitionDelay: '300ms' }}
           >
-            Whether you&apos;re curious about meditation, need guidance on where to start,
-            or have a specific question, I&apos;m here to help.
+            Whether you&apos;re enquiring for yourself, your organisation or your school,
+            I&apos;d be glad to hear from you.
           </p>
 
           {/* Trust Indicator */}

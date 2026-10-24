@@ -7,28 +7,33 @@ import CelticDivider from '@/components/ui/CelticDivider'
 const faqs = [
   {
     id: 1,
-    question: "What is your approach to mindfulness coaching?",
-    answer: "My approach combines traditional meditation techniques with practical applications for modern life. It focuses on three core elements: observing with non-judgmental awareness, cultivating present-moment attention, and connecting your practice to your personal values. This method is designed to make meditation accessible and relevant to your unique circumstances."
+    question: "What is mindfulness?",
+    answer: "Mindfulness means paying attention to the present moment, on purpose and without judgement. Through simple meditation practices—focusing on the breath, the body and everyday activities—we learn to notice thoughts and feelings without being carried away by them. It is a secular, practical skill that anyone can learn."
   },
   {
     id: 2,
-    question: "I've never meditated before. Is this suitable for beginners?",
-    answer: "Absolutely! The Mindfulness Foundation Course is specifically designed to welcome beginners and guide you step by step. One-to-one sessions are also excellent for beginners as they provide personalised guidance tailored to your experience level. No prior knowledge or experience is necessary—just an open mind and willingness to learn."
+    question: "Is this suitable for beginners?",
+    answer: "Yes. All programmes are designed for people with no previous experience of meditation. Each practice is introduced step by step, and you'll be supported throughout."
   },
   {
     id: 3,
-    question: "How often should I attend sessions to see results?",
-    answer: "For one-to-one sessions, most clients begin with weekly sessions for 4-6 weeks to establish a strong foundation, then transition to fortnightly or monthly sessions. The Foundation Course runs weekly for 8 weeks. Consistency is key—regular short practices are more effective than occasional long ones."
+    question: "What does the research say?",
+    answer: "Mindfulness-based approaches have been studied extensively over the past forty years. Evidence suggests they can help reduce stress and support wellbeing, focus and resilience."
   },
   {
     id: 4,
-    question: "Are online sessions as effective as in-person?",
-    answer: "Yes, my approach works wonderfully in both formats. Online sessions offer convenience and accessibility while maintaining the personal connection essential for effective guidance. Many clients actually prefer online sessions as they learn to practice in their everyday environment."
+    question: "Can mindfulness replace therapy or medical treatment?",
+    answer: "No. Mindfulness can be a valuable support, but it is not a substitute for medical or psychological care. If you are going through significant mental health difficulties, we'll talk beforehand to make sure a programme is suitable for you, and I'd encourage you to speak with your GP."
   },
   {
     id: 5,
-    question: "Do you offer gift certificates?",
-    answer: "Yes! Gift certificates are available for both one-to-one sessions and courses. They make thoughtful presents for birthdays, anniversaries, or anyone going through a challenging time. Contact me directly to arrange a gift certificate with a personal message."
+    question: "Are online sessions as effective as in-person?",
+    answer: "Online sessions work very well for mindfulness. Many people find it helpful to practise in their own environment, and online delivery makes it easy for teams in different locations to take part."
+  },
+  {
+    id: 6,
+    question: "How do I arrange a programme for my workplace or school?",
+    answer: "Get in touch with a short outline of your organisation and what you'd like to achieve. I'll arrange a call to discuss your needs and then send a tailored proposal."
   }
 ]
 

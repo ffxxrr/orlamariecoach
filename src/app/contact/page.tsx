@@ -4,8 +4,8 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
 export const metadata = {
-  title: 'Contact | Orla Marie Mindfulness Coach',
-  description: 'Get in touch with Orla Marie for personalised mindfulness guidance, course information, or session bookings. Based in Donegal, Ireland, available worldwide.',
+  title: 'Contact',
+  description: 'Contact Orla Marie about one-to-one, workplace or school mindfulness programmes. Based in Donegal, Ireland, working in person and online.',
 }
 
 export default function ContactPage() {

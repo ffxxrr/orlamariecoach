@@ -5,52 +5,45 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowFlow, SeedBullet } from '@/components/brand/CelticIcons'
 import CelticDivider from '@/components/ui/CelticDivider'
-import { FEATURES } from '@/lib/features'
 
 const services = [
   {
-    title: 'Anam Chara Guidance',
-    subtitle: 'Your Soul Friend',
-    description: 'In a world of disconnected algorithms, I offer the ancient Irish tradition of the Anam Chara—your "Soul Friend." Together we walk the threshold between your daily life and your deeper spirit, releasing what no longer serves you like waters dissolving burdens at a holy well.',
-    price: '€100',
-    priceNote: 'per session',
+    title: 'One-to-One Mindfulness',
+    subtitle: 'For Individuals',
+    description: 'A personal mindfulness programme built around your needs, pace and schedule. Over a series of sessions you\'ll learn core mindfulness meditation practices—breath, body and mindful movement—and practical ways to use them to manage stress and bring more calm and focus to daily life.',
     features: [
-      '60-minute one-to-one session',
-      'Human-guided, not algorithm-driven',
-      'Purification and release practices',
-      'Ongoing support between sessions',
+      'Individual sessions, in person or online',
+      'Programme length tailored to you',
+      'Guided recordings to support home practice',
+      'Suitable for complete beginners',
     ],
     image: '/images/orla/optimized/about/orla-green-door.webp',
-    href: FEATURES.courses ? '/book-session' : '/contact',
-    cta: FEATURES.courses ? 'Book a Session' : 'Get in Touch',
+    href: '/contact',
+    cta: 'Get in Touch',
   },
   {
-    title: 'The Celtic Wheel',
-    subtitle: 'Seasonal Rhythms',
-    description: 'Journey through an 8-week programme aligned with the ancient Irish seasonal wheel. Move through the Dark Half—a time of inward reflection and mending—toward the Bright Half of outward growth and renewal, synchronising your inner life with the rhythms of the natural world.',
-    price: '€250',
-    priceNote: 'per course',
+    title: 'Mindfulness in Schools',
+    subtitle: 'For Education',
+    description: 'Age-appropriate mindfulness for primary and secondary pupils, alongside wellbeing programmes for teachers and school staff. Short, practical exercises that fit into the school day and help pupils, and the adults who support them, build attention, calm and emotional awareness.',
     features: [
-      '8 weekly group sessions (90 minutes)',
-      'Dark Half: forgiveness, inner child work',
-      'Bright Half: intentionality, manifestation',
-      'Private community of fellow travellers',
+      'Classroom sessions for pupils',
+      'Wellbeing workshops and courses for staff',
+      'Simple practices teachers can use in class',
+      'Delivered in school or online',
     ],
     image: '/images/orla/optimized/about/orla-celtic-wheel-v2.webp',
-    href: FEATURES.courses ? '/courses' : '/contact',
-    cta: FEATURES.courses ? 'Explore Courses' : 'Learn More',
+    href: '/contact',
+    cta: 'Get in Touch',
   },
   {
-    title: 'Organisational Resilience',
-    subtitle: 'Workplace Grounding',
-    description: 'Like the ancient cashels that sheltered communities for millennia, build structural resilience within your organisation. Customised programmes that help your team find the stillness at the centre of the storm.',
-    price: 'Custom',
-    priceNote: 'pricing',
+    title: 'Workplace Mindfulness',
+    subtitle: 'For Organisations',
+    description: 'Evidence-based mindfulness programmes that support employee wellbeing, focus and resilience. From introductory workshops to multi-week courses for teams and leaders, each programme is tailored to your organisation and can sit within your wider wellbeing strategy.',
     features: [
       'Tailored to your organisation',
-      'Grounding practices for busy teams',
-      'Progress measurement and reporting',
-      'Flexible delivery (in-person/online)',
+      'Workshops, courses and ongoing sessions',
+      'For teams, managers and leaders',
+      'Delivered on-site or online',
     ],
     image: '/images/orla/optimized/service/office-plants.webp',
     href: '/contact',
@@ -62,8 +55,6 @@ interface Service {
   title: string
   subtitle: string
   description: string
-  price: string
-  priceNote: string
   features: string[]
   image: string
   imagePosition?: string
@@ -115,12 +106,6 @@ function ServicePath({ service, reverse, index, isLast }: ServicePathProps) {
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-
-                {/* Price Badge */}
-                <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full">
-                  <span className="font-crimson text-xl text-forest-deep font-medium">{service.price}</span>
-                  <span className="text-sage-calm text-sm ml-1">{service.priceNote}</span>
-                </div>
               </div>
               {/* Decorative frame offset - alternates direction */}
               <div className={`absolute inset-0 border-2 border-living-green/20 rounded-2xl -z-10 ${

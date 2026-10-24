@@ -42,7 +42,7 @@ export default function Footer() {
 
         {/* Personal closing message */}
         <p className="font-crimson italic text-lg text-earth-warmth/90 mb-6">
-          Wishing you stillness on your journey.
+          Mindfulness meditation for workplaces, schools and individuals.
         </p>
 
         {/* Email */}
