@@ -1,6 +1,6 @@
 services:
   orlamariecoach-app:
-    image: registry.nexus3-slingshot.digitalsamba.com/orlamariecoach:latest
+    image: ghcr.io/ffxxrr/orlamariecoach:latest
     container_name: orlamariecoach-app
     restart: unless-stopped
     env_file:

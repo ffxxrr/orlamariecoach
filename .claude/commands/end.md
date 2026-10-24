@@ -6,8 +6,7 @@ Wrap up the current development session for OrlaMarieCoach.
 
 1. **Summarize this session** - List what was accomplished (be specific about files changed, features added, bugs fixed).
 
-2. **Update BACKLOG.md** in Obsidian at:
-   `/Users/conalmullan/Documents/Obsidian Vault/01-Projects/Personal/OrlaMarieCoach-Website-V2/BACKLOG.md`
+2. **Update `docs/BACKLOG.md`**
 
    Updates to make:
    - Move completed items from "In Progress" to "Done (This Sprint)"
@@ -20,14 +19,14 @@ Wrap up the current development session for OrlaMarieCoach.
 4. **Next session prep** - Suggest what should be tackled next based on:
    - Any unfinished work from this session
    - Priority items in the backlog
-   - Any new feedback from Orla
+   - Any new feedback from the site widget
 
 5. **Final output** - Provide a one-liner summary I could paste into a commit message or note.
 
 6. **Commit & Push** - After user approval:
    - Stage all changes with `git add -A`
    - Commit with descriptive message
-   - Push to origin main
-   - Confirm deployment to Vercel
+   - Push to origin main (staging only; going live is `/publish`)
+   - Share the staging link
 
 Do NOT commit or push without my explicit approval.

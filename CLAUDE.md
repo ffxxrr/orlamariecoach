@@ -2,24 +2,52 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
+## Who You're Working With
 
-OrlaMarieCoach is a professional Next.js 14 website for Orla Marie, an Irish meditation and mindfulness coach from Donegal with 30 years of practice and 500+ clients helped. The site targets both UK/Ireland and the US Irish diaspora market (32+ million Irish-Americans).
+**Orla Marie Mullan** owns this website and makes her own changes to it with Claude. She is an Irish meditation and mindfulness coach from Donegal with 30 years of practice, not a developer.
 
-**Vision:** Create a beautiful, engaging website that honors Irish heritage and enables sustainable revenue through courses, 1:1 sessions, and packages.
+- Talk in plain language. Describe changes by what she'll see on the page, not by file names or code.
+- Don't show code or diffs unless she asks. Summarise what changed instead.
+- Before changing wording she wrote, or anything about prices, payments or bookings, read back what you're about to change and confirm.
+- She checks her changes on the staging site, often on her phone, before they go live. Always give her the link to look at.
+- If something technical goes wrong that you can't fix (the server, DNS, the domain, payments), stop and tell her to ask Conal. Don't guess at infrastructure.
 
-**Live URL:** https://orlamariecoach.com
-**Staging URL:** https://orlamariecoach.vercel.app
-**GitHub:** https://github.com/ffxxrr/orlamariecoach
+Conal (her husband) built the site and handles the server. He may also use this repo; with him you can be technical.
+
+## How Changes Go Live
+
+There are three places the site can be seen:
+
+| Where | URL | Updates when |
+|-------|-----|--------------|
+| Local preview | http://localhost:3004 | Instantly, while working (Claude Desktop preview pane, `.claude/launch.json`) |
+| Staging | https://orlamariecoach.vercel.app | ~2 minutes after a push to `main` (Vercel) |
+| **Live site** | https://orlamariecoach.com | ~10 minutes after a `v*` tag is pushed |
+
+The routine (also available as `/preview` and `/publish`):
+
+1. Make the change. Run `npm run type-check` and `npm run build` and fix any errors.
+2. Commit to `main` and push. Wait for staging to update, then give Orla the staging link for the page that changed.
+3. Only when Orla says it looks right and asks for it to go live: tag and push (`vYYYY.MM.DD`, add `-2`, `-3` for more releases the same day). See `/publish`.
+
+Never push a tag without Orla's say-so. Pushing to `main` only affects staging, never the live site.
+
+### Production details (for Conal)
+
+- The tag triggers `.github/workflows/deploy-production.yml`, which builds the image and pushes it to `ghcr.io/ffxxrr/orlamariecoach` using the built-in `GITHUB_TOKEN`.
+- The production server isn't reachable from GitHub. It runs `deployment/autodeploy.sh` from cron every 5 minutes, and that script pulls `:latest` and recreates the container when the image changed (log: `autodeploy.log` next to the compose file).
+- Server env lives in `app.env` on the server (not in the repo). It needs `SESSION_SECRET`, `ADMIN_EMAIL` and `ADMIN_PASSWORD`, or admin login fails.
+- To roll back: re-tag the previous good commit with a new `v*` tag and push it.
+- Claude has no server access from Orla's machine, and that's intentional.
 
 ## Technology Stack
 
-- **Framework**: Next.js 14 with App Router
+- **Framework**: Next.js 16 with App Router, React 19
 - **Language**: TypeScript (strict mode enabled)
-- **Styling**: Tailwind CSS with earthy color palette
+- **Styling**: Tailwind CSS 3 with earthy color palette
 - **Database**: PostgreSQL with Prisma ORM
-- **Deployment**: Vercel (auto-deploys from main)
-- **Analytics**: Custom privacy-first system (partial)
+- **Hosting**: Docker on our own server (live), Vercel (staging)
+- **Analytics**: Custom privacy-first system
 
 ## Commands
 
@@ -31,17 +59,15 @@ npm run type-check   # TypeScript checking - run before commits
 npm run lint         # Run ESLint
 ```
 
-### Database
+### Database (local, optional)
 ```bash
+docker compose up -d # Start local Postgres
 npm run db:setup     # Generate Prisma client and push schema
 npm run db:studio    # Open Prisma Studio GUI
 npm run db:reset     # Reset database (WARNING: destroys data)
 ```
 
-### Deployment
-```bash
-git push origin main    # Auto-deploys to Vercel
-```
+Public pages render without a database. Only the admin dashboard, feedback and analytics need it.
 
 ## Architecture
 
@@ -60,24 +86,29 @@ git push origin main    # Auto-deploys to Vercel
   /layout/          # Navbar, Footer
   /brand/           # Logo, Celtic elements
   /ui/              # Shared components
-  /feedback/        # Stakeholder feedback widget
+  /feedback/        # Feedback widget
 /src/lib/           # Utilities
   /analytics/       # Tracking system
+  /auth/            # Signed admin sessions
   db.ts             # Prisma singleton
 /content/copy/      # Written content
-/public/            # Static assets
-/.claude/commands/  # Slash commands for session management
+/public/            # Static assets (images in /public/images, video in /public/media)
+/docs/BACKLOG.md    # Living task list
+/deployment/        # Production compose file + autodeploy script
+/.claude/commands/  # Slash commands
 ```
 
 ### Key Components
 - `CelticTriskelion.tsx` - Celtic branding SVG
+- `CelticDivider.tsx` / `CelticIcons.tsx` - Section dividers and icon set
 - `AudioPlayer.tsx` - Meditation sample player
-- `FeedbackWidget.tsx` - Stakeholder feedback collection
-- `BotanicalAccents.tsx` - Nature-themed decorations
+- `FeedbackWidget.tsx` - Feedback collection
 
 ## Design System
 
-### Color Palette (October 2025 - Orla Approved)
+Use the `orla-marie-design` skill for any visual work.
+
+### Color Palette (Orla Approved)
 ```javascript
 colors: {
   'forest-deep': '#56140F',      // Deep Burgundy - CTAs
@@ -93,15 +124,21 @@ colors: {
 - **Headings**: Crimson Pro (elegant serif)
 - **Body**: Inter (clean sans-serif)
 
-### Design Reference
-Orla referenced [mindfulnesspatagonia.com](https://mindfulnesspatagonia.com/) for inspiration - warm earthy tones, generous whitespace, nature photography.
+### Design Direction
+- No emojis ("they look childish")
+- Earthy browns and creams, not bright greens or primary colors
+- Classic and sophisticated; reference [mindfulnesspatagonia.com](https://mindfulnesspatagonia.com/): warm earthy tones, generous whitespace, nature photography
+- Irish spiritual narrative: Turas, Anam Chara, thin places, the Celtic Wheel
+
+### Images
+New photos should be converted to `.webp` and resized before adding (`sips`/`cwebp` are available on macOS via Homebrew). Keep heroes under ~300KB and videos under ~2MB.
 
 ## Business Context
 
 ### Pricing (Confirmed)
 - Individual Session: €100/hour
 - 6-Session Package: €400 (33% savings)
-- Online Courses: €250
+- Online Courses: €250 (courses page currently hidden on live via `NEXT_PUBLIC_FEATURES_COURSES=false`)
 
 ### Payment Methods
 - Revolut, PayPal (current)
@@ -116,65 +153,26 @@ Orla referenced [mindfulnesspatagonia.com](https://mindfulnesspatagonia.com/) fo
 
 1. **Port**: Dev server runs on port 3004
 2. **Environment**: Copy `.env.example` to `.env.local`
-3. **Admin Login**: `admin@orlamariecoach.com` / `admin123!` (dev only)
-4. **Database**: `docker compose up -d` then `npm run db:setup`
-5. **Type Check**: Always run before commits
-
-## Current Status
-
-**Phase:** Design iteration with stakeholder
-
-### Completed
-- Core website structure (6 pages)
-- New earthy color palette
-- Emoji removal (per Orla's feedback)
-- Feedback widget system
-- Admin dashboard
-- Basic analytics tracking
-
-### In Progress
-- Visual polish (photography, animations)
-- Payment integration (Stripe)
-- Course platform details
-- Final content placement
-
-### Pending
-- Professional photography from Orla
-- Final testimonials collection
-- SEO optimization
-- Launch preparation
+3. **Admin Login (dev only)**: `admin@orlamariecoach.com` / `admin123!`. Production uses its own credentials from `app.env`.
+4. **Type Check**: Always run before commits
+5. **This repo is public.** Never commit passwords, keys, server addresses or private notes.
 
 ## Project Management
 
-All project planning and session tracking lives in Obsidian (not in this repo).
-
-**Obsidian Vault:** `/Users/conalmullan/Documents/Obsidian Vault/01-Projects/Personal/OrlaMarieCoach-Website-V2/`
-
-Key files:
-- `BACKLOG.md` - Living task list, updated each session
-- `README.md` - Project overview and navigation
-- `01-09` docs - Vision, strategy, roadmap, etc.
+`docs/BACKLOG.md` is the living task list. Read it at the start of a session (`/start`) and update it at the end (`/end`). Keep the Session Log table current.
 
 ### Slash Commands
-
-Use these to manage dev sessions:
-- `/start` - Load context from Obsidian, check feedback, show git status
-- `/end` - Summarize session, update BACKLOG.md, prep for next session
-- `/feedback` - Check Orla's feedback from Vercel API
+- `/start` - Load the backlog, check feedback, show what changed recently
+- `/preview` - Push current changes to staging and give the link to check
+- `/publish` - Put what's on staging onto the live site (only when Orla asks)
+- `/end` - Summarise the session and update the backlog
+- `/feedback` - Check feedback submitted through the site widget
 - `/status` - Quick project health check
 
-## Stakeholder Feedback
+## Site Feedback
 
-**Client:** Orla Marie Mullan (ommullan@gmail.com)
-**Method:** Feedback widget on Vercel deployment
+Visitors (and Orla) can leave feedback through the widget on the staging site.
 
-### Check for New Feedback
 ```bash
 curl -s https://orlamariecoach.vercel.app/api/feedback | jq '.feedback | length'
 ```
-
-### Recent Design Direction
-- Remove all emojis ("they look childish")
-- Earthy browns/creams (not bright greens)
-- Reference: mindfulnesspatagonia.com aesthetic
-- Classic, sophisticated, not primary colors

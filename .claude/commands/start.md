@@ -4,11 +4,9 @@ Begin a new development session for OrlaMarieCoach.
 
 ## Tasks
 
-1. **Read Obsidian context** - Load project state from:
-   - `/Users/conalmullan/Documents/Obsidian Vault/01-Projects/Personal/OrlaMarieCoach-Website-V2/BACKLOG.md`
-   - `/Users/conalmullan/Documents/Obsidian Vault/01-Projects/Personal/OrlaMarieCoach-Website-V2/README.md`
+1. **Read project context** - Load project state from `docs/BACKLOG.md`
 
-2. **Check for new feedback** from Orla via the API:
+2. **Check for new feedback** via the API:
    ```
    curl -s https://orlamariecoach.vercel.app/api/feedback
    ```
@@ -19,7 +17,7 @@ Begin a new development session for OrlaMarieCoach.
 4. **Summarize** - Give me a brief summary of:
    - What was done last session (from Session Log in BACKLOG.md)
    - What's in "Next Session" or "In Progress"
-   - Any blockers or items waiting on Orla
+   - Any blockers or items waiting on Orla or Conal
    - Any new feedback requiring attention
 
 5. **Ask** what I want to work on today.
