@@ -2,6 +2,10 @@
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
+  // Blog posts are read from /content/blog at request time, so ship them with the server
+  outputFileTracingIncludes: {
+    '/**': ['./content/blog/**/*'],
+  },
   images: {
     domains: [],
   },

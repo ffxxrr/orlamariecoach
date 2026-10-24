@@ -1,4 +1,7 @@
 import type { MetadataRoute } from 'next'
+import { getPosts } from '@/lib/blog'
+
+export const revalidate = 3600
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://orlamariecoach.vercel.app'
 
@@ -25,6 +28,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    ...getPosts()
+      .filter((post) => !post.isScheduled)
+      .map((post) => ({
+        url: `${BASE_URL}/blog/${post.slug}`,
+        lastModified: new Date(`${post.date}T12:00:00Z`),
+        changeFrequency: 'yearly' as const,
+        priority: 0.6,
+      })),
     {
       url: `${BASE_URL}/contact`,
       lastModified: now,

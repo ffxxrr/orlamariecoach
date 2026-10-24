@@ -228,4 +228,37 @@
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
+  /* Blog post text (rendered from markdown) */
+  .blog-body {
+    @apply text-lg leading-[1.8] text-deep-text;
+  }
+  .blog-body > * + * {
+    @apply mt-6;
+  }
+  .blog-body h2 {
+    @apply font-crimson text-3xl text-forest-deep mt-12;
+  }
+  .blog-body h3 {
+    @apply font-crimson text-2xl text-deep-text mt-10;
+  }
+  .blog-body a {
+    @apply text-forest-deep underline underline-offset-4 decoration-living-green hover:decoration-forest-deep;
+  }
+  .blog-body ul,
+  .blog-body ol {
+    @apply pl-6 space-y-2;
+  }
+  .blog-body ul {
+    @apply list-disc marker:text-living-green;
+  }
+  .blog-body ol {
+    @apply list-decimal marker:text-sage-calm;
+  }
+  .blog-body blockquote {
+    @apply border-l-2 border-living-green pl-6 font-crimson text-2xl italic text-sage-calm;
+  }
+  .blog-body strong {
+    @apply font-semibold;
+  }
 }
