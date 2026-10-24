@@ -11,6 +11,7 @@
     "db:studio": "node scripts/check-env.js && prisma studio",
     "db:reset": "node scripts/check-env.js && prisma db push --force-reset",
     "type-check": "tsc --noEmit",
+    "lint:blog": "node scripts/lint-blog.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },

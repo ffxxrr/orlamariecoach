@@ -159,6 +159,10 @@ Orla works on **Windows**. Claude Code runs shell commands in Git Bash there, so
 4. **Type Check**: Always run before commits
 5. **This repo is public.** Never commit passwords, keys, server addresses or private notes.
 
+## Weekly Blog
+
+Posts are markdown files in `content/blog`, one per Tuesday, drafted by Claude and approved by Orla. Follow `content/blog/_GUIDE.md` for every post, and run `npm run lint:blog` until each draft reads "Clean" before showing it to her. Her news and favourites for drafts are in `private/blog-notes.md` (not in the repo).
+
 ## Project Management
 
 `docs/BACKLOG.md` is the living task list. Read it at the start of a session (`/start`) and update it at the end (`/end`). Keep the Session Log table current.
