@@ -56,6 +56,10 @@ not swapping one word for another. Repeat until the post reads "Clean". If a
 flagged word is genuinely right, it can be removed from the list at the top of
 `scripts/lint-blog.js`.
 
+Once it's on staging, email it to Orla for approval with
+`node scripts/email-draft.js content/blog/<post>.md` (needs the SMTP settings
+in `.env.local` on her computer; exit code 3 means they're missing).
+
 ## File format
 
 `content/blog/YYYY-MM-DD-short-slug.md` with:
