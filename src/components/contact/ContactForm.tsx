@@ -19,6 +19,9 @@ export default function ContactForm() {
     newsletter: false,
     privacy: false
   })
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
+  const [honeypot, setHoneypot] = useState('')
 
   const handleFormStart = () => {
     if (!hasStartedForm.current) {
@@ -37,8 +40,26 @@ export default function ContactForm() {
     setFormData(prev => ({ ...prev, [name]: checked }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setStatus('sending')
+    setErrorMessage('')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, website: honeypot })
+      })
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}))
+        throw new Error(data.error || 'Your message could not be sent.')
+      }
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'Your message could not be sent.')
+      setStatus('error')
+      return
+    }
 
     // Track form submission
     trackContactInteraction('form_submitted', {
@@ -51,8 +72,7 @@ export default function ContactForm() {
       inquiryType: formData.inquiryType
     })
 
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! I will respond within 24 hours.')
+    setStatus('sent')
     hasStartedForm.current = false
     setFormData({
       firstName: '',
@@ -242,12 +262,42 @@ export default function ContactForm() {
             </label>
           </div>
 
+          {/* Honeypot for spam bots; hidden from people and screen readers */}
+          <input
+            type="text"
+            name="website"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="hidden"
+          />
+
           <button
             type="submit"
-            className="w-full mt-8 bg-forest-deep text-white font-medium py-4 px-6 rounded-full hover:bg-sage-calm transition-all duration-300"
+            disabled={status === 'sending'}
+            className="w-full mt-8 bg-forest-deep text-white font-medium py-4 px-6 rounded-full hover:bg-sage-calm transition-all duration-300 disabled:opacity-60 disabled:cursor-wait"
           >
-            Send Message
+            {status === 'sending' ? 'Sending...' : 'Send Message'}
           </button>
+
+          <div aria-live="polite">
+            {status === 'sent' && (
+              <p className="mt-6 text-center text-forest-deep">
+                Thank you for your message. I will respond within 24 hours.
+              </p>
+            )}
+            {status === 'error' && (
+              <p className="mt-6 text-center text-forest-deep">
+                {errorMessage} Please email me directly at{' '}
+                <a href="mailto:admin@orlamariecoach.com" className="underline">
+                  admin@orlamariecoach.com
+                </a>
+                .
+              </p>
+            )}
+          </div>
         </form>
 
         <p className="text-center mt-8 text-sage-calm">
