@@ -22,6 +22,10 @@ the social posting tool shares it to Facebook, Instagram and LinkedIn.
 
 - Short and snappy: 250 to 400 words. Short paragraphs, plain words.
 - Warm, Irish, first person ("I"). Irish phrasing is welcome ("mind yourself").
+- Grassroots and down to earth, the way Orla talks: Derry and Donegal sayings,
+  honest everyday words ("it's been pretty shitty", "overwhelming"), not
+  polished wellness language. Use her own sayings from the voice notes in
+  `private/blog-notes.md`; don't put on a stage-Irish accent or invent slang.
 - Trauma-informed: invitational, never "you must"; offer an eyes-open option.
 - No emojis, no hashtags in the post, no hard selling. End with
   "I'll be back next Tuesday" and sign off *Orla Marie*.
