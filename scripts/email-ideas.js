@@ -5,7 +5,7 @@
 //   node scripts/email-ideas.js private/blog-ideas/<date>.md "<subject>"
 //   node scripts/email-ideas.js private/blog-ideas/<date>.md "<subject>" --preview out.html
 //
-// Exit codes: 0 sent, 1 error, 3 email isn't set up on this computer (ask Conal).
+// Exit codes: 0 sent, 1 error, 3 email isn't set up on this computer (run npm run setup:email).
 
 const fs = require('fs');
 const { marked } = require('marked');

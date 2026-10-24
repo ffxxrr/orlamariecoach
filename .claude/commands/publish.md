@@ -23,6 +23,12 @@ Only do this when Orla has asked for it to go live.
 
 4. **Watch the build** - `gh run watch $(gh run list --workflow deploy-production.yml --limit 1 --json databaseId -q '.[0].databaseId') --exit-status`. If it fails, show the error and suggest asking Conal.
 
-5. **Tell Orla** - The build is done and the live site picks it up within about 5 minutes. Give her https://orlamariecoach.com and suggest a hard refresh (or checking on her phone) if she still sees the old version.
+5. **Check the live site** - The server picks up the new version within about 5 minutes. Then check the main pages answer (no server access needed):
+   ```
+   for p in / /blog /blog/feed.xml /contact; do echo "$p $(curl -s -o /dev/null -w '%{http_code}' https://orlamariecoach.com$p)"; done
+   ```
+   All should say 200. Check again a few minutes later if not, since the old version may still be running. If any page is still failing after 15 minutes, tell Orla the site needs Conal (don't try to fix the server). Blog posts dated in the future don't show on the live blog until 7am on their date; that's expected.
 
-6. **Backlog** - Note the release in the Session Log in `docs/BACKLOG.md`.
+6. **Tell Orla** - The build is done and live. Give her https://orlamariecoach.com and suggest a hard refresh (or checking on her phone) if she still sees the old version.
+
+7. **Backlog** - Note the release in the Session Log in `docs/BACKLOG.md`.

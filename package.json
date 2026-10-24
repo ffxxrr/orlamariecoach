@@ -12,6 +12,7 @@
     "db:reset": "node scripts/check-env.js && prisma db push --force-reset",
     "type-check": "tsc --noEmit",
     "lint:blog": "node scripts/lint-blog.js",
+    "setup:email": "node scripts/setup-email.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },

@@ -6,7 +6,7 @@
 //   node scripts/email-draft.js content/blog/<post>.md --preview out.html   # write the email to a file, don't send
 //
 // Sends to BLOG_DRAFT_EMAIL, else CONTACT_TO_EMAIL, else SMTP_USER.
-// Exit codes: 0 sent, 1 error, 3 email isn't set up on this computer (ask Conal).
+// Exit codes: 0 sent, 1 error, 3 email isn't set up on this computer (run npm run setup:email).
 
 const fs = require('fs');
 const path = require('path');

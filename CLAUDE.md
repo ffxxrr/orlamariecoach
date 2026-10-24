@@ -165,6 +165,9 @@ Posts are markdown files in `content/blog`, one per Tuesday, drafted by Claude a
 
 Every Monday a routine emails her four ideas (`private/blog-ideas/<Tuesday's date>.md`) for the Tuesday after next. When she picks one ("blog idea 2"), in any session, record it in `private/blog-notes.md` under "Chosen ideas" with that Tuesday's date and any news she adds, then confirm in one line. Thursday's draft builds on her pick.
 
+- Drafts and ideas are emailed to Orla with `scripts/email-draft.js` and `scripts/email-ideas.js`. If email isn't set up on her computer (exit code 3), run `npm run setup:email` and have her paste the password into the file it opens. Never ask for the password in chat.
+- New posts are shared to Facebook, Instagram and LinkedIn by a Make.com scenario watching `/blog/feed.xml`. To set it up or fix it, walk Orla through `docs/SOCIAL-AUTOPOST.md`.
+
 ## Project Management
 
 `docs/BACKLOG.md` is the living task list. Read it at the start of a session (`/start`) and update it at the end (`/end`). Keep the Session Log table current.

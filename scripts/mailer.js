@@ -31,6 +31,6 @@ async function sendToOrla({ subject, html, text }) {
 }
 
 const NOT_CONFIGURED_MESSAGE =
-  'Email is not set up on this computer: SMTP_HOST, SMTP_USER and SMTP_PASSWORD are missing from .env.local. Ask Conal.';
+  'Email is not set up on this computer: SMTP_HOST, SMTP_USER and SMTP_PASSWORD are missing from .env.local. Run: npm run setup:email';
 
 module.exports = { sendToOrla, NOT_CONFIGURED, NOT_CONFIGURED_MESSAGE };

@@ -38,6 +38,17 @@ jobs:
             -t ${{ env.IMAGE }}:latest \
             .
 
+      - name: Smoke test the image
+        run: |
+          docker run -d --name smoke -p 3000:3000 -e SESSION_SECRET=smoke-test-secret-only ${{ env.IMAGE }}:latest
+          for i in $(seq 1 30); do curl -sf -o /dev/null http://localhost:3000/ && break; sleep 2; done
+          docker exec smoke sh -c 'ls content/blog/*.md' | grep -v _GUIDE || { echo "No blog posts in the image"; exit 1; }
+          for path in / /blog /blog/feed.xml /contact; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:3000$path")
+            echo "$path $code"
+            [ "$code" = 200 ] || { docker logs smoke; exit 1; }
+          done
+
       - name: Push to GHCR
         run: |
           docker push ${{ env.IMAGE }}:${{ github.ref_name }}

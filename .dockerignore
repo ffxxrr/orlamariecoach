@@ -9,5 +9,6 @@ deployment/
 .claude/
 *.md
 !README.md
+!content/blog/*.md
 .vscode
 .idea

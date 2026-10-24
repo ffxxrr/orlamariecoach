@@ -60,6 +60,11 @@ Once it's on staging, email it to Orla for approval with
 `node scripts/email-draft.js content/blog/<post>.md` (needs the SMTP settings
 in `.env.local` on her computer; exit code 3 means they're missing).
 
+If email isn't set up, run `npm run setup:email`. It adds the settings and opens
+`.env.local` in Notepad for Orla to paste the mailbox password herself. Never
+ask her to type the password into the chat, and never print `.env.local`. When
+she says she's saved it, run `npm run setup:email -- --check`.
+
 ## File format
 
 `content/blog/YYYY-MM-DD-short-slug.md` with:
