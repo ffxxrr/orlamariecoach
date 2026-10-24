@@ -10,19 +10,10 @@
 
 const fs = require('fs');
 const path = require('path');
-const nodemailer = require('nodemailer');
 const { marked } = require('marked');
+const { sendToOrla, NOT_CONFIGURED, NOT_CONFIGURED_MESSAGE } = require('./mailer');
 
 const STAGING_URL = 'https://orlamariecoach.vercel.app';
-
-function loadEnvFile(file) {
-  if (!fs.existsSync(file)) return;
-  for (const line of fs.readFileSync(file, 'utf8').split(/\r?\n/)) {
-    const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/);
-    if (!m || process.env[m[1]] !== undefined) continue;
-    process.env[m[1]] = m[2].replace(/^["']|["']$/g, '');
-  }
-}
 
 function parsePost(file) {
   const raw = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
@@ -86,18 +77,11 @@ async function main(argv) {
     return 0;
   }
 
-  loadEnvFile(path.join(__dirname, '..', '.env.local'));
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD, BLOG_DRAFT_EMAIL, CONTACT_TO_EMAIL } = process.env;
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASSWORD) {
-    console.error('Email is not set up on this computer: SMTP_HOST, SMTP_USER and SMTP_PASSWORD are missing from .env.local. Ask Conal.');
-    return 3;
+  const to = await sendToOrla(email);
+  if (!to) {
+    console.error(NOT_CONFIGURED_MESSAGE);
+    return NOT_CONFIGURED;
   }
-
-  const port = Number(SMTP_PORT || 465);
-  const to = BLOG_DRAFT_EMAIL || CONTACT_TO_EMAIL || SMTP_USER;
-  await nodemailer
-    .createTransport({ host: SMTP_HOST, port, secure: port === 465, auth: { user: SMTP_USER, pass: SMTP_PASSWORD } })
-    .sendMail({ from: `"Orla Marie Coach blog" <${SMTP_USER}>`, to, ...email });
   console.log(`Sent "${email.subject}" to ${to}`);
   return 0;
 }
