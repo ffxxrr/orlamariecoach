@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { isEmailConfigured, sendEmail } from '@/lib/email'
 
+// Keep in sync with the enquiry options in ContactForm.tsx
 const INQUIRY_LABELS: Record<string, string> = {
-  'getting-started': 'Getting started with meditation',
-  'course-info': 'Course information',
-  'session-info': 'Session information',
-  corporate: 'Corporate programmes',
-  other: 'Other',
+  'one-to-one': 'One-to-one mindfulness',
+  workplace: 'Workplace programme',
+  schools: 'Schools programme',
+  other: 'General question',
 }
 
 const EXPERIENCE_LABELS: Record<string, string> = {
