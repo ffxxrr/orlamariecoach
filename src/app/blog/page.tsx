@@ -13,7 +13,7 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: 'Blog',
   description:
-    'A short weekly note from Donegal every Tuesday: a simple mindfulness tool to try, what Orla Marie is up to, and the books, films and Irish seasons that inspire her practice.',
+    'Short notes from Donegal: a simple mindfulness tool to try, what Orla Marie is up to, and the books, films and Irish seasons that inspire her practice.',
   alternates: {
     types: { 'application/rss+xml': '/blog/feed.xml' },
   },
@@ -30,13 +30,13 @@ export default function BlogPage() {
           <Container className="max-w-4xl">
             <header className="text-center mb-16 md:mb-20">
               <p className="text-xs uppercase tracking-[0.25em] text-sage-calm mb-4">
-                Every Tuesday
+                The Blog
               </p>
               <h1 className="font-crimson text-4xl md:text-6xl text-forest-deep mb-6">
                 Notes from Donegal
               </h1>
               <p className="text-lg text-sage-calm max-w-xl mx-auto leading-relaxed">
-                A short weekly read: one simple tool to try, what I&apos;m up to, and the
+                Short reads: one simple tool to try, what I&apos;m up to, and the
                 books, films and seasons that shape my practice.
               </p>
             </header>

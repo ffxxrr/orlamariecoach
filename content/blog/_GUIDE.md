@@ -28,7 +28,8 @@ the social posting tool shares it to Facebook, Instagram and LinkedIn.
   `private/blog-notes.md`; don't put on a stage-Irish accent or invent slang.
 - Trauma-informed: invitational, never "you must"; offer an eyes-open option.
 - No emojis, no hashtags in the post, no hard selling. End with
-  "I'll be back next Tuesday" and sign off *Orla Marie*.
+  "Mind yourself." (or similar) and sign off *Orla Marie*. Never promise
+  the next post ("back next Tuesday", "see you next week").
 - Irish/British spelling (colour, favourite, practise as a verb).
 
 ## Avoid the AI tells

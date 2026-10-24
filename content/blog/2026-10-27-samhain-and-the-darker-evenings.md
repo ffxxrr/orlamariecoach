@@ -32,6 +32,6 @@ That's it. Five minutes, and the dark becomes something you've welcomed rather t
 
 If this season tends to weigh on you, please be gentle with yourself. Go at your own pace, and if sitting with your thoughts feels like too much, keep your eyes open and your feet on the floor.
 
-I'll be back next Tuesday. Until then, mind yourself.
+Mind yourself.
 
 *Orla Marie*

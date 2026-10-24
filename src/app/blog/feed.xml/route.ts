@@ -42,7 +42,7 @@ export function GET() {
     <title>Orla Marie Coach: Notes from Donegal</title>
     <link>${SITE_URL}/blog</link>
     <atom:link href="${SITE_URL}/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <description>A short weekly note on mindfulness from Donegal, every Tuesday.</description>
+    <description>Short notes on mindfulness from Donegal.</description>
     <language>en-ie</language>
 ${items}
   </channel>
