@@ -1,6 +1,6 @@
 # Project Backlog
 
-**Last Updated:** June 11, 2026 (Session 30)
+**Last Updated:** October 24, 2026 (Session 31)
 **Current Phase:** LIVE - Post-Launch Polish
 
 ---
@@ -254,6 +254,17 @@ This is the living backlog. Update it each session.
 ---
 
 ## Done (This Sprint)
+
+### October 24, 2026 - Site Repositioning (Session 31, Orla's first self-service session)
+- [x] Set up Orla's Windows PC (Git, Node, gh, clone to Documents\orlamariecoach)
+- [x] Rewrote all public copy: mindfulness meditation programmes for individuals, workplaces and schools; professional, secular, evidence-based, trauma-informed tone (reference: Mindfulness Now / UK College of Mindfulness Meditation)
+- [x] Removed Anam Chara, thin places, Turas, Celtic Wheel, MBSR, all pricing (incl. JSON-LD), placeholder testimonials and "500+" claims
+- [x] Orla described as "Accredited Mindfulness Teacher, trained with Mindfulness Now" (not BAMBA-registered)
+- [x] /courses → /services and /book-session → /contact (permanent redirects); nav "Services" renamed "Programmes"
+- [x] New classroom photo on Programmes > Mindfulness in Schools (Orla confirmed written school/parent consent)
+- [x] Released as v2026.10.24-3
+- Draft copy and review notes: `docs/website-text-draft.md`
+- Note: commit 4775f22 was pushed with an empty message (copy rewrite) — harmless
 
 ### June 11, 2026 - P0 SEO Complete (Session 30)
 - [x] **Google Search Console verified** — domain property via DNS TXT record at Namecheap, sitemap.xml submitted
@@ -552,7 +563,7 @@ This is the living backlog. Update it each session.
 | Item | Waiting For |
 |------|-------------|
 | ~~Professional photos~~ | ✅ 11 photos received and optimized! |
-| Testimonials | Orla to collect from clients |
+| Testimonials | Orla to collect from clients (placeholders removed Oct 2026; add only real, permissioned quotes) |
 | Final copy approval | Orla review |
 | ~~Audio meditation file~~ | ✅ MP3 converted and deployed |
 | **OM Method section redesign** | Orla input - removed from homepage, needs reimagining with her vision |
@@ -575,6 +586,7 @@ This is the living backlog. Update it each session.
 
 | Date | Focus | Outcome |
 |------|-------|---------|
+| 2026-10-24 | **Site Repositioning (Session 31)** | Orla's PC set up. Full copy rewrite for workplaces/schools/one-to-one, trauma-informed, no pricing, no Anam Chara. Old courses/booking pages redirected. Classroom photo added. Live as v2026.10.24-3. Next: real testimonials, MTAI directory listing, workplace/schools SEO pages. |
 | 2026-06-11 | **P0 SEO Complete (Session 30)** | Search Console verified + sitemap submitted. Orla created Business Profile. Inner pages confirmed already indexed. AI crawlers unblocked + deployed to production. Next: MTAI directory, local keyword pages, check Search Console data in ~1 week. |
 | 2026-06-11 | **Admin Security + Review (Session 29)** | Fixed & deployed all critical admin security holes (auth gate, signed sessions, no default password, login lockout). Reviewed visitor volume (no real traffic yet) + SEO. Built post-launch roadmap: analytics accuracy fixes, SEO/discoverability, growth & resilience. |
 | 2026-02-12 | **PRODUCTION LAUNCH (Session 28)** | Site live at orlamariecoach.com! Feature flags for courses, Docker deployment to apps3, admin security hardened, SEO finalized, 3 analytics bugs fixed. 8 commits. |
