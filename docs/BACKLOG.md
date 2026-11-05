@@ -1,6 +1,6 @@
 # Project Backlog
 
-**Last Updated:** October 24, 2026 (Session 31)
+**Last Updated:** November 5, 2026 (Session 32)
 **Current Phase:** LIVE - Post-Launch Polish
 
 ---
@@ -593,6 +593,7 @@ This is the living backlog. Update it each session.
 
 | Date | Focus | Outcome |
 |------|-------|---------|
+| 2026-11-05 | **Blog live + promotion (Session 32)** | Blog released live (v2026.11.05) with only St Martin's (Tue 10 Nov 7am); Samhain and All Souls held back in content/blog/held-back. Make "Blog to socials" active daily 08:00 to Facebook + LinkedIn. Footer "Find us on Google" link, Glenn Rhodes testimonial on Home, Orla's own drawing as St Martin's cover with caption (new optional imageCaption field). Live as v2026.11.05-2. Waiting: two more testimonials, partner logos + permissions. |
 | 2026-10-24 | **Site Repositioning (Session 31)** | Orla's PC set up. Full copy rewrite for workplaces/schools/one-to-one, trauma-informed, no pricing, no Anam Chara. Old courses/booking pages redirected. Classroom photo added. Live as v2026.10.24-3. Next: real testimonials, MTAI directory listing, workplace/schools SEO pages. |
 | 2026-06-11 | **P0 SEO Complete (Session 30)** | Search Console verified + sitemap submitted. Orla created Business Profile. Inner pages confirmed already indexed. AI crawlers unblocked + deployed to production. Next: MTAI directory, local keyword pages, check Search Console data in ~1 week. |
 | 2026-06-11 | **Admin Security + Review (Session 29)** | Fixed & deployed all critical admin security holes (auth gate, signed sessions, no default password, login lockout). Reviewed visitor volume (no real traffic yet) + SEO. Built post-launch roadmap: analytics accuracy fixes, SEO/discoverability, growth & resilience. |
