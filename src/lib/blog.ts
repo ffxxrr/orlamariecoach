@@ -10,6 +10,7 @@ import { marked } from 'marked'
 // description: One or two sentences for Google and social previews.
 // image: /images/blog/samhain.jpg
 // imageAlt: Misty Donegal hills at dusk
+// imageCaption: Photo: Orla Marie   (optional, shown under the image)
 // ---
 //
 // A post only appears on the live site once its date has arrived (from 7am
@@ -29,6 +30,7 @@ export type BlogPost = {
   description: string
   image?: string
   imageAlt?: string
+  imageCaption?: string
   html: string
   readingMinutes: number
   isScheduled: boolean
@@ -66,6 +68,7 @@ function readPost(file: string): BlogPost {
     description: data.description || '',
     image: data.image,
     imageAlt: data.imageAlt,
+    imageCaption: data.imageCaption,
     html: marked.parse(body, { async: false }) as string,
     readingMinutes: Math.max(1, Math.round(words / 220)),
     isScheduled: Date.now() < publishTime(data.date || file.slice(0, 10)),

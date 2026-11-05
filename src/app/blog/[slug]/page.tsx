@@ -90,16 +90,23 @@ export default async function BlogPostPage({ params }: Props) {
             </header>
 
             {post.image && (
-              <div className="relative aspect-[1200/630] overflow-hidden rounded-md mb-12 bg-earth-warmth/40">
-                <Image
-                  src={post.image}
-                  alt={post.imageAlt || ''}
-                  fill
-                  priority
-                  sizes="(min-width: 768px) 720px, 100vw"
-                  className="object-cover"
-                />
-              </div>
+              <figure className="mb-12">
+                <div className="relative aspect-[1200/630] overflow-hidden rounded-md bg-earth-warmth/40">
+                  <Image
+                    src={post.image}
+                    alt={post.imageAlt || ''}
+                    fill
+                    priority
+                    sizes="(min-width: 768px) 720px, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                {post.imageCaption && (
+                  <figcaption className="mt-3 text-sm italic text-sage-calm text-center">
+                    {post.imageCaption}
+                  </figcaption>
+                )}
+              </figure>
             )}
 
             <div className="blog-body" dangerouslySetInnerHTML={{ __html: post.html }} />
