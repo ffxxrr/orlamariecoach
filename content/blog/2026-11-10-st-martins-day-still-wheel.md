@@ -2,8 +2,8 @@
 title: St Martin's Day, the day no wheel turned
 date: 2026-11-10
 description: In old Irish lore, no wheel was turned on St Martin's Day. Orla Marie shares a simple "still wheel" hour for letting everything stop spinning for a while.
-image: /images/blog/st-martins-still-hour.jpg
-imageAlt: Orla Marie sitting quietly on a grey sofa at home, by a window with a houseplant beside her
+image: /images/blog/st-martins-take-it-easy-drawing.jpg
+imageAlt: Orla Marie's ink drawing of a woman resting her head on her knees, beside the handwritten words I am going to take it easy today and that is OK
 ---
 
 Tomorrow, 11 November, is St Martin's Day.
@@ -31,6 +31,8 @@ Pick an hour this week. It doesn't have to be on St Martin's Day, and it doesn't
 If sitting still with your thoughts feels uncomfortable, that's okay. Keep your eyes open, look out the window, and come back to the room whenever you need to.
 
 The old people used to hope for a mild spell around now, a St Martin's little summer. I hope you get one, even if it's only an hour on the sofa.
+
+The drawing at the top is one of my own.
 
 Mind yourself.
 
