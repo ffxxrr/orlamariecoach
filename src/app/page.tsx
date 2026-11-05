@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Hero from '@/components/home/Hero'
 import Invitation from '@/components/home/Invitation'
 import ThreePaths from '@/components/home/ThreePaths'
+import TestimonialFeature from '@/components/home/TestimonialFeature'
 import AboutGlimpse from '@/components/home/AboutGlimpse'
 import FreeMeditationSection from '@/components/home/FreeMeditationSection'
 import Navbar from '@/components/layout/Navbar'
@@ -41,6 +42,9 @@ export default function HomePage() {
 
         {/* Three Paths - Individuals, workplaces, schools */}
         <ThreePaths />
+
+        {/* Testimonial - Glenn Rhodes (Google review, used with permission) */}
+        <TestimonialFeature />
 
         {/* About Glimpse - Meet Orla */}
         <AboutGlimpse />
