@@ -48,10 +48,22 @@ export default function Footer() {
         {/* Email */}
         <a
           href="mailto:admin@orlamariecoach.com"
-          className="inline-block text-pure-light/90 hover:text-earth-warmth transition-colors duration-300 mb-8"
+          className="inline-block text-pure-light/90 hover:text-earth-warmth transition-colors duration-300 mb-3"
         >
           admin@orlamariecoach.com
         </a>
+
+        {/* Google Business Profile */}
+        <div className="mb-8">
+          <a
+            href="https://maps.app.goo.gl/7hKPT8Dno7g9xiYG7"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-sm uppercase tracking-wider text-earth-warmth/80 hover:text-earth-warmth transition-colors duration-300"
+          >
+            Find us on Google
+          </a>
+        </div>
 
         {/* Social icons */}
         <div className="flex justify-center gap-6 mb-10">
