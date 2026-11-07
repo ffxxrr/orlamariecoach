@@ -5,7 +5,8 @@ import Footer from '@/components/layout/Footer'
 
 export const metadata = {
   title: 'Contact',
-  description: 'Contact Orla Marie about one-to-one, workplace or school mindfulness programmes. Based in Donegal, Ireland, working in person and online.',
+  description: 'Contact Orla Marie about one-to-one, workplace or school mindfulness programmes. Based in Inishowen, Co. Donegal, working in person across the North West and online.',
+  alternates: { canonical: '/contact' },
 }
 
 export default function ContactPage() {

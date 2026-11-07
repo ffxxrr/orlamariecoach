@@ -7,9 +7,10 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
-  title: 'Mindfulness Programmes',
+  title: 'Mindfulness Programmes in Donegal & Online',
   description:
-    'Evidence-based mindfulness meditation programmes for individuals, workplaces and schools. Based in Donegal, Ireland, delivered in person and online.',
+    'Evidence-based mindfulness meditation programmes for individuals, workplaces and schools, in person across Inishowen, Donegal and the North West, and online.',
+  alternates: { canonical: '/services' },
   openGraph: {
     images: ['/images/og/og-services.jpg'],
   },

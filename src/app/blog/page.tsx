@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   description:
     'Short notes from Donegal: a simple mindfulness tool to try, what Orla Marie is up to, and the books, films and Irish seasons that inspire her practice.',
   alternates: {
+    canonical: '/blog',
     types: { 'application/rss+xml': '/blog/feed.xml' },
   },
 }

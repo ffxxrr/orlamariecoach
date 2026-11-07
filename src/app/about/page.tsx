@@ -7,9 +7,10 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
-  title: 'About Orla Marie, Accredited Mindfulness Teacher',
+  title: 'About Orla Marie, Accredited Mindfulness Teacher in Donegal',
   description:
-    'Orla Marie Mullan is an accredited mindfulness teacher based in Donegal, Ireland, with thirty years of practice, delivering evidence-based mindfulness programmes for workplaces, schools and individuals.',
+    'Orla Marie Mullan is an accredited mindfulness teacher based in Inishowen, Co. Donegal, with thirty years of practice, delivering evidence-based mindfulness programmes for workplaces, schools and individuals.',
+  alternates: { canonical: '/about' },
   openGraph: {
     images: ['/images/og/og-about.jpg'],
   },

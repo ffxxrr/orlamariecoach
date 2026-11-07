@@ -9,7 +9,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Orla Marie Coach | Mindfulness Meditation for Workplaces, Schools & Individuals' },
+  title: { absolute: 'Orla Marie Coach | Mindfulness & Meditation in Donegal, Ireland' },
   description:
     'Evidence-based, trauma-informed mindfulness meditation programmes for workplaces, schools and individuals, led by accredited mindfulness teacher Orla Marie Mullan. Based in Donegal, Ireland, delivered in person and online.',
   keywords: [
@@ -20,6 +20,8 @@ export const metadata: Metadata = {
     'one-to-one mindfulness',
     'trauma-informed mindfulness',
     'mindfulness meditation Donegal',
+    'meditation Inishowen',
+    'mindfulness Buncrana',
     'employee wellbeing',
     'staff wellbeing',
     'mindfulness programmes',

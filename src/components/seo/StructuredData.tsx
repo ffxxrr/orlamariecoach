@@ -45,9 +45,10 @@ const organizationSchema = {
     availableLanguage: ['English'],
   },
   sameAs: [
-    // Add social media URLs when available
-    // 'https://www.instagram.com/orlamariecoach',
-    // 'https://www.facebook.com/orlamariecoach',
+    'https://maps.google.com/?cid=6504779544190575579',
+    'https://www.instagram.com/orlamariecoach',
+    'https://www.facebook.com/profile.php?id=61553453342673',
+    'https://www.youtube.com/@ommcoach',
   ],
 }
 
@@ -58,20 +59,35 @@ const localBusinessSchema = {
   '@id': `${BASE_URL}/#localbusiness`,
   name: 'Orla Marie Coach',
   description:
-    'Mindfulness meditation programmes for workplaces, schools and individuals in Donegal, Ireland and online.',
+    'Mindfulness meditation programmes for workplaces, schools and individuals in Inishowen, Co. Donegal, the North West and online.',
   url: BASE_URL,
+  hasMap: 'https://maps.google.com/?cid=6504779544190575579',
   image: `${BASE_URL}/images/brand/logo-square.png`,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Donegal',
+    addressLocality: 'Buncrana',
+    addressRegion: 'County Donegal',
+    postalCode: 'F93 X997',
     addressCountry: 'IE',
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 54.6538,
-    longitude: -8.1096,
+    latitude: 55.1832,
+    longitude: -7.4177,
   },
   areaServed: [
+    {
+      '@type': 'Place',
+      name: 'Inishowen, County Donegal',
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: 'County Donegal',
+    },
+    {
+      '@type': 'City',
+      name: 'Derry',
+    },
     {
       '@type': 'Country',
       name: 'Ireland',

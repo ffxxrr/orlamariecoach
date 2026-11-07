@@ -77,7 +77,7 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            href="https://www.facebook.com/orlamariecoach"
+            href="https://www.facebook.com/profile.php?id=61553453342673"
             className="text-earth-warmth/60 hover:text-earth-warmth transition-colors duration-300"
             aria-label="Facebook"
           >
@@ -86,7 +86,7 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            href="https://www.youtube.com/orlamariecoach"
+            href="https://www.youtube.com/@ommcoach"
             className="text-earth-warmth/60 hover:text-earth-warmth transition-colors duration-300"
             aria-label="YouTube"
           >
@@ -101,7 +101,7 @@ export default function Footer() {
 
         {/* Copyright and legal */}
         <div className="text-xs text-pure-light/40 space-x-3">
-          <span>© 2025 Orla Marie</span>
+          <span>© {new Date().getFullYear()} Orla Marie</span>
           <span>·</span>
           <Link href="/privacy" className="hover:text-pure-light/70 transition-colors">
             Privacy
