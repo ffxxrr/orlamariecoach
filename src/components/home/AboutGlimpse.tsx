@@ -63,8 +63,8 @@ export default function AboutGlimpse() {
               <p className="text-lg text-sage-calm leading-relaxed">
                 Today I am an accredited mindfulness teacher, trained with Mindfulness Now
                 (The UK College of Mindfulness Meditation), with a background in psychotherapy
-                training at the University of Manchester. From my base in Donegal, I work with
-                organisations, schools and individuals across Ireland, the UK and online.
+                training at the University of Manchester. From my base in Inishowen, near Buncrana, I work with
+                organisations, schools and individuals in Derry and across Ireland, the UK and online.
               </p>
             </div>
 

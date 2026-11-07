@@ -67,7 +67,7 @@ export default function Invitation() {
 
         {/* Second paragraph */}
         <p className="font-crimson text-xl md:text-2xl text-sage-calm leading-relaxed">
-          I&apos;m Orla Marie, an accredited mindfulness teacher based in Donegal, Ireland.
+          I&apos;m Orla Marie, an accredited mindfulness teacher based in Inishowen, County Donegal.
           Drawing on thirty years of personal practice and professional training, I deliver
           secular, evidence-based and trauma-informed mindfulness programmes that help
           people manage stress,

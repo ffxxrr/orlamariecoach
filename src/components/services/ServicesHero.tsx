@@ -54,7 +54,7 @@ export default function ServicesHero() {
             style={{ transitionDelay: '300ms' }}
           >
             Secular, evidence-based and trauma-informed mindfulness for individuals,
-            organisations and schools&mdash;delivered in person in Donegal and the North West, and online.
+            organisations and schools&mdash;delivered in person across Inishowen, Donegal, Derry and the North West, and online.
           </p>
 
           {/* Trust Indicators */}
