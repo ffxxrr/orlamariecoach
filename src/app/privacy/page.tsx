@@ -92,6 +92,19 @@ export default function PrivacyPage() {
 
                 <div>
                   <h2 className="font-crimson text-2xl text-forest-deep mb-4">
+                    My Mailing List
+                  </h2>
+                  <p className="text-deep-text leading-relaxed">
+                    If you sign up for my free meditation and guide, I will hold your first name
+                    and email address so I can send them to you, along with occasional news about
+                    courses and reflections on mindfulness. My mailing list is managed with
+                    MailerLite, a GDPR-compliant email service. Every email includes a link to
+                    unsubscribe, and you can also ask me to remove you at any time.
+                  </p>
+                </div>
+
+                <div>
+                  <h2 className="font-crimson text-2xl text-forest-deep mb-4">
                     Your Rights
                   </h2>
                   <p className="text-deep-text leading-relaxed">
