@@ -1,9 +1,19 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import CelticDivider from '@/components/ui/CelticDivider'
 import { useEventTracker } from '@/components/ui/AnalyticsProvider'
+
+// Keep in sync with INQUIRY_LABELS in src/app/api/contact/route.ts
+const ENQUIRY_OPTIONS = [
+  { value: 'one-to-one', label: 'One-to-one mindfulness' },
+  { value: 'mindfulness-course', label: 'Six-week mindfulness course (January, Buncrana)' },
+  { value: 'gift-voucher', label: 'Gift voucher' },
+  { value: 'workplace', label: 'Workplace programme' },
+  { value: 'schools', label: 'Schools programme' },
+  { value: 'other', label: 'General question' },
+]
 
 export default function ContactForm() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
@@ -22,6 +32,14 @@ export default function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [honeypot, setHoneypot] = useState('')
+
+  // Pre-select the enquiry type from links like /contact?enquiry=gift-voucher
+  useEffect(() => {
+    const enquiry = new URLSearchParams(window.location.search).get('enquiry')
+    if (enquiry && ENQUIRY_OPTIONS.some((o) => o.value === enquiry)) {
+      setFormData((prev) => ({ ...prev, inquiryType: enquiry }))
+    }
+  }, [])
 
   const handleFormStart = () => {
     if (!hasStartedForm.current) {
@@ -190,10 +208,9 @@ export default function ContactForm() {
                 className="w-full px-4 py-3 bg-white border border-earth-warmth/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-living-green/30 focus:border-living-green/50 transition-all"
               >
                 <option value="">Please select...</option>
-                <option value="one-to-one">One-to-one mindfulness</option>
-                <option value="workplace">Workplace programme</option>
-                <option value="schools">Schools programme</option>
-                <option value="other">General question</option>
+                {ENQUIRY_OPTIONS.map((o) => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
+                ))}
               </select>
             </div>
 

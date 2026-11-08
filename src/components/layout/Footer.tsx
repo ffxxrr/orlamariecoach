@@ -65,6 +65,16 @@ export default function Footer() {
           </a>
         </div>
 
+        {/* Course and gift vouchers */}
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-8 text-sm">
+          <Link href="/mindfulness-course" className="text-pure-light/80 hover:text-earth-warmth transition-colors duration-300">
+            Six-Week Mindfulness Course
+          </Link>
+          <Link href="/gift-vouchers" className="text-pure-light/80 hover:text-earth-warmth transition-colors duration-300">
+            Gift Vouchers
+          </Link>
+        </div>
+
         {/* Social icons */}
         <div className="flex justify-center gap-6 mb-10">
           <a
