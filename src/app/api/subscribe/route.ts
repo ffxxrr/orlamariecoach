@@ -11,7 +11,7 @@ import { isEmailConfigured, sendEmail } from '@/lib/email'
  * Orla also gets a notification email for each sign-up, which is the only record until
  * MailerLite is connected.
  */
-const MAILERLITE_FORM_URL = ''
+const MAILERLITE_FORM_URL = 'https://assets.mailerlite.com/jsonp/2779194/forms/203587351806478172/subscribe'
 
 const MAX_PER_WINDOW = 5
 const WINDOW_MS = 60 * 60 * 1000
