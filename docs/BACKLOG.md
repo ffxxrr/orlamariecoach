@@ -252,9 +252,9 @@ This is the living backlog. Update it each session.
 *Nothing currently in progress*
 
 ### Suggested next (from Session 31 promotion discussion)
-- [ ] One-page PDF brochure for workplaces and schools (for Orla to email HR leads / principals)
+- [x] One-page PDF brochure for workplaces and schools (Session 33, kept privately on Orla's PC)
 - [ ] Local SEO landing pages: workplace mindfulness Donegal / North West, mindfulness for schools Ireland
-- [ ] Email sign-up (ConvertKit or similar)
+- [~] Email sign-up: built with MailerLite (Session 33). On staging; publish once Orla re-records the free meditation
 - [ ] Re-add testimonials once Orla has real, permissioned quotes
 - [ ] Orla: request listing on Mindfulness Now "Find a Teacher" directory + MTA register; update Google Business Profile services/photos; LinkedIn headline
 
@@ -593,6 +593,7 @@ This is the living backlog. Update it each session.
 
 | Date | Focus | Outcome |
 |------|-------|---------|
+| 2026-11-08 | **Income ideas (Session 33)** | Live (v2026.11.08): /mindfulness-course (6 weeks, Tue 12 Jan 2027, Buncrana, EUR150, not the 5-week meditation course) and /gift-vouchers (suggested EUR/GBP amounts, ordered via the contact form). Private on Orla's PC: brochure, outreach emails, a contacts spreadsheet of 49 orgs, voucher PDF maker, Monday reminder email (scheduled task). On staging only: email sign-up wired to MailerLite (homepage and blog posts), /free-gift page, free guide PDF, privacy page update. Waiting: Orla re-records the meditation (crunch noise), then publish, then turn on the MailerLite welcome automation; Conal to authenticate the MailerLite domain (DNS). |
 | 2026-11-05 | **Blog live + promotion (Session 32)** | Blog released live (v2026.11.05) with only St Martin's (Tue 10 Nov 7am); Samhain and All Souls held back in content/blog/held-back. Make "Blog to socials" active daily 08:00 to Facebook + LinkedIn. Footer "Find us on Google" link, Glenn Rhodes testimonial on Home, Orla's own drawing as St Martin's cover with caption (new optional imageCaption field). Live as v2026.11.05-2. Waiting: two more testimonials, partner logos + permissions. |
 | 2026-10-24 | **Site Repositioning (Session 31)** | Orla's PC set up. Full copy rewrite for workplaces/schools/one-to-one, trauma-informed, no pricing, no Anam Chara. Old courses/booking pages redirected. Classroom photo added. Live as v2026.10.24-3. Next: real testimonials, MTAI directory listing, workplace/schools SEO pages. |
 | 2026-06-11 | **P0 SEO Complete (Session 30)** | Search Console verified + sitemap submitted. Orla created Business Profile. Inner pages confirmed already indexed. AI crawlers unblocked + deployed to production. Next: MTAI directory, local keyword pages, check Search Console data in ~1 week. |
