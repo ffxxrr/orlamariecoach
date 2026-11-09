@@ -3,7 +3,20 @@
 import { useScrollAnimation } from '@/lib/hooks/useScrollAnimation'
 import CelticDivider from '@/components/ui/CelticDivider'
 
-export default function TestimonialFeature() {
+const GLENN_QUOTE =
+  "I highly recommend Orla's Meditation classes. The variety of techniques she introduced me to were taught in a simple, uncomplicated way with her gentle encouragement allowing me get the most out of each session. Orla's Meditation class is an opportunity to slow down, reconnect and experience peace. A very special person with a very special gift."
+
+interface TestimonialFeatureProps {
+  quote?: string
+  name?: string
+  place?: string
+}
+
+export default function TestimonialFeature({
+  quote = GLENN_QUOTE,
+  name = 'Glenn Rhodes',
+  place = 'Derry',
+}: TestimonialFeatureProps = {}) {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 })
 
   return (
@@ -57,11 +70,7 @@ export default function TestimonialFeature() {
           style={{ transitionDelay: '200ms' }}
         >
           <p className="font-crimson text-xl md:text-2xl lg:text-3xl text-forest-deep leading-relaxed md:leading-relaxed italic">
-            I highly recommend Orla&apos;s Meditation classes. The variety of techniques she
-            introduced me to were taught in a simple, uncomplicated way with her gentle
-            encouragement allowing me get the most out of each session. Orla&apos;s Meditation
-            class is an opportunity to slow down, reconnect and experience peace. A very
-            special person with a very special gift.
+            {quote}
           </p>
         </blockquote>
 
@@ -74,9 +83,9 @@ export default function TestimonialFeature() {
         >
           <div className="w-12 h-px bg-living-green mx-auto mb-6" />
           <p className="text-sage-calm">
-            <span className="font-medium">Glenn Rhodes</span>
+            <span className="font-medium">{name}</span>
             <span className="mx-2 text-living-green/50">&mdash;</span>
-            <span className="text-sm">Derry</span>
+            <span className="text-sm">{place}</span>
           </p>
         </div>
       </div>
