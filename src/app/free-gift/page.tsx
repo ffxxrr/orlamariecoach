@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import { FEATURES } from '@/lib/features'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
@@ -10,6 +12,7 @@ export const metadata = {
 }
 
 export default function FreeGiftPage() {
+  if (!FEATURES.signup) notFound()
   return (
     <>
       <Navbar />

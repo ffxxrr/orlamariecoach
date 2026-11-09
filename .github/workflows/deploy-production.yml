@@ -32,6 +32,7 @@ jobs:
             --platform linux/amd64 \
             --build-arg NEXT_PUBLIC_SITE_URL=https://orlamariecoach.com \
             --build-arg NEXT_PUBLIC_FEATURES_COURSES=false \
+            --build-arg NEXT_PUBLIC_FEATURES_SIGNUP=false \
             --label org.opencontainers.image.source=https://github.com/${{ github.repository }} \
             --label org.opencontainers.image.version=${{ github.ref_name }} \
             -t ${{ env.IMAGE }}:${{ github.ref_name }} \

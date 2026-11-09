@@ -6,6 +6,7 @@ import TestimonialFeature from '@/components/home/TestimonialFeature'
 import AboutGlimpse from '@/components/home/AboutGlimpse'
 import FreeMeditationSection from '@/components/home/FreeMeditationSection'
 import EmailSignup from '@/components/ui/EmailSignup'
+import { FEATURES } from '@/lib/features'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
@@ -56,7 +57,7 @@ export default function HomePage() {
         <FreeMeditationSection />
 
         {/* Email sign-up with free meditation and guide */}
-        <EmailSignup source="homepage" />
+        {FEATURES.signup && <EmailSignup source="homepage" />}
       </main>
       <Footer />
     </>

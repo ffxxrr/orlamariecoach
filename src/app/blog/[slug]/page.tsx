@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Container from '@/components/ui/Container'
 import EmailSignup from '@/components/ui/EmailSignup'
+import { FEATURES } from '@/lib/features'
 import { getPosts, getPost, formatPostDate, SITE_URL } from '@/lib/blog'
 
 export const revalidate = 3600
@@ -112,9 +113,11 @@ export default async function BlogPostPage({ params }: Props) {
 
             <div className="blog-body" dangerouslySetInnerHTML={{ __html: post.html }} />
 
-            <div className="mt-16">
-              <EmailSignup source="blog" variant="card" />
-            </div>
+            {FEATURES.signup && (
+              <div className="mt-16">
+                <EmailSignup source="blog" variant="card" />
+              </div>
+            )}
 
             <footer className="mt-16 pt-10 border-t border-earth-warmth">
               <p className="font-crimson text-2xl text-deep-text mb-3">
