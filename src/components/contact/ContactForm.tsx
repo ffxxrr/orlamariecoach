@@ -8,7 +8,7 @@ import { useEventTracker } from '@/components/ui/AnalyticsProvider'
 // Keep in sync with INQUIRY_LABELS in src/app/api/contact/route.ts
 const ENQUIRY_OPTIONS = [
   { value: 'one-to-one', label: 'One-to-one mindfulness' },
-  { value: 'mindfulness-course', label: 'Six-week mindfulness course (January, Buncrana)' },
+  { value: 'mindfulness-course', label: 'Six-week mindfulness course (January, Sliabh Sneacht Centre)' },
   { value: 'gift-voucher', label: 'Gift voucher' },
   { value: 'workplace', label: 'Workplace programme' },
   { value: 'schools', label: 'Schools programme' },

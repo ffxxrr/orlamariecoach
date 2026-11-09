@@ -7,7 +7,7 @@ const INQUIRY_LABELS: Record<string, string> = {
   workplace: 'Workplace programme',
   schools: 'Schools programme',
   'gift-voucher': 'Gift voucher',
-  'mindfulness-course': 'Six-week mindfulness course (January, Buncrana)',
+  'mindfulness-course': 'Six-week mindfulness course (January, Sliabh Sneacht Centre)',
   other: 'General question',
 }
 

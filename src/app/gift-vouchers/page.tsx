@@ -26,7 +26,7 @@ const SUGGESTED = [
     euro: '€150',
     sterling: '£130',
     title: 'Mindfulness Course',
-    text: 'A place on the six-week mindfulness course in Buncrana, starting in January.',
+    text: 'A place on the six-week mindfulness course at The Sliabh Sneacht Centre, starting in January.',
   },
 ]
 

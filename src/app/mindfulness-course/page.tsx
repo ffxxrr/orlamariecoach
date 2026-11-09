@@ -4,16 +4,16 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
 export const metadata = {
-  title: 'Six-Week Mindfulness Course in Buncrana',
+  title: 'Six-Week Mindfulness Course in Inishowen',
   description:
-    'A structured six-week mindfulness course in Buncrana, Inishowen, on Tuesday evenings from 12 January 2027. Beginners welcome. Taught by accredited, trauma-informed mindfulness teacher Orla Marie.',
+    'A structured six-week mindfulness course at The Sliabh Sneacht Centre, Drumfries, Inishowen, on Tuesday evenings from 12 January 2027. Beginners welcome. Taught by accredited, trauma-informed mindfulness teacher Orla Marie.',
   alternates: { canonical: '/mindfulness-course' },
 }
 
 const DETAILS = [
   { label: 'When', value: 'Tuesdays, 12 January to 16 February 2027' },
   { label: 'Time', value: '7pm to 8.30pm' },
-  { label: 'Where', value: 'Buncrana, Inishowen (venue confirmed when you book)' },
+  { label: 'Where', value: 'The Sliabh Sneacht Centre, Drumfries, Inishowen' },
   { label: 'Price', value: '€150 for all six weeks' },
   { label: 'Group', value: 'Small group, places limited' },
 ]
@@ -37,7 +37,7 @@ export default function MindfulnessCoursePage() {
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-sm uppercase tracking-[0.2em] text-living-green mb-6">
-                Six-Week Mindfulness Course &middot; Buncrana
+                Six-Week Mindfulness Course &middot; Inishowen
               </p>
               <h1 className="font-crimson text-4xl sm:text-5xl md:text-6xl font-light text-forest-deep leading-[1.1] mb-8">
                 A calm start
