@@ -3,7 +3,9 @@ import { getPosts, SITE_URL } from '@/lib/blog'
 // RSS feed of published posts. The social posting tool (Make/Zapier) watches
 // the live site's copy of this and shares each new post to Facebook,
 // Instagram and LinkedIn. Images are JPEG because Instagram won't take WebP.
-export const revalidate = 3600
+// Always build fresh: Make checks once a day at 8am, and a cached copy from
+// before 7am made it miss the St Martin's post (10 Nov 2026).
+export const dynamic = 'force-dynamic'
 
 function escape(text: string) {
   return text
