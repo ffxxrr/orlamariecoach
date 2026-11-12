@@ -593,6 +593,7 @@ This is the living backlog. Update it each session.
 
 | Date | Focus | Outcome |
 |------|-------|---------|
+| 2026-11-12 | **Release v2026.11.12** | Orla's own post 'A misty morning on the Foyle' (her photo) goes live Tue 17 Nov 7am; the Anam Chara draft moved to held-back. Draft for 24 Nov: Carrowmore West Cross (her photo), on staging only. Also: FB course event published, pinned, invites sent, shared to 2 groups, Sliabh Sneacht co-host pending; outreach to ii, Go Visit Inishowen and Strabane. |
 | 2026-11-11 | **Release v2026.11.11** | Blog feed is now built fresh on every request. On 10 Nov, Make's 8am run read a feed cached from before the 7am post, so St Martin's wasn't shared; Orla posted it by hand. Make's RSS "Date from" is set to 2026-11-10 12:00 so it isn't re-shared. 5 Instagram stories scheduled (St Martin's moved to 12 Nov). |
 | 2026-11-09 | **Release v2026.11.09-2** | Course venue is now The Sliabh Sneacht Centre, Drumfries, Inishowen (course page, vouchers, contact form). Posters made (private/facebook). 8 Facebook posts scheduled (12 Nov to 7 Dec); 10 and 14 Dec posts to schedule after 16 Nov (reminder task set). |
 | 2026-11-09 | **Release v2026.11.09** | Live: Sliabh Sneacht Centre review on Programmes. Email sign-up and /free-gift are built but hidden on live by NEXT_PUBLIC_FEATURES_SIGNUP=false (Dockerfile + deploy workflow). Remove that build-arg to launch once Orla re-records and the MailerLite welcome automation is on. First outreach batch of 5 (ROI only) sent from admin@. |
