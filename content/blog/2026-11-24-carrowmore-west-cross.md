@@ -14,7 +14,7 @@ My husband and I share a love of places like this. We'll happily go down a wee b
 
 ## Thin places
 
-The old Irish talk about thin places, where the space between this world and the next feels a bit thinner. I'm not sure I'd put it that way myself, but there's something about standing beside a stone that's been there for over a thousand years. The monastery here was founded in the 6th century, and people have been coming to this spot ever since.
+The old Irish talk about thin places, where the space between this world and the next feels a bit thinner. I feel that at places like this. There's something about standing beside a stone that's been there for over a thousand years. The monastery here was founded in the 6th century, and people have been coming to this spot ever since.
 
 Whatever is going on in my own head shrinks a bit next to that. The cross has stood through every kind of weather, and it's still here.
 
