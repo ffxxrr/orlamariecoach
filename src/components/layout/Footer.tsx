@@ -87,7 +87,7 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            href="https://www.facebook.com/profile.php?id=61553453342673"
+            href="https://www.facebook.com/orlamariecoach"
             className="text-earth-warmth/60 hover:text-earth-warmth transition-colors duration-300"
             aria-label="Facebook"
           >

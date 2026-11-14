@@ -47,7 +47,7 @@ const organizationSchema = {
   sameAs: [
     'https://maps.google.com/?cid=6504779544190575579',
     'https://www.instagram.com/orlamariecoach',
-    'https://www.facebook.com/profile.php?id=61553453342673',
+    'https://www.facebook.com/orlamariecoach',
     'https://www.youtube.com/@ommcoach',
   ],
 }
