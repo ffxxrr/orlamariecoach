@@ -78,7 +78,7 @@ she says she's saved it, run `npm run setup:email -- --check`.
 ---
 title: Short, specific, under 60 characters
 date: YYYY-MM-DD   (a Tuesday)
-description: One or two sentences for Google and social previews.
+description: One or two sentences for Google and social previews, in the first person as Orla ("I took a walk...", "Here's my..."). Never "Orla Marie shares...".
 image: /images/blog/<name>.jpg   (1200x630 JPEG, Instagram needs JPEG)
 imageAlt: What the photo shows
 ---

@@ -1,7 +1,7 @@
 ---
 title: A misty morning on the Foyle, coffee in hand
 date: 2026-11-17
-description: Orla Marie takes a slow, mindful walk by the River Foyle on a misty November morning, and shares a simple way to turn any walk into a few minutes of calm.
+description: I took a slow, mindful walk by the River Foyle on a misty November morning. Here's a simple way to turn any walk into a few minutes of calm.
 image: /images/blog/misty-morning-river-foyle.jpg
 imageAlt: Boats moored on the River Foyle on a misty morning, with soft sunlight through the clouds reflected in still water
 ---

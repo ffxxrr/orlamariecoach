@@ -1,7 +1,7 @@
 ---
 title: The Carrowmore cross, standing in a field for 1,300 years
 date: 2026-11-24
-description: Orla Marie visits the Carrowmore West Cross near Gleneely, one of the oldest high crosses in Ireland, and shares a simple practice for standing still in an ancient place.
+description: I visited the Carrowmore West Cross near Gleneely, one of the oldest high crosses in Ireland. Here's a simple practice for standing still in an ancient place.
 image: /images/blog/carrowmore-west-cross.jpg
 imageAlt: A plain, weathered stone cross with short arms standing in a green field near Gleneely, with hedges and hills behind under a cloudy sky
 ---

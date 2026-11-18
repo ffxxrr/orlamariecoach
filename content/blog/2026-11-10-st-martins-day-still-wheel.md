@@ -1,7 +1,7 @@
 ---
 title: St Martin's Day, the day no wheel turned
 date: 2026-11-10
-description: In old Irish lore, no wheel was turned on St Martin's Day. Orla Marie shares a simple "still wheel" hour for letting everything stop spinning for a while.
+description: In old Irish lore, no wheel was turned on St Martin's Day. Here's my simple "still wheel" hour for letting everything stop spinning for a while.
 image: /images/blog/st-martins-take-it-easy-drawing.jpg
 imageAlt: Orla Marie's ink drawing of a woman resting her head on her knees, beside the handwritten words I am going to take it easy today and that is OK
 imageCaption: Illustration: Orla Marie
