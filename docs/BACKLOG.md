@@ -593,6 +593,7 @@ This is the living backlog. Update it each session.
 
 | Date | Focus | Outcome |
 |------|-------|---------|
+| 2026-11-18 | **Release v2026.11.18** | Blog descriptions now in the first person ("I took a walk...", never "Orla Marie shares..."), which is what Facebook and LinkedIn show; guide and Thursday drafting routine updated to match. Footer Facebook link now facebook.com/orlamariecoach. Foyle post: Make shared it to Facebook on 17 Nov but LinkedIn didn't post (cause unknown, Orla is signed out of Make); posted to LinkedIn by hand. |
 | 2026-11-12 | **Release v2026.11.12-2** | The Carrowmore West Cross post (Orla's photo) is approved and scheduled for Tue 24 Nov 7am. |
 | 2026-11-12 | **Release v2026.11.12** | Orla's own post 'A misty morning on the Foyle' (her photo) goes live Tue 17 Nov 7am; the Anam Chara draft moved to held-back. Draft for 24 Nov: Carrowmore West Cross (her photo), on staging only. Also: FB course event published, pinned, invites sent, shared to 2 groups, Sliabh Sneacht co-host pending; outreach to ii, Go Visit Inishowen and Strabane. |
 | 2026-11-11 | **Release v2026.11.11** | Blog feed is now built fresh on every request. On 10 Nov, Make's 8am run read a feed cached from before the 7am post, so St Martin's wasn't shared; Orla posted it by hand. Make's RSS "Date from" is set to 2026-11-10 12:00 so it isn't re-shared. 5 Instagram stories scheduled (St Martin's moved to 12 Nov). |
