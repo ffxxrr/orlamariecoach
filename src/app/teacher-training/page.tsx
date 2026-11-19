@@ -128,7 +128,7 @@ export default function TeacherTrainingPage() {
             </div>
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
               <Image
-                src="/images/orla/optimized/about/7R500406.webp"
+                src="/images/orla/optimized/about/7R500169.webp"
                 alt="Orla Marie, meditation teacher"
                 fill
                 priority
