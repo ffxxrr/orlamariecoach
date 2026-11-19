@@ -158,7 +158,17 @@ export default function TeacherTrainingPage() {
 
         {/* Who it's for */}
         <section className="py-20 px-6">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-center">
+            <div className="relative aspect-square rounded-2xl overflow-hidden md:col-span-2">
+              <Image
+                src="/images/orla/optimized/about/7R500333.webp"
+                alt="Orla Marie reading at home"
+                fill
+                sizes="(min-width: 768px) 40vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="md:col-span-3">
             <h2 className="font-crimson text-3xl md:text-4xl text-forest-deep mb-6">Who it’s for</h2>
             <p className="text-lg text-deep-text leading-relaxed mb-4">
               For anyone whose life has been changed by meditation and who now feels called to
@@ -170,6 +180,7 @@ export default function TeacherTrainingPage() {
               mindfulness course is the place to begin. Every applicant has a short call with me
               first, so we both know it is right for you.
             </p>
+            </div>
           </div>
         </section>
 
