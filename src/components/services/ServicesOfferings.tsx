@@ -56,12 +56,13 @@ const services = [
   {
     title: 'Mindful Nature Walks',
     subtitle: 'Outdoors',
-    description: 'A slow, guided walk on a carefully chosen trail, taking time to notice the sights, sounds and textures of the natural world around you. We pause along the way for simple mindfulness practices: grounding through the feet, breathing with the trees, and resting the senses on the landscape. Each walk is shaped around you, your pace and what feels comfortable.',
+    description: 'A slow, guided walk on a carefully chosen trail, taking time to notice the sights, sounds and textures of the natural world around you. Along the way we pause for simple practices: breathing with the trees, resting the senses on the landscape, and, if you\'d like, slipping off your shoes to feel the earth, grass or sand beneath your bare feet, a lovely way to ground yourself in nature. We finish with a mindful snack outdoors, savouring each bite slowly, with all the senses. Each walk is shaped around you, your pace and what feels comfortable.',
     features: [
       'For individuals and small groups',
       'Selected trails across Inishowen and Donegal',
+      'Barefoot grounding, always optional',
+      'Mindful eating in the open air',
       'Paced to suit your needs and fitness',
-      'Simple practices you can use on any walk',
       'Trauma-informed, with gentle invitations throughout',
     ],
     image: '/images/orla/optimized/service/nature-walk-group.webp',
