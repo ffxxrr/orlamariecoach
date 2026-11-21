@@ -10,7 +10,7 @@ import Footer from '@/components/layout/Footer'
 export const metadata: Metadata = {
   title: 'Mindfulness Programmes in Donegal & Online',
   description:
-    'Evidence-based mindfulness meditation programmes for individuals, workplaces and schools, in person across Inishowen, Donegal and the North West, and online.',
+    'Evidence-based mindfulness meditation programmes for individuals, workplaces and schools, plus mindful nature walks, in person across Inishowen, Donegal and the North West, and online.',
   alternates: { canonical: '/services' },
   openGraph: {
     images: ['/images/og/og-services.jpg'],

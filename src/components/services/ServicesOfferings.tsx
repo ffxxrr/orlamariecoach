@@ -53,6 +53,24 @@ const services = [
     href: '/contact',
     cta: 'Get in Touch',
   },
+  {
+    title: 'Mindful Nature Walks',
+    subtitle: 'Outdoors',
+    description: 'A slow, guided walk on a carefully chosen trail, taking time to notice the sights, sounds and textures of the natural world around you. We pause along the way for simple mindfulness practices: grounding through the feet, breathing with the trees, and resting the senses on the landscape. Each walk is shaped around you, your pace and what feels comfortable.',
+    features: [
+      'For individuals and small groups',
+      'Selected trails across Inishowen and Donegal',
+      'Paced to suit your needs and fitness',
+      'Simple practices you can use on any walk',
+      'Trauma-informed, with gentle invitations throughout',
+    ],
+    image: '/images/orla/optimized/service/nature-walk-group.webp',
+    imageAlt: 'A small group walking a stony mountain trail through heather in Inishowen',
+    inset: '/images/orla/optimized/service/nature-walk-mountain.webp',
+    insetAlt: 'A mountain in Inishowen under a soft winter sky',
+    href: '/contact?enquiry=nature-walk',
+    cta: 'Get in Touch',
+  },
 ]
 
 interface Service {
@@ -61,7 +79,10 @@ interface Service {
   description: string
   features: string[]
   image: string
+  imageAlt?: string
   imagePosition?: string
+  inset?: string
+  insetAlt?: string
   href: string
   cta: string
 }
@@ -103,7 +124,7 @@ function ServicePath({ service, reverse, index, isLast }: ServicePathProps) {
               <div className="relative w-full h-full overflow-hidden rounded-2xl">
                 <Image
                   src={service.image}
-                  alt={service.title}
+                  alt={service.imageAlt || service.title}
                   fill
                   className="object-cover"
                   style={{ objectPosition: service.imagePosition || 'center' }}
@@ -111,6 +132,20 @@ function ServicePath({ service, reverse, index, isLast }: ServicePathProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
               </div>
+              {/* Optional second photo, overlapping the corner */}
+              {service.inset && (
+                <div className={`absolute -bottom-6 w-[42%] aspect-square overflow-hidden rounded-2xl border-4 border-pure-light shadow-xl z-10 ${
+                  reverse ? '-right-4 md:-right-8' : '-left-4 md:-left-8'
+                }`}>
+                  <Image
+                    src={service.inset}
+                    alt={service.insetAlt || ''}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 45vw, 22vw"
+                  />
+                </div>
+              )}
               {/* Decorative frame offset - alternates direction */}
               <div className={`absolute inset-0 border-2 border-living-green/20 rounded-2xl -z-10 ${
                 reverse ? 'translate-y-3 -translate-x-3' : 'translate-y-3 translate-x-3'

@@ -12,6 +12,7 @@ const ENQUIRY_OPTIONS = [
   { value: 'gift-voucher', label: 'Gift voucher' },
   { value: 'workplace', label: 'Workplace programme' },
   { value: 'schools', label: 'Schools programme' },
+  { value: 'nature-walk', label: 'Mindful nature walk' },
   { value: 'other', label: 'General question' },
 ]
 
