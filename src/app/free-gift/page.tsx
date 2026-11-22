@@ -7,7 +7,7 @@ import Footer from '@/components/layout/Footer'
 // Linked from the MailerLite welcome email. Kept out of search results.
 export const metadata = {
   title: 'Your Free Gift',
-  description: 'A free guided mindfulness meditation and guide from Orla Marie.',
+  description: 'A free guided meditation, The Tree Within, and a mindfulness guide from Orla Marie.',
   robots: { index: false, follow: true },
 }
 
@@ -32,14 +32,14 @@ export default function FreeGiftPage() {
 
         <section className="pb-16 px-6">
           <div className="max-w-2xl mx-auto bg-white/70 border border-earth-warmth/40 rounded-2xl p-8 md:p-10">
-            <h2 className="font-crimson text-3xl text-forest-deep mb-2">Guided mindfulness meditation</h2>
-            <p className="text-sage-calm mb-6">10 minutes, with soft piano</p>
+            <h2 className="font-crimson text-3xl text-forest-deep mb-2">The Tree Within</h2>
+            <p className="text-sage-calm mb-6">A guided meditation, 14 minutes, with soft piano</p>
             <audio controls preload="none" className="w-full" src="/free/orla-marie-guided-meditation.mp3">
               Your browser cannot play this audio.{' '}
               <a href="/free/orla-marie-guided-meditation.mp3">Download the meditation</a>.
             </audio>
             <p className="text-sm text-sage-calm mt-4">
-              <a href="/free/orla-marie-guided-meditation.mp3" download className="underline hover:text-forest-deep">
+              <a href="/free/orla-marie-guided-meditation.mp3" download="The-Tree-Within-Orla-Marie.mp3" className="underline hover:text-forest-deep">
                 Download the meditation
               </a>{' '}
               to listen any time, even without an internet connection.
