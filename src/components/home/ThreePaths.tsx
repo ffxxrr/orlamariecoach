@@ -12,6 +12,8 @@ interface PathProps {
   description: string
   image: string
   imagePosition?: string
+  imageAlt?: string
+  wide?: boolean
   href: string
   cta: string
   reverse?: boolean
@@ -19,7 +21,7 @@ interface PathProps {
   isLast?: boolean
 }
 
-function Path({ title, subtitle, description, image, imagePosition, href, cta, reverse, index, isLast }: PathProps) {
+function Path({ title, subtitle, description, image, imagePosition, imageAlt, wide, href, cta, reverse, index, isLast }: PathProps) {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 })
 
   return (
@@ -42,11 +44,11 @@ function Path({ title, subtitle, description, image, imagePosition, href, cta, r
             } transition-all duration-1000 ease-out`}
             style={{ transitionDelay: '200ms' }}
           >
-            <div className="relative aspect-[4/5] md:aspect-square lg:aspect-[4/5] max-h-[500px] md:max-h-[550px]">
+            <div className={`relative ${wide ? 'aspect-[16/9]' : 'aspect-[4/5] md:aspect-square lg:aspect-[4/5] max-h-[500px] md:max-h-[550px]'}`}>
               <div className="relative w-full h-full overflow-hidden rounded-2xl">
                 <Image
                   src={image}
-                  alt={title}
+                  alt={imageAlt || title}
                   fill
                   className="object-cover"
                   style={{ objectPosition: imagePosition || 'center' }}
@@ -128,7 +130,9 @@ export default function ThreePaths() {
       title: 'Workplace Mindfulness',
       subtitle: 'For Organisations',
       description: 'Programmes for teams and leaders that support wellbeing, focus and resilience at work. From introductory workshops to multi-week courses, delivered on-site or online and tailored to your organisation.',
-      image: '/images/orla/optimized/service/office-plants.webp',
+      image: '/images/orla/optimized/service/workplace-team.webp',
+      imageAlt: 'Orla Marie chatting with a group over tea',
+      wide: true,
       href: '/services',
       cta: 'Find Out More',
     },
