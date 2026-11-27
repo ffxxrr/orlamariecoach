@@ -10,12 +10,62 @@ export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [linkToken, setLinkToken] = useState<string | null>(null);
+  const [linkStatus, setLinkStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
   const router = useRouter();
 
   useEffect(() => {
+    // Arriving from an emailed sign-in link?
+    const token = new URLSearchParams(window.location.search).get('link');
+    if (token) {
+      setLinkToken(token);
+      return;
+    }
     // Check if already authenticated
     checkAuthStatus();
   }, []);
+
+  const requestLink = async () => {
+    setLinkStatus('sending');
+    setError('');
+    try {
+      const response = await fetch('/api/admin/auth/forgot', { method: 'POST' });
+      const data = await response.json().catch(() => ({}));
+      if (response.ok) {
+        setLinkStatus('sent');
+      } else {
+        setError(data.error || 'Sorry, the email could not be sent.');
+        setLinkStatus('idle');
+      }
+    } catch {
+      setError('Network error. Please try again.');
+      setLinkStatus('idle');
+    }
+  };
+
+  const signInWithLink = async () => {
+    setIsLoading(true);
+    setError('');
+    try {
+      const response = await fetch('/api/admin/auth/magic', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: linkToken }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (response.ok) {
+        router.push('/admin/dashboard');
+      } else {
+        setError(data.error || 'This link did not work.');
+        setLinkToken(null);
+        window.history.replaceState(null, '', '/admin/login');
+      }
+    } catch {
+      setError('Network error. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const checkAuthStatus = async () => {
     try {
@@ -76,6 +126,22 @@ export default function AdminLogin() {
 
         {/* Login Form */}
         <div className="bg-white rounded-lg shadow-xl p-8">
+          {linkToken ? (
+            <div className="space-y-6 text-center">
+              <p className="text-gray-700">
+                Welcome back. Tap the button below to sign in to your dashboard.
+              </p>
+              <button
+                type="button"
+                onClick={signInWithLink}
+                disabled={isLoading}
+                className="w-full py-3 px-4 rounded-md shadow-sm text-white bg-forest-deep hover:bg-forest-deep/90 disabled:opacity-50 transition-colors"
+              >
+                {isLoading ? 'Signing in...' : 'Sign in to the dashboard'}
+              </button>
+            </div>
+          ) : (
+          <>
           <form onSubmit={handleSubmit} className="space-y-6">
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-md p-3">
@@ -152,6 +218,26 @@ export default function AdminLogin() {
               )}
             </button>
           </form>
+
+          {/* Forgot password: emails a one-time sign-in link to the admin inbox */}
+          <div className="mt-6 pt-6 border-t border-gray-100 text-center">
+            {linkStatus === 'sent' ? (
+              <p className="text-sm text-gray-700">
+                A sign-in link is on its way to your admin email inbox. It works once, for 15 minutes.
+              </p>
+            ) : (
+              <button
+                type="button"
+                onClick={requestLink}
+                disabled={linkStatus === 'sending'}
+                className="text-sm text-forest-deep underline hover:no-underline disabled:opacity-50"
+              >
+                {linkStatus === 'sending' ? 'Sending...' : 'Forgot your password? Email me a sign-in link'}
+              </button>
+            )}
+          </div>
+          </>
+          )}
 
           {/* Development Note */}
           {process.env.NODE_ENV === 'development' && (

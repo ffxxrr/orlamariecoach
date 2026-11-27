@@ -142,6 +142,72 @@ export async function verifySessionToken(
 }
 
 /**
+ * One-time sign-in links ("Forgot password?").
+ *
+ * Same HMAC key as sessions, but the signed message is prefixed with a
+ * purpose label, so a link token can never be replayed as a session cookie
+ * (and vice versa). Links are short-lived; single use is enforced by the
+ * route that redeems them.
+ */
+export const MAGIC_LINK_DURATION_MS = 15 * 60 * 1000; // 15 minutes
+const MAGIC_LINK_PURPOSE = 'admin-magic-link';
+
+export interface MagicLinkPayload {
+  purpose: typeof MAGIC_LINK_PURPOSE;
+  email: string;
+  expiresAt: number; // epoch ms
+  nonce: string;
+}
+
+export async function createMagicLinkToken(email: string): Promise<string> {
+  const payload: MagicLinkPayload = {
+    purpose: MAGIC_LINK_PURPOSE,
+    email,
+    expiresAt: Date.now() + MAGIC_LINK_DURATION_MS,
+    nonce: generateSessionId(),
+  };
+  const payloadPart = base64UrlEncode(utf8Bytes(JSON.stringify(payload)));
+  const key = await getKey();
+  const signature = await crypto.subtle.sign(
+    'HMAC',
+    key,
+    utf8Bytes(`${MAGIC_LINK_PURPOSE}.${payloadPart}`)
+  );
+  return `${payloadPart}.${base64UrlEncode(new Uint8Array(signature))}`;
+}
+
+/** Verify a sign-in link's signature, purpose and expiry. Never throws. */
+export async function verifyMagicLinkToken(
+  token: string | undefined | null
+): Promise<MagicLinkPayload | null> {
+  if (!token || typeof token !== 'string') return null;
+  const dot = token.indexOf('.');
+  if (dot <= 0) return null;
+  const payloadPart = token.slice(0, dot);
+  const sigPart = token.slice(dot + 1);
+
+  try {
+    const key = await getKey();
+    const valid = await crypto.subtle.verify(
+      'HMAC',
+      key,
+      base64UrlDecode(sigPart),
+      utf8Bytes(`${MAGIC_LINK_PURPOSE}.${payloadPart}`)
+    );
+    if (!valid) return null;
+    const payload = JSON.parse(
+      new TextDecoder().decode(base64UrlDecode(payloadPart))
+    ) as MagicLinkPayload;
+    if (payload?.purpose !== MAGIC_LINK_PURPOSE) return null;
+    if (typeof payload.expiresAt !== 'number' || payload.expiresAt < Date.now()) return null;
+    if (typeof payload.email !== 'string' || typeof payload.nonce !== 'string') return null;
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Cookie options shared by login/session/logout so they stay in sync.
  * `path: '/'` so middleware on both /admin and /api/admin can read it.
  */

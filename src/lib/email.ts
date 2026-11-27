@@ -25,6 +25,8 @@ export async function sendEmail(options: {
   subject: string
   text: string
   replyTo?: string
+  /** Defaults to CONTACT_TO_EMAIL, then the mailbox itself. */
+  to?: string
 }): Promise<void> {
   const transport = getTransport()
   if (!transport) throw new Error('SMTP is not configured')
@@ -32,7 +34,7 @@ export async function sendEmail(options: {
   const from = process.env.SMTP_USER as string
   await transport.sendMail({
     from: `"orlamariecoach.com" <${from}>`,
-    to: process.env.CONTACT_TO_EMAIL || from,
+    to: options.to || process.env.CONTACT_TO_EMAIL || from,
     replyTo: options.replyTo,
     subject: options.subject,
     text: options.text,

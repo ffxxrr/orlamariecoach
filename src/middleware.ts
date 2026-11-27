@@ -11,12 +11,16 @@ import { SESSION_COOKIE, verifySessionToken } from '@/lib/auth/session';
  *   - /api/admin/auth/login   (issues the session)
  *   - /api/admin/auth/logout  (clears it)
  *   - /api/admin/auth/session (reports auth state; returns 401 on its own)
+ *   - /api/admin/auth/forgot  (emails a sign-in link to ADMIN_EMAIL only)
+ *   - /api/admin/auth/magic   (redeems that one-time link)
  */
 const PUBLIC_PATHS = new Set<string>([
   '/admin/login',
   '/api/admin/auth/login',
   '/api/admin/auth/logout',
   '/api/admin/auth/session',
+  '/api/admin/auth/forgot',
+  '/api/admin/auth/magic',
 ]);
 
 export async function middleware(request: NextRequest) {
