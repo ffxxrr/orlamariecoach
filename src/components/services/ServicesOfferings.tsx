@@ -35,6 +35,11 @@ const services = [
     ],
     image: '/images/orla/optimized/service/orla-schools-classroom.webp',
     imagePosition: 'center 15%',
+    testimonial: {
+      quote: 'Orla Marie has a lovely, gentle way with our three to five year olds. The children look forward to her visits and use what she teaches them, taking a slow breath when they feel upset and finding words for big feelings. I would happily recommend her.',
+      name: 'Rosie Hegarty',
+      role: 'Principal, Cockhill Community Preschool',
+    },
     href: '/contact',
     cta: 'Get in Touch',
   },
@@ -84,6 +89,7 @@ interface Service {
   imagePosition?: string
   inset?: string
   insetAlt?: string
+  testimonial?: { quote: string; name: string; role: string }
   href: string
   cta: string
 }
@@ -200,6 +206,25 @@ function ServicePath({ service, reverse, index, isLast }: ServicePathProps) {
                 </li>
               ))}
             </ul>
+
+            {/* Optional short testimonial for this programme */}
+            {service.testimonial && (
+              <figure
+                className={`mb-8 border-l-4 border-living-green pl-5 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                } transition-all duration-700`}
+                style={{ transitionDelay: '375ms' }}
+              >
+                <blockquote className="font-crimson text-lg md:text-xl italic text-forest-deep leading-relaxed">
+                  &ldquo;{service.testimonial.quote}&rdquo;
+                </blockquote>
+                <figcaption className="mt-3 text-sm text-sage-calm">
+                  <span className="font-medium">{service.testimonial.name}</span>
+                  <span className="mx-2 text-living-green/60">&mdash;</span>
+                  {service.testimonial.role}
+                </figcaption>
+              </figure>
+            )}
 
             {/* CTA Link */}
             <Link
