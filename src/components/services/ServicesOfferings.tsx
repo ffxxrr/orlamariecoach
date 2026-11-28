@@ -54,7 +54,10 @@ const services = [
       'Delivered on-site or online',
       'Trauma-informed and inclusive',
     ],
-    image: '/images/orla/optimized/service/office-plants.webp',
+    image: '/images/orla/optimized/service/workplace-orla.webp',
+    imageAlt: 'Orla Marie chatting with workshop participants over tea',
+    imagePosition: 'center 20%',
+    wide: true,
     href: '/contact',
     cta: 'Get in Touch',
   },
@@ -90,6 +93,8 @@ interface Service {
   inset?: string
   insetAlt?: string
   testimonial?: { quote: string; name: string; role: string }
+  /** Landscape photo: use a wide frame instead of the square one */
+  wide?: boolean
   href: string
   cta: string
 }
@@ -127,7 +132,7 @@ function ServicePath({ service, reverse, index, isLast }: ServicePathProps) {
             } transition-all duration-1000 ease-out`}
             style={{ transitionDelay: '200ms' }}
           >
-            <div className="relative aspect-[4/5] md:aspect-square">
+            <div className={`relative ${service.wide ? 'aspect-[4/3] md:aspect-[16/10]' : 'aspect-[4/5] md:aspect-square'}`}>
               <div className="relative w-full h-full overflow-hidden rounded-2xl">
                 <Image
                   src={service.image}
