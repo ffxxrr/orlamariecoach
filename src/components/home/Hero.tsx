@@ -1,7 +1,6 @@
 'use client'
 import Link from 'next/link'
 import { useEventTracker } from '@/components/ui/AnalyticsProvider'
-import { CourseHeroPill } from '@/components/home/ComingUp'
 import VideoHeroBackground from '@/components/ui/VideoHeroBackground'
 
 export default function Hero() {
@@ -22,8 +21,6 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
         <div className="max-w-4xl mx-auto">
-          <CourseHeroPill />
-
           {/* Main Headline */}
           <h1 className="font-crimson text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-6 leading-[1.1] tracking-tight">
             Mindfulness for

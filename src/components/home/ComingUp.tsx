@@ -14,22 +14,6 @@ function stillShowing(until: Date) {
   return Date.now() <= until.getTime()
 }
 
-/** Small link above the hero headline, so phone visitors see the course straight away */
-export function CourseHeroPill() {
-  const [show, setShow] = useState(true)
-  useEffect(() => setShow(stillShowing(COURSE_UNTIL)), [])
-  if (!show) return null
-  return (
-    <Link
-      href="/mindfulness-course"
-      className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-white/15 backdrop-blur-sm border border-white/40 text-white text-sm sm:text-base hover:bg-white/25 transition-colors"
-    >
-      <span className="font-medium text-earth-warmth">New</span>
-      <span>Six-week mindfulness course in Buncrana, from 12 January</span>
-    </Link>
-  )
-}
-
 export default function ComingUp() {
   const { trackNavigation } = useEventTracker()
   const [showCourse, setShowCourse] = useState(true)
