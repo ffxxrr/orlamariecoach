@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Hero from '@/components/home/Hero'
+import ComingUp from '@/components/home/ComingUp'
 import Invitation from '@/components/home/Invitation'
 import ThreePaths from '@/components/home/ThreePaths'
 import TestimonialFeature from '@/components/home/TestimonialFeature'
@@ -40,6 +41,9 @@ export default function HomePage() {
       <main>
         {/* Hero - Full viewport with Sora video */}
         <Hero />
+
+        {/* Coming up - January course and Christmas vouchers (hide themselves after their dates) */}
+        <ComingUp />
 
         {/* The Invitation - Breathing intro */}
         <Invitation />
